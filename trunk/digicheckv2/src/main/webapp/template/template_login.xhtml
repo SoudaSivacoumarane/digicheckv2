@@ -37,7 +37,31 @@
 	                         <td><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_03.jpg" width="351" height="88" alt="" /></td>
 	                     </tr>
 	                </table>
-	        
+	        		<table width="100%"  border="0" cellpadding="0" cellspacing="0">
+	                   <tr>
+	                       <td width="100%"><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_04.jpg" width="100%" height="41" alt="" /></td>
+	                       <td><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_05.jpg" width="131" height="41" alt="" /></td>
+	                       <td><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_06.jpg" width="43" height="41" alt="" /></td>
+	                       <td><h:commandLink  actionListener="#{loginManagedBean.goUserAction}">
+	                           		<img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_07_L.jpg" width="97" height="41" alt="Usuarios" border="0"/>
+	                           </h:commandLink>
+                           </td>
+	                       <td><h:commandLink actionListener="#{loginManagedBean.goBrachOfficesAction}">
+	                           		<img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_08_L.jpg" width="101" height="41" alt="Sucursales" border="0" />
+	                           </h:commandLink>
+                           </td>
+	                       <td><a href="#" onmouseover="popup('catalogos', 'img_catalogos');" onmouseout="popdown();"><img name="img_catalogos" id="img_catalogos" src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_09_L.jpg" width="100" height="41" alt="Catalogos"  border="0" /></a></td>
+	                       <td><h:commandLink actionListener="#{loginManagedBean.goChecksAction}">
+                                    <img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_10_L.jpg" width="101" height="41" alt="Cheques" border="0" />
+                               </h:commandLink>
+	                       </td>
+	                       <td><a href="#" onmouseover="popup('reportes', 'img_reportes');" onmouseout="popdown();"><img name="img_reportes" id="img_reportes" src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_11_L.jpg" width="101" height="41" alt="Reportes"  border="0" /></a></td>
+	                       <td><h:commandLink actionListener="#{loginManagedBean.goOutAction}">
+                           			<img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_12_L.jpg" width="99" height="41" alt="Salir" border="0" />
+                           		</h:commandLink>
+                           </td>
+	                   </tr>
+	               </table>
 				</h:form>
 			</div>
 			<div id="div_body">			     
