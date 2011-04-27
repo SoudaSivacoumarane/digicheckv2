@@ -10,7 +10,7 @@
 	
 	<context-param>
     	<param-name>org.richfaces.skin</param-name>
-    	<param-value>ruby</param-value>
+    	<param-value>glassX</param-value>
 	</context-param>
 
 	<servlet>
