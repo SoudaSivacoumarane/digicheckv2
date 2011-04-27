@@ -4,7 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.prime.com.tr/ui">
+      xmlns:rich="http://richfaces.org/rich"      
+	  xmlns:a4j="http://richfaces.org/a4j">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>
@@ -47,45 +48,10 @@
 	                <tr>
 	                    <td>
 	                      	<div align="center">
-                               <p:panel widgetVar="panel_login" style="width: 173px">
-                               		<h:form id="panel_login_form">
-                                       <table cellpadding="2" cellspacing="2">
-                                           <tr>
-                                               <td>
-                                                   <h:outputLabel for="usuario" value="Usuario" />
-                                               </td>
-                                               <td>
-                                                   <h:inputText id="usuario" value="#{loginManagedBean.view.login}"  required="true" label="Usuario" size="10" />
-                                               								 
-                                               </td>
-                                               <td>
-                                                   <p:message for="usuario" />
-                                               </td>
-                                           </tr>
-                                           <tr>
-                                               <td>
-                                                   <h:outputLabel for="contrasena" value="Contraseña" />
-                                               </td>
-                                               <td>
-                                                   <h:inputSecret id="contrasena" value="#{loginManagedBean.view.password}"  required="true" size="10"/>
-                                               </td>
-                                               <td>
-                                                   <p:message for="contrasena" />
-                                               </td>
-                                           </tr>
-                                           <tr>
-                                               <td colspan="3" style="text-align: center">
-                                                   <p:commandButton value="Entrar" async="true" ajax="true" immediate="false" actionListener="#{loginManagedBean.doLoginAction}"
-                                                   update="panel_login_form,growl" process="panel_login_form"
-                                                   />
-                                               </td>
-                                           </tr>
-                                       </table>
-                                   </h:form>
-                               </p:panel>
+                  				<!-- Agregar Panel Login -->
 	                        </div>
 	                        <div id="div_body">
-							    <p:growl id="growl" globalOnly="true" showDetail="true" showSummary="true"/> 
+							    <!-- Agregar Panel Msgs -->
 								<ui:insert name="content">Contenido ...</ui:insert>
 							</div>
 	                  </td>

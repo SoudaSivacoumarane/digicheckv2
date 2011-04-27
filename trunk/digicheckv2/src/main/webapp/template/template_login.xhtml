@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:rich="http://richfaces.org/rich"      
 	  xmlns:a4j="http://richfaces.org/a4j">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -27,42 +28,19 @@
 				<h:form id="navigation_menu">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
 	                     <tr>
-	                         <td><p:commandLink actionListener="#{loginManagedBean.goHomeAction}">
-	                         	<img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_01.jpg" width="424" height="88" alt="Inicio" border="0"/>
-	                         </p:commandLink></td>
+	                         <td>
+	                         	<h:commandLink actionListener="#{loginManagedBean.goHomeAction}">
+	                         		<img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_01.jpg" width="424" height="88" alt="Inicio" border="0"/>
+	                         	 </h:commandLink>
+	                         </td>
 	                         <td width="100%"><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_02.jpg" width="100%" height="88" alt="" /></td>
 	                         <td><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_03.jpg" width="351" height="88" alt="" /></td>
 	                     </tr>
 	                </table>
-	                <table width="100%"  border="0" cellpadding="0" cellspacing="0">
-	                   <tr>
-	                       <td width="100%"><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_04.jpg" width="100%" height="41" alt="" /></td>
-	                       <td><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_05.jpg" width="131" height="41" alt="" /></td>
-	                       <td><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_06.jpg" width="43" height="41" alt="" /></td>
-	                       <td><p:commandLink  actionListener="#{loginManagedBean.goUserAction}">
-	                           		<img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_07_L.jpg" width="97" height="41" alt="Usuarios" border="0"/>
-	                           </p:commandLink>
-                           </td>
-	                       <td><p:commandLink actionListener="#{loginManagedBean.goBrachOfficesAction}">
-	                           		<img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_08_L.jpg" width="101" height="41" alt="Sucursales" border="0" />
-	                           </p:commandLink>
-                           </td>
-	                       <td><a href="#" onmouseover="popup('catalogos', 'img_catalogos');" onmouseout="popdown();"><img name="img_catalogos" id="img_catalogos" src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_09_L.jpg" width="100" height="41" alt="Catalogos"  border="0" /></a></td>
-	                       <td><p:commandLink actionListener="#{loginManagedBean.goChecksAction}">
-                                    <img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_10_L.jpg" width="101" height="41" alt="Cheques" border="0" />
-                               </p:commandLink>
-	                       </td>
-	                       <td><a href="#" onmouseover="popup('reportes', 'img_reportes');" onmouseout="popdown();"><img name="img_reportes" id="img_reportes" src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_11_L.jpg" width="101" height="41" alt="Reportes"  border="0" /></a></td>
-	                       <td><p:commandLink actionListener="#{loginManagedBean.goOutAction}">
-                           			<img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_12_L.jpg" width="99" height="41" alt="Salir" border="0" />
-                           		</p:commandLink>
-                           </td>
-	                   </tr>
-	               </table>
+	        
 				</h:form>
 			</div>
-			<div id="div_body">
-			    <p:growl id="growl" globalOnly="true" showDetail="true" showSummary="true"/> 
+			<div id="div_body">			     
 				<ui:insert name="content">Contenido ...</ui:insert>
 			</div>
 			<div id="div_footer">
