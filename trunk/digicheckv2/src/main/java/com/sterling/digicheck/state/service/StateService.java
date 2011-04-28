@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.sterling.digicheck.state.dao.StateDAO;
 import com.sterling.digicheck.state.entity.StateEntity;
 @Service("stateService")
-public class StateServiceImpl implements IStateService{
+public class StateService {
 	
 	@Autowired
 	private StateDAO stateDAO;

@@ -5,14 +5,14 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 import com.sterling.digicheck.state.entity.StateEntity;
-import com.sterling.digicheck.state.service.IStateService;
+import com.sterling.digicheck.state.service.StateService;
 
 @ManagedBean(name="statesBean")
 @RequestScoped
 public class StateManagedBean {
 
 	@ManagedProperty("#{stateService}")
-	private IStateService stateService;
+	private StateService stateService;
 		
 	public void showStates(){
 		for (StateEntity state : stateService.getStates()) {
@@ -21,7 +21,7 @@ public class StateManagedBean {
 		}
 	}
 	
-	public void setStateService(IStateService stateService) {
+	public void setStateService(StateService stateService) {
 		this.stateService = stateService;
 	}			
 }
