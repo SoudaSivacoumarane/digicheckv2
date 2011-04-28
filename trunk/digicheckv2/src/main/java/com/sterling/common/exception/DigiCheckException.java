@@ -18,6 +18,8 @@ public abstract class DigiCheckException extends Exception {
 	public static final String 	LAYER_SERVICE = "SER";//$NON-NLS-1$
 	/** Code Exception for Helper layer */
 	public static final String 	LAYER_HELPER = "WEB";//$NON-NLS-1$
+	/** Code Exception for DAO layer */
+	public static final String 	LAYER_DAO = "DAO";//$NON-NLS-1$
 	/** Code Exception for Web layer */
 	public static final String 	LAYER_WEB = "WEB";//$NON-NLS-1$
 	/** Code Exception for Insert actions */
@@ -28,8 +30,8 @@ public abstract class DigiCheckException extends Exception {
 	public static final String 	ACTION_UPDATE = "03";//$NON-NLS-1$
 	/** Code Exception for List Handle */
 	public static final String 	ACTION_LISTS = "04";//$NON-NLS-1$
-	/** Code Exception for Delegate actions */
-	public static final String 	ACTION_DELEGATE = "05";//$NON-NLS-1$
+	/** Code Exception for DAO actions */
+	public static final String 	ACTION_DAO = "05";//$NON-NLS-1$
 	/** Code Exception for Service Locator actions */
 	public static final String 	ACTION_SERVICE_LOCATOR = "06";//$NON-NLS-1$
 	/** Code Exception for Select Handle */

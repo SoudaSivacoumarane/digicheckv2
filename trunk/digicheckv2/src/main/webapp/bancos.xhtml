@@ -11,5 +11,78 @@
 	<ui:define name="title">
         Bancos
     </ui:define>
+    <br />
+    <ui:define name="content">
+    	<div align="center">    	
+    		<br />
+    		<br />
+    		<br />
+    		<h:panelGroup id="panel_tabla_bancos">        	
+		    	<h:form id="form_tabla_bancos">		    				    		
+					<rich:dataTable value="#{bankManagedBean.banks}" var="row" iterationStatusVar="it" id="table" rows="15">
+					<rich:column>
+						<f:facet name="header">
+							<a4j:commandLink execute="@this"
+							render="@none" oncomplete="#{rich:component('newPane')}.show()">
+							<h:graphicImage value="/resources/images/img-new.png" alt="Nuevo Banco" />							
+						</a4j:commandLink>
+						</f:facet>
+						#{it.index}
+					</rich:column>
+					<rich:column filterBy="#{row.code}" filterEvent="onkeyup">
+						<f:facet name="header">Codigo</f:facet>
+						<h:outputText value="#{row.code}" />
+					</rich:column>
+					<rich:column filterBy="#{row.name}" filterEvent="onkeyup">
+						<f:facet name="header">Nombre</f:facet>
+						<h:outputText value="#{row.name}" />
+					</rich:column>
+					<rich:column filterBy="#{row.account}" filterEvent="onkeyup">
+						<f:facet name="header">Cuenta</f:facet>
+						<h:outputText value="#{row.account}" />
+					</rich:column>		
+					<rich:column>
+						<a4j:commandLink execute="@this"
+							render="@none" oncomplete="#{rich:component('confirmPane')}.show()">
+							<h:graphicImage value="/resources/images/img-delete.png" alt="delete" />							
+						</a4j:commandLink>
+					</rich:column>	            			            
+					<f:facet name="footer">
+						<rich:dataScroller page="#{bankManagedBean.page}" />
+					</f:facet>
+				</rich:dataTable>
+				
+				<rich:popupPanel id="confirmPane" autosized="true">
+			        Are you sure you want to delete the row?
+			        <a4j:commandButton value="Cancelar" onclick="#{rich:component('confirmPane')}.hide(); return false;" />
+			        <a4j:commandButton value="Delete" onclick="remove(); return false;" />
+			    </rich:popupPanel>
+			    
+			    <rich:popupPanel id="editPane" autosized="true">
+			    	
+			    </rich:popupPanel>
+			    
+			    <rich:popupPanel id="newPane" header="Nuevo Banco" autosized="true">
+			    	<h:panelGrid columns="3">
+			    		<h:outputText value="Codigo" />
+			    		<h:inputText id="code" value="#{bankManagedBean.currentBank.code}" required="true" />			    		
+			    		<rich:message id="codeMsg" for="code" />
+			    		
+			    		<h:outputText value="Nombre" />
+			    		<h:inputText id="name" value="#{bankManagedBean.currentBank.name}" required="true" />
+			    		<rich:message id="nameMsg" for="name" />
+			    		
+			    		<h:outputText value="Cuenta" />
+			    		<h:inputText id="account" value="#{bankManagedBean.currentBank.account}" required="true" />			    						    		
+			    		<rich:message id="accountMsg" for="account" />
+			    	</h:panelGrid>
+			    	<h:commandButton value="Guardar" action="#{bankManagedBean.addBankAction}" /> &nbsp;
+			    	<a4j:commandButton value="Cancelar" onclick="#{rich:component('newPane')}.hide(); return false;" />
+			    </rich:popupPanel>
+					   		
+		    	</h:form>
+	    	</h:panelGroup>
+    	</div>
+    </ui:define>
 	
 </ui:composition>
