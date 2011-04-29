@@ -5,23 +5,17 @@ package com.sterling.digicheck.bank.view;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.Size;
-
-/**
- *
- * TODO rioslore:Document this.
+/** 
+ * Bank View
  * 
- * @author rioslore
+ * @author Edgar Joao
  */
 public class BankView implements Serializable{
 	/** Serial Version ID */
 	private static final long serialVersionUID = -4836470143973592753L;
 	private String bankId;
-	//@Size(min=4, max=4, message="Selecciona una cantidad correcta.")
 	private String code;
-	//@Size(min=1, message="Ingresa un nombre de Banco.")
 	private String name;
-	//@Size(min=1, message="Ingresa un nombre de Cuenta.")
 	private String account;
 
 	public BankView() {

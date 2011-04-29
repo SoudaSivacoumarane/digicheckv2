@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import com.sterling.common.dao.GenericDAO;
@@ -17,17 +18,20 @@ import com.sterling.digicheck.bank.exception.BankException;
 @Repository
 public class BankDAO extends GenericDAO{
 
+	private static final Logger logger = Logger.getLogger(BankDAO.class);
+	
 	@SuppressWarnings("unchecked")
 	public List<BankEntity> getAllBanks() throws BankException{		
 		List<BankEntity> bankEntities = null;		
 		Query query = null;
-		try{			
+		try{	
+			logger.info("Obtener Bancos");
 			query = em.createNamedQuery("BankEntity.findAll");
 			bankEntities = query.getResultList();					
 		}catch (Exception exception){
 			BankException bankException = null;
 			bankException = new BankException(exception, BankException.LAYER_DAO, BankException.ACTION_LISTS);
-    		//log.error(bankException);
+    		logger.error(bankException);
     		exception.printStackTrace(System.out);
     		throw bankException;
 		}		
@@ -36,23 +40,29 @@ public class BankDAO extends GenericDAO{
 	
 	public void insertBank(BankEntity bankEntity)throws BankException{
 		try{
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
 			em.persist(bankEntity);
+			em.getTransaction().commit();
 		}catch (Exception exception){
 			BankException bankException = null;
 			bankException = new BankException(exception, BankException.LAYER_DAO, BankException.ACTION_INSERT);
-    		//log.error(bankException);
+    		logger.error(bankException);
     		exception.printStackTrace(System.out);
     		throw bankException;
 		}		
 	}
 	
 	public void updateBank(BankEntity entity)throws BankException{		
-		try{						
-			em.merge(entity);		
+		try{
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
+			em.merge(entity);
+			em.getTransaction().commit();
 		}catch (Exception exception){
 			BankException bankException = null;
 			bankException = new BankException(exception, BankException.LAYER_DAO, BankException.ACTION_UPDATE);
-    		//log.error(bankException);
+    		logger.error(bankException);
     		exception.printStackTrace(System.out);
     		throw bankException;
 		}
@@ -60,13 +70,16 @@ public class BankDAO extends GenericDAO{
 	
 	public void deleteBank(Integer bankId)throws BankException{
 		BankEntity entity = null;		
-		try{				
+		try{					
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
 			entity = em.find(BankEntity.class, bankId);			
 			em.remove(entity);			
+			em.getTransaction().commit();
 		}catch (Exception exception){
 			BankException bankException = null;
 			bankException = new BankException(exception, BankException.LAYER_DAO, BankException.ACTION_DELETE);
-    		//log.error(bankException);
+    		logger.error(bankException);
     		exception.printStackTrace(System.out);
     		throw bankException;
 		}

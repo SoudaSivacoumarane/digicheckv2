@@ -2,6 +2,7 @@ package com.sterling.digicheck.bank.service;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,8 @@ import com.sterling.digicheck.bank.view.BankView;
 
 @Service("bankService")
 public class BankService {
+	
+	private static final Logger logger = Logger.getLogger(BankService.class);
 	
 	@Autowired
 	private BankDAO bankDAO;
@@ -32,7 +35,7 @@ public class BankService {
 		}catch (Exception exception){
 			BankException bankException = null;
 			bankException = new BankException(exception, BankException.LAYER_SERVICE, BankException.ACTION_LISTS);
-    		//log.error(bankException);
+    		logger.error(bankException);
     		exception.printStackTrace(System.out);
     		throw bankException;
 		}		
@@ -51,7 +54,7 @@ public class BankService {
 		}catch (Exception exception){
 			BankException bankException = null;
 			bankException = new BankException(exception, BankException.LAYER_SERVICE, BankException.ACTION_INSERT);
-    		//log.error(bankException);
+    		logger.error(bankException);
     		exception.printStackTrace(System.out);
     		throw bankException;
 		}
@@ -69,7 +72,7 @@ public class BankService {
 		}catch (Exception exception){
 			BankException bankException = null;
 			bankException = new BankException(exception, BankException.LAYER_SERVICE, BankException.ACTION_UPDATE);
-    		//log.error(bankException);
+    		logger.error(bankException);
     		exception.printStackTrace(System.out);
     		throw bankException;
 		}
@@ -81,7 +84,7 @@ public class BankService {
 		}catch (Exception exception){
 			BankException bankException = null;
 			bankException = new BankException(exception, BankException.LAYER_SERVICE, BankException.ACTION_DELETE);
-    		//log.error(bankException);
+    		logger.error(bankException);
     		exception.printStackTrace(System.out);
     		throw bankException;
 		}
