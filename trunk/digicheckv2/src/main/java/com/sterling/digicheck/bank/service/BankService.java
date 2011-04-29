@@ -56,4 +56,34 @@ public class BankService {
     		throw bankException;
 		}
 	}
+	
+	public void updateBank(BankView view)throws BankException{
+		BankEntity entity = null;
+		BankConverter bankConverter = null;
+		try{
+			bankConverter = new BankConverter();
+			entity = bankConverter.convertViewToEntity(view);			
+			bankDAO.updateBank(entity);
+		}catch (BankException bankException){
+			throw bankException;
+		}catch (Exception exception){
+			BankException bankException = null;
+			bankException = new BankException(exception, BankException.LAYER_SERVICE, BankException.ACTION_UPDATE);
+    		//log.error(bankException);
+    		exception.printStackTrace(System.out);
+    		throw bankException;
+		}
+	}
+	
+	public void deleteBank(Integer bankId)throws BankException{		
+		try{			
+			bankDAO.deleteBank(bankId);						
+		}catch (Exception exception){
+			BankException bankException = null;
+			bankException = new BankException(exception, BankException.LAYER_SERVICE, BankException.ACTION_DELETE);
+    		//log.error(bankException);
+    		exception.printStackTrace(System.out);
+    		throw bankException;
+		}
+	}
 }

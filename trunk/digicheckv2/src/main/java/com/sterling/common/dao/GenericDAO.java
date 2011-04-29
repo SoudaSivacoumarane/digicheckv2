@@ -13,10 +13,10 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public abstract class GenericDAO {
+		
+	protected EntityManager em;
 	
-	protected EntityManager em = null;	
-	
-	@PersistenceContext
+	@PersistenceContext	
 	public void setEntityManager(EntityManager em){
 		this.em = em;
 	}

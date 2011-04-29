@@ -45,4 +45,30 @@ public class BankDAO extends GenericDAO{
     		throw bankException;
 		}		
 	}
+	
+	public void updateBank(BankEntity entity)throws BankException{		
+		try{						
+			em.merge(entity);		
+		}catch (Exception exception){
+			BankException bankException = null;
+			bankException = new BankException(exception, BankException.LAYER_DAO, BankException.ACTION_UPDATE);
+    		//log.error(bankException);
+    		exception.printStackTrace(System.out);
+    		throw bankException;
+		}
+	}
+	
+	public void deleteBank(Integer bankId)throws BankException{
+		BankEntity entity = null;		
+		try{				
+			entity = em.find(BankEntity.class, bankId);			
+			em.remove(entity);			
+		}catch (Exception exception){
+			BankException bankException = null;
+			bankException = new BankException(exception, BankException.LAYER_DAO, BankException.ACTION_DELETE);
+    		//log.error(bankException);
+    		exception.printStackTrace(System.out);
+    		throw bankException;
+		}
+	}
 }
