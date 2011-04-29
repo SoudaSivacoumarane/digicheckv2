@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import com.sterling.digicheck.currency.service.CurrencyService;
 
 @ManagedBean(name="currencyMagedbean")
-@SessionScoped
+@ViewScoped
 public class CurrencyMagedbean implements Serializable {
 	/** Serial Version UID */
 	private static final long serialVersionUID = -5466571077218267924L;

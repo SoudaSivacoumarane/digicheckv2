@@ -4,16 +4,18 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
 
 import org.apache.log4j.Logger;
 
 import com.sterling.digicheck.branchoffice.service.BranchOfficeService;
 
 @ManagedBean(name="branchOfficeService")
+@ViewScoped
 public class BranchOfficeManagedbean implements Serializable {
 	/** Serial Version UID */
 	private static final long serialVersionUID = -3292054842997979343L;
-
+	
 	private static final Logger logger = Logger.getLogger(BranchOfficeManagedbean.class);
 	
 	@ManagedProperty("#{branchOfficeService}")
