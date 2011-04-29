@@ -24,6 +24,10 @@
 		<org.richfaces.bom.version>4.0.0.Final</org.richfaces.bom.version>
 		<org.springframework.version>3.0.5.RELEASE</org.springframework.version>
 	</properties>
+	<scm>
+		<connection>scm:svn:svn://digicheckv2.googlecode.com/svn/trunk</connection>
+		<developerConnection>scm:svn:svn://digicheckv2.googlecode.com/svn/trunk</developerConnection>
+	</scm>
 	<repositories>
 		<repository>
 			<id>repository.jboss.com</id>
@@ -47,7 +51,6 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -55,7 +58,7 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -224,7 +227,7 @@
 				<filters>
 					<filter>src/main/environments/dev.properties</filter>
 				</filters>
-				<plugins>
+				<plugins>					
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-war-plugin</artifactId>
