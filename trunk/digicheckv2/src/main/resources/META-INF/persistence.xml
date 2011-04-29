@@ -4,9 +4,9 @@
       <mapping-file>META-INF/orm.xml</mapping-file>             
       <properties>        
       	<property name="hibernate.connection.driver_class" value="com.inet.tds.TdsDriver"/>
-      	<property name="hibernate.connection.url" value="jdbc:inetdae7:localhost:1999?DIGICHECK"/>
-      	<property name="hibernate.connection.username" value="digicheck"/>
-      	<property name="hibernate.connection.password" value="noproblem.1"/> 
+      	<property name="hibernate.connection.url" value="${jdbc.url}"/>
+      	<property name="hibernate.connection.username" value="${jdbc.username}"/>
+      	<property name="hibernate.connection.password" value="${jdbc.password}"/> 
       	<property name="hibernate.dialect" value="com.sterling.common.mysql.MSSqlDialect"/>      	
       	<property name="hibernate.show_sql" value="true" />
       	<property name="use_sql_comments" value="false"/>
