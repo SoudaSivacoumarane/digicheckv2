@@ -9,12 +9,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import com.sterling.digicheck.state.entity.StateEntity;
 
 @Entity
 @Table(name="SUCURSAL")
+@NamedQueries({@NamedQuery(name = "BranchOfficeEntity.findAll", query = "select b from BranchOfficeEntity b")})
 public class BranchOfficeEntity implements Serializable{
 	private static final long serialVersionUID = 1621438969371389248L;
 	@Id
