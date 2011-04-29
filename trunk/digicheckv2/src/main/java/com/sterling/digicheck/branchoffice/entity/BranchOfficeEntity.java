@@ -31,8 +31,7 @@ public class BranchOfficeEntity implements Serializable{
 	@Column(name="SUC_COLONIA")
 	private String community;
 	@Column(name="SUC_CODIGO_POSTAL")
-	private String zip;
-	//private String state;
+	private String zip;	
 	@JoinColumn(name = "EST_CODIGO", referencedColumnName = "EST_CODIGO")
 	@ManyToOne
 	private StateEntity stateEntity;
