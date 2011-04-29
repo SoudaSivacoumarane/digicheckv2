@@ -19,7 +19,7 @@
     		<br />
     		<h:panelGroup id="panel_tabla_bancos">        	
 		    	<h:form id="form_tabla_bancos">		    				    		
-					<rich:dataTable value="#{bankManagedBean.banks}" var="row" iterationStatusVar="it" id="table" rows="15">
+					<rich:dataTable value="#{bankManagedBean.banks}" var="row" iterationStatusVar="it" id="table" rows="11">
 						<rich:column>
 							<f:facet name="header">
 								<a4j:commandLink execute="@this"
@@ -27,7 +27,7 @@
 								<h:graphicImage value="/resources/images/img-new.png" alt="Nuevo Banco" />							
 							</a4j:commandLink>
 							</f:facet>
-							#{it.index}
+							#{row.bankId}
 						</rich:column>
 						<rich:column filterBy="#{row.code}" filterEvent="onkeyup">
 							<f:facet name="header">Codigo</f:facet>
@@ -44,7 +44,8 @@
 						<rich:column>
 							<a4j:commandLink execute="@this"
 								render="@none" oncomplete="#{rich:component('confirmPane')}.show()">
-								<h:graphicImage value="/resources/images/img-delete.png" alt="delete" />							
+								<h:graphicImage value="/resources/images/img-delete.png" alt="borrar Banco" />
+								<a4j:param value="#{row.bankId}" assignTo="#{bankManagedBean.bankId}" />							
 							</a4j:commandLink>
 						</rich:column>	            			            
 						<f:facet name="footer">
@@ -57,7 +58,7 @@
 			        <h:form id="dialog_eliminar_banco_form">
 				         Desea eliminar el banco?
 				        <a4j:commandButton value="Cancelar" onclick="#{rich:component('confirmPane')}.hide(); return false;" />
-				        <a4j:commandButton value="Delete"  onclick="remove(); return false;" />
+				        <a4j:commandButton value="Eliminar"  onclick="remove(); return false;" />
 			        </h:form>
 			    </rich:popupPanel>
 			    
@@ -71,10 +72,7 @@
 			    </rich:popupPanel>
 			    
 			    <rich:popupPanel id="newPane" header="Nuevo Banco" height="180" width="350" autosized="true">
-			    	<h:form id="dialog_nuevo_banco_form">
-			    	<rich:graphValidator value="#{bankManagedBean}" id="gv">
-			    			<rich:messages for="gv"/>
-                			<rich:messages globalOnly="true"/>
+			    	<h:form id="dialog_nuevo_banco_form">			    			                			
 					    	<h:panelGrid columns="3">
 					    		<h:outputText value="Codigo" />
 					    		<h:inputText id="code" value="#{bankManagedBean.currentBank.code}" required="true" />			    		
@@ -89,8 +87,7 @@
 					    		<rich:message id="accountMsg" for="account" />
 					    	</h:panelGrid>
 					    	<a4j:commandButton value="Guardar" action="#{bankManagedBean.addBankAction}" /> &nbsp;
-					    	<a4j:commandButton value="Cancelar" onclick="#{rich:component('newPane')}.hide(); return false;" />
-				    	</rich:graphValidator>
+					    	<a4j:commandButton value="Cancelar" onclick="#{rich:component('newPane')}.hide(); return false;" />				    	
 			    	</h:form>
 			    </rich:popupPanel>
 					   				    	
