@@ -27,8 +27,9 @@ public class BankDAO extends GenericDAO{
 		try{	
 			logger.info("Obtener Bancos");
 			query = em.createNamedQuery("BankEntity.findAll");
-			bankEntities = query.getResultList();					
+			bankEntities = query.getResultList();			
 		}catch (Exception exception){
+			em.flush();
 			BankException bankException = null;
 			bankException = new BankException(exception, BankException.LAYER_DAO, BankException.ACTION_LISTS);
     		logger.error(bankException);
@@ -44,7 +45,9 @@ public class BankDAO extends GenericDAO{
 			em.getTransaction().begin();
 			em.persist(bankEntity);
 			em.getTransaction().commit();
+			em.flush();
 		}catch (Exception exception){
+			em.flush();
 			BankException bankException = null;
 			bankException = new BankException(exception, BankException.LAYER_DAO, BankException.ACTION_INSERT);
     		logger.error(bankException);
@@ -59,7 +62,9 @@ public class BankDAO extends GenericDAO{
 			em.getTransaction().begin();
 			em.merge(entity);
 			em.getTransaction().commit();
+			em.flush();
 		}catch (Exception exception){
+			em.flush();
 			BankException bankException = null;
 			bankException = new BankException(exception, BankException.LAYER_DAO, BankException.ACTION_UPDATE);
     		logger.error(bankException);
@@ -76,12 +81,29 @@ public class BankDAO extends GenericDAO{
 			entity = em.find(BankEntity.class, bankId);			
 			em.remove(entity);			
 			em.getTransaction().commit();
+			em.flush();
 		}catch (Exception exception){
+			em.flush();
 			BankException bankException = null;
 			bankException = new BankException(exception, BankException.LAYER_DAO, BankException.ACTION_DELETE);
     		logger.error(bankException);
     		exception.printStackTrace(System.out);
     		throw bankException;
 		}
+	}
+	
+	public BankEntity getBankEntityById(Integer bankId) throws BankException{
+		BankEntity entity = null;
+		try{
+			entity = em.find(BankEntity.class, bankId);			
+		}catch (Exception exception){
+			em.flush();
+			BankException bankException = null;
+			bankException = new BankException(exception, BankException.LAYER_DAO, BankException.ACTION_SELECT);
+    		logger.error(bankException);
+    		exception.printStackTrace(System.out);
+    		throw bankException;
+		}
+		return entity;
 	}
 }

@@ -9,7 +9,7 @@
 	</context-param>
 	
 	<context-param>
-    	<param-name>org.richfaces.skin</param-name>
+    	<param-name>org.richfaces.SKIN</param-name>
     	<param-value>glassX</param-value>
 	</context-param>
 

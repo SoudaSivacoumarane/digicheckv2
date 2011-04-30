@@ -11,88 +11,145 @@
 	<ui:define name="title">
         Bancos
     </ui:define>
-    <br />
     <ui:define name="content">
     	<div align="center">    	
-    		<br />
-    		<br />
-    		<br />
-    		<h:panelGroup id="panel_tabla_bancos">        	
-		    	<h:form id="form_tabla_bancos">		    				    		
-					<rich:dataTable value="#{bankManagedBean.banks}" var="row" iterationStatusVar="it" id="table" rows="11">
-						<rich:column>
-							<f:facet name="header">
-								<a4j:commandLink execute="@this"
-								render="@none" oncomplete="#{rich:component('newPane')}.show()">
-								<h:graphicImage value="/resources/images/img-new.png" alt="Nuevo Banco" />							
-							</a4j:commandLink>
-							</f:facet>
-							#{row.bankId}
-						</rich:column>
-						<rich:column filterBy="#{row.code}" filterEvent="onkeyup">
-							<f:facet name="header">Codigo</f:facet>
-							<h:outputText value="#{row.code}" />
-						</rich:column>
-						<rich:column filterBy="#{row.name}" filterEvent="onkeyup">
-							<f:facet name="header">Nombre</f:facet>
-							<h:outputText value="#{row.name}" />
-						</rich:column>
-						<rich:column filterBy="#{row.account}" filterEvent="onkeyup">
-							<f:facet name="header">Cuenta</f:facet>
-							<h:outputText value="#{row.account}" />
-						</rich:column>		
-						<rich:column>
-							<a4j:commandLink execute="@this"
-								render="@none" oncomplete="#{rich:component('confirmPane')}.show()">
-								<h:graphicImage value="/resources/images/img-delete.png" alt="borrar Banco" />
-								<a4j:param value="#{row.bankId}" assignTo="#{bankManagedBean.bankId}" />							
-							</a4j:commandLink>
-						</rich:column>	            			            
-						<f:facet name="footer">
-							<rich:dataScroller page="#{bankManagedBean.page}" />
-						</f:facet>
-					</rich:dataTable>
-				</h:form>
+   		<br />
+   		<br />
+   		<br />
+	<h:outputStylesheet>
+		a.no-decor>img {
+    	border: none;
+		}
+    </h:outputStylesheet>	
+	<a4j:status onstart="#{rich:component('statPane')}.show()"
+		onstop="#{rich:component('statPane')}.hide()" />
+	
+	<h:form id="form">
+		<rich:dataTable value="#{bankManagedBean.banks}" var="row" id="table" rows="10" style="width: 30%">		
+			<rich:column>
+				<f:facet name="header">
+					<a4j:commandLink styleClass="no-decor" execute="@this" render="@none" oncomplete="#{rich:component('newPane')}.show()">
+						<h:graphicImage value="/resources/images/img-new.png" alt="Nuevo Banco" />
+					</a4j:commandLink>
+				</f:facet>            
+					<a4j:commandLink styleClass="no-decor" execute="@this"
+						render="@none" oncomplete="#{rich:component('confirmPane')}.show()">
+						<h:graphicImage value="/resources/images/img-delete.png" alt="delete" />
+						<a4j:param value="#{row.bankId}" assignTo="#{bankManagedBean.bankId}" />
+					</a4j:commandLink>
+					::
+					<a4j:commandLink styleClass="no-decor" render="editGrid" action="#{bankManagedBean.goEditBank}"
+						execute="@this" oncomplete="#{rich:component('editPane')}.show()">
+						<h:graphicImage value="/resources/images/img-edit.png" alt="edit" />
+						<a4j:param value="#{row.bankId}" assignTo="#{bankManagedBean.bankId}" />					
+					</a4j:commandLink>    
+            </rich:column>            
+			<rich:column>
+				<f:facet name="header">Codigo</f:facet>
+				<h:outputText value="#{row.code}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">Nombre</f:facet>
+				<h:outputText value="#{row.name}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">Cuenta</f:facet>
+				<h:outputText value="#{row.account}" />
+			</rich:column>												
+			<f:facet name="footer">
+				<rich:dataScroller page="#{bankManagedBean.page}" />
+			</f:facet>
+		</rich:dataTable>
+
+		<a4j:jsFunction name="remove" action="#{bankManagedBean.deleteBank}" render="table" execute="@this"
+			oncomplete="#{rich:component('confirmPane')}.hide();" />
+		
+		<rich:popupPanel id="statPane" autosized="true">
+			<h:graphicImage value="/resources/images/ai.gif" alt="ai" />
+	        Please wait...
+	    </rich:popupPanel>
+
+		<rich:popupPanel id="confirmPane" autosized="true">
+        	Desea borrar el Banco?
+        <a4j:commandButton value="Cancelar" onclick="#{rich:component('confirmPane')}.hide(); return false;" />&nbsp;&nbsp;
+			<a4j:commandButton value="Borrar" onclick="remove(); return false;" />
+		</rich:popupPanel>
+		
+		<rich:popupPanel header="Editar Banco" id="editPane" width="400" height="170">
+			<h:panelGrid columns="2" id="editGrid">							
+				<h:outputText value="Codigo" />
+				<h:panelGroup>
+					<h:inputText id="ecode" value="#{bankManagedBean.currentBank.code}" required="true"
+						requiredMessage="El codigo es requerido">		
+						<rich:validator />		
+					</h:inputText>
+					<rich:message id="ecodeMsg" for="ecode" />
+				</h:panelGroup>
+								
+				<h:outputText value="Nombre" />
+				<h:panelGroup>
+					<h:inputText id="ename" value="#{bankManagedBean.currentBank.name}" required="true"
+						requiredMessage="El nombre es requerido">
+						<rich:validator />				
+					</h:inputText>
+					<rich:message id="enameMsg" for="ename" />
+				</h:panelGroup>
 				
-				<rich:popupPanel id="confirmPane" autosized="true">
-			        <h:form id="dialog_eliminar_banco_form">
-				         Desea eliminar el banco?
-				        <a4j:commandButton value="Cancelar" onclick="#{rich:component('confirmPane')}.hide(); return false;" />
-				        <a4j:commandButton value="Eliminar"  onclick="remove(); return false;" />
-			        </h:form>
-			    </rich:popupPanel>
-			    
-			      <a4j:jsFunction name="remove" action="#{bankManagedBean.deleteBank}"
-						render="table" execute="@this"
-            			oncomplete="#{rich:component('confirmPane')}.hide();" />
-			    
-			    <rich:popupPanel id="editPane" autosized="true">
-			    	<h:form id="dialog_editar_banco_form">
-			    	</h:form>
-			    </rich:popupPanel>
-			    
-			    <rich:popupPanel id="newPane" header="Nuevo Banco" height="180" width="350" autosized="true">
-			    	<h:form id="dialog_nuevo_banco_form">			    			                			
-					    	<h:panelGrid columns="3">
-					    		<h:outputText value="Codigo" />
-					    		<h:inputText id="code" value="#{bankManagedBean.currentBank.code}" required="true" />			    		
-					    		<rich:message id="codeMsg" for="code" />
-					    		
-					    		<h:outputText value="Nombre" />
-					    		<h:inputText id="name" value="#{bankManagedBean.currentBank.name}" required="true" />
-					    		<rich:message id="nameMsg" for="name" />
-					    		
-					    		<h:outputText value="Cuenta" />
-					    		<h:inputText id="account" value="#{bankManagedBean.currentBank.account}" required="true" />			    						    		
-					    		<rich:message id="accountMsg" for="account" />
-					    	</h:panelGrid>
-					    	<a4j:commandButton value="Guardar" action="#{bankManagedBean.addBankAction}" /> &nbsp;
-					    	<a4j:commandButton value="Cancelar" onclick="#{rich:component('newPane')}.hide(); return false;" />				    	
-			    	</h:form>
-			    </rich:popupPanel>
-					   				    	
-	    	</h:panelGroup>
-    	</div>
-    </ui:define>
+				<h:outputText value="Cuenta" />
+				<h:panelGroup>
+					<h:inputText id="eaccaount" value="#{bankManagedBean.currentBank.account}" required="true"
+						requiredMessage="Cuenta es requerida">
+					<rich:validator />				
+					</h:inputText>
+					<rich:message id="eaccaountMsg" for="eaccaount" />
+				</h:panelGroup>									
+			</h:panelGrid>
+			<a4j:commandButton value="Editar" action="#{bankManagedBean.editBank}"
+				render="table" execute="editPane"
+				oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('editPane')}.hide();}" />
+			<a4j:commandButton value="Cancelar" onclick="#{rich:component('editPane')}.hide(); return false;" />
+		</rich:popupPanel>				
+		
+	</h:form>
+	
+	<rich:popupPanel header="Nuevo Banco" id="newPane" width="400" height="170">
+		<h:form>
+			<h:panelGrid columns="2" id="newGrid">							
+				<h:outputText value="Codigo" />
+				<h:panelGroup>
+					<h:inputText id="code" value="#{bankManagedBean.bankView.code}" required="true"
+						requiredMessage="El codigo es requerido">
+						<rich:validator />				
+					</h:inputText>
+					<rich:message id="codeMsg" for="code" />
+				</h:panelGroup>
+								
+				<h:outputText value="Nombre" />
+				<h:panelGroup>
+					<h:inputText id="name" value="#{bankManagedBean.bankView.name}" required="true"
+						requiredMessage="El nombre es requerido">
+						<rich:validator />				
+					</h:inputText>
+					<rich:message id="nameMsg" for="name" />
+				</h:panelGroup>
+				
+				<h:outputText value="Cuenta" />
+				<h:panelGroup>
+					<h:inputText id="account" value="#{bankManagedBean.bankView.account}" required="true"
+						requiredMessage="Cuenta es requerida">
+					<rich:validator />				
+					</h:inputText>
+					<rich:message id="accountMsg" for="account" />
+				</h:panelGroup>											
+			</h:panelGrid>		
+			<a4j:commandButton value="Guardar" action="#{bankManagedBean.addBankAction}"
+				render="table" execute="newPane"
+				oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('newPane')}.hide();}" />
+			<a4j:commandButton value="Cancel" onclick="#{rich:component('newPane')}.hide(); return false;" />
+		</h:form>
+	</rich:popupPanel>		
+	
+	</div>
+	</ui:define>	
 	
 </ui:composition>

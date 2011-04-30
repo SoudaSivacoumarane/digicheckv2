@@ -7,7 +7,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import org.apache.log4j.Logger;
 
@@ -17,24 +17,22 @@ import com.sterling.digicheck.bank.service.BankService;
 import com.sterling.digicheck.bank.view.BankView;
 
 @ManagedBean(name="bankManagedBean")
-@SessionScoped
+@ViewScoped
 public class BankManagedBean implements Serializable{	
 	/** Serial Version UID */
 	private static final long serialVersionUID = -3472740015549876796L;
 	private static final Logger logger = Logger.getLogger(BankManagedBean.class);
 	@ManagedProperty("#{bankService}")
-	private BankService bankService;	
+	private BankService bankService;
+	private BankView bankView = new BankView();
 	private BankView currentBank = new BankView();	
 	private List<BankView> banks = null;
 	private int page = 1;
 	private String bankId;
-		
-	public BankManagedBean() {		
-	}		
-	
+			
 	public void addBankAction(){
 		try {
-			bankService.insertBank(getCurrentBank());
+			bankService.insertBank(bankView);
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "La sucursal se agrego correctamente");
 			banks = bankService.getAllBanks();
 		} catch (BankException e) {
@@ -42,12 +40,23 @@ public class BankManagedBean implements Serializable{
 		}		
 	}		
 	
-	public BankView getCurrentBank() {
-		return currentBank;
+	public void goEditBank(){		
+		try {
+			currentBank = bankService.getBankEntityById(Integer.parseInt(bankId));
+		} catch (NumberFormatException e) {			
+		} catch (BankException e) {
+			e.printStackTrace();
+		}
 	}
-	public void setCurrentBank(BankView currentBank) {
-		this.currentBank = currentBank;
+	
+	public void editBank(){
+		try {
+			bankService.updateBank(currentBank);
+		} catch (BankException e) {
+			e.printStackTrace();
+		}
 	}
+	
 	public List<BankView> getBanks() {
 		banks = new ArrayList<BankView>(0);
 		try {
@@ -64,7 +73,15 @@ public class BankManagedBean implements Serializable{
 		} catch (BankException e) {
 			e.printStackTrace();
 		}
-	}	
+	}
+	
+	public BankView getCurrentBank() {
+		return currentBank;
+	}
+	
+	public void setCurrentBank(BankView currentBank) {
+		this.currentBank = currentBank;
+	}
 	
 	public void setBanks(List<BankView> banks) {
 		this.banks = banks;
@@ -87,5 +104,13 @@ public class BankManagedBean implements Serializable{
 	public void setBankId(String bankId) {
 		this.bankId = bankId;
 	}
+
+	public BankView getBankView() {
+		return bankView;
+	}
+
+	public void setBankView(BankView bankView) {
+		this.bankView = bankView;
+	}	
 	
 }

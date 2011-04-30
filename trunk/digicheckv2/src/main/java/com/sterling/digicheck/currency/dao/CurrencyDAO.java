@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.sterling.common.dao.GenericDAO;
 import com.sterling.digicheck.currency.entity.CurrencyEntity;
 import com.sterling.digicheck.currency.exception.CurrencyException;
+import com.sterling.digicheck.currency.view.CurrencyView;
 
 @Repository
 public class CurrencyDAO extends GenericDAO {
@@ -80,7 +81,7 @@ public class CurrencyDAO extends GenericDAO {
 		}
 	}
 	
-	public CurrencyEntity validateCurrency(int domainCurrencyName)throws CurrencyException{		
+	public CurrencyEntity getCurrencyById(int domainCurrencyName)throws CurrencyException{		
 		CurrencyEntity currencyEntity = null;		
 		try{						
 			currencyEntity = em.find(CurrencyEntity.class, domainCurrencyName);				
@@ -92,6 +93,6 @@ public class CurrencyDAO extends GenericDAO {
     		throw currencyException;
 		}
 		return currencyEntity;
-	}
+	}	
 	
 }

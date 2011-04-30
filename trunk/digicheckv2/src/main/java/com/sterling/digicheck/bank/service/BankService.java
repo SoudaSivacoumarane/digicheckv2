@@ -89,4 +89,20 @@ public class BankService {
     		throw bankException;
 		}
 	}
+	
+	public BankView getBankEntityById(Integer bankId) throws BankException{
+		BankConverter bankConverter = null;
+		BankView view = null;
+		try{
+			bankConverter = new BankConverter();
+			view = bankConverter.converterEntityToAuthView(bankDAO.getBankEntityById(bankId));
+		}catch (Exception exception){
+			BankException bankException = null;
+			bankException = new BankException(exception, BankException.LAYER_SERVICE, BankException.ACTION_DELETE);
+    		logger.error(bankException);
+    		exception.printStackTrace(System.out);
+    		throw bankException;
+		}
+		return view;
+	}
 }

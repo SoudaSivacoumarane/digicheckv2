@@ -89,13 +89,13 @@ public class CurrencyService {
 		}
 	}
 	
-	public CurrencyView validateCurrency(int domainCurrencyName)throws CurrencyException{
+	public CurrencyView getCurrencyById(int domainCurrencyName)throws CurrencyException{
 		CurrencyView currencyView = null;
 		CurrencyEntity currencyEntity = null;
 		CurrencyConverter currencyConverter = null;
 		try{
 			currencyConverter = new CurrencyConverter();
-			currencyEntity = currencyDAO.validateCurrency(domainCurrencyName);
+			currencyEntity = currencyDAO.getCurrencyById(domainCurrencyName);
 			if(currencyEntity!=null){
 				currencyView = currencyConverter.converterEntityToAuthView(currencyEntity);
 			}
