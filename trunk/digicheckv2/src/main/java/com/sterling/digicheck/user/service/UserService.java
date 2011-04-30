@@ -20,6 +20,28 @@ public class UserService {
 	@Autowired
 	private UserDAO userDAO;
 	
+	public UserView loginUser(UserView userView) throws UserException{		
+		UserEntity userEntity = null;
+		UserView view = null;
+		UserConverter userConverter = null;
+		try{
+			userConverter = new UserConverter();
+			userEntity = userDAO.loginUser(userConverter.convertViewToEntity(userView));
+			if(userEntity != null){
+				view = userConverter.converterEntityToAuthView(userEntity);
+			}
+		} catch (UserException userException){
+			throw userException;
+		} catch (Exception exception){
+			UserException userException = null;
+			userException = new UserException(exception, UserException.LAYER_SERVICE, UserException.ACTION_SELECT);
+    		logger.error(userException);
+    		exception.printStackTrace(System.out);
+    		throw userException;
+		}
+		return view;
+	}
+	
 	public UserView validateUser(String domainUserName)throws UserException{
 		UserView userView = null;
 		UserEntity userEntity = null;

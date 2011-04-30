@@ -47,8 +47,50 @@
 				 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	                <tr>
 	                    <td>
-	                      	<div align="center">
-                  				<!-- Agregar Panel Login -->
+	                      	<div align="center" style="_position: absolute; _top: 50%;">                  				
+                  				<br />
+                  				<br />
+                  				<br />
+                  				<rich:panel header="Login">                  				
+                               		<h:form autocomplete="off">
+                                       <table cellpadding="2" cellspacing="2">
+                                           <tr>
+                                               <td>
+                                                   <h:outputLabel for="usuario" value="Usuario" />
+                                               </td>
+                                               <td>
+                                                   <h:inputText id="usuario" value="#{loginManagedBean.view.login}"  required="true" label="Usuario" size="10"
+                                                   		requiredMessage="username es requerido">
+														<rich:validator />	
+                                                   </h:inputText>
+                                               								 
+                                               </td>
+                                               <td>                                                   
+                                                   <rich:message id="usuarioMsg" for="usuario" />
+                                               </td>
+                                           </tr>
+                                           <tr>
+                                               <td>
+                                                   <h:outputLabel for="contrasena" value="Contraseña" />
+                                               </td>
+                                               <td>
+                                                   <h:inputSecret id="contrasena" value="#{loginManagedBean.view.password}"  required="true" size="10"
+                                                   		requiredMessage="El password es requerido">
+														<rich:validator />
+												   </h:inputSecret>	                                                                                                     
+                                               </td>
+                                               <td>                                                   
+                                                   <rich:message id="contrasenaMsg" for="contrasena" />
+                                               </td>
+                                           </tr>
+                                           <tr>
+                                               <td colspan="3" style="text-align: center">                                                                                                      
+                                                   <a4j:commandButton value="Iniciar Sesion" action="#{loginManagedBean.doLoginAction}"/>                                                   
+                                               </td>
+                                           </tr>
+                                       </table>
+                                   </h:form>
+                               </rich:panel>
 	                        </div>
 	                        <div id="div_body">
 							    <!-- Agregar Panel Msgs -->

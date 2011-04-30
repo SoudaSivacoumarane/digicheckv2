@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sterling.digicheck.user.view.UserView;
+
 public class AuthenticationFilter implements Filter {	
 	/** Nombre de variable de session para el usuario */
 	private static final String USER_SESSION_NAME = "user";
@@ -39,30 +41,28 @@ public class AuthenticationFilter implements Filter {
 	
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
 			FilterChain filterChain) throws IOException, ServletException {
-		//UserView userView = null;
+		UserView userView = null;
 		HttpServletRequest httpServletRequest = null;
 		HttpServletResponse httpServletResponse = null;
 		HttpSession httpSession =  null;
-		String requestUri = null;
-		
+		String requestUri = null;		
 		String contextPath = null;
-		
 		
 		httpServletRequest = (HttpServletRequest)servletRequest;
 		httpServletResponse = (HttpServletResponse)servletResponse;
 		contextPath = httpServletRequest.getContextPath();		
 		httpSession =  httpServletRequest.getSession();
-		//userView = (UserView)httpSession.getAttribute(USER_SESSION_NAME);
+		userView = (UserView)httpSession.getAttribute(USER_SESSION_NAME);
 		requestUri= httpServletRequest.getServletPath();
 		if(requestUri.startsWith("/javax.faces.resource")){
 			requestUri = "/javax.faces.resource";
 		}
 		if( !securityActionsException.contains(requestUri) ){
-		/*	if(  userView == null ){
+			if(  userView == null ){
 				httpServletResponse.sendRedirect(new StringBuffer(contextPath).append(LOGOUT_ACTION).toString());
 			}else{				
 				filterChain.doFilter(servletRequest, servletResponse);
-			}*/
+			}
 		}else{
 			if( requestUri.equals(MAIN_ACTION) ){
 				//errorTmp = (String)httpSession.getAttribute(ERROR_MESSAGE);
@@ -72,9 +72,6 @@ public class AuthenticationFilter implements Filter {
 			}
 			filterChain.doFilter(servletRequest, servletResponse);
 		}
-		
-		
-		
 	}
 
 	public void init(FilterConfig arg0) throws ServletException {

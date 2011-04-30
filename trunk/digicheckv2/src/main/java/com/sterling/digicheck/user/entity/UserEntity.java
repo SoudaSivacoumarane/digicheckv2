@@ -11,7 +11,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "USUARIO")
-@NamedQueries({@NamedQuery(name = "UserEntity.findAll", query = "select u from UserEntity u")})
+@NamedQueries({
+		@NamedQuery(name = "UserEntity.findAll", query = "select u from UserEntity u"),
+		@NamedQuery(name = "UserEntity.login", query = "select u from UserEntity u where u.login = :user and u.password = :pass")
+		})
 public class UserEntity implements Serializable {
 	private static final long serialVersionUID = -2386177213472335274L;
 	@Id
