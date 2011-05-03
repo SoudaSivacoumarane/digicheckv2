@@ -12,7 +12,9 @@ import org.apache.commons.logging.LogFactory;
 import com.sterling.digicheck.branchoffice.entity.BranchOfficeEntity;
 import com.sterling.digicheck.branchoffice.exception.BranchOfficeException;
 import com.sterling.digicheck.branchoffice.view.BranchOfficeView;
+import com.sterling.digicheck.state.converter.StateConverter;
 import com.sterling.digicheck.state.entity.StateEntity;
+import com.sterling.digicheck.state.view.StateView;
 
 public class BranchOfficeConverter {
 
@@ -42,16 +44,18 @@ public class BranchOfficeConverter {
 	}
 	public BranchOfficeView converterEntityToAuthView(BranchOfficeEntity branchOfficeEntity)throws BranchOfficeException{
 		BranchOfficeView branchOfficeView = null;
+		StateConverter stateConverter = null;
 
 		try{
 			branchOfficeView = new BranchOfficeView();
+			stateConverter = new StateConverter();
 			
 			branchOfficeView.setSucId(String.valueOf(branchOfficeEntity.getSucId()));
 			branchOfficeView.setName(branchOfficeEntity.getName());
 			branchOfficeView.setAddress(branchOfficeEntity.getAddress());
 			branchOfficeView.setCity(branchOfficeEntity.getCity());
 			branchOfficeView.setCommunity(branchOfficeEntity.getCommunity());
-			branchOfficeView.setState(branchOfficeEntity.getStateEntity().getName());
+			branchOfficeView.setState(stateConverter.converterEntityToAuthView(branchOfficeEntity.getStateEntity()));
 			branchOfficeView.setZip(branchOfficeEntity.getZip());
 		} catch (Exception exception){
 			BranchOfficeException branchOfficeException = null;
@@ -64,18 +68,15 @@ public class BranchOfficeConverter {
 	}
 	public BranchOfficeEntity convertViewToEntity(BranchOfficeView branchOfficeView)throws BranchOfficeException{
 		BranchOfficeEntity branchOfficeEntity = null;
-		StateEntity stateEntity = null;
+		StateConverter stateConverter = null;
 		try{
 			branchOfficeEntity = new BranchOfficeEntity();			
-			stateEntity = new StateEntity();
+			stateConverter = new StateConverter();
 			branchOfficeEntity.setName(branchOfficeView.getName());
 			branchOfficeEntity.setAddress(branchOfficeView.getAddress());
 			branchOfficeEntity.setCity(branchOfficeView.getCity());
 			branchOfficeEntity.setCommunity(branchOfficeView.getCommunity());
-			stateEntity.setCode(branchOfficeView.getState());
-			stateEntity.setName("");
-			branchOfficeEntity.setStateEntity(stateEntity);
-			//branchOfficeEntity.setState(branchOfficeView.getState());
+			branchOfficeEntity.setStateEntity(stateConverter.convertViewToEntity(branchOfficeView.getState()));
 			branchOfficeView.setZip(branchOfficeView.getZip());
 		}catch (Exception exception){
 			BranchOfficeException branchOfficeException = null;

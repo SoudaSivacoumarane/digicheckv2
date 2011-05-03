@@ -41,6 +41,21 @@ public class StateConverter {
 		return stateViews;
 	}
 	
+	public StateEntity convertViewToEntity(StateView view)throws StateException{
+		StateEntity stateEntity = null;
+		try{
+			stateEntity = new StateEntity();
+			stateEntity.setCode(view.getCode());
+			stateEntity.setName(view.getName());
+		} catch (Exception exception){
+			StateException stateException = null;
+			stateException = new StateException(exception, StateException.LAYER_CONVERTER, StateException.ACTION_SELECT);
+			log.error(stateException);
+			exception.printStackTrace(System.out);
+			throw stateException;
+		}
+		return stateEntity;
+	}
 	
 	public StateView converterEntityToAuthView(StateEntity stateEntity)throws StateException{
 		StateView stateView = null;

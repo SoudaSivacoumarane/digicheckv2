@@ -2,6 +2,8 @@ package com.sterling.digicheck.branchoffice.view;
 
 import java.io.Serializable;
 
+import com.sterling.digicheck.state.view.StateView;
+
 public class BranchOfficeView implements Serializable {
 	private static final long serialVersionUID = 1091505038339380532L;
 	private String sucId;
@@ -9,14 +11,14 @@ public class BranchOfficeView implements Serializable {
 	private String address;
 	private String community;
 	private String zip;
-	private String state;
+	private StateView state;
 	private String city;
 
 	public BranchOfficeView() {
 		
 	}	
 	
-	public BranchOfficeView(String nName, String nAddress, String nCommunity, String nZip, String nState, String nCity) {
+	public BranchOfficeView(String nName, String nAddress, String nCommunity, String nZip, StateView nState, String nCity) {
 		name = nName;
 		address = nAddress;
 		community = nCommunity;
@@ -59,10 +61,10 @@ public class BranchOfficeView implements Serializable {
 	public void setZip(String zip) {
 		this.zip = zip;
 	}
-	public String getState() {
+	public StateView getState() {
 		return state;
 	}
-	public void setState(String state) {
+	public void setState(StateView state) {
 		this.state = state;
 	}
 	public String getCity() {
