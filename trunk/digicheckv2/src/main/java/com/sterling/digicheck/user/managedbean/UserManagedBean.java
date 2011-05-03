@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
@@ -15,7 +14,7 @@ import com.sterling.digicheck.user.exception.UserException;
 import com.sterling.digicheck.user.service.UserService;
 import com.sterling.digicheck.user.view.UserView;
 
-@ManagedBean(name="loginManagedBean")
+@ManagedBean(name="userManagedBean")
 public class UserManagedBean implements Serializable{
 
 	/** Serial Version UID */
@@ -28,26 +27,7 @@ public class UserManagedBean implements Serializable{
 	private static final String VIEW_MONTHLY_REPORT = "reporte_mensual.xhtml";
 	private static final String VIEW_DAILY_REPORT = "reporte_diario.xhtml";
 	private static final String VIEW_ADD_LOT = "digitalizacion.xhtml";
-	@ManagedProperty("#{userService}")
-	private UserService userService;
-	private UserView view = new UserView();
-	
-	
-	public void doLoginAction(){		
-		try {
-			HttpSession session = null;
-			
-			if(userService.loginUser(view) != null){
-				session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-				session.setAttribute("user", view);
-				goHomeAction(null);
-			}else{
-				JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Login Error", "Usuario o Password incorrecto");
-			}
-		} catch (UserException e) {
-			e.printStackTrace();
-		}
-	}	
+		
 	
 	public void goHomeAction(ActionEvent actionEvent){
 		JSFUtil.redirect(VIEW_HOME);
@@ -79,18 +59,6 @@ public class UserManagedBean implements Serializable{
 	
 	public void goDailyReportAction(ActionEvent actionEvent){
 		JSFUtil.redirect(VIEW_DAILY_REPORT);
-	}
-	
-	public UserView getView() {
-		return view;
-	}
-
-	public void setView(UserView view) {
-		this.view = view;
-	}
-
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}								
+	}						
 	
 }
