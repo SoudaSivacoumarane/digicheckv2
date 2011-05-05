@@ -15,7 +15,7 @@ public class StateService {
 	
 	public List<StateEntity> getStates() {
 		return stateDAO.getStates();
-	}
+	}		
 
 	public void setStateDAO(StateDAO stateDAO) {
 		this.stateDAO = stateDAO;

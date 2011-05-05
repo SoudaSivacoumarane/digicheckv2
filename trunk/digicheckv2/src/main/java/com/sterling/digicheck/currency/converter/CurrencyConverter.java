@@ -58,8 +58,9 @@ public class CurrencyConverter {
 		CurrencyEntity entity = null;		
 		try{
 			entity = new CurrencyEntity();
-			if(view.getCurrencyId()!=null)
+			if(view.getCurrencyId() != null){
 				entity.setCurrencyId(Integer.parseInt(view.getCurrencyId()));
+			}
 			entity.setCode(view.getCode());			
 			entity.setName(view.getName());
 			byte[] b = new byte [0];

@@ -2,6 +2,8 @@ package com.sterling.digicheck.branchoffice.service;
 
 import java.util.List;
 
+import javax.faces.model.SelectItem;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,10 @@ import com.sterling.digicheck.branchoffice.dao.BranchOfficeDAO;
 import com.sterling.digicheck.branchoffice.entity.BranchOfficeEntity;
 import com.sterling.digicheck.branchoffice.exception.BranchOfficeException;
 import com.sterling.digicheck.branchoffice.view.BranchOfficeView;
+import com.sterling.digicheck.state.converter.StateConverter;
+import com.sterling.digicheck.state.dao.StateDAO;
+import com.sterling.digicheck.state.exception.StateException;
+import com.sterling.digicheck.state.view.StateView;
 
 @Service("branchOfficeService")
 public class BranchOfficeService {
@@ -18,7 +24,9 @@ public class BranchOfficeService {
 	private static final Logger logger = Logger.getLogger(BranchOfficeService.class);
 	
 	@Autowired
-	private BranchOfficeDAO branchOfficeDAO;	
+	private BranchOfficeDAO branchOfficeDAO;
+	@Autowired
+	private StateDAO stateDAO;
 	
 	public List<BranchOfficeView> getAllBranchOffices()throws BranchOfficeException{
 		List<BranchOfficeView> branchOfficeViews = null;
@@ -110,5 +118,18 @@ public class BranchOfficeService {
     		throw branchOfficeException;
 		}
 		return branchOfficeView;
+	}
+	
+	public List<SelectItem> getSelectStates(){
+		StateConverter stateConverter = null;
+		List<SelectItem> states = null;
+		try {				
+			stateConverter = new StateConverter();
+			List<StateView> views = stateConverter.converterEntitiesToViews(stateDAO.getStates());
+			states = stateConverter.converterViewsToItems(views);
+		} catch (StateException e) {			
+			e.printStackTrace();
+		}	
+		return states;
 	}
 }

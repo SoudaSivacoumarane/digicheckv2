@@ -62,7 +62,10 @@ public class BankConverter {
 	public BankEntity convertViewToEntity(BankView view)throws BankException{
 		BankEntity entity = null;		
 		try{
-			entity = new BankEntity();			
+			entity = new BankEntity();
+			if(view.getBankId() != null){
+				entity.setBankId(Integer.parseInt(view.getBankId()));	
+			}			
 			entity.setCode(view.getCode());
 			entity.setName(view.getName());
 			entity.setAccount(view.getAccount());				

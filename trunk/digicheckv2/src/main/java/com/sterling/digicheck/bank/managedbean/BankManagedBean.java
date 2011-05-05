@@ -33,7 +33,7 @@ public class BankManagedBean implements Serializable{
 	public void addBankAction(){
 		try {
 			bankService.insertBank(bankView);
-			JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "La sucursal se agrego correctamente");
+			//JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "La sucursal se agrego correctamente");
 			banks = bankService.getAllBanks();
 		} catch (BankException e) {
 			logger.error(e.getStackTrace());			

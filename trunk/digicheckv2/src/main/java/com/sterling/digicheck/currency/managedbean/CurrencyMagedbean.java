@@ -29,7 +29,7 @@ public class CurrencyMagedbean implements Serializable {
 	public void addCurrency(){
 		try {
 			currencyService.insertCurrency(currencyView);
-			JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "La divisa se agrego correctamente.");
+			//JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "La divisa se agrego correctamente.");
 		} catch (CurrencyException e) {
 			e.printStackTrace();
 		}
@@ -58,7 +58,7 @@ public class CurrencyMagedbean implements Serializable {
 	public void editCurrency(){
 		try {
 			currencyService.updateCurrency(currentView);
-			JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "La divisa se edito correctamente.");
+			//JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "La divisa se edito correctamente.");
 		} catch (CurrencyException e) {
 			e.printStackTrace();
 		}

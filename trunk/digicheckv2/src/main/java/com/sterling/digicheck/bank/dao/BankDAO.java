@@ -29,7 +29,6 @@ public class BankDAO extends GenericDAO{
 			query = em.createNamedQuery("BankEntity.findAll");
 			bankEntities = query.getResultList();			
 		}catch (Exception exception){
-			em.flush();
 			BankException bankException = null;
 			bankException = new BankException(exception, BankException.LAYER_DAO, BankException.ACTION_LISTS);
     		logger.error(bankException);
@@ -45,9 +44,7 @@ public class BankDAO extends GenericDAO{
 			em.getTransaction().begin();
 			em.persist(bankEntity);
 			em.getTransaction().commit();
-			em.flush();
 		}catch (Exception exception){
-			em.flush();
 			BankException bankException = null;
 			bankException = new BankException(exception, BankException.LAYER_DAO, BankException.ACTION_INSERT);
     		logger.error(bankException);
@@ -61,10 +58,8 @@ public class BankDAO extends GenericDAO{
 			em = emf.createEntityManager();
 			em.getTransaction().begin();
 			em.merge(entity);
-			em.getTransaction().commit();
-			em.flush();
+			em.getTransaction().commit();			
 		}catch (Exception exception){
-			em.flush();
 			BankException bankException = null;
 			bankException = new BankException(exception, BankException.LAYER_DAO, BankException.ACTION_UPDATE);
     		logger.error(bankException);
@@ -80,8 +75,7 @@ public class BankDAO extends GenericDAO{
 			em.getTransaction().begin();
 			entity = em.find(BankEntity.class, bankId);			
 			em.remove(entity);			
-			em.getTransaction().commit();
-			em.flush();
+			em.getTransaction().commit();			
 		}catch (Exception exception){
 			em.flush();
 			BankException bankException = null;
@@ -96,8 +90,7 @@ public class BankDAO extends GenericDAO{
 		BankEntity entity = null;
 		try{
 			entity = em.find(BankEntity.class, bankId);			
-		}catch (Exception exception){
-			em.flush();
+		}catch (Exception exception){			
 			BankException bankException = null;
 			bankException = new BankException(exception, BankException.LAYER_DAO, BankException.ACTION_SELECT);
     		logger.error(bankException);

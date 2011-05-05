@@ -7,6 +7,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.model.SelectItem;
 
 import org.apache.log4j.Logger;
 
@@ -34,7 +35,7 @@ public class BranchOfficeManagedbean implements Serializable {
 	public void addBranchOffice(){
 		try {
 			branchOfficeService.insertBranchOffice(branchOfficeView);
-			JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "La sucursal se agrego correctamente.");
+			//JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "La sucursal se agrego correctamente.");
 		} catch (BranchOfficeException e) {
 			logger.error(e);
 		}
@@ -52,7 +53,7 @@ public class BranchOfficeManagedbean implements Serializable {
 	public void editBranchOffice(){
 		try{
 			branchOfficeService.updateBranchOffice(currentBranchOfficeView);
-			JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "La sucursal se actualizo correctamente.");
+			//JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "La sucursal se actualizo correctamente.");
 		} catch (BranchOfficeException e) {
 			logger.error(e);
 		}
@@ -90,6 +91,10 @@ public class BranchOfficeManagedbean implements Serializable {
 			logger.error(e);
 		}
 		return branchOfficeList;
+	}
+	
+	public List<SelectItem> getStatesList(){		
+		return branchOfficeService.getSelectStates();
 	}
 
 	public void setBranchOfficeList(List<BranchOfficeView> branchOfficeList) {

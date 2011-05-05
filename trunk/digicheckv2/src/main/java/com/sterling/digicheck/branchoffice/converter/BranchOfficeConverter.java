@@ -72,12 +72,13 @@ public class BranchOfficeConverter {
 		try{
 			branchOfficeEntity = new BranchOfficeEntity();			
 			stateConverter = new StateConverter();
+			branchOfficeEntity.setSucId(Integer.parseInt(branchOfficeView.getSucId()));
 			branchOfficeEntity.setName(branchOfficeView.getName());
 			branchOfficeEntity.setAddress(branchOfficeView.getAddress());
 			branchOfficeEntity.setCity(branchOfficeView.getCity());
 			branchOfficeEntity.setCommunity(branchOfficeView.getCommunity());
 			branchOfficeEntity.setStateEntity(stateConverter.convertViewToEntity(branchOfficeView.getState()));
-			branchOfficeView.setZip(branchOfficeView.getZip());
+			branchOfficeEntity.setZip(branchOfficeView.getZip());
 		}catch (Exception exception){
 			BranchOfficeException branchOfficeException = null;
 			branchOfficeException = new BranchOfficeException(exception, BranchOfficeException.LAYER_CONVERTER, BranchOfficeException.ACTION_SELECT);
