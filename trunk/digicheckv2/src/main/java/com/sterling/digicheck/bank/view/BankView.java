@@ -5,42 +5,18 @@ package com.sterling.digicheck.bank.view;
 
 import java.io.Serializable;
 
-/** 
+/**
  * Bank View
  * 
  * @author Edgar Joao
  */
-public class BankView implements Serializable{
+public class BankView implements Serializable {
 	/** Serial Version ID */
 	private static final long serialVersionUID = -4836470143973592753L;
 	private String bankId;
-	private String code;
-	private String name;
-	private String account;
+	private String aba;
+	private String description;
 
-	public BankView() {
-		
-	}
-	
-	public BankView(String nBankId){
-		bankId = nBankId;
-	}
-	
-	public BankView(String nBankId, String nCode, String nName, String nAccount) {
-		bankId = nBankId;
-		code = nCode;
-		name= nName;
-		account = nAccount;
-	}
-	
-
-	public String getName() {
-		return name;
-	}
-	public void setName(String nombre) {
-		this.name = nombre;
-	}
-	
 	public String getBankId() {
 		return bankId;
 	}
@@ -49,27 +25,27 @@ public class BankView implements Serializable{
 		this.bankId = bankId;
 	}
 
-	public String getCode() {
-		return code;
+	public String getAba() {
+		return aba;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setAba(String aba) {
+		this.aba = aba;
 	}
 
-	public String getAccount() {
-		return account;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setAccount(String account) {
-		this.account = account;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if(!(obj instanceof BankView))
+		if (!(obj instanceof BankView))
 			return false;
-		BankView bankView = (BankView)obj; 
-		return this.getBankId().equals(bankView.getBankId());		
+		BankView bankView = (BankView) obj;
+		return this.getBankId().equals(bankView.getBankId());
 	}
 }

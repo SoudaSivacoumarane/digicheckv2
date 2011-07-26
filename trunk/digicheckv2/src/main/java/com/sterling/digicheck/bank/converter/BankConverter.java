@@ -46,10 +46,9 @@ public class BankConverter {
 
 		try{
 			bankView = new BankView();			
-			bankView.setBankId(String.valueOf(bankEntity.getBankId()));			
-			bankView.setCode(bankEntity.getCode());
-			bankView.setName(bankEntity.getName());
-			bankView.setAccount(bankEntity.getAccount());
+			bankView.setBankId(String.valueOf(bankEntity.getBankId()));
+			bankView.setAba(bankEntity.getAba());
+			bankView.setDescription(bankEntity.getDescription());						
 		} catch (Exception exception){
 			BankException bankException = null;
 			bankException = new BankException(exception, BankException.LAYER_CONVERTER, BankException.ACTION_SELECT);
@@ -65,10 +64,9 @@ public class BankConverter {
 			entity = new BankEntity();
 			if(view.getBankId() != null){
 				entity.setBankId(Integer.parseInt(view.getBankId()));	
-			}			
-			entity.setCode(view.getCode());
-			entity.setName(view.getName());
-			entity.setAccount(view.getAccount());				
+			}
+			entity.setAba(view.getAba());
+			entity.setDescription(view.getDescription());							
 		}catch (Exception exception){
 			BankException bankException = null;
 			bankException = new BankException(exception, BankException.LAYER_CONVERTER, BankException.ACTION_SELECT);

@@ -68,7 +68,7 @@ public class AuthenticationFilter implements Filter {
 				//errorTmp = (String)httpSession.getAttribute(ERROR_MESSAGE);
 				//httpSession.invalidate();
 				//httpSession = httpServletRequest.getSession();
-				//httpSession.setAttribute(ERROR_MESSAGE,errorTmp);
+				//httpSession.setAttribute(ERROR_MESSAGE,errorTmp);				
 			}
 			filterChain.doFilter(servletRequest, servletResponse);
 		}

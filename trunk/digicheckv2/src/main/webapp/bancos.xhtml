@@ -43,18 +43,14 @@
 						<h:graphicImage value="/resources/images/img-edit.png" alt="edit" />
 						<a4j:param value="#{row.bankId}" assignTo="#{bankManagedBean.bankId}" />					
 					</a4j:commandLink>    
-            </rich:column>            
+            </rich:column>            	
 			<rich:column>
-				<f:facet name="header">Codigo</f:facet>
-				<h:outputText value="#{row.code}" />
+				<f:facet name="header">ABA</f:facet>
+				<h:outputText value="#{row.aba}" />
 			</rich:column>
 			<rich:column>
-				<f:facet name="header">Nombre</f:facet>
-				<h:outputText value="#{row.name}" />
-			</rich:column>
-			<rich:column>
-				<f:facet name="header">Cuenta</f:facet>
-				<h:outputText value="#{row.account}" />
+				<f:facet name="header">Descripcion</f:facet>
+				<h:outputText value="#{row.description}" />
 			</rich:column>												
 			<f:facet name="footer">
 				<rich:dataScroller page="#{bankManagedBean.page}" />
@@ -78,29 +74,20 @@
 		
 		<rich:popupPanel header="Editar Banco" id="editPane" width="400" height="170">
 			<h:form>
-				<h:panelGrid columns="2" id="editGrid">							
-					<h:outputText value="Codigo" />
+				<h:panelGrid columns="2" id="editGrid">																							
+					<h:outputText value="ABA" />
 					<h:panelGroup>
-						<h:inputText id="ecode" value="#{bankManagedBean.currentBank.code}" required="true"
-							requiredMessage="El codigo es requerido">		
-							<rich:validator />		
-						</h:inputText>
-						<rich:message id="ecodeMsg" for="ecode" />
-					</h:panelGroup>
-									
-					<h:outputText value="Nombre" />
-					<h:panelGroup>
-						<h:inputText id="ename" value="#{bankManagedBean.currentBank.name}" required="true"
-							requiredMessage="El nombre es requerido">
+						<h:inputText id="ename" value="#{bankManagedBean.currentBank.aba}" required="true"
+							requiredMessage="ABA es requerido">
 							<rich:validator />				
 						</h:inputText>
 						<rich:message id="enameMsg" for="ename" />
 					</h:panelGroup>
 					
-					<h:outputText value="Cuenta" />
+					<h:outputText value="Descripcion" />
 					<h:panelGroup>
-						<h:inputText id="eaccaount" value="#{bankManagedBean.currentBank.account}" required="true"
-							requiredMessage="Cuenta es requerida">
+						<h:inputText id="eaccaount" value="#{bankManagedBean.currentBank.description}" required="true"
+							requiredMessage="La descripcion es requerida">
 						<rich:validator />				
 						</h:inputText>
 						<rich:message id="eaccaountMsg" for="eaccaount" />
@@ -115,29 +102,20 @@
 	
 	<rich:popupPanel header="Nuevo Banco" id="newPane" width="400" height="170">
 		<h:form>
-			<h:panelGrid columns="2" id="newGrid">							
-				<h:outputText value="Codigo" />
+			<h:panelGrid columns="2" id="newGrid">																			
+				<h:outputText value="ABA" />
 				<h:panelGroup>
-					<h:inputText id="code" value="#{bankManagedBean.bankView.code}" required="true"
-						requiredMessage="El codigo es requerido">
-						<rich:validator />				
-					</h:inputText>
-					<rich:message id="codeMsg" for="code" />
-				</h:panelGroup>
-								
-				<h:outputText value="Nombre" />
-				<h:panelGroup>
-					<h:inputText id="name" value="#{bankManagedBean.bankView.name}" required="true"
-						requiredMessage="El nombre es requerido">
+					<h:inputText id="name" value="#{bankManagedBean.bankView.aba}" required="true"
+						requiredMessage="ABA es requerido">
 						<rich:validator />				
 					</h:inputText>
 					<rich:message id="nameMsg" for="name" />
 				</h:panelGroup>
 				
-				<h:outputText value="Cuenta" />
+				<h:outputText value="Descripcion" />
 				<h:panelGroup>
-					<h:inputText id="account" value="#{bankManagedBean.bankView.account}" required="true"
-						requiredMessage="Cuenta es requerida">
+					<h:inputText id="account" value="#{bankManagedBean.bankView.description}" required="true"
+						requiredMessage="La descripcion es requerida">
 					<rich:validator />				
 					</h:inputText>
 					<rich:message id="accountMsg" for="account" />

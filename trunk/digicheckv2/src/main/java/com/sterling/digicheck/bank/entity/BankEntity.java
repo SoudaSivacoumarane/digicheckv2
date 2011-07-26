@@ -21,12 +21,10 @@ public class BankEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "BAN_ID")
 	private Integer bankId;
-	@Column(name = "BAN_CODIGO")
-	private String code;
-	@Column(name = "BAN_NOMBRE")
-	private String name;
-	@Column(name = "BAN_CUENTA")
-	private String account;
+	@Column(name = "ABA")
+	private String aba;
+	@Column(name = "DESCRIPCION")
+	private String description;
 
 	public Integer getBankId() {
 		return bankId;
@@ -34,30 +32,21 @@ public class BankEntity implements Serializable {
 
 	public void setBankId(Integer nBankId) {
 		bankId = nBankId;
+	}	
+
+	public String getAba() {
+		return aba;
 	}
 
-	public String getCode() {
-		return code;
+	public void setAba(String aba) {
+		this.aba = aba;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public String getDescription() {
+		return description;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	@Column(name = "BAN_CUENTA")
-	public String getAccount() {
-		return account;
-	}
-
-	public void setAccount(String account) {
-		this.account = account;
-	}
+	public void setDescription(String description) {
+		this.description = description;
+	}	
 }

@@ -69,6 +69,9 @@ public class LoginManagedBean implements Serializable{
 	}
 	
 	public void goOutAction(ActionEvent actionEvent){
+		HttpSession session = null;
+		session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		session.setAttribute("user", null);		
 		JSFUtil.redirect(VIEW_OUT);
 	}
 	
