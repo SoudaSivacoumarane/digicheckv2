@@ -11,8 +11,8 @@
         <title>
             DigiCheck :: Bienvenido
         </title>
-        <link href="#{facesContext.externalContext.requestContextPath}/resources/themes/theme2/skin.css"  rel="stylesheet" type="text/css" />
-        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/prototype.css"  rel="stylesheet" type="text/css" />
+        <link href="resources/themes/theme2/skin.css"  rel="stylesheet" type="text/css" />
+        <link href="resources/css/prototype.css"  rel="stylesheet" type="text/css" />
         <meta http-equiv="Expires" content="Sat, 6 May 1995 12:00:00 GMT"/>
 		<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
 		<meta http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
@@ -52,14 +52,14 @@
                   				<br />
                   				<br />
                   				<rich:panel header="Login">                  				
-                               		<h:form autocomplete="off">
+                               		<h:form>
                                        <table cellpadding="2" cellspacing="2">
                                            <tr>
                                                <td>
                                                    <h:outputLabel for="usuario" value="Usuario" />
                                                </td>
                                                <td>
-                                                   <h:inputText id="usuario" value="#{loginManagedBean.view.login}"  required="true" label="Usuario" size="10"
+                                                   <h:inputText id="usuario" value="#{loginManagedBean.view.login}"  required="true" label="Usuario" size="10" autocomplete="off"
                                                    		requiredMessage="username es requerido">
 														<rich:validator />	
                                                    </h:inputText>
@@ -74,7 +74,7 @@
                                                    <h:outputLabel for="contrasena" value="Contraseña" />
                                                </td>
                                                <td>
-                                                   <h:inputSecret id="contrasena" value="#{loginManagedBean.view.password}"  required="true" size="10"
+                                                   <h:inputSecret id="contrasena" value="#{loginManagedBean.view.password}"  required="true" size="10" redisplay="false" autocomplete="off"
                                                    		requiredMessage="El password es requerido">
 														<rich:validator />
 												   </h:inputSecret>	                                                                                                     

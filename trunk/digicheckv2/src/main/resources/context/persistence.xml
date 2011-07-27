@@ -1,7 +1,12 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
   <persistence-unit name="MSSQLDS" transaction-type="RESOURCE_LOCAL">  	
       <provider>org.hibernate.ejb.HibernatePersistence</provider>    
-      <mapping-file>META-INF/orm.xml</mapping-file>             
+      <mapping-file>META-INF/orm.xml</mapping-file>
+      <class>com.sterling.digicheck.bank.entity.BankEntity</class>
+      <class>com.sterling.digicheck.branchoffice.entity.BranchOfficeEntity</class>
+      <class>com.sterling.digicheck.currency.entity.CurrencyEntity</class>
+      <class>com.sterling.digicheck.state.entity.StateEntity</class>
+      <class>com.sterling.digicheck.user.entity.UserEntity</class>             
       <properties>        
       	<property name="hibernate.connection.driver_class" value="com.inet.tds.TdsDriver"/>
       	<property name="hibernate.connection.url" value="${jdbc.url}"/>
@@ -9,7 +14,7 @@
       	<property name="hibernate.connection.password" value="${jdbc.password}"/> 
       	<property name="hibernate.dialect" value="com.sterling.common.mysql.MSSqlDialect"/>      	
       	<property name="hibernate.show_sql" value="true" />
-      	<property name="use_sql_comments" value="false"/>
-      </properties>     
+      	<property name="use_sql_comments" value="false"/>      	
+      </properties>
    </persistence-unit>
 </persistence>
