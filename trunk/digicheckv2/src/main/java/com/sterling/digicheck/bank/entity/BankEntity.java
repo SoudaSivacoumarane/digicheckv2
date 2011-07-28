@@ -15,15 +15,14 @@ import javax.persistence.Table;
 @Table(name = "BANCO")
 @NamedQueries({@NamedQuery(name = "BankEntity.findAll", query = "select b from BankEntity b")})
 public class BankEntity implements Serializable {
-	private static final long serialVersionUID = 5113528482715104208L;
-
+	private static final long serialVersionUID = 1715090681946047742L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "BAN_ID")
 	private Integer bankId;
-	@Column(name = "ABA")
+	@Column(name = "BAN_ABBA")
 	private String aba;
-	@Column(name = "DESCRIPCION")
+	@Column(name = "BAN_DESCRIPCION")
 	private String description;
 
 	public Integer getBankId() {

@@ -27,7 +27,7 @@ public class BankDAO extends GenericDAO{
 		try{	
 			logger.info("Obtener Bancos");
 			query = em.createNamedQuery("BankEntity.findAll");
-			bankEntities = query.getResultList();			
+			bankEntities = query.getResultList();
 		}catch (Exception exception){
 			BankException bankException = null;
 			bankException = new BankException(exception, BankException.LAYER_DAO, BankException.ACTION_LISTS);
