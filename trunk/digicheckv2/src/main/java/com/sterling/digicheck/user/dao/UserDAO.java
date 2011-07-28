@@ -35,7 +35,7 @@ public class UserDAO extends GenericDAO {
 		List<UserEntity> userEntities = null;		
 		Query query = null;
 		try{
-			query = em.createNamedQuery("");
+			query = em.createNamedQuery("UserEntity.findAll");
 			userEntities = query.getResultList();				
 		}catch (Exception exception){
 			UserException userException = null;
@@ -100,6 +100,20 @@ public class UserDAO extends GenericDAO {
 		try{		
 		  query = em.createNamedQuery("UserEntity.login").setParameter("user", entity.getLogin()).setParameter("pass", entity.getPassword());
 		  userEntity = (UserEntity) query.getSingleResult();			
+		}catch (Exception exception){
+			UserException userException = null;
+			userException = new UserException(exception, UserException.LAYER_DAO, UserException.ACTION_DELETE);
+    		logger.error(userException);
+    		exception.printStackTrace(System.out);
+    		throw userException;
+		}		
+		return userEntity;
+	}
+	
+	public UserEntity getUserByLogin(String login) throws UserException{
+		UserEntity userEntity = null;		
+		try{
+			userEntity = em.find(UserEntity.class, login);			
 		}catch (Exception exception){
 			UserException userException = null;
 			userException = new UserException(exception, UserException.LAYER_DAO, UserException.ACTION_DELETE);

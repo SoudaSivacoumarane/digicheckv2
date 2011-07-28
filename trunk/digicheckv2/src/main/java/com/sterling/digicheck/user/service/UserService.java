@@ -136,4 +136,22 @@ public class UserService {
     		throw userException;
 		}
 	}
+	
+	public UserView getUserByLogin(String login) throws UserException{
+		UserConverter converter = null;
+		UserView userView = null;		
+		try{
+			converter = new UserConverter();
+			userView = converter.converterEntityToAuthView(userDAO.getUserByLogin(login));
+		} catch (UserException userException){
+			throw userException;
+		} catch (Exception exception){
+			UserException userException = null;
+			userException = new UserException(exception, UserException.LAYER_SERVICE, UserException.ACTION_SELECT);
+    		logger.error(userException);
+    		exception.printStackTrace(System.out);
+    		throw userException;
+		}
+		return userView;		
+	}
 }

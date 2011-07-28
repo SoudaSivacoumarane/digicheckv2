@@ -1,13 +1,19 @@
 package com.sterling.digicheck.user.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.sterling.digicheck.user.permission.entity.UserPermissionEntity;
 
 @Entity
 @Table(name = "USUARIO")
@@ -26,6 +32,8 @@ public class UserEntity implements Serializable {
 	private String nombre;
 	@Column(name = "SUC_ID")
 	private int sucursalId;
+	@OneToMany(cascade = CascadeType.ALL, fetch= FetchType.EAGER, mappedBy = "usuario")
+    private Collection<UserPermissionEntity> userPermissionEntity;
 
 	public String getLogin() {
 		return login;
@@ -58,5 +66,14 @@ public class UserEntity implements Serializable {
 	public void setSucursalId(int sucursalId) {
 		this.sucursalId = sucursalId;
 	}
+
+	public Collection<UserPermissionEntity> getUserPermissionEntity() {
+		return userPermissionEntity;
+	}
+
+	public void setUserPermissionEntity(
+			Collection<UserPermissionEntity> userPermissionEntity) {
+		this.userPermissionEntity = userPermissionEntity;
+	}		
 
 }

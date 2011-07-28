@@ -39,12 +39,10 @@ public class LoginManagedBean implements Serializable{
 			if(userService.loginUser(view) != null){
 				session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 				session.setAttribute("user", view);
-				goHomeAction(null);
-			}else{
-				JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Login Error", "Usuario o Password incorrecto");
+				goHomeAction(null);							
 			}
 		} catch (UserException e) {
-			e.printStackTrace();
+			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Usuario o Password incorrecto", "Login Error");
 		}
 	}		
 		

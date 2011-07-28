@@ -24,6 +24,10 @@ public class UserView implements Serializable {
 		password = nPassword;
 	}
 	
+	public void goEditUser(){
+		
+	}
+	
 	public String getLogin() {
 		return login;
 	}
