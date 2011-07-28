@@ -6,7 +6,11 @@
       <class>com.sterling.digicheck.branchoffice.entity.BranchOfficeEntity</class>
       <class>com.sterling.digicheck.currency.entity.CurrencyEntity</class>
       <class>com.sterling.digicheck.state.entity.StateEntity</class>
-      <class>com.sterling.digicheck.user.entity.UserEntity</class>             
+      <class>com.sterling.digicheck.user.entity.UserEntity</class>
+      <class>com.sterling.digicheck.permission.entity.PermissionEntity</class>
+      <class>com.sterling.digicheck.user.permissiontype.entity.PermissionTypeEntity</class>
+      <class>com.sterling.digicheck.user.permission.entity.UserPermissionEntity</class>
+      <class>com.sterling.digicheck.user.permission.pk.UserPermissionPK</class>             
       <properties>        
       	<property name="hibernate.connection.driver_class" value="com.inet.tds.TdsDriver"/>
       	<property name="hibernate.connection.url" value="${jdbc.url}"/>
