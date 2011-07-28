@@ -59,7 +59,7 @@ public class UserManagedBean implements Serializable{
 			deleteUser = new UserView();
 			deleteUser.setLogin(login);
 			userService.deleteUser(deleteUser);
-			JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "El usuario se eliminó correctamente");
+			JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "El usuario se elimino correctamente");
 		} catch (UserException userException) {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, userException.getMessage(), userException.getMessage());
 		}
@@ -68,7 +68,7 @@ public class UserManagedBean implements Serializable{
 	public void editUser(){
 		try{						
 			userService.updateUser(currentUser);
-			JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "El usuario se modificó correctamente");
+			JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "El usuario se modifico correctamente");
 		} catch (UserException userException) {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, userException.getMessage(), userException.getMessage());
 		}
@@ -77,7 +77,7 @@ public class UserManagedBean implements Serializable{
 	public void addUser(){
 		try{		
 			userService.insertUser(userView);
-			JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "El usuario se agregó correctamente");
+			JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "El usuario se agrego correctamente");
 		} catch (UserException userException) {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, userException.getMessage(), userException.getMessage());
 		}
