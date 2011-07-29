@@ -1,0 +1,50 @@
+body {
+	margin:0 0 0 0;
+	background-color: #FFFFFF;
+	font-family: tahoma;
+	font-size: 11px; 
+}
+html, body{
+	height: 100px;
+}
+#div_header{
+	width: 100%;
+	height: 129px;
+}
+#div_body {
+	position: absolute; 
+	margin-top: 129px; 
+	top: 0px;
+	bottom: 41px; 
+	left: 0; 
+	right: 0; 
+	overflow: auto; 
+}
+#div_footer {
+	height: 41px; 
+	position: absolute; 
+	bottom: 0; 
+	width: 100%; 
+}
+.font_default{
+	font-family: tahoma;
+	font-size: 11px; 
+}
+.new_image {
+	background-image: url(../images/img-new.png)!important;
+}
+.accept_image {
+	background-image: url(../images/img-accept.gif)!important;
+}
+.edit_image{
+	background-image: url(../images/img-edit.png)!important;
+}
+.delete_image{
+	background-image: url(../images/img-delete.png)!important;
+}
+.odd {
+	background: #FFFFFF;
+}
+.even {
+	background: #edeaea;
+}

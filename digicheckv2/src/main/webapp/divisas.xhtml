@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	template="./template/template_login.xhtml">
+
+	<ui:define name="title">
+        Divisas
+    </ui:define>
+
+	<ui:define name="content">
+    	<div align="center">    	
+   		<br />
+   		<br />
+   		<br />
+	<h:outputStylesheet>
+		a.no-decor>img {
+    	border: none;
+		}
+    </h:outputStylesheet>	
+	<a4j:status onstart="#{rich:component('statPane')}.show()"
+		onstop="#{rich:component('statPane')}.hide()" />
+	
+	<h:form id="form">
+		<rich:dataTable value="#{currencyMagedbean.currencyList}" var="row" id="table" rows="10">		
+			<rich:column>
+				<f:facet name="header">
+					<a4j:commandLink styleClass="no-decor" execute="@this" render="@none" oncomplete="#{rich:component('newPane')}.show()">
+						<h:graphicImage value="/resources/images/img-new.png" alt="Nueva Divisa" />
+					</a4j:commandLink>
+				</f:facet>            
+					<a4j:commandLink styleClass="no-decor" execute="@this"
+						render="@none" oncomplete="#{rich:component('confirmPane')}.show()">
+						<h:graphicImage value="/resources/images/img-delete.png" alt="delete" />
+						<a4j:param value="#{row.currencyId}" assignTo="#{currencyMagedbean.currencyId}" />
+					</a4j:commandLink>
+					::
+					<a4j:commandLink styleClass="no-decor" render="editGrid" action="#{currencyMagedbean.goEditCurrency}"
+						execute="@this" oncomplete="#{rich:component('editPane')}.show()">
+						<h:graphicImage value="/resources/images/img-edit.png" alt="edit" />
+						<a4j:param value="#{row.currencyId}" assignTo="#{currencyMagedbean.currencyId}" />					
+					</a4j:commandLink>    
+            </rich:column>            
+			<rich:column>
+				<f:facet name="header">Codigo</f:facet>
+				<h:outputText value="#{row.code}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">Nombre</f:facet>
+				<h:outputText value="#{row.name}" />
+			</rich:column>						
+			<f:facet name="footer">
+				<rich:dataScroller page="#{currencyMagedbean.page}" />
+			</f:facet>
+		</rich:dataTable>
+
+		<a4j:jsFunction name="remove" action="#{currencyMagedbean.deleteCurrency}" render="table" execute="@this"
+			oncomplete="#{rich:component('confirmPane')}.hide();" />
+		
+		<rich:popupPanel id="statPane" autosized="true">
+			<h:graphicImage value="/resources/images/ai.gif" alt="ai" />
+	        Please wait...
+	    </rich:popupPanel>
+
+		<rich:popupPanel id="confirmPane" autosized="true">
+        	Desea eliminar la divisa?
+        <a4j:commandButton value="Cancelar" onclick="#{rich:component('confirmPane')}.hide(); return false;" />&nbsp;&nbsp;
+			<a4j:commandButton value="Borrar" onclick="remove(); return false;" />
+		</rich:popupPanel>
+		
+		</h:form>
+				
+		<rich:popupPanel header="Editar Divisa" id="editPane" width="400" height="170">
+			<h:form>
+				<h:panelGrid columns="2" id="editGrid">							
+					<h:outputText value="Codigo" />
+					<h:panelGroup>
+						<h:inputText id="ecode" value="#{currencyMagedbean.currentView.code}" required="true"
+							requiredMessage="El codigo es requerido">
+							<rich:validator />				
+						</h:inputText>
+						<rich:message id="ecodeMsg" for="ecode" />
+					</h:panelGroup>
+									
+					<h:outputText value="Nombre" />
+					<h:panelGroup>
+						<h:inputText id="ename" value="#{currencyMagedbean.currentView.name}" required="true"
+							requiredMessage="El nombre es requerido">
+							<rich:validator />				
+						</h:inputText>
+						<rich:message id="enameMsg" for="ename" />
+					</h:panelGroup>								
+				</h:panelGrid>			
+				<a4j:commandButton value="Editar" action="#{currencyMagedbean.editCurrency}"
+					render="table" execute="editPane"
+					oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('editPane')}.hide();}" />
+				<a4j:commandButton value="Cancelar" onclick="#{rich:component('editPane')}.hide(); return false;" />
+			</h:form>
+		</rich:popupPanel>				
+		
+		<rich:popupPanel header="Nueva Divisa" id="newPane" width="400" height="170">
+			<h:form>
+				<h:panelGrid columns="2" id="newGrid">							
+					<h:outputText value="Codigo" />
+					<h:panelGroup>
+						<h:inputText id="code" value="#{currencyMagedbean.currencyView.code}" required="true"
+							requiredMessage="El codigo es requerido">
+							<rich:validator />				
+						</h:inputText>
+						<rich:message id="codeMsg" for="code" />
+					</h:panelGroup>
+									
+					<h:outputText value="Nombre" />
+					<h:panelGroup>
+						<h:inputText id="name" value="#{currencyMagedbean.currencyView.name}" required="true"
+							requiredMessage="El nombre es requerido">
+							<rich:validator />				
+						</h:inputText>
+						<rich:message id="nameMsg" for="name" />
+					</h:panelGroup>								
+				</h:panelGrid>
+				<a4j:commandButton value="Guardar" action="#{currencyMagedbean.addCurrency}"
+					render="table" execute="newPane"
+					oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('newPane')}.hide();}" />
+				<a4j:commandButton value="Cancel" onclick="#{rich:component('newPane')}.hide(); return false;" />
+			</h:form>
+		</rich:popupPanel>		
+	</div>
+	</ui:define>	
+</ui:composition>
