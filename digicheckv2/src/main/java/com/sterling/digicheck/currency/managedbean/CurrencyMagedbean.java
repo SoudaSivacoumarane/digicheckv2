@@ -3,12 +3,10 @@ package com.sterling.digicheck.currency.managedbean;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-import com.sterling.common.util.JSFUtil;
 import com.sterling.digicheck.currency.exception.CurrencyException;
 import com.sterling.digicheck.currency.service.CurrencyService;
 import com.sterling.digicheck.currency.view.CurrencyView;
