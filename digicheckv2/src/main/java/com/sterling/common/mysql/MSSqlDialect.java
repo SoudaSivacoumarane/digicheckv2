@@ -1,8 +1,5 @@
 package com.sterling.common.mysql;
 
-import java.sql.Types;
-
-import org.hibernate.Hibernate;
 
 public class MSSqlDialect extends org.hibernate.dialect.SQLServerDialect {
 
