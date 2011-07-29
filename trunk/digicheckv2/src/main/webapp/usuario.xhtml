@@ -1,0 +1,290 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"      
+	xmlns:a4j="http://richfaces.org/a4j"
+	template="./template/template_login.xhtml">
+	
+	<ui:define name="title">
+        Usuario
+    </ui:define>
+    
+	<ui:define name="content">
+    	<div align="center">    	
+   		<br />
+   		<br />
+   		<br />
+	<h:outputStylesheet>
+		a.no-decor>img {
+    	border: none;    	
+		}
+		a.rf-msgs-err{ 
+			background-image:none; 
+		}		
+    </h:outputStylesheet>	
+	<a4j:status onstart="#{rich:component('statPane')}.show()"
+		onstop="#{rich:component('statPane')}.hide()" />			
+	<h:form id="form">
+		<rich:dataTable value="#{userManagedBean.userViewList}" var="row" id="table" rows="10" style="width: 30%">		
+			<rich:column>
+				<f:facet name="header">
+					<a4j:commandLink styleClass="no-decor" execute="@this" render="@none" oncomplete="#{rich:component('addPane')}.show()">
+						<h:graphicImage value="/resources/images/img-new.png" alt="Nuevo Banco" />
+					</a4j:commandLink>
+				</f:facet>            
+					<a4j:commandLink styleClass="no-decor" execute="@this"
+						render="@none" oncomplete="#{rich:component('confirmPane')}.show()">
+						<h:graphicImage value="/resources/images/img-delete.png" alt="delete" />
+						<a4j:param value="#{row.login}" assignTo="#{userManagedBean.login}" />
+					</a4j:commandLink>
+					::
+					<a4j:commandLink styleClass="no-decor" render="editGrid" action="#{userManagedBean.goEditUser}"
+						execute="@this" oncomplete="#{rich:component('editPane')}.show()">
+						<h:graphicImage value="/resources/images/img-edit.png" alt="edit" />
+						<a4j:param value="#{row.login}" assignTo="#{userManagedBean.login}" />					
+					</a4j:commandLink>    
+            </rich:column>            	
+			<rich:column>
+				<f:facet name="header">Login</f:facet>
+				<h:outputText value="#{row.login}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">Nombre</f:facet>
+				<h:outputText value="#{row.name}" />
+			</rich:column>												
+			<f:facet name="footer">
+				<rich:dataScroller page="#{userManagedBean.page}" />
+			</f:facet>
+		</rich:dataTable>
+		
+		<a4j:jsFunction name="remove" action="#{userManagedBean.deleteUser}" render="table" execute="@this"
+			oncomplete="#{rich:component('confirmPane')}.hide();" />
+		
+		<rich:popupPanel id="statPane" autosized="true">
+			<h:graphicImage value="/resources/images/ai.gif" alt="ai" />
+	        Please wait...
+	    </rich:popupPanel>
+
+		<rich:popupPanel id="confirmPane" autosized="true">
+        	Desea borrar el Usuario?
+        <a4j:commandButton value="Cancelar" onclick="#{rich:component('confirmPane')}.hide(); return false;" />&nbsp;&nbsp;
+			<a4j:commandButton value="Borrar" onclick="remove(); return false;" />
+		</rich:popupPanel>
+	</h:form>
+		
+	<rich:popupPanel header="Editar Usuario" id="editPane" width="500" height="400">
+		<h:form>
+			<h:panelGrid columns="2" id="editGrid">																							
+				<h:outputText value="Login" />
+				<h:panelGroup>
+					<h:inputText id="elogin" value="#{userManagedBean.currentUser.login}" required="true"
+						requiredMessage="Login es requerido">
+						<rich:validator />				
+					</h:inputText>
+					<rich:message id="eloginMsg" for="elogin" />
+				</h:panelGroup>
+				
+				<h:outputText value="Nombre" />
+				<h:panelGroup>
+					<h:inputText id="enombre" value="#{userManagedBean.currentUser.name}" required="true"
+						requiredMessage="El nombre es requerido">
+						<rich:validator />				
+					</h:inputText>
+					<rich:message id="enombreMsg" for="enombre" />
+				</h:panelGroup>
+				
+				<h:outputText value="Contraseña" />
+				<h:panelGroup>
+					<h:inputSecret id="epass" value="#{userManagedBean.currentUser.password}" required="true"
+						requiredMessage="La contraseña es requerida">
+						<rich:validator />				
+					</h:inputSecret>
+					<rich:message id="epassMsg" for="epass" />
+				</h:panelGroup>
+				
+				<h:outputText value="Repetir Contraseña" />
+				<h:panelGroup>
+					<h:inputSecret id="erpass" value="#{userManagedBean.currentUser.password}" required="true"
+						requiredMessage="La contraseña es requerida">
+						<rich:validator />				
+					</h:inputSecret>
+					<rich:message id="erpassMsg" for="erpass" />
+				</h:panelGroup>
+													
+			</h:panelGrid>
+			
+			<h:outputText value="Sucursal" />
+			<h:selectOneMenu style="width: 200px">
+				<f:selectItem itemValue="000" itemLabel="Sucursal"/>
+			</h:selectOneMenu>
+			<br />
+			<br />
+			<fieldset>
+				<legend>Permisos</legend>
+				<h:panelGrid columns="3" rows="2">
+					<h:panelGroup>
+						<fieldset>
+							<legend>Scanner</legend>
+							<h:selectBooleanCheckbox></h:selectBooleanCheckbox>Configurar Scanner
+						</fieldset>
+					</h:panelGroup>
+					
+					<h:panelGroup>															
+						<fieldset>
+							<legend>Digitalizar</legend>
+							<h:selectBooleanCheckbox></h:selectBooleanCheckbox>Digitalizar Cheques
+						</fieldset>
+					</h:panelGroup>
+					
+					<h:panelGroup>															
+						<fieldset>
+							<legend>Sucursales</legend>
+							<h:selectBooleanCheckbox></h:selectBooleanCheckbox>Datos de Sucursal
+						</fieldset>
+					</h:panelGroup>					
+										
+					<h:panelGroup>
+						<fieldset>
+							<legend>Cheques</legend>
+							<h:selectBooleanCheckbox></h:selectBooleanCheckbox>Solo de su Sucursal<br/>
+				            <h:selectBooleanCheckbox></h:selectBooleanCheckbox>Todas las Sucursales
+						</fieldset>
+					</h:panelGroup>
+					
+					<h:panelGroup>	
+						<fieldset>
+							<legend>Reportes</legend>
+							<h:selectBooleanCheckbox></h:selectBooleanCheckbox>Solo de su Sucursal<br/>
+				            <h:selectBooleanCheckbox></h:selectBooleanCheckbox>Todas las Sucursales
+						</fieldset>
+					</h:panelGroup>
+					
+					<h:panelGroup>	
+						<fieldset>
+							<legend>Usuarios</legend>
+							<h:selectBooleanCheckbox></h:selectBooleanCheckbox>Agregar<br/>
+				            <h:selectBooleanCheckbox></h:selectBooleanCheckbox>Modificar<br/>
+				            <h:selectBooleanCheckbox></h:selectBooleanCheckbox>Eliminar
+						</fieldset>
+					</h:panelGroup>																			
+				</h:panelGrid>				 			
+			</fieldset>
+			<br />					
+			<a4j:commandButton value="Editar" action="#{userManagedBean.editUser}"
+				render="table" execute="editPane"
+				oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('editPane')}.hide();}" /> &nbsp;&nbsp;
+			<a4j:commandButton value="Cancelar" onclick="#{rich:component('editPane')}.hide(); return false;" />
+		</h:form>
+	</rich:popupPanel>
+	
+	<rich:popupPanel header="Agregar Usuario" id="addPane" width="500" height="400">
+		<h:form id="addForm">
+			<h:panelGrid columns="2" id="addGrid">																							
+				<h:outputText value="Login" />
+				<h:panelGroup>
+					<h:inputText id="alogin" value="#{userManagedBean.userView.login}" required="true"
+						requiredMessage="Login es requerido">
+						<rich:validator />				
+					</h:inputText>
+					<rich:message id="aloginMsg" for="alogin" />
+				</h:panelGroup>
+				
+				<h:outputText value="Nombre" />
+				<h:panelGroup>
+					<h:inputText id="anombre" value="#{userManagedBean.userView.name}" required="true"
+						requiredMessage="El nombre es requerido">
+						<rich:validator />				
+					</h:inputText>
+					<rich:message id="anombreMsg" for="anombre" />
+				</h:panelGroup>
+				
+				<h:outputText value="Contraseña" />
+				<h:panelGroup>
+					<h:inputSecret id="epass" value="#{userManagedBean.userView.password}" required="true"
+						requiredMessage="La contraseña es requerida">
+						<rich:validator />				
+					</h:inputSecret>
+					<rich:message id="epassMsg" for="epass" />
+				</h:panelGroup>
+				
+				<h:outputText value="Repetir Contraseña" />
+				<h:panelGroup>
+					<h:inputSecret id="arpass" value="#{userManagedBean.userView.password}" required="true"
+						requiredMessage="La contraseña es requerida">
+						<rich:validator />				
+					</h:inputSecret>
+					<rich:message id="arpassMsg" for="arpass" />
+				</h:panelGroup>
+													
+			</h:panelGrid>
+			
+			<h:outputText value="Sucursal" />
+			<h:selectOneMenu style="width: 200px">
+				<f:selectItem itemValue="000" itemLabel="Sucursal"/>
+			</h:selectOneMenu>
+			<br />
+			<br />
+			<fieldset>
+				<legend>Permisos</legend>
+				<h:panelGrid columns="3" rows="2">
+					<h:panelGroup>
+						<fieldset>
+							<legend>Scanner</legend>
+							<h:selectBooleanCheckbox></h:selectBooleanCheckbox>Configurar Scanner
+						</fieldset>
+					</h:panelGroup>
+					
+					<h:panelGroup>															
+						<fieldset>
+							<legend>Digitalizar</legend>
+							<h:selectBooleanCheckbox></h:selectBooleanCheckbox>Digitalizar Cheques
+						</fieldset>
+					</h:panelGroup>
+					
+					<h:panelGroup>															
+						<fieldset>
+							<legend>Sucursales</legend>
+							<h:selectBooleanCheckbox></h:selectBooleanCheckbox>Datos de Sucursal
+						</fieldset>
+					</h:panelGroup>					
+										
+					<h:panelGroup>
+						<fieldset>
+							<legend>Cheques</legend>
+							<h:selectBooleanCheckbox></h:selectBooleanCheckbox>Solo de su Sucursal<br/>
+				            <h:selectBooleanCheckbox></h:selectBooleanCheckbox>Todas las Sucursales
+						</fieldset>
+					</h:panelGroup>
+					
+					<h:panelGroup>	
+						<fieldset>
+							<legend>Reportes</legend>
+							<h:selectBooleanCheckbox></h:selectBooleanCheckbox>Solo de su Sucursal<br/>
+				            <h:selectBooleanCheckbox></h:selectBooleanCheckbox>Todas las Sucursales
+						</fieldset>
+					</h:panelGroup>
+					
+					<h:panelGroup>	
+						<fieldset>
+							<legend>Usuarios</legend>
+							<h:selectBooleanCheckbox></h:selectBooleanCheckbox>Agregar<br/>
+				            <h:selectBooleanCheckbox></h:selectBooleanCheckbox>Modificar<br/>
+				            <h:selectBooleanCheckbox></h:selectBooleanCheckbox>Eliminar
+						</fieldset>
+					</h:panelGroup>																			
+				</h:panelGrid>				 			
+			</fieldset>
+			<br />					
+			<a4j:commandButton value="Agregar Usuario" action="#{userManagedBean.addUser}"
+				render="table" execute="addPane"
+				oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('addPane')}.hide();}" /> &nbsp;&nbsp;
+			<a4j:commandButton value="Cancelar" onclick="#{rich:component('addPane')}.hide(); return false;" />
+		</h:form>
+	</rich:popupPanel>	
+	</div>
+	</ui:define>
+	
+</ui:composition>

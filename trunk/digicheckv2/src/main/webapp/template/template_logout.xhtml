@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:rich="http://richfaces.org/rich"      
+	  xmlns:a4j="http://richfaces.org/a4j">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>
+            DigiCheck :: Bienvenido
+        </title>
+        <link href="resources/themes/theme2/skin.css"  rel="stylesheet" type="text/css" />
+        <link href="resources/css/prototype.css"  rel="stylesheet" type="text/css" />
+        <meta http-equiv="Expires" content="Sat, 6 May 1995 12:00:00 GMT"/>
+		<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+		<meta http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+		<meta http-equiv="Pragma" content="no-cache"/>
+        <ui:insert name="head"/>
+    </h:head>
+    <h:body>
+        <f:view>
+			<div id="div_header">
+				<table width="100%" border="0" cellpadding="0" cellspacing="0">
+                     <tr>
+                         <td><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_01.jpg" width="424" height="88" alt="" /></td>
+                         <td width="100%"><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_02.jpg" width="100%" height="88" alt="" /></td>
+                         <td><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_03.jpg" width="351" height="88" alt="" /></td>
+                     </tr>
+                </table>
+                <table width="100%"  border="0" cellpadding="0" cellspacing="0">
+                   <tr>
+                       <td width="100%"><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_04.jpg" width="100%" height="41" alt="" /></td>
+                       <td><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_05.jpg" width="131" height="41" alt="" /></td>
+                       <td><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_06.jpg" width="43" height="41" alt="" /></td>
+                       <td><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_07.jpg" width="97" height="41" alt="" /></td>
+                       <td><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_08.jpg" width="101" height="41" alt="" /></td>
+                       <td><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_09.jpg" width="100" height="41" alt="" /></td>
+                       <td><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_10.jpg" width="101" height="41" alt="" /></td>
+                       <td><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_11.jpg" width="101" height="41" alt="" /></td>
+                       <td><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_12.jpg" width="99" height="41" alt="" /></td>
+                   </tr>
+               </table>
+			</div>
+			<div id="div_body">
+				 <table width="100%" border="0" cellpadding="0" cellspacing="0">
+	                <tr>
+	                    <td>
+	                      	<div align="center" style="_position: absolute; _top: 50%;">                  				
+                  				<br />
+                  				<br />
+                  				<br />
+                  				<rich:panel header="Login">                  				
+                               		<h:form>
+                                       <table cellpadding="2" cellspacing="2">
+                                           <tr>
+                                               <td>
+                                                   <h:outputLabel for="usuario" value="Usuario" />
+                                               </td>
+                                               <td>
+                                                   <h:inputText id="usuario" value="#{loginManagedBean.view.login}"  required="true" label="Usuario" size="10" autocomplete="off"
+                                                   		requiredMessage="username es requerido">
+														<rich:validator />	
+                                                   </h:inputText>
+                                               								 
+                                               </td>
+                                               <td>                                                   
+                                                   <rich:message id="usuarioMsg" for="usuario" />
+                                               </td>
+                                           </tr>
+                                           <tr>
+                                               <td>
+                                                   <h:outputLabel for="contrasena" value="Contraseña" />
+                                               </td>
+                                               <td>
+                                                   <h:inputSecret id="contrasena" value="#{loginManagedBean.view.password}"  required="true" size="10" redisplay="false" autocomplete="off"
+                                                   		requiredMessage="El password es requerido">
+														<rich:validator />
+												   </h:inputSecret>	                                                                                                     
+                                               </td>
+                                               <td>                                                   
+                                                   <rich:message id="contrasenaMsg" for="contrasena" />
+                                               </td>
+                                           </tr>
+                                           <tr>
+                                               <td colspan="3" style="text-align: center">                                                                                                      
+                                                   <a4j:commandButton value="Iniciar Sesion" action="#{loginManagedBean.doLoginAction}"/>                                                   
+                                               </td>
+                                           </tr>
+                                       </table>                                       
+                                       <rich:messages />
+                                   </h:form>
+                               </rich:panel>
+	                        </div>
+	                        <div id="div_body">
+							    <!-- Agregar Panel Msgs -->
+								<ui:insert name="content">Contenido ...</ui:insert>
+							</div>
+	                  </td>
+	                  <td width="100%"></td>
+	                 </tr>
+	             </table>
+			</div>
+			<div id="div_footer">
+				<table width="100%" border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_22.jpg" width="70" height="13" alt="" /></td>
+						<td width="100%"><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_23.jpg" width="100%" height="13" alt="" /></td>
+					</tr>
+                </table>
+				<table width="100%" border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td width="100%"><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_24.jpg" width="100%" height="28" alt="" /></td>
+					</tr>
+				</table>
+			</div>
+        </f:view>
+    </h:body>
+</html>
