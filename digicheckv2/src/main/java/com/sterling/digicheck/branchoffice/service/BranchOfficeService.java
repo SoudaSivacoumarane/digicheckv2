@@ -1,5 +1,6 @@
 package com.sterling.digicheck.branchoffice.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.model.SelectItem;
@@ -131,5 +132,32 @@ public class BranchOfficeService {
 			e.printStackTrace();
 		}	
 		return states;
+	}
+	
+	public List<SelectItem> branchOfficeItems() throws BranchOfficeException{		
+		List<BranchOfficeEntity> branchOfficeEntities = null;		
+		List<SelectItem> branchOfficeItems = null;
+		SelectItem branchItem = null;
+		try{				
+			branchOfficeEntities = branchOfficeDAO.getAllBranchOffices();
+			branchOfficeItems = new ArrayList<SelectItem>(0);
+			if(branchOfficeEntities != null){
+				for (BranchOfficeEntity b : branchOfficeEntities) {
+					branchItem = new SelectItem();
+					branchItem.setValue(b.getSucId());
+					branchItem.setLabel(b.getName());
+					branchOfficeItems.add(branchItem);
+				}
+			}
+		}catch (BranchOfficeException branchOfficeException){
+			throw branchOfficeException;
+		}catch (Exception exception){
+			BranchOfficeException branchOfficeException = null;
+			branchOfficeException = new BranchOfficeException(exception, BranchOfficeException.LAYER_SERVICE, BranchOfficeException.ACTION_SELECT);
+    		logger.error(branchOfficeException);
+    		exception.printStackTrace(System.out);
+    		throw branchOfficeException;
+		}
+		return branchOfficeItems;
 	}
 }

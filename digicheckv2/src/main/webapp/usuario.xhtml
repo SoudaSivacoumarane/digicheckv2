@@ -112,14 +112,14 @@
 						<rich:validator />				
 					</h:inputSecret>
 					<rich:message id="erpassMsg" for="erpass" />
-				</h:panelGroup>
-													
+				</h:panelGroup>								
+												
 			</h:panelGrid>
-			
-			<h:outputText value="Sucursal" />
-			<h:selectOneMenu style="width: 200px">
-				<f:selectItem itemValue="000" itemLabel="Sucursal"/>
+			<h:outputText value="Sucursal" /> &nbsp;
+			<h:selectOneMenu id="sucursales" style="width: 180px" value="#{userManagedBean.currentUser.sucursalId}">
+				<f:selectItems value="#{userManagedBean.branchOfficeItems}" />
 			</h:selectOneMenu>
+			
 			<br />
 			<br />
 			<fieldset>
@@ -221,9 +221,9 @@
 													
 			</h:panelGrid>
 			
-			<h:outputText value="Sucursal" />
-			<h:selectOneMenu style="width: 200px">
-				<f:selectItem itemValue="000" itemLabel="Sucursal"/>
+			<h:outputText value="Sucursal" /> &nbsp;
+			<h:selectOneMenu id="sucursales" style="width: 180px" value="#{userManagedBean.userView.sucursalId}">
+				<f:selectItems value="#{userManagedBean.branchOfficeItems}" />
 			</h:selectOneMenu>
 			<br />
 			<br />

@@ -1,6 +1,9 @@
 package com.sterling.digicheck.user.view;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.sterling.digicheck.user.permission.view.UserPermissionView;
 
 public class UserView implements Serializable {
 	private static final long serialVersionUID = 1091505038339380532L;
@@ -8,6 +11,7 @@ public class UserView implements Serializable {
 	private String login;
 	private String name;
 	private String password;
+	private List<UserPermissionView> userPermissionViews;
 
 	public UserView() {
 		
@@ -51,8 +55,16 @@ public class UserView implements Serializable {
 	}
 	public void setName(String nombre) {
 		this.name = nombre;
-	}
+	}		
 	
+	public List<UserPermissionView> getUserPermissionViews() {
+		return userPermissionViews;
+	}
+
+	public void setUserPermissionViews(List<UserPermissionView> userPermissionViews) {
+		this.userPermissionViews = userPermissionViews;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if(!(obj instanceof UserView))

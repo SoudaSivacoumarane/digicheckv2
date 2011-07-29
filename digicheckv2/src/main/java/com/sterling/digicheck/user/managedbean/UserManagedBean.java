@@ -7,8 +7,11 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.event.ActionEvent;
+import javax.faces.model.SelectItem;
 
 import com.sterling.common.util.JSFUtil;
+import com.sterling.digicheck.branchoffice.exception.BranchOfficeException;
+import com.sterling.digicheck.branchoffice.service.BranchOfficeService;
 import com.sterling.digicheck.user.exception.UserException;
 import com.sterling.digicheck.user.service.UserService;
 import com.sterling.digicheck.user.view.UserView;
@@ -29,11 +32,14 @@ public class UserManagedBean implements Serializable{
 	
 	@ManagedProperty("#{userService}")
 	UserService userService;
+	@ManagedProperty("#{branchOfficeService}")
+	BranchOfficeService branchOfficeService;	
 	private List<UserView> userViewList = null;
 	private String login;
 	private int page = 1;
 	private UserView userView = new UserView();
 	private UserView currentUser = new UserView();
+	private String sucId;
 	
 	
 	public List<UserView> getUserViewList() {
@@ -81,8 +87,30 @@ public class UserManagedBean implements Serializable{
 		} catch (UserException userException) {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, userException.getMessage(), userException.getMessage());
 		}
-	}		
+	}
 	
+	public List<SelectItem> getBranchOfficeItems(){
+		List<SelectItem> bItems = null;
+		try {
+			bItems = branchOfficeService.branchOfficeItems();
+		} catch (BranchOfficeException e) {
+			e.printStackTrace();
+		}
+		return bItems;
+	}
+	
+	public String getSucId() {
+		return sucId;
+	}
+
+	public void setSucId(String sucId) {
+		this.sucId = sucId;
+	}
+	
+	public void setBranchOfficeService(BranchOfficeService branchOfficeService) {
+		this.branchOfficeService = branchOfficeService;
+	}
+
 	public UserView getUserView() {
 		return userView;
 	}
