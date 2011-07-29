@@ -13,8 +13,6 @@ import com.sterling.digicheck.branchoffice.entity.BranchOfficeEntity;
 import com.sterling.digicheck.branchoffice.exception.BranchOfficeException;
 import com.sterling.digicheck.branchoffice.view.BranchOfficeView;
 import com.sterling.digicheck.state.converter.StateConverter;
-import com.sterling.digicheck.state.entity.StateEntity;
-import com.sterling.digicheck.state.view.StateView;
 
 public class BranchOfficeConverter {
 
