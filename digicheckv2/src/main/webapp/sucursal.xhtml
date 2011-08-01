@@ -145,7 +145,7 @@
 					</h:panelGroup>
 												
 				</h:panelGrid>
-				<a4j:commandButton value="Editar" action="#{branchOfficeManagedbean.editBranchOffice}"
+				<a4j:commandButton value="Guardar" action="#{branchOfficeManagedbean.editBranchOffice}"
 					render="table" execute="editPane"
 					oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('editPane')}.hide();}" />
 				<a4j:commandButton value="Cancelar" onclick="#{rich:component('editPane')}.hide(); return false;" />
