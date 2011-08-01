@@ -95,7 +95,7 @@
 						<rich:message id="enameMsg" for="ename" />
 					</h:panelGroup>								
 				</h:panelGrid>			
-				<a4j:commandButton value="Editar" action="#{currencyMagedbean.editCurrency}"
+				<a4j:commandButton value="Guardar" action="#{currencyMagedbean.editCurrency}"
 					render="table" execute="editPane"
 					oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('editPane')}.hide();}" />
 				<a4j:commandButton value="Cancelar" onclick="#{rich:component('editPane')}.hide(); return false;" />
