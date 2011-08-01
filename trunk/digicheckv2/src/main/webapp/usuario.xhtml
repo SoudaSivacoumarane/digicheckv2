@@ -32,7 +32,7 @@
 			<rich:column>
 				<f:facet name="header">
 					<a4j:commandLink styleClass="no-decor" execute="@this" render="@none" oncomplete="#{rich:component('addPane')}.show()">
-						<h:graphicImage value="/resources/images/img-new.png" alt="Nuevo Banco" />
+						<h:graphicImage value="/resources/images/img-new.png" alt="Nuevo Usuario" />
 					</a4j:commandLink>
 				</f:facet>            
 					<a4j:commandLink styleClass="no-decor" execute="@this"
@@ -173,7 +173,7 @@
 				</h:panelGrid>				 			
 			</fieldset>
 			<br />					
-			<a4j:commandButton value="Editar" action="#{userManagedBean.editUser}"
+			<a4j:commandButton value="Guardar" action="#{userManagedBean.editUser}"
 				render="table" execute="editPane"
 				oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('editPane')}.hide();}" /> &nbsp;&nbsp;
 			<a4j:commandButton value="Cancelar" onclick="#{rich:component('editPane')}.hide(); return false;" />
