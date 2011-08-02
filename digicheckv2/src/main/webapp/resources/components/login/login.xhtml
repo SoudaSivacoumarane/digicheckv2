@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"     
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:composite="http://java.sun.com/jsf/composite">    		    
+
+	<composite:interface/>
+	<composite:implementation>	 
+	<table cellpadding="2" cellspacing="2">
+	   <tr>
+		   <td>
+			   <h:outputLabel for="usuario" value="Usuario" />
+		   </td>
+		   <td style="text-align: right">
+			   <h:inputText id="usuario" value="#{loginManagedBean.view.login}"  required="true" label="Usuario" style="width: 100px" size="10" autocomplete="off"
+					requiredMessage="username es requerido">
+					<rich:validator />	
+			   </h:inputText>
+										 
+		   </td>
+	   </tr>
+	   <tr>
+		   <td>
+			   <h:outputLabel for="contrasena" value="Contrase&ntilde;a" />
+		   </td>
+		   <td style="text-align: right">
+			   <h:inputSecret id="contrasena" value="#{loginManagedBean.view.password}"  required="true" style="width: 100px" size="10" redisplay="false" autocomplete="off"
+					requiredMessage="El password es requerido">
+					<rich:validator />
+			   </h:inputSecret>	                                                                                                     
+		   </td>
+	   </tr>
+	   <tr>
+		   <td colspan="3" style="text-align: right">                                                                                                      
+			   <a4j:commandButton value="Iniciar Sesion" action="#{loginManagedBean.doLoginAction}"/>                                                   
+		   </td>
+	   </tr>
+	</table>	
+	</composite:implementation>
+ </html>
+    
