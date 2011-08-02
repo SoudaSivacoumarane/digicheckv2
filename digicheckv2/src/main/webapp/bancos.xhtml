@@ -74,56 +74,49 @@
 		
 		<rich:popupPanel header="Editar Banco" id="editPane" width="400" height="170">
 			<h:form>
-				<h:panelGrid columns="2" id="editGrid">																							
-					<h:outputText value="ABA" />
-					<h:panelGroup>
-						<h:inputText id="ename" value="#{bankManagedBean.currentBank.aba}" required="true"
-							requiredMessage="ABA es requerido">
-							<rich:validator />				
-						</h:inputText>
-						<rich:message id="enameMsg" for="ename" />
-					</h:panelGroup>
-					
-					<h:outputText value="Descripcion" />
-					<h:panelGroup>
-						<h:inputText id="eaccaount" value="#{bankManagedBean.currentBank.description}" required="true"
-							requiredMessage="La descripcion es requerida">
+				<h:panelGrid columns="3" id="editGrid">																							
+					<h:outputText value="ABA" />					
+					<h:inputText id="ename" value="#{bankManagedBean.currentBank.aba}" required="true"
+						requiredMessage="ABA es requerido">
 						<rich:validator />				
-						</h:inputText>
-						<rich:message id="eaccaountMsg" for="eaccaount" />
-					</h:panelGroup>									
-				</h:panelGrid>
-				<a4j:commandButton value="Editar" action="#{bankManagedBean.editBank}"
+					</h:inputText>
+					<rich:message id="enameMsg" for="ename" />					
+					
+					<h:outputText value="Descripcion" />					
+					<h:inputText id="eaccaount" value="#{bankManagedBean.currentBank.description}" required="true"
+						requiredMessage="La descripcion es requerida">
+					<rich:validator />				
+					</h:inputText>
+					<rich:message id="eaccaountMsg" for="eaccaount" />
+								
+				</h:panelGrid> <br />
+				<a4j:commandButton value="Guardar" action="#{bankManagedBean.editBank}"
 					render="table" execute="editPane"
-					oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('editPane')}.hide();}" />
+					oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('editPane')}.hide();}" /> &nbsp;&nbsp;
 				<a4j:commandButton value="Cancelar" onclick="#{rich:component('editPane')}.hide(); return false;" />
 			</h:form>
 		</rich:popupPanel>							
 	
 	<rich:popupPanel header="Nuevo Banco" id="newPane" width="400" height="170">
 		<h:form>
-			<h:panelGrid columns="2" id="newGrid">																			
-				<h:outputText value="ABA" />
-				<h:panelGroup>
-					<h:inputText id="name" value="#{bankManagedBean.bankView.aba}" required="true"
-						requiredMessage="ABA es requerido">
-						<rich:validator />				
-					</h:inputText>
-					<rich:message id="nameMsg" for="name" />
-				</h:panelGroup>
-				
-				<h:outputText value="Descripcion" />
-				<h:panelGroup>
-					<h:inputText id="account" value="#{bankManagedBean.bankView.description}" required="true"
-						requiredMessage="La descripcion es requerida">
+			<h:panelGrid columns="3" id="newGrid">																			
+				<h:outputText value="ABA" />				
+				<h:inputText id="name" value="#{bankManagedBean.bankView.aba}" required="true"
+					requiredMessage="ABA es requerido">
 					<rich:validator />				
-					</h:inputText>
-					<rich:message id="accountMsg" for="account" />
-				</h:panelGroup>											
-			</h:panelGrid>		
+				</h:inputText>
+				<rich:message id="nameMsg" for="name" />				
+				
+				<h:outputText value="Descripcion" />				
+				<h:inputText id="account" value="#{bankManagedBean.bankView.description}" required="true"
+					requiredMessage="La descripcion es requerida">
+				<rich:validator />				
+				</h:inputText>
+				<rich:message id="accountMsg" for="account" />											
+			</h:panelGrid> <br />		
 			<a4j:commandButton value="Guardar" action="#{bankManagedBean.addBankAction}"
 				render="table" execute="newPane"
-				oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('newPane')}.hide();}" />
+				oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('newPane')}.hide();}" /> &nbsp;&nbsp;
 			<a4j:commandButton value="Cancelar" onclick="#{rich:component('newPane')}.hide(); return false;" />
 		</h:form>
 	</rich:popupPanel>		

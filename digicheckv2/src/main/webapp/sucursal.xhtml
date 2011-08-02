@@ -178,11 +178,11 @@
 					<h:panelGroup />
 					
 					<h:outputText value="Codigo Postal" />					
-					<h:inputText id="zip" value="#{branchOfficeManagedbean.branchOfficeView.zip}" required="true"
+					<h:inputText id="nzip" value="#{branchOfficeManagedbean.branchOfficeView.zip}" required="true"
 						requiredMessage="El Codigo Postal es requerido">
 						<rich:validator />				
 					</h:inputText>
-					<rich:message id="zipMsg" for="zip" />
+					<rich:message id="nzipMsg" for="nzip" />
 													
 				</h:panelGrid> <br />
 				<a4j:commandButton value="Guardar" action="#{branchOfficeManagedbean.addBranchOffice}"
