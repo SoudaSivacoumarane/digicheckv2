@@ -4,7 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:rich="http://richfaces.org/rich"      
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:util="http://java.sun.com/jsf/composite/components/login"
 	  xmlns:a4j="http://richfaces.org/a4j">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -51,47 +52,10 @@
                   				<br />
                   				<br />
                   				<br />
-                  				<rich:panel header="Login">                  				
-                               		<h:form>
-                                       <table cellpadding="2" cellspacing="2">
-                                           <tr>
-                                               <td>
-                                                   <h:outputLabel for="usuario" value="Usuario" />
-                                               </td>
-                                               <td>
-                                                   <h:inputText id="usuario" value="#{loginManagedBean.view.login}"  required="true" label="Usuario" size="10" autocomplete="off"
-                                                   		requiredMessage="username es requerido">
-														<rich:validator />	
-                                                   </h:inputText>
-                                               								 
-                                               </td>
-                                               <td>                                                   
-                                                   <rich:message id="usuarioMsg" for="usuario" />
-                                               </td>
-                                           </tr>
-                                           <tr>
-                                               <td>
-                                                   <h:outputLabel for="contrasena" value="Contraseña" />
-                                               </td>
-                                               <td>
-                                                   <h:inputSecret id="contrasena" value="#{loginManagedBean.view.password}"  required="true" size="10" redisplay="false" autocomplete="off"
-                                                   		requiredMessage="El password es requerido">
-														<rich:validator />
-												   </h:inputSecret>	                                                                                                     
-                                               </td>
-                                               <td>                                                   
-                                                   <rich:message id="contrasenaMsg" for="contrasena" />
-                                               </td>
-                                           </tr>
-                                           <tr>
-                                               <td colspan="3" style="text-align: center">                                                                                                      
-                                                   <a4j:commandButton value="Iniciar Sesion" action="#{loginManagedBean.doLoginAction}"/>                                                   
-                                               </td>
-                                           </tr>
-                                       </table>                                       
-                                       <rich:messages />
-                                   </h:form>
-                               </rich:panel>
+                  				<h:form>
+                  				   <util:login />
+                                <rich:messages />
+                                </h:form>
 	                        </div>
 	                        <div id="div_body">
 							    <!-- Agregar Panel Msgs -->
