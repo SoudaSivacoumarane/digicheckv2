@@ -70,7 +70,9 @@ public class BranchOfficeConverter {
 		try{
 			branchOfficeEntity = new BranchOfficeEntity();			
 			stateConverter = new StateConverter();
-			branchOfficeEntity.setSucId(Integer.parseInt(branchOfficeView.getSucId()));
+			if(branchOfficeView.getSucId() != null){
+				branchOfficeEntity.setSucId(Integer.parseInt(branchOfficeView.getSucId()));
+			}
 			branchOfficeEntity.setName(branchOfficeView.getName());
 			branchOfficeEntity.setAddress(branchOfficeView.getAddress());
 			branchOfficeEntity.setCity(branchOfficeView.getCity());
