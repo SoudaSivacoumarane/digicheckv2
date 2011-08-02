@@ -11,7 +11,7 @@ public class BranchOfficeView implements Serializable {
 	private String address;
 	private String community;
 	private String zip;
-	private StateView state;
+	private StateView state = new StateView();
 	private String city;
 
 	public BranchOfficeView() {
