@@ -76,56 +76,49 @@
 				
 		<rich:popupPanel header="Editar Divisa" id="editPane" width="400" height="170">
 			<h:form>
-				<h:panelGrid columns="2" id="editGrid">							
-					<h:outputText value="Codigo" />
-					<h:panelGroup>
-						<h:inputText id="ecode" value="#{currencyMagedbean.currentView.code}" required="true"
-							requiredMessage="El codigo es requerido">
-							<rich:validator />				
-						</h:inputText>
-						<rich:message id="ecodeMsg" for="ecode" />
-					</h:panelGroup>
+				<h:panelGrid columns="3" id="editGrid">							
+					<h:outputText value="Codigo" />					
+					<h:inputText id="ecode" value="#{currencyMagedbean.currentView.code}" required="true"
+						requiredMessage="El codigo es requerido">
+						<rich:validator />				
+					</h:inputText>
+					<rich:message id="ecodeMsg" for="ecode" />					
 									
 					<h:outputText value="Nombre" />
-					<h:panelGroup>
-						<h:inputText id="ename" value="#{currencyMagedbean.currentView.name}" required="true"
-							requiredMessage="El nombre es requerido">
-							<rich:validator />				
-						</h:inputText>
-						<rich:message id="enameMsg" for="ename" />
-					</h:panelGroup>								
-				</h:panelGrid>			
+					<h:inputText id="ename" value="#{currencyMagedbean.currentView.name}" required="true"
+						requiredMessage="El nombre es requerido">
+						<rich:validator />				
+					</h:inputText>
+					<rich:message id="enameMsg" for="ename" />										
+				</h:panelGrid> <br />			
 				<a4j:commandButton value="Guardar" action="#{currencyMagedbean.editCurrency}"
 					render="table" execute="editPane"
-					oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('editPane')}.hide();}" />
+					oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('editPane')}.hide();}" /> &nbsp;&nbsp;
 				<a4j:commandButton value="Cancelar" onclick="#{rich:component('editPane')}.hide(); return false;" />
 			</h:form>
 		</rich:popupPanel>				
 		
 		<rich:popupPanel header="Nueva Divisa" id="newPane" width="400" height="170">
 			<h:form>
-				<h:panelGrid columns="2" id="newGrid">							
+				<h:panelGrid columns="3" id="newGrid">							
 					<h:outputText value="Codigo" />
-					<h:panelGroup>
-						<h:inputText id="code" value="#{currencyMagedbean.currencyView.code}" required="true"
-							requiredMessage="El codigo es requerido">
-							<rich:validator />				
-						</h:inputText>
-						<rich:message id="codeMsg" for="code" />
-					</h:panelGroup>
+					<h:inputText id="code" value="#{currencyMagedbean.currencyView.code}" required="true"
+						requiredMessage="El codigo es requerido">
+						<rich:validator />				
+					</h:inputText>
+					<rich:message id="codeMsg" for="code" />					
 									
-					<h:outputText value="Nombre" />
-					<h:panelGroup>
-						<h:inputText id="name" value="#{currencyMagedbean.currencyView.name}" required="true"
-							requiredMessage="El nombre es requerido">
-							<rich:validator />				
-						</h:inputText>
-						<rich:message id="nameMsg" for="name" />
-					</h:panelGroup>								
-				</h:panelGrid>
+					<h:outputText value="Nombre" />					
+					<h:inputText id="name" value="#{currencyMagedbean.currencyView.name}" required="true"
+						requiredMessage="El nombre es requerido">
+						<rich:validator />				
+					</h:inputText>
+					<rich:message id="nameMsg" for="name" />
+								
+				</h:panelGrid> <br />
 				<a4j:commandButton value="Guardar" action="#{currencyMagedbean.addCurrency}"
 					render="table" execute="newPane"
-					oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('newPane')}.hide();}" />
+					oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('newPane')}.hide();}" /> &nbsp; &nbsp;
 				<a4j:commandButton value="Cancelar" onclick="#{rich:component('newPane')}.hide(); return false;" />
 			</h:form>
 		</rich:popupPanel>		
