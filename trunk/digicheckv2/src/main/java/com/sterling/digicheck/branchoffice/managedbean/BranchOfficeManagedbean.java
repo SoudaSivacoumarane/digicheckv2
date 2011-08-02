@@ -44,7 +44,7 @@ public class BranchOfficeManagedbean implements Serializable {
 	public void deleteBranchOffice(){
 		try{
 			branchOfficeService.deleteBranchOffice(Integer.parseInt(sucId));
-			JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "La sucursal se elimino correctamente.");
+			//JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "La sucursal se elimino correctamente.");
 		} catch (BranchOfficeException e) {			
 			logger.error(e);
 		}
