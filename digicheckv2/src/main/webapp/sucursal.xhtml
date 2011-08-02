@@ -89,94 +89,106 @@
 		
 		</h:form>
 				
-		<rich:popupPanel header="Editar Sucursal" id="editPane" width="400" height="200">
+		<rich:popupPanel header="Editar Sucursal" id="editPane" width="400" height="210">
 			<h:form>
-				<h:panelGrid columns="2" id="editGrid">							
-					<h:outputText value="Codigo" />
-					<h:panelGroup>
-						<h:inputText id="ecode" value="#{branchOfficeManagedbean.currentBranchOfficeView.sucId}" required="true"
-							requiredMessage="El codigo es requerido">
-							<rich:validator />				
-						</h:inputText>
-						<rich:message id="ecodeMsg" for="ecode" />
-					</h:panelGroup>
+				<h:panelGrid columns="3" id="editGrid">							
+					<h:outputText value="Codigo" />					
+					<h:inputText id="ecode" value="#{branchOfficeManagedbean.currentBranchOfficeView.sucId}" required="true"
+						requiredMessage="El codigo es requerido">
+						<rich:validator />				
+					</h:inputText>
+					<rich:message id="ecodeMsg" for="ecode" />					
 									
-					<h:outputText value="Nombre" />
-					<h:panelGroup>
-						<h:inputText id="ename" value="#{branchOfficeManagedbean.currentBranchOfficeView.name}" required="true"
-							requiredMessage="El nombre es requerido">
-							<rich:validator />				
-						</h:inputText>
-						<rich:message id="enameMsg" for="ename" />
-					</h:panelGroup>	
+					<h:outputText value="Nombre" />					
+					<h:inputText id="ename" value="#{branchOfficeManagedbean.currentBranchOfficeView.name}" required="true"
+						requiredMessage="El nombre es requerido">
+						<rich:validator />				
+					</h:inputText>
+					<rich:message id="enameMsg" for="ename" />						
 					
-				 <h:outputText value="Domicilio" />
-					<h:panelGroup>
-						<h:inputText id="edomicilio" value="#{branchOfficeManagedbean.currentBranchOfficeView.city}" required="true"
-							requiredMessage="El domicilio es requerido">
-							<rich:validator />				
-						</h:inputText>
-						<rich:message id="edomicilioMsg" for="edomicilio" />
-					</h:panelGroup>	
+				    <h:outputText value="Domicilio" />						
+					<h:inputText id="edomicilio" value="#{branchOfficeManagedbean.currentBranchOfficeView.city}" required="true"
+						requiredMessage="El domicilio es requerido">
+						<rich:validator />				
+					</h:inputText>
+					<rich:message id="edomicilioMsg" for="edomicilio" />						
 					
-					<h:outputText value="Municipio" />
-					<h:panelGroup>
-						<h:inputText id="emunicipio" value="#{branchOfficeManagedbean.currentBranchOfficeView.community}" required="true"
-							requiredMessage="El municipio es requerido">
-							<rich:validator />				
-						</h:inputText>
-						<rich:message id="emunicipioMsg" for="emunicipio" />
-					</h:panelGroup>
-					
-					<h:outputLabel value="Estado" />
-					<h:panelGroup>				
+					<h:outputText value="Municipio" />					
+					<h:inputText id="emunicipio" value="#{branchOfficeManagedbean.currentBranchOfficeView.community}" required="true"
+						requiredMessage="El municipio es requerido">
+						<rich:validator />				
+					</h:inputText>
+					<rich:message id="emunicipioMsg" for="emunicipio" />
+										
+					<h:outputLabel value="Estado" />					
 	              		<h:selectOneMenu id="estado" value="#{branchOfficeManagedbean.currentBranchOfficeView.state.code}">
 	  						<f:selectItems value="#{branchOfficeManagedbean.statesList}" />
 						</h:selectOneMenu>
-					</h:panelGroup>	
+					<h:panelGroup />	
 					
-					<h:outputText value="Codigo Postal" />
-					<h:panelGroup>
-						<h:inputText id="ezip" value="#{branchOfficeManagedbean.currentBranchOfficeView.zip}" required="true"
-							requiredMessage="El Codigo Postal es requerido">
-							<rich:validator />				
-						</h:inputText>
-						<rich:message id="ezipMsg" for="ezip" />
-					</h:panelGroup>
-												
-				</h:panelGrid>
+					<h:outputText value="Codigo Postal" />					
+					<h:inputText id="ezip" value="#{branchOfficeManagedbean.currentBranchOfficeView.zip}" required="true"
+						requiredMessage="El Codigo Postal es requerido">
+						<rich:validator />				
+					</h:inputText>
+					<rich:message id="ezipMsg" for="ezip" />																	
+				</h:panelGrid><br />
 				<a4j:commandButton value="Guardar" action="#{branchOfficeManagedbean.editBranchOffice}"
 					render="table" execute="editPane"
-					oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('editPane')}.hide();}" />
+					oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('editPane')}.hide();}" /> &nbsp;&nbsp;
 				<a4j:commandButton value="Cancelar" onclick="#{rich:component('editPane')}.hide(); return false;" />
 			</h:form>
 		</rich:popupPanel>				
 			
-		<rich:popupPanel header="Nueva Sucursal" id="newPane" width="400" height="170">
+		<rich:popupPanel header="Nueva Sucursal" id="newPane" width="400" height="210">
 			<h:form>
-				<h:panelGrid columns="2" id="newGrid">							
-					<h:outputText value="Codigo" />
-					<h:panelGroup>
-						<h:inputText id="code" value="#{branchOfficeManagedbean.branchOfficeView.sucId}" required="true"
-							requiredMessage="El codigo es requerido">
-							<rich:validator />				
-						</h:inputText>
-						<rich:message id="codeMsg" for="code" />
-					</h:panelGroup>
-									
-					<h:outputText value="Nombre" />
-					<h:panelGroup>
-						<h:inputText id="name" value="#{branchOfficeManagedbean.branchOfficeView.name}" required="true"
-							requiredMessage="El nombre es requerido">
-							<rich:validator />				
-						</h:inputText>
-						<rich:message id="nameMsg" for="name" />
-					</h:panelGroup>								
-				</h:panelGrid>
+				<h:panelGrid columns="3" id="newGrid">							
+					<h:outputText value="Codigo" />					
+					<h:inputText id="code" value="#{branchOfficeManagedbean.branchOfficeView.sucId}" required="true"
+						requiredMessage="El codigo es requerido">
+						<rich:validator />				
+					</h:inputText>
+					<rich:message id="codeMsg" for="code" />
+														
+					<h:outputText value="Nombre" />					
+					<h:inputText id="name" value="#{branchOfficeManagedbean.branchOfficeView.name}" required="true"
+						requiredMessage="El nombre es requerido">
+						<rich:validator />				
+					</h:inputText>
+					<rich:message id="nameMsg" for="name" />
+					
+					<h:outputText value="Domicilio" />					
+					<h:inputText id="domicilio" value="#{branchOfficeManagedbean.branchOfficeView.city}" required="true"
+						requiredMessage="El domicilio es requerido">
+						<rich:validator />				
+					</h:inputText>
+					<rich:message id="domicilioMsg" for="domicilio" />					
+					
+					<h:outputText value="Municipio" />					
+					<h:inputText id="municipio" value="#{branchOfficeManagedbean.branchOfficeView.community}" required="true"
+						requiredMessage="El municipio es requerido">
+						<rich:validator />				
+					</h:inputText>
+					<rich:message id="municipioMsg" for="municipio" />					
+					
+					<h:outputLabel value="Estado" />								
+	              		<h:selectOneMenu id="estado" value="#{branchOfficeManagedbean.branchOfficeView.state.code}">
+	  						<f:selectItems value="#{branchOfficeManagedbean.statesList}" />
+						</h:selectOneMenu>
+					<h:panelGroup />
+					
+					<h:outputText value="Codigo Postal" />					
+					<h:inputText id="zip" value="#{branchOfficeManagedbean.branchOfficeView.zip}" required="true"
+						requiredMessage="El Codigo Postal es requerido">
+						<rich:validator />				
+					</h:inputText>
+					<rich:message id="zipMsg" for="zip" />
+													
+				</h:panelGrid> <br />
 				<a4j:commandButton value="Guardar" action="#{branchOfficeManagedbean.addBranchOffice}"
 					render="table" execute="newPane"
-					oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('newPane')}.hide();}" />
-				<a4j:commandButton value="Cancel" onclick="#{rich:component('newPane')}.hide(); return false;" />
+					oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('newPane')}.hide();}" />&nbsp;&nbsp;
+				<a4j:commandButton value="Cancelar" onclick="#{rich:component('newPane')}.hide(); return false;" />
 			</h:form>
 		</rich:popupPanel>		
 	</div>

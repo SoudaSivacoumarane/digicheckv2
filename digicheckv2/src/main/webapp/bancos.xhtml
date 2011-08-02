@@ -124,7 +124,7 @@
 			<a4j:commandButton value="Guardar" action="#{bankManagedBean.addBankAction}"
 				render="table" execute="newPane"
 				oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('newPane')}.hide();}" />
-			<a4j:commandButton value="Cancel" onclick="#{rich:component('newPane')}.hide(); return false;" />
+			<a4j:commandButton value="Cancelar" onclick="#{rich:component('newPane')}.hide(); return false;" />
 		</h:form>
 	</rich:popupPanel>		
 	
