@@ -11,5 +11,114 @@
 	<ui:define name="title">
         Reporte Mensual
     </ui:define>
+    
+    <ui:define name="content">
+    <br />
+    <br />
+    <br />
+    <div align="center">     	
+  		<h:form id="panel_reporte_form">
+  			<h:panelGroup>
+  				<rich:panel header="Reporte Mensual por Sucursal" style="width: 700px;">
+  					<h:panelGrid columns="7" cellpadding="1" cellspacing="2">
+                        	<h:outputLabel value="Mes : " style="font-weight: bold"/>
+                            <h:selectOneMenu id="Mes" label="Mes">
+		                        <f:selectItem itemValue="Enero" itemLabel="Enero" />
+		                        <f:selectItem itemValue="Febrero" itemLabel="Febrero" />
+		                        <f:selectItem itemValue="Marzo" itemLabel="Marzo" />
+		                        <f:selectItem itemValue="Abril" itemLabel="Abril" />
+		                        <f:selectItem itemValue="Mayo" itemLabel="Mayo" />
+		                        <f:selectItem itemValue="Junio" itemLabel="Junio" />
+		                        <f:selectItem itemValue="Julio" itemLabel="Julio" />
+		                        <f:selectItem itemValue="Agosto" itemLabel="Agosto" />
+		                        <f:selectItem itemValue="Septiembre" itemLabel="Septiembre" />
+		                        <f:selectItem itemValue="Octubre" itemLabel="Octubre" />
+		                        <f:selectItem itemValue="Noviembre" itemLabel="Noviembre" />
+		                        <f:selectItem itemValue="Diciembre" itemLabel="Diciembre" />
+		                    </h:selectOneMenu>
+		                    <h:outputLabel value="A&ntilde;o : " style="font-weight: bold"/>
+                            <h:selectOneMenu id="a&ntilde;o" label="A&ntilde;o">
+		                        <f:selectItem itemValue="2007" itemLabel="2007" />
+		                        <f:selectItem itemValue="2008" itemLabel="2008" />
+		                        <f:selectItem itemValue="2009" itemLabel="2009" />
+		                        <f:selectItem itemValue="2010" itemLabel="2010" />
+		                        <f:selectItem itemValue="2011" itemLabel="2011" />
+		                        <f:selectItem itemValue="2012" itemLabel="2012" />
+		                    </h:selectOneMenu>
+                            <h:outputLabel value="Sucursal : " style="font-weight: bold"/>
+		                    <h:selectOneMenu id="sucursales" style="width: 200px" value="#{monthlyReportManagedBean.branchOfficeCode}">
+		                    	<f:selectItem itemValue="-1" itemLabel="Seleccione una Sucursal"/>			                    	
+								<f:selectItems value="#{monthlyReportManagedBean.branchOfficeItems}" />
+							</h:selectOneMenu>		                    		                    		                    		                    
+		                    <a4j:commandButton value="Aceptar" action="#{monthlyReportManagedBean.performSearch}"
+								render="monthlyReportPane"  execute="@form"
+								oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('monthlyReportPane')}.show();}" />			                    		                    		                   
+                        </h:panelGrid>                        
+                        <br />
+						<div style="width: 200px;">
+                        	<rich:messages />
+                        </div>
+  				</rich:panel>
+  			</h:panelGroup>  
+  			
+  		<rich:popupPanel header="Reporte Mensual - MES:  Enero-2010 / SUCURSAL: San Agustin Remesas" id="monthlyReportPane" width="600" height="520">
+  			<f:facet name="controls">
+				<h:outputLink value="#" onclick="#{rich:component('monthlyReportPane')}.hide(); return false;">
+					cerrar
+				</h:outputLink>
+			</f:facet>					
+			<div align="center">
+			<h:dataTable id="tabla_reporte_mensual" var="row" value="#{monthlyReportManagedBean.reportList}" >                                                
+                   <h:column style="text-align: center">
+                       <f:facet name="header">
+                       	<h:outputText value="FECHA" />
+                       </f:facet>
+                       <h:outputText value="#{row.date}"/>
+                   </h:column>
+                   <h:column style="text-align: center">
+                       <f:facet name="header">
+                           <h:outputText value="REFERENCIA" />
+                       </f:facet>
+                       <h:outputText value="#{row.reference}" />
+                   </h:column>
+                   <h:column style="text-align: center">
+                       <f:facet name="header">
+                           <h:outputText value="BANCO" />
+                       </f:facet>
+                       <h:outputText value="#{row.bank}" />
+                   </h:column>
+                   <h:column style="text-align: center">
+                       <f:facet name="header">
+                           <h:outputText value="CUENTA" />
+                       </f:facet>
+                       <h:outputText value="#{row.account}" />
+                   </h:column>
+                   <h:column style="text-align: center">
+                       <f:facet name="header">
+                           <h:outputText value="DIVISA" />
+                       </f:facet>
+                       <h:outputText value="#{row.currency}" />
+                   </h:column>
+                   <h:column style="text-align: center">
+                       <f:facet name="header">
+                           <h:outputText value="NO. DOC." />
+                       </f:facet>
+                       <h:outputText value="#{row.docNum}" />
+                   </h:column>
+                   <h:column style="text-align: right">
+                   	<f:facet name="header">
+                           <h:outputText value="IMPORTE" />
+                       </f:facet>
+                       <h:outputText value="#{row.amount}" />
+                   </h:column>
+                </h:dataTable>                
+                <h:panelGroup style="width: 790; text-align: right;">
+           			<h:outputText value="32" /> <h:outputText value="$ 3,434.32" />
+             	</h:panelGroup>  
+             </div>                          	  		
+		</rich:popupPanel>  			
+  	</h:form>		
+    </div>
+    </ui:define>
 	
 </ui:composition>
