@@ -11,6 +11,16 @@ public class UserView implements Serializable {
 	private String login;
 	private String name;
 	private String password;
+	private boolean scannerPermission = false;
+	private boolean digitalizePermission = false;
+	private boolean branchOfficePermission = false;
+	private boolean itselfCheckPermission = false;
+	private boolean allCheckPermission = false;
+	private boolean itselftReportPermission = false;
+	private boolean allReportsPermission = false;
+	private boolean addUser = false;
+	private boolean editUser = false;
+	private boolean delUser = false;		
 	private List<UserPermissionView> userPermissionViews;
 
 	public UserView() {
@@ -63,6 +73,86 @@ public class UserView implements Serializable {
 
 	public void setUserPermissionViews(List<UserPermissionView> userPermissionViews) {
 		this.userPermissionViews = userPermissionViews;
+	}		
+
+	public boolean isScannerPermission() {
+		return scannerPermission;
+	}
+
+	public void setScannerPermission(boolean scannerPermission) {
+		this.scannerPermission = scannerPermission;
+	}
+
+	public boolean isDigitalizePermission() {
+		return digitalizePermission;
+	}
+
+	public void setDigitalizePermission(boolean digitalizePermission) {
+		this.digitalizePermission = digitalizePermission;
+	}
+
+	public boolean isBranchOfficePermission() {
+		return branchOfficePermission;
+	}
+
+	public void setBranchOfficePermission(boolean branchOfficePermission) {
+		this.branchOfficePermission = branchOfficePermission;
+	}
+
+	public boolean isItselfCheckPermission() {
+		return itselfCheckPermission;
+	}
+
+	public void setItselfCheckPermission(boolean itselfCheckPermission) {
+		this.itselfCheckPermission = itselfCheckPermission;
+	}
+
+	public boolean isAllCheckPermission() {
+		return allCheckPermission;
+	}
+
+	public void setAllCheckPermission(boolean allCheckPermission) {
+		this.allCheckPermission = allCheckPermission;
+	}
+
+	public boolean isItselftReportPermission() {
+		return itselftReportPermission;
+	}
+
+	public void setItselftReportPermission(boolean itselftReportPermission) {
+		this.itselftReportPermission = itselftReportPermission;
+	}
+
+	public boolean isAllReportsPermission() {
+		return allReportsPermission;
+	}
+
+	public void setAllReportsPermission(boolean allReportsPermission) {
+		this.allReportsPermission = allReportsPermission;
+	}
+
+	public boolean isAddUser() {
+		return addUser;
+	}
+
+	public void setAddUser(boolean addUser) {
+		this.addUser = addUser;
+	}
+
+	public boolean isEditUser() {
+		return editUser;
+	}
+
+	public void setEditUser(boolean editUser) {
+		this.editUser = editUser;
+	}
+
+	public boolean isDelUser() {
+		return delUser;
+	}
+
+	public void setDelUser(boolean delUser) {
+		this.delUser = delUser;
 	}
 
 	@Override

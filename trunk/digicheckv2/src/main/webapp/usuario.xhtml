@@ -128,46 +128,46 @@
 					<h:panelGroup>
 						<fieldset>
 							<legend>Scanner</legend>
-							<h:selectBooleanCheckbox></h:selectBooleanCheckbox>Configurar Scanner
+							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.scannerPermission}" />Configurar Scanner
 						</fieldset>
 					</h:panelGroup>
 					
 					<h:panelGroup>															
 						<fieldset>
 							<legend>Digitalizar</legend>
-							<h:selectBooleanCheckbox></h:selectBooleanCheckbox>Digitalizar Cheques
+							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.digitalizePermission}" />Digitalizar Cheques
 						</fieldset>
 					</h:panelGroup>
 					
 					<h:panelGroup>															
 						<fieldset>
 							<legend>Sucursales</legend>
-							<h:selectBooleanCheckbox></h:selectBooleanCheckbox>Datos de Sucursal
+							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.branchOfficePermission}" />Datos de Sucursal
 						</fieldset>
 					</h:panelGroup>					
 										
 					<h:panelGroup>
 						<fieldset>
 							<legend>Cheques</legend>
-							<h:selectBooleanCheckbox></h:selectBooleanCheckbox>Solo de su Sucursal<br/>
-				            <h:selectBooleanCheckbox></h:selectBooleanCheckbox>Todas las Sucursales
+							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.itselfCheckPermission}" />Solo de su Sucursal<br/>
+				            <h:selectBooleanCheckbox value="#{userManagedBean.currentUser.allCheckPermission}" />Todas las Sucursales
 						</fieldset>
 					</h:panelGroup>
 					
 					<h:panelGroup>	
 						<fieldset>
 							<legend>Reportes</legend>
-							<h:selectBooleanCheckbox></h:selectBooleanCheckbox>Solo de su Sucursal<br/>
-				            <h:selectBooleanCheckbox></h:selectBooleanCheckbox>Todas las Sucursales
+							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.itselftReportPermission}" />Solo de su Sucursal<br/>
+				            <h:selectBooleanCheckbox value="#{userManagedBean.currentUser.allReportsPermission}" />Todas las Sucursales
 						</fieldset>
 					</h:panelGroup>
 					
 					<h:panelGroup>	
 						<fieldset>
 							<legend>Usuarios</legend>
-							<h:selectBooleanCheckbox></h:selectBooleanCheckbox>Agregar<br/>
-				            <h:selectBooleanCheckbox></h:selectBooleanCheckbox>Modificar<br/>
-				            <h:selectBooleanCheckbox></h:selectBooleanCheckbox>Eliminar
+							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.addUser}" />Agregar<br/>
+				            <h:selectBooleanCheckbox value="#{userManagedBean.currentUser.editUser}" />Modificar<br/>
+				            <h:selectBooleanCheckbox value="#{userManagedBean.currentUser.delUser}" />Eliminar
 						</fieldset>
 					</h:panelGroup>																			
 				</h:panelGrid>				 			
@@ -233,46 +233,46 @@
 					<h:panelGroup>
 						<fieldset>
 							<legend>Scanner</legend>
-							<h:selectBooleanCheckbox tabindex="6" ></h:selectBooleanCheckbox>Configurar Scanner
+							<h:selectBooleanCheckbox value="#{userManagedBean.userView.scannerPermission}" tabindex="6" />Configurar Scanner
 						</fieldset>
 					</h:panelGroup>
 					
 					<h:panelGroup>															
 						<fieldset>
 							<legend>Digitalizar</legend>
-							<h:selectBooleanCheckbox tabindex="7" ></h:selectBooleanCheckbox>Digitalizar Cheques
+							<h:selectBooleanCheckbox tabindex="7" value="#{userManagedBean.userView.digitalizePermission}" />Digitalizar Cheques
 						</fieldset>
 					</h:panelGroup>
 					
 					<h:panelGroup>															
 						<fieldset>
 							<legend>Sucursales</legend>
-							<h:selectBooleanCheckbox tabindex="8" ></h:selectBooleanCheckbox>Datos de Sucursal
+							<h:selectBooleanCheckbox tabindex="8" value="#{userManagedBean.userView.branchOfficePermission}" />Datos de Sucursal
 						</fieldset>
 					</h:panelGroup>					
 										
 					<h:panelGroup>
 						<fieldset>
 							<legend>Cheques</legend>
-							<h:selectBooleanCheckbox tabindex="9" ></h:selectBooleanCheckbox>Solo de su Sucursal<br/>
-				            <h:selectBooleanCheckbox tabindex="10"></h:selectBooleanCheckbox>Todas las Sucursales
+							<h:selectBooleanCheckbox tabindex="9" value="#{userManagedBean.userView.itselfCheckPermission}" />Solo de su Sucursal<br/>
+				            <h:selectBooleanCheckbox tabindex="10" value="#{userManagedBean.userView.allCheckPermission}" />Todas las Sucursales
 						</fieldset>
 					</h:panelGroup>
 					
 					<h:panelGroup>	
 						<fieldset>
 							<legend>Reportes</legend>
-							<h:selectBooleanCheckbox tabindex="11" ></h:selectBooleanCheckbox>Solo de su Sucursal<br/>
-				            <h:selectBooleanCheckbox tabindex="12"></h:selectBooleanCheckbox>Todas las Sucursales
+							<h:selectBooleanCheckbox tabindex="11" value="#{userManagedBean.userView.itselftReportPermission}" />Solo de su Sucursal<br/>
+				            <h:selectBooleanCheckbox tabindex="12" value="#{userManagedBean.userView.allReportsPermission}" />Todas las Sucursales
 						</fieldset>
 					</h:panelGroup>
 					
 					<h:panelGroup>	
 						<fieldset>
 							<legend>Usuarios</legend>
-							<h:selectBooleanCheckbox tabindex="13"></h:selectBooleanCheckbox>Agregar<br/>
-				            <h:selectBooleanCheckbox tabindex="14"></h:selectBooleanCheckbox>Modificar<br/>
-				            <h:selectBooleanCheckbox tabindex="15"></h:selectBooleanCheckbox>Eliminar
+							<h:selectBooleanCheckbox tabindex="13" value="#{userManagedBean.userView.addUser}" />Agregar<br/>
+				            <h:selectBooleanCheckbox tabindex="14" value="#{userManagedBean.userView.editUser}" />Modificar<br/>
+				            <h:selectBooleanCheckbox tabindex="15" value="#{userManagedBean.userView.delUser}" />Eliminar
 						</fieldset>
 					</h:panelGroup>																			
 				</h:panelGrid>				 			
@@ -282,7 +282,7 @@
 				render="table" execute="addPane"
 				oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('addPane')}.hide();}" /> &nbsp;&nbsp;
 			<a4j:commandButton tabindex="17" value="Cancelar" onclick="#{rich:component('addPane')}.hide(); return false;" />
-		</h:form>
+		</h:form><h:selectManyCheckbox ></h:selectManyCheckbox>
 	</rich:popupPanel>	
 	</div>
 	</ui:define>
