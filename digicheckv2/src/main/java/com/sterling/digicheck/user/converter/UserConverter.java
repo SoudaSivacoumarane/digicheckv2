@@ -9,11 +9,13 @@ import org.apache.commons.logging.LogFactory;
 
 import com.sterling.digicheck.user.entity.UserEntity;
 import com.sterling.digicheck.user.exception.UserException;
+import com.sterling.digicheck.user.permission.entity.UserPermissionEntity;
 import com.sterling.digicheck.user.view.UserView;
 
 public class UserConverter {
-
+	
 	private static final Log log = LogFactory.getLog(UserConverter.class);
+	
 	public List<UserView> converterEntitiesToViews(List<UserEntity> userEntities)throws UserException{
 		List<UserView> userViews = null;
 		UserView userView = null;
@@ -46,8 +48,35 @@ public class UserConverter {
 			userView.setPassword(userEntity.getPassword());
 			userView.setName(userEntity.getNombre());
 			userView.setSucursalId(String.valueOf(userEntity.getSucursalId()));
-			if(userView.getPassword()!=null)
+			if(userView.getPassword()!=null){
 				userView.setPassword(userView.getPassword().trim());
+			}
+			if(!userEntity.getUserPermissionEntity().isEmpty()){				
+				for (UserPermissionEntity upe : userEntity.getUserPermissionEntity()) {
+					if(upe.getPermiso().getPerId().intValue() == 1){
+						userView.setScannerPermission(true);						
+					}else if(upe.getPermiso().getPerId().intValue() == 2){
+						userView.setDigitalizePermission(true);
+					}else if(upe.getPermiso().getPerId().intValue() == 3){
+						userView.setBranchOfficePermission(true);
+					}else if(upe.getPermiso().getPerId().intValue() == 4){
+						userView.setItselfCheckPermission(true);
+					}else if(upe.getPermiso().getPerId().intValue() == 5){
+						userView.setAllCheckPermission(true);
+					}else if(upe.getPermiso().getPerId().intValue() == 6){
+						userView.setItselftReportPermission(true);
+					}else if(upe.getPermiso().getPerId().intValue() == 7){
+						userView.setAllReportsPermission(true);
+					}else if(upe.getPermiso().getPerId().intValue() == 8){
+						userView.setAddUser(true);
+					}else if(upe.getPermiso().getPerId().intValue() == 9){
+						userView.setEditUser(true);
+					}else if(upe.getPermiso().getPerId().intValue() == 10){
+						userView.setDelUser(true);
+					}					
+				}
+			}
+			
 		} catch (Exception exception){
 			UserException userException = null;
 			userException = new UserException(exception, UserException.LAYER_CONVERTER, UserException.ACTION_SELECT);
