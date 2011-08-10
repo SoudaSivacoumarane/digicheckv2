@@ -102,24 +102,24 @@
 			<h:form>
 				<h:panelGrid columns="3" id="newGrid">							
 					<h:outputText value="Codigo" />
-					<h:inputText id="code" value="#{currencyMagedbean.currencyView.code}" required="true"
+					<h:inputText tabindex="1" id="code" value="#{currencyMagedbean.currencyView.code}" required="true"
 						requiredMessage="El codigo es requerido">
 						<rich:validator />				
 					</h:inputText>
 					<rich:message id="codeMsg" for="code" />					
 									
 					<h:outputText value="Nombre" />					
-					<h:inputText id="name" value="#{currencyMagedbean.currencyView.name}" required="true"
+					<h:inputText tabindex="2" id="name" value="#{currencyMagedbean.currencyView.name}" required="true"
 						requiredMessage="El nombre es requerido">
 						<rich:validator />				
 					</h:inputText>
 					<rich:message id="nameMsg" for="name" />
 								
 				</h:panelGrid> <br />
-				<a4j:commandButton value="Guardar" action="#{currencyMagedbean.addCurrency}"
+				<a4j:commandButton tabindex="3" value="Guardar" action="#{currencyMagedbean.addCurrency}"
 					render="table" execute="newPane"
 					oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('newPane')}.hide();}" /> &nbsp; &nbsp;
-				<a4j:commandButton value="Cancelar" onclick="#{rich:component('newPane')}.hide(); return false;" />
+				<a4j:commandButton tabindex="4" value="Cancelar" onclick="#{rich:component('newPane')}.hide(); return false;" />
 			</h:form>
 		</rich:popupPanel>		
 	</div>
