@@ -26,7 +26,8 @@
 		}		
     </h:outputStylesheet>	
 	<a4j:status onstart="#{rich:component('statPane')}.show()"
-		onstop="#{rich:component('statPane')}.hide()" />			
+		onstop="#{rich:component('statPane')}.hide()" />
+			
 	<h:form id="form">
 		<rich:dataTable value="#{userManagedBean.userViewList}" var="row" id="table" rows="10" style="width: 30%">		
 			<rich:column>
@@ -98,17 +99,19 @@
 				
 				<h:outputText value="Contraseña" />
 				<h:panelGroup>
-					<h:inputSecret id="epass" value="#{userManagedBean.currentUser.password}" required="true"
-						requiredMessage="La contraseña es requerida">
+					<h:inputSecret id="epass" value="#{userManagedBean.password}" required="true"
+						requiredMessage="La contrase&ntilde;a es requerida">
+						<f:ajax render="@none" execute="@this" />
 						<rich:validator />				
 					</h:inputSecret>
 					<rich:message id="epassMsg" for="epass" />
 				</h:panelGroup>
 				
-				<h:outputText value="Repetir Contraseña" />
+				<h:outputText value="Repetir Contrase&ntilde;a" />
 				<h:panelGroup>
-					<h:inputSecret id="erpass" value="#{userManagedBean.currentUser.password}" required="true"
+					<h:inputSecret id="erpass" value="#{userManagedBean.currentUser.password}" validator="#{userManagedBean.validatePassword}" required="true"
 						requiredMessage="La contraseña es requerida">
+						<f:ajax render="erpassMsg" event="blur" />		
 						<rich:validator />				
 					</h:inputSecret>
 					<rich:message id="erpassMsg" for="erpass" />
@@ -203,20 +206,22 @@
 				
 				<h:outputText value="Contraseña" />
 				<h:panelGroup>
-					<h:inputSecret tabindex="3" id="epass" value="#{userManagedBean.userView.password}" required="true"
+					<h:inputSecret tabindex="3" id="pass" value="#{userManagedBean.password}" required="true"
 						requiredMessage="La contraseña es requerida">
-						<rich:validator />				
+						<rich:validator />
+						<f:ajax render="@none" execute="@this" />				
 					</h:inputSecret>
-					<rich:message id="epassMsg" for="epass" />
+					<rich:message id="passMsg" for="pass" />
 				</h:panelGroup>
 				
 				<h:outputText value="Repetir Contraseña" />
 				<h:panelGroup>
-					<h:inputSecret tabindex="4" id="arpass" value="#{userManagedBean.userView.password}" required="true"
+					<h:inputSecret tabindex="4" id="rpass" value="#{userManagedBean.userView.password}" validator="#{userManagedBean.validatePassword}"  required="true"
 						requiredMessage="La contraseña es requerida">
-						<rich:validator />				
+						<rich:validator />		
+						<f:ajax render="rpassMsg" event="blur" />		
 					</h:inputSecret>
-					<rich:message id="arpassMsg" for="arpass" />
+					<rich:message id="rpassMsg" for="rpass" />
 				</h:panelGroup>
 													
 			</h:panelGrid>
@@ -281,8 +286,8 @@
 			<a4j:commandButton tabindex="16" value="Agregar Usuario" action="#{userManagedBean.addUser}"
 				render="table" execute="addPane"
 				oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('addPane')}.hide();}" /> &nbsp;&nbsp;
-			<a4j:commandButton tabindex="17" value="Cancelar" onclick="#{rich:component('addPane')}.hide(); return false;" />
-		</h:form><h:selectManyCheckbox ></h:selectManyCheckbox>
+			<a4j:commandButton tabindex="17" value="Cancelar" action="#{userManagedBean.cleanUser}" onclick="#{rich:component('addPane')}.hide(); return false;" />			
+		</h:form>
 	</rich:popupPanel>	
 	</div>
 	</ui:define>

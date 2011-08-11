@@ -6,6 +6,10 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
@@ -17,6 +21,7 @@ import com.sterling.digicheck.user.service.UserService;
 import com.sterling.digicheck.user.view.UserView;
 
 @ManagedBean(name="userManagedBean")
+@ViewScoped
 public class UserManagedBean implements Serializable{
 
 	/** Serial Version UID */
@@ -40,6 +45,7 @@ public class UserManagedBean implements Serializable{
 	private UserView userView = new UserView();
 	private UserView currentUser = new UserView();
 	private String sucId;
+	private String password;
 	
 	
 	public List<UserView> getUserViewList() {
@@ -65,7 +71,7 @@ public class UserManagedBean implements Serializable{
 			deleteUser = new UserView();
 			deleteUser.setLogin(login);
 			userService.deleteUser(deleteUser);
-			JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "El usuario se elimino correctamente");
+			//JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "El usuario se elimino correctamente");
 		} catch (UserException userException) {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, userException.getMessage(), userException.getMessage());
 		}
@@ -74,7 +80,7 @@ public class UserManagedBean implements Serializable{
 	public void editUser(){
 		try{						
 			userService.updateUser(currentUser);
-			JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "El usuario se modifico correctamente");
+			//JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "El usuario se modifico correctamente");
 		} catch (UserException userException) {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, userException.getMessage(), userException.getMessage());
 		}
@@ -83,7 +89,7 @@ public class UserManagedBean implements Serializable{
 	public void addUser(){
 		try{		
 			userService.insertUser(userView);
-			JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "El usuario se agrego correctamente");
+			//JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "El usuario se agrego correctamente");
 		} catch (UserException userException) {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, userException.getMessage(), userException.getMessage());
 		}
@@ -97,6 +103,21 @@ public class UserManagedBean implements Serializable{
 			e.printStackTrace();
 		}
 		return bItems;
+	}
+	
+	public void validatePassword(FacesContext context, UIComponent component, Object value) {		
+		String pass = (String) value;		
+		if (!pass.equals(password)) {
+			((UIInput)component).setValid(false);		
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contrasenias no coinciden","Las contrasenias no coinciden");
+			context.addMessage(component.getClientId(context), message);
+		}
+	}
+	
+	public void cleanUser(){		
+		this.setUserView(null);
+		this.userView = new UserView();
+		this.password = "";
 	}
 	
 	public String getSucId() {
@@ -145,6 +166,14 @@ public class UserManagedBean implements Serializable{
 
 	public void setUserViewList(List<UserView> userViewList) {
 		this.userViewList = userViewList;
+	}		
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public void setUserService(UserService userService) {
