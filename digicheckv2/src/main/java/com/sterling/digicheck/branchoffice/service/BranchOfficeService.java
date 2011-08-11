@@ -16,6 +16,7 @@ import com.sterling.digicheck.branchoffice.exception.BranchOfficeException;
 import com.sterling.digicheck.branchoffice.view.BranchOfficeView;
 import com.sterling.digicheck.state.converter.StateConverter;
 import com.sterling.digicheck.state.dao.StateDAO;
+import com.sterling.digicheck.state.entity.StateEntity;
 import com.sterling.digicheck.state.exception.StateException;
 import com.sterling.digicheck.state.view.StateView;
 
@@ -53,10 +54,13 @@ public class BranchOfficeService {
 	
 	public void insertBranchOffice(BranchOfficeView view)throws BranchOfficeException{
 		BranchOfficeEntity entity = null;
+		StateEntity stateEntity = null;
 		BranchOfficeConverter branchOfficeConverter = null;
 		try{
 			branchOfficeConverter = new BranchOfficeConverter();
 			entity = branchOfficeConverter.convertViewToEntity(view);
+			stateEntity = stateDAO.getStateById(view.getState().getCode());
+			entity.setStateEntity(stateEntity);
 			branchOfficeDAO.insertBranchOffice(entity);
 		}catch (BranchOfficeException branchOfficeException){
 			throw branchOfficeException;
