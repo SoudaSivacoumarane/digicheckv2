@@ -15,5 +15,11 @@ public class StateDAO extends GenericDAO{
 		String sql = "select s from StateEntity s";
 		return em.createQuery(sql).getResultList();
 	}
+	
+	public StateEntity getStateById(String code){
+		StateEntity stateEntity = null;
+		stateEntity = em.find(StateEntity.class, code);
+		return stateEntity;
+	}
 
 }
