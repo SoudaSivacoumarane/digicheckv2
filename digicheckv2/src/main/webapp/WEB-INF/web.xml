@@ -3,14 +3,15 @@
 	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-	<context-param>
-		<param-name>javax.faces.PROJECT_STAGE</param-name>
-		<param-value>Development</param-value>
-	</context-param>
 
 	<context-param>
 		<param-name>org.richfaces.SKIN</param-name>
 		<param-value>glassX</param-value>
+	</context-param>
+	
+	<context-param>
+    	<param-name>org.ajax4jsf.handleViewExpiredOnClient</param-name>
+    	<param-value>true</param-value>
 	</context-param>
 	
 	<filter>
