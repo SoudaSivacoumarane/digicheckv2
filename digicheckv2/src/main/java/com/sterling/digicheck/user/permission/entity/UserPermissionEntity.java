@@ -58,6 +58,13 @@ public class UserPermissionEntity implements Serializable {
     public UserPermissionEntity(String usuLogin, int perId) {
         this.usuarioPermisoPK = new UserPermissionPK(usuLogin, perId);
     }
+    
+    public UserPermissionEntity(String usuLogin, int perId, Date uspFecha, PermissionEntity argPermiso, UserEntity argUsuario) {
+        this.usuarioPermisoPK = new UserPermissionPK(usuLogin, perId);
+        this.uspFecha = uspFecha;
+        this.permiso = argPermiso;
+        this.usuario = argUsuario;
+    }
 
     public UserPermissionPK getUsuarioPermisoPK() {
         return usuarioPermisoPK;

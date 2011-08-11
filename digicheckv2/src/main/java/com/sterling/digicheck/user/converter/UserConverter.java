@@ -51,7 +51,7 @@ public class UserConverter {
 			if(userView.getPassword()!=null){
 				userView.setPassword(userView.getPassword().trim());
 			}
-			if(!userEntity.getUserPermissionEntity().isEmpty()){				
+			if(userEntity.getUserPermissionEntity() != null){				
 				for (UserPermissionEntity upe : userEntity.getUserPermissionEntity()) {
 					if(upe.getPermiso().getPerId().intValue() == 1){
 						userView.setScannerPermission(true);						
@@ -89,13 +89,13 @@ public class UserConverter {
 	public UserEntity convertViewToEntity(UserView view)throws UserException{
 		UserEntity entity = null;		
 		try{
-			entity = new UserEntity();
-			
+			entity = new UserEntity();			
 			entity.setLogin(view.getLogin());
 			entity.setPassword(view.getPassword());
 			entity.setNombre(view.getName());
-			if(view.getSucursalId()!=null)
+			if(view.getSucursalId() != null){
 				entity.setSucursalId(Integer.parseInt(view.getSucursalId()));
+			}
 		}catch (Exception exception){
 			UserException userException = null;
 			userException = new UserException(exception, UserException.LAYER_CONVERTER, UserException.ACTION_SELECT);
