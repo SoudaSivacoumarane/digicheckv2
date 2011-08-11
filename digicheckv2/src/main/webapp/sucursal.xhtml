@@ -92,7 +92,7 @@
 		<rich:popupPanel header="Editar Sucursal" id="editPane" width="400" height="210">
 			<h:form>
 				<h:panelGrid columns="3" id="editGrid">							
-					<h:outputText value="Empresa" />					
+					<h:outputText value="Sucursal" />					
 					<h:inputText id="ecode" value="#{branchOfficeManagedbean.currentBranchOfficeView.name}" required="true"
 						requiredMessage="La empresa es requerida">
 						<rich:validator />				
@@ -144,7 +144,7 @@
 		<rich:popupPanel header="Nueva Sucursal" id="newPane" width="400" height="210">
 			<h:form>
 				<h:panelGrid columns="3" id="newGrid">							
-					<h:outputText value="Empresa" />					
+					<h:outputText value="Sucursal" />					
 					<h:inputText tabindex="1" id="code" value="#{branchOfficeManagedbean.branchOfficeView.name}" required="true"
 						requiredMessage="La empresa es requerida">
 						<rich:validator />				
