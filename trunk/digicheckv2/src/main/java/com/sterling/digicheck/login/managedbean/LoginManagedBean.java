@@ -10,6 +10,7 @@ import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
 
 import com.sterling.common.util.JSFUtil;
+import com.sterling.digicheck.security.service.SecurityAuthorizationService;
 import com.sterling.digicheck.user.exception.UserException;
 import com.sterling.digicheck.user.service.UserService;
 import com.sterling.digicheck.user.view.UserView;
@@ -29,6 +30,8 @@ public class LoginManagedBean implements Serializable{
 	
 	@ManagedProperty("#{userService}")
 	private UserService userService;
+	@ManagedProperty("#{securityAuthorizationService}")
+	SecurityAuthorizationService securityAuthorizationService;
 	private UserView view = new UserView();
 	
 	
@@ -44,7 +47,42 @@ public class LoginManagedBean implements Serializable{
 		} catch (UserException e) {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Usuario o Password incorrecto", "Login Error");
 		}
-	}		
+	}
+	
+	public boolean isBranchOfficePermission() {
+		boolean updateUser = Boolean.FALSE; 
+		try {
+			updateUser = this.securityAuthorizationService.hasPermission("3", JSFUtil.getSessionAttribute(UserView.class, "user").getLogin());
+		} catch (UserException e) {
+			System.out.println(e.getMessage());
+		}
+		return updateUser;
+	}
+	
+	public boolean isAllReportsPermission(){
+		boolean allReportsPermission = Boolean.FALSE; 
+		try {
+			allReportsPermission = this.securityAuthorizationService.hasPermission("7", JSFUtil.getSessionAttribute(UserView.class, "user").getLogin());
+		} catch (UserException e) {
+			System.out.println(e.getMessage());
+		}
+		return allReportsPermission;
+	}
+	
+	public boolean isAllCheckPermission(){
+		boolean allCheckPermission = Boolean.FALSE; 
+		try {
+			allCheckPermission = this.securityAuthorizationService.hasPermission("5", JSFUtil.getSessionAttribute(UserView.class, "user").getLogin());
+		} catch (UserException e) {
+			System.out.println(e.getMessage());
+		}
+		return allCheckPermission;
+	}
+	
+	public void setSecurityAuthorizationService(
+			SecurityAuthorizationService securityAuthorizationService) {
+		this.securityAuthorizationService = securityAuthorizationService;
+	}	
 		
 	public UserView getView() {
 		return view;

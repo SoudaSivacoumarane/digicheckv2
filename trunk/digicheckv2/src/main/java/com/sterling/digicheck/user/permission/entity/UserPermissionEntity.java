@@ -23,7 +23,7 @@ import com.sterling.digicheck.user.permission.pk.UserPermissionPK;
 @Table(name = "USUARIO_PERMISO")
 @NamedQueries({@NamedQuery(name = "UserPermissionEntity.findAll", query = "SELECT u FROM UserPermissionEntity u"), 
 			   @NamedQuery(name = "UserPermissionEntity.findByUsuLogin", query = "SELECT u FROM UserPermissionEntity u WHERE u.usuarioPermisoPK.usuLogin = :usuLogin"), 
-			   @NamedQuery(name = "UserPermissionEntity.findByPerId", query = "SELECT u FROM UserPermissionEntity u WHERE u.usuarioPermisoPK.perId = :perId"), 
+			   @NamedQuery(name = "UserPermissionEntity.findByPerId", query = "SELECT count(*) FROM UserPermissionEntity u WHERE u.usuarioPermisoPK.perId = :perId AND u.usuarioPermisoPK.usuLogin = :usuLogin"), 
 			   @NamedQuery(name = "UserPermissionEntity.findByUspFecha", query = "SELECT u FROM UserPermissionEntity u WHERE u.uspFecha = :uspFecha")})
 public class UserPermissionEntity implements Serializable {
 	/**
