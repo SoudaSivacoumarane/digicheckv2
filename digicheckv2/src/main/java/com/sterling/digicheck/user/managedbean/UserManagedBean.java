@@ -61,7 +61,8 @@ public class UserManagedBean implements Serializable{
 	
 	public void goEditUser(){
 		try {
-			currentUser = userService.getUserByLogin(login);			
+			currentUser = userService.getUserByLogin(login);
+			this.password = currentUser.getPassword();
 		} catch (UserException userException) {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, userException.getMessage(), userException.getMessage());
 		}
