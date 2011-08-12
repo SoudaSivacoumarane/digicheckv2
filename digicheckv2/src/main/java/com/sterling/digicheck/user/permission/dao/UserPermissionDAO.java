@@ -51,4 +51,26 @@ public class UserPermissionDAO extends GenericDAO {
 		return list;
 	}
 	
+	public boolean hasPermission(String permission, String login) throws UserException{
+		boolean haspermission = Boolean.FALSE;
+		Long result = null;
+		Query query = null;
+		try{
+			query = em.createNamedQuery("UserPermissionEntity.findByPerId");
+			query.setParameter("perId", Integer.parseInt(permission));
+			query.setParameter("usuLogin", login);
+			result = (Long) query.getSingleResult();
+			if(result.intValue() > 0){
+				haspermission = Boolean.TRUE;
+			}			
+		}catch (Exception exception){
+			UserException userException = null;
+			userException = new UserException(exception, UserException.LAYER_DAO, UserException.ACTION_LISTS);
+    		logger.error(userException);
+    		exception.printStackTrace(System.out);
+    		throw userException;
+		}
+		return haspermission;
+	}
+	
 }

@@ -16,6 +16,7 @@ import javax.faces.model.SelectItem;
 import com.sterling.common.util.JSFUtil;
 import com.sterling.digicheck.branchoffice.exception.BranchOfficeException;
 import com.sterling.digicheck.branchoffice.service.BranchOfficeService;
+import com.sterling.digicheck.security.service.SecurityAuthorizationService;
 import com.sterling.digicheck.user.exception.UserException;
 import com.sterling.digicheck.user.service.UserService;
 import com.sterling.digicheck.user.view.UserView;
@@ -39,6 +40,8 @@ public class UserManagedBean implements Serializable{
 	UserService userService;
 	@ManagedProperty("#{branchOfficeService}")
 	BranchOfficeService branchOfficeService;	
+	@ManagedProperty("#{securityAuthorizationService}")
+	SecurityAuthorizationService securityAuthorizationService;	
 	private List<UserView> userViewList = null;
 	private String login;
 	private int page = 1;
@@ -46,7 +49,6 @@ public class UserManagedBean implements Serializable{
 	private UserView currentUser = new UserView();
 	private String sucId;
 	private String password;
-	
 	
 	public List<UserView> getUserViewList() {
 		try{
@@ -210,6 +212,43 @@ public class UserManagedBean implements Serializable{
 	
 	public void goDailyReportAction(ActionEvent actionEvent){
 		JSFUtil.redirect(VIEW_DAILY_REPORT);
-	}						
+	}
+
+	public boolean isAddUser() {
+		boolean addUser = Boolean.FALSE;
+		try {			
+			addUser = this.securityAuthorizationService.hasPermission("8", JSFUtil.getSessionAttribute(UserView.class, "user").getLogin());
+		} catch (UserException e) {
+			System.out.println(e.getMessage());
+		}
+		return addUser;
+	}
+
+
+	public boolean isDeleteUser() {
+		boolean deleteUser = Boolean.FALSE;
+		try {
+			deleteUser = this.securityAuthorizationService.hasPermission("10", JSFUtil.getSessionAttribute(UserView.class, "user").getLogin());
+		} catch (UserException e) {
+			System.out.println(e.getMessage());
+		}
+		return deleteUser;
+	}
+
+
+	public boolean isUpdateUser() {
+		boolean updateUser = Boolean.FALSE; 
+		try {
+			updateUser = this.securityAuthorizationService.hasPermission("9", JSFUtil.getSessionAttribute(UserView.class, "user").getLogin());
+		} catch (UserException e) {
+			System.out.println(e.getMessage());
+		}
+		return updateUser;
+	}
+
+	public void setSecurityAuthorizationService(
+			SecurityAuthorizationService securityAuthorizationService) {
+		this.securityAuthorizationService = securityAuthorizationService;
+	}			
 	
 }

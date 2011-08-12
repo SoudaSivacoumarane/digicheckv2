@@ -46,16 +46,20 @@
 	                           		<img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_07_L.jpg" width="97" height="41" alt="Usuarios" border="0"/>
 	                           </h:commandLink>
                            </td>
-	                       <td><h:commandLink actionListener="#{loginManagedBean.goBrachOfficesAction}">
+	                       <td><h:commandLink actionListener="#{loginManagedBean.goBrachOfficesAction}" rendered="#{loginManagedBean.branchOfficePermission}">
 	                           		<img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_08_L.jpg" width="101" height="41" alt="Sucursales" border="0" />
 	                           </h:commandLink>
                            </td>
 	                       <td><a href="#" onmouseover="popup('catalogos', 'img_catalogos');" onmouseout="popdown();"><img name="img_catalogos" id="img_catalogos" src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_09_L.jpg" width="100" height="41" alt="Catalogos"  border="0" /></a></td>
-	                       <td><h:commandLink actionListener="#{loginManagedBean.goChecksAction}">
+	                       <td><h:commandLink actionListener="#{loginManagedBean.goChecksAction}" rendered="#{loginManagedBean.allCheckPermission}" >
                                     <img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_10_L.jpg" width="101" height="41" alt="Cheques" border="0" />
                                </h:commandLink>
 	                       </td>
-	                       <td><a href="#" onmouseover="popup('reportes', 'img_reportes');" onmouseout="popdown();"><img name="img_reportes" id="img_reportes" src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_11_L.jpg" width="101" height="41" alt="Reportes"  border="0" /></a></td>
+	                       <td> 
+	                       		<h:commandLink action="#" onmouseover="popup('reportes', 'img_reportes');" onmouseout="popdown();" rendered="#{loginManagedBean.allReportsPermission}">
+	                       			<img name="img_reportes" id="img_reportes" src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_11_L.jpg" width="101" height="41" alt="Reportes"  border="0" />
+	                       		</h:commandLink>	                       
+	                       	</td>
 	                       <td><h:commandLink actionListener="#{loginManagedBean.goOutAction}">
                            			<img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_12_L.jpg" width="99" height="41" alt="Salir" border="0" />
                            		</h:commandLink>
