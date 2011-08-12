@@ -42,8 +42,7 @@ public class UserConverter {
 		UserView userView = null;
 
 		try{
-			userView = new UserView();
-			
+			userView = new UserView();			
 			userView.setLogin(userEntity.getLogin());
 			userView.setPassword(userEntity.getPassword());
 			userView.setName(userEntity.getNombre());

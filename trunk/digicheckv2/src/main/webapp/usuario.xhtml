@@ -32,19 +32,19 @@
 		<rich:dataTable value="#{userManagedBean.userViewList}" var="row" id="table" rows="10" style="width: 30%">		
 			<rich:column>
 				<f:facet name="header">
-					<a4j:commandLink rendered="#{userManagedBean.addUser}" styleClass="no-decor" execute="@this" render="@none" oncomplete="#{rich:component('addPane')}.show()">
-						<h:graphicImage value="/resources/images/img-new.png" alt="Nuevo Usuario" />
+					<a4j:commandLink rendered="#{userManagedBean.addUser}" styleClass="no-decor" execute="@this" render="addGrid,addPermissionGrid" oncomplete="#{rich:component('addPane')}.show()">
+						<h:graphicImage value="resources/images/img-new.png" alt="Nuevo Usuario" />
 					</a4j:commandLink>
 				</f:facet>            
 					<a4j:commandLink rendered="#{userManagedBean.deleteUser}" styleClass="no-decor" execute="@this"
 						render="@none" oncomplete="#{rich:component('confirmPane')}.show();">
-						<h:graphicImage value="/resources/images/img-delete.png" alt="delete" />
+						<h:graphicImage value="resources/images/img-delete.png" alt="delete" />
 						<a4j:param value="#{row.login}" assignTo="#{userManagedBean.login}" />
 					</a4j:commandLink>
 					::
-					<a4j:commandLink rendered="#{userManagedBean.updateUser}" styleClass="no-decor" render="editPane" action="#{userManagedBean.goEditUser}"
+					<a4j:commandLink rendered="#{userManagedBean.updateUser}" styleClass="no-decor" render="editGrid,editPermissionsGrid,esucursales" action="#{userManagedBean.goEditUser}"
 						execute="@this" oncomplete="#{rich:component('editPane')}.show();">
-						<h:graphicImage value="/resources/images/img-edit.png" alt="edit" />
+						<h:graphicImage value="resources/images/img-edit.png" alt="edit" />
 						<a4j:param value="#{row.login}" assignTo="#{userManagedBean.login}" />					
 					</a4j:commandLink>    
             </rich:column>            	
@@ -99,7 +99,7 @@
 				
 				<h:outputText value="Contraseña" />
 				<h:panelGroup>
-					<h:inputSecret id="epass" value="#{userManagedBean.password}" required="true"
+					<h:inputSecret id="epass" redisplay="true" value="#{userManagedBean.password}" required="true"
 						requiredMessage="La contrase&ntilde;a es requerida">
 						<f:ajax render="@none" execute="@this" />
 						<rich:validator />				
@@ -109,7 +109,7 @@
 				
 				<h:outputText value="Repetir Contrase&ntilde;a" />
 				<h:panelGroup>
-					<h:inputSecret id="erpass" value="#{userManagedBean.currentUser.password}" validator="#{userManagedBean.validatePassword}" required="true"
+					<h:inputSecret id="erpass" redisplay="true" value="#{userManagedBean.currentUser.password}" validator="#{userManagedBean.validatePassword}" required="true"
 						requiredMessage="La contraseña es requerida">
 						<f:ajax render="erpassMsg" event="blur" />		
 						<rich:validator />				
@@ -119,7 +119,7 @@
 												
 			</h:panelGrid>
 			<h:outputText value="Sucursal" /> &nbsp;
-			<h:selectOneMenu id="sucursales" style="width: 180px" value="#{userManagedBean.currentUser.sucursalId}">
+			<h:selectOneMenu id="esucursales" style="width: 180px" value="#{userManagedBean.currentUser.sucursalId}">
 				<f:selectItems value="#{userManagedBean.branchOfficeItems}" />
 			</h:selectOneMenu>
 			
@@ -127,7 +127,7 @@
 			<br />
 			<fieldset>
 				<legend>Permisos</legend>
-				<h:panelGrid columns="3" rows="2">
+				<h:panelGrid id="editPermissionsGrid" columns="3" rows="2">
 					<h:panelGroup>
 						<fieldset>
 							<legend>Scanner</legend>
@@ -206,7 +206,7 @@
 				
 				<h:outputText value="Contraseña" />
 				<h:panelGroup>
-					<h:inputSecret tabindex="3" id="pass" value="#{userManagedBean.password}" required="true"
+					<h:inputSecret tabindex="3" redisplay="true" id="pass" value="#{userManagedBean.password}" required="true"
 						requiredMessage="La contraseña es requerida">
 						<rich:validator />
 						<f:ajax render="@none" execute="@this" />				
@@ -216,7 +216,7 @@
 				
 				<h:outputText value="Repetir Contraseña" />
 				<h:panelGroup>
-					<h:inputSecret tabindex="4" id="rpass" value="#{userManagedBean.userView.password}" validator="#{userManagedBean.validatePassword}"  required="true"
+					<h:inputSecret tabindex="4" id="rpass" redisplay="true" value="#{userManagedBean.userView.password}" validator="#{userManagedBean.validatePassword}"  required="true"
 						requiredMessage="La contraseña es requerida">
 						<rich:validator />		
 						<f:ajax render="rpassMsg" event="blur" />		
@@ -234,7 +234,7 @@
 			<br />
 			<fieldset>
 				<legend>Permisos</legend>
-				<h:panelGrid columns="3" rows="2">
+				<h:panelGrid id="addPermissionGrid" columns="3" rows="2">
 					<h:panelGroup>
 						<fieldset>
 							<legend>Scanner</legend>

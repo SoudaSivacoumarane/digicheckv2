@@ -151,9 +151,45 @@ public class UserService {
 	public void updateUser(UserView view)throws UserException{
 		UserEntity entity = null;
 		UserConverter userConverter = null;
+		List<UserPermissionEntity> uList = null;
+		List<PermissionEntity> pList = null;
 		try{
 			userConverter = new UserConverter();
 			entity = userConverter.convertViewToEntity(view);
+			entity.setUserPermissionEntity(null);
+			pList = userPermissionDAO.getAllPermissionEntitiesList();			
+			uList = new ArrayList<UserPermissionEntity>(0);
+			if(view.isScannerPermission()){
+				uList.add(new UserPermissionEntity(view.getLogin(), 1, new Date(), pList.get(0), entity));				
+			}
+			if(view.isDigitalizePermission()){
+				uList.add(new UserPermissionEntity(view.getLogin(), 2, new Date(), pList.get(1), entity));
+			}
+			if(view.isBranchOfficePermission()){
+				uList.add(new UserPermissionEntity(view.getLogin(), 3, new Date(), pList.get(2), entity));
+			}
+			if(view.isItselfCheckPermission()){
+				uList.add(new UserPermissionEntity(view.getLogin(), 4, new Date(), pList.get(3), entity));
+			}
+			if(view.isAllCheckPermission()){
+				uList.add(new UserPermissionEntity(view.getLogin(), 5, new Date(), pList.get(4), entity));
+			}
+			if(view.isItselftReportPermission()){
+				uList.add(new UserPermissionEntity(view.getLogin(), 6, new Date(), pList.get(5), entity));
+			}
+			if(view.isAllReportsPermission()){
+				uList.add(new UserPermissionEntity(view.getLogin(), 7, new Date(), pList.get(6), entity));
+			}
+			if(view.isAddUser()){
+				uList.add(new UserPermissionEntity(view.getLogin(), 8, new Date(), pList.get(7), entity));
+			}
+			if(view.isEditUser()){
+				uList.add(new UserPermissionEntity(view.getLogin(), 9, new Date(), pList.get(8), entity));
+			}
+			if(view.isDelUser()){
+				uList.add(new UserPermissionEntity(view.getLogin(), 10, new Date(), pList.get(9), entity));
+			}
+			entity.setUserPermissionEntity(uList);
 			userDAO.updateUser(entity);
 		}catch (UserException userException){
 			throw userException;
