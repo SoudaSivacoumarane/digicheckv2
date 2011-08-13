@@ -10,7 +10,10 @@
       <class>com.sterling.digicheck.permission.entity.PermissionEntity</class>
       <class>com.sterling.digicheck.user.permissiontype.entity.PermissionTypeEntity</class>
       <class>com.sterling.digicheck.user.permission.entity.UserPermissionEntity</class>
-      <class>com.sterling.digicheck.user.permission.pk.UserPermissionPK</class>             
+      <class>com.sterling.digicheck.user.permission.pk.UserPermissionPK</class>
+      <class>com.sterling.digicheck.batch.entity.BatchEntity</class>
+      <class>com.sterling.digicheck.document.entity.DocumentEntity</class>
+      <class>com.sterling.digicheck.documenttype.entity.DocumentTypeEntity</class>             
       <properties>        
       	<property name="hibernate.connection.driver_class" value="com.inet.tds.TdsDriver"/>
       	<property name="hibernate.connection.url" value="${jdbc.url}"/>
