@@ -27,8 +27,9 @@ import com.sterling.digicheck.user.entity.UserEntity;
 
 @Entity
 @Table(name = "LOTE")
-@NamedQueries({@NamedQuery(name = "BatchEntity.findAll", query = "SELECT l FROM BatchEntity l"), 
-			   @NamedQuery(name = "BatchEntity.findByLotReferencia", query = "SELECT l FROM BatchEntity l WHERE l.lotReference = :lotReference"), 
+@NamedQueries({@NamedQuery(name = "BatchEntity.findAll", query = "SELECT l FROM BatchEntity l"),
+			   @NamedQuery(name = "BatchEntity.findBySearchCriteria", query = "SELECT l FROM BatchEntity l WHERE l.reference = :reference AND l.batchDate = :batchDate AND l.batchId = :batchId"),
+			   @NamedQuery(name = "BatchEntity.findByLotReferencia", query = "SELECT l FROM BatchEntity l WHERE l.reference = :reference"), 
 			   @NamedQuery(name = "BatchEntity.findByLotImporte", query = "SELECT l FROM BatchEntity l WHERE l.batchAmount = :batchAmount"), 
 			   @NamedQuery(name = "BatchEntity.findByLotId", query = "SELECT l FROM BatchEntity l WHERE l.batchId = :batchId"), 
 			   @NamedQuery(name = "BatchEntity.findByLotDocumentos", query = "SELECT l FROM BatchEntity l WHERE l.batchDocuments = :batchDocuments"), 
@@ -46,7 +47,7 @@ public class BatchEntity implements Serializable {
     private Integer batchId; 
 	@Basic(optional = false)
     @Column(name = "LOT_REFERENCIA")
-    private String lotReference;	
+    private String reference;	
     @Basic(optional = false)
     @Column(name = "LOT_IMPORTE")
     private BigDecimal batchAmount;           
@@ -76,11 +77,11 @@ public class BatchEntity implements Serializable {
     @ManyToOne(optional = false)
     private UserEntity userLogin;
     
-	public String getLotReference() {
-		return lotReference;
+	public String getReference() {
+		return reference;
 	}
-	public void setLotReference(String lotReference) {
-		this.lotReference = lotReference;
+	public void setLotReference(String reference) {
+		this.reference = reference;
 	}
 	public BigDecimal getBatchAmount() {
 		return batchAmount;
