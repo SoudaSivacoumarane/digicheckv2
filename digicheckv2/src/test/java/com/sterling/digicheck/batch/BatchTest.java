@@ -57,7 +57,7 @@ public class BatchTest extends AbstractTestNGSpringContextTests {
 		documentTypeEntity.setDocTypeDescription("Cheque");
 		
 		batchEntity = new BatchEntity();
-		batchEntity.setBatchAmount(new BigDecimal(0));
+		batchEntity.setBatchAmount(new BigDecimal(57384.89).setScale(2, BigDecimal.ROUND_DOWN));
 		batchEntity.setBatchDate(new Date());
 		batchEntity.setBatchDateAdded(new Date());
 		batchEntity.setBatchDocuments(10);
