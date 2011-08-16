@@ -94,4 +94,18 @@ public class BranchOfficeDAO extends GenericDAO {
 		return branchOfficeEntity;
 	}
 	
+	public BranchOfficeEntity getBranchOfficeById(int branchOfficeId) throws BranchOfficeException {
+		BranchOfficeEntity branchOfficeEntity = null;		
+		try{			
+			branchOfficeEntity = em.find(BranchOfficeEntity.class, branchOfficeId);				
+		} catch (Exception exception){
+			BranchOfficeException branchOfficeException = null;
+			branchOfficeException = new BranchOfficeException(exception, BranchOfficeException.LAYER_DAO, BranchOfficeException.ACTION_SELECT);
+    		logger.error(branchOfficeException);
+    		exception.printStackTrace(System.out);
+    		throw branchOfficeException;
+		}
+		return branchOfficeEntity;
+	}
+	
 }

@@ -1,0 +1,27 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+  <persistence-unit name="MSSQLDS" transaction-type="RESOURCE_LOCAL">  	
+      <provider>org.hibernate.ejb.HibernatePersistence</provider>    
+      <mapping-file>orm.xml</mapping-file>
+      <class>com.sterling.digicheck.bank.entity.BankEntity</class>
+      <class>com.sterling.digicheck.branchoffice.entity.BranchOfficeEntity</class>
+      <class>com.sterling.digicheck.currency.entity.CurrencyEntity</class>
+      <class>com.sterling.digicheck.state.entity.StateEntity</class>
+      <class>com.sterling.digicheck.user.entity.UserEntity</class>
+      <class>com.sterling.digicheck.permission.entity.PermissionEntity</class>
+      <class>com.sterling.digicheck.user.permissiontype.entity.PermissionTypeEntity</class>
+      <class>com.sterling.digicheck.user.permission.entity.UserPermissionEntity</class>
+      <class>com.sterling.digicheck.user.permission.pk.UserPermissionPK</class>
+      <class>com.sterling.digicheck.batch.entity.BatchEntity</class>
+      <class>com.sterling.digicheck.document.entity.DocumentEntity</class>
+      <class>com.sterling.digicheck.documenttype.entity.DocumentTypeEntity</class>             
+      <properties>        
+      	<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+      	<property name="hibernate.connection.url" value="${jdbc.url}"/>
+      	<property name="hibernate.connection.username" value="${jdbc.username}"/>
+      	<property name="hibernate.connection.password" value="${jdbc.password}"/> 
+      	<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>      	
+      	<property name="hibernate.show_sql" value="true" />
+      	<property name="use_sql_comments" value="false"/>      	
+      </properties>
+   </persistence-unit>
+</persistence>
