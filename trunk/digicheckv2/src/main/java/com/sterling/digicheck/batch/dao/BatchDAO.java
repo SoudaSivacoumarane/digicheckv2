@@ -21,11 +21,11 @@ public class BatchDAO extends GenericDAO {
 	public List<BatchEntity> searchBatchEntity(String reference, Date date, Integer branchOfficeId) throws BatchException{
 		List<BatchEntity> batchEntityList = null;		
 		Query query = null;
-		try{
+		try{			
 			query = em.createNamedQuery("BatchEntity.findBySearchCriteria");
-			query.setParameter("reference", reference);
-			query.setParameter("batchDate", date);
-			query.setParameter("batchId", branchOfficeId);
+			query.setParameter("reference", "%"+reference+"%".toUpperCase());
+			//query.setParameter("batchDate", date, TemporalType.DATE);
+			query.setParameter("sucId", branchOfficeId);
 			batchEntityList = query.getResultList();
 			
 		}catch (Exception exception){

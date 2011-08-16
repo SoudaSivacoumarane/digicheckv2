@@ -13,7 +13,7 @@ import com.sterling.digicheck.batch.entity.BatchEntity;
 import com.sterling.digicheck.batch.exception.BatchException;
 import com.sterling.digicheck.batch.view.BatchView;
 
-@Service("BatchService")
+@Service("batchService")
 public class BatchService {
 	
 	private static final Logger logger = Logger.getLogger(BatchService.class);

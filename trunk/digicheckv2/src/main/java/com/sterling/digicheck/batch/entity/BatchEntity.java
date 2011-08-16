@@ -30,7 +30,7 @@ import com.sterling.digicheck.user.entity.UserEntity;
 @Entity
 @Table(name = "LOTE")
 @NamedQueries({@NamedQuery(name = "BatchEntity.findAll", query = "SELECT l FROM BatchEntity l"),
-			   @NamedQuery(name = "BatchEntity.findBySearchCriteria", query = "SELECT l FROM BatchEntity l WHERE l.reference = :reference AND l.batchDate = :batchDate AND l.batchId = :batchId"),
+			   @NamedQuery(name = "BatchEntity.findBySearchCriteria", query = "SELECT l FROM BatchEntity l WHERE UPPER(l.reference) Like :reference AND l.branchOfficeId.sucId = :sucId"),
 			   @NamedQuery(name = "BatchEntity.findByLotReferencia", query = "SELECT l FROM BatchEntity l WHERE l.reference = :reference"), 
 			   @NamedQuery(name = "BatchEntity.findByLotImporte", query = "SELECT l FROM BatchEntity l WHERE l.batchAmount = :batchAmount"), 
 			   @NamedQuery(name = "BatchEntity.findByLotId", query = "SELECT l FROM BatchEntity l WHERE l.batchId = :batchId"), 

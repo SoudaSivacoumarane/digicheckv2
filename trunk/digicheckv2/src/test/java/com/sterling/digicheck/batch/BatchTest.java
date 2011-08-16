@@ -1,7 +1,10 @@
 package com.sterling.digicheck.batch;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -19,6 +22,7 @@ import com.sterling.digicheck.bank.dao.BankDAO;
 import com.sterling.digicheck.bank.exception.BankException;
 import com.sterling.digicheck.batch.dao.BatchDAO;
 import com.sterling.digicheck.batch.entity.BatchEntity;
+import com.sterling.digicheck.batch.exception.BatchException;
 import com.sterling.digicheck.branchoffice.dao.BranchOfficeDAO;
 import com.sterling.digicheck.branchoffice.exception.BranchOfficeException;
 import com.sterling.digicheck.currency.dao.CurrencyDAO;
@@ -47,7 +51,7 @@ public class BatchTest extends AbstractTestNGSpringContextTests {
 	EntityManager em;
 	
 	
-	@Test
+	//@Test
 	public void pupulateBatchEntity(){
 		BatchEntity batchEntity = null;		
 		DocumentTypeEntity documentTypeEntity = null;
@@ -85,6 +89,29 @@ public class BatchTest extends AbstractTestNGSpringContextTests {
 		em.getTransaction().commit();						
 	}
 	
+	@Test
+	public void searchCriteriaTest(){
+		List<BatchEntity> batList = null;
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date currentTime = new Date();
+		String dateString = "2011-08-15";
+		try {
+			currentTime = formatter.parse(dateString);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			batList = batchDAO.searchBatchEntity("12345", currentTime, 1);
+			for(BatchEntity b : batList){
+				System.out.println(b.getReference());
+				System.out.println(b.getBankId().getDescription());
+				System.out.println(b.getBatchDateAdded());
+				System.out.println(b.getBatchDocuments());
+			}
+		} catch (BatchException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@PersistenceContext	
 	public void setEntityManager(EntityManager em){

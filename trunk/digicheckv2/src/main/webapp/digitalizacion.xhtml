@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"      
+	xmlns:a4j="http://richfaces.org/a4j"
+	template="./template/template_login.xhtml">
+	
+	<ui:define name="title">
+        Cheques
+    </ui:define>
+    
+    <ui:define name="content">
+    <br />
+    <br />
+    <br />
+    <div align="center"> 		
+    	<h:form id="formDigitalization">
+	    <h:panelGroup>	    		   			
+   				<rich:panel header="Digitalizacion de Documentos" style="width: 600px;">
+   					<fieldset>
+						<legend>Datos de Sucursal</legend>
+						<h:panelGrid columns="2" cellpadding="1" cellspacing="2">
+                            <h:outputLabel value="Usuario" style="font-weight: bold"/>
+                            <h:outputLabel value="Jose Delgado (jdelgado)"/>
+                            <h:outputLabel value="Nombre" style="font-weight: bold"/>
+                            <h:outputLabel value="Remesero"/>
+                            <h:outputLabel value="Direcci&oacute;n" style="font-weight: bold"/>
+                            <h:panelGroup>
+                                <h:outputLabel value="Rio Verde #123"/>
+                                <h:outputLabel value=" Col." style="font-weight: bold"/>
+                                <h:outputLabel value="16 de Septiembre"/>
+                                <h:outputLabel value=" C.P." style="font-weight: bold"/>
+                                <h:outputLabel value="12345"/>
+                            </h:panelGroup>
+                            <h:outputLabel value="Ciudad" style="font-weight: bold"/>
+                            <h:outputLabel value="Aguascalientes"/>
+                            <h:outputLabel value="Estado" style="font-weight: bold"/>
+                            <h:outputLabel value="Aguascalientes"/>
+                        </h:panelGrid>							
+					</fieldset>
+   					
+   				</rich:panel>
+   		</h:panelGroup>
+   		</h:form>
+   	</div>    
+    </ui:define>
+</ui:composition>
