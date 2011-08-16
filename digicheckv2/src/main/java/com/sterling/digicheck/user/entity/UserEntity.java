@@ -34,6 +34,17 @@ public class UserEntity implements Serializable {
 	private int sucursalId;
 	@OneToMany(cascade = CascadeType.ALL, fetch= FetchType.EAGER, mappedBy = "usuario")
     private Collection<UserPermissionEntity> userPermissionEntity;
+	
+	public UserEntity() {
+
+	}
+	
+	public UserEntity(String argLogin, String argPassword, String argNombre, int argSucursal) {
+		this.login = argLogin;
+		this.password = argPassword;
+		this.nombre = argNombre;
+		this.sucursalId = argSucursal;
+	}
 
 	public String getLogin() {
 		return login;

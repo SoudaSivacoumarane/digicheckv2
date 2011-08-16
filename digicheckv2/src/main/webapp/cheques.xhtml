@@ -11,5 +11,39 @@
 	<ui:define name="title">
         Cheques
     </ui:define>
+    
+    <ui:define name="content">
+    <br />
+    <br />
+    <br />
+    <div align="center"> 
+    	<h:form id="panel_reporte_form">
+	    <h:panelGroup id="panel_tabla_reporte_diario">	    		   			
+   				<rich:panel header="Buscar Cheques" style="width: 750px;">
+   					 <h:panelGrid columns="7">
+   					 		<h:outputLabel style="font-weight: bold" value="Referencia: " />
+   					 		<h:inputText value="#{batchManagedBean.reference}" />
+                        	<h:outputLabel value="Fecha : " style="font-weight: bold"/>
+                            <rich:calendar id="calendar" cellWidth="24px" datePattern="dd/MM/yyyy" value="#{batchManagedBean.date}"
+                    				       cellHeight="22px" style="width:100px">
+							</rich:calendar>
+                            <h:outputLabel value="Sucursal : "  style="font-weight: bold"/>
+		                    <h:selectOneMenu id="sucursales" style="width: 200px" value="#{batchManagedBean.branchOfficeId}">
+		                    	<f:selectItem itemValue="-1" itemLabel="Seleccione una Sucursal"/>			                    	
+								<f:selectItems value="#{dailyReportManagedBean.branchOfficeItems}" />
+							</h:selectOneMenu>			  
+							<h:commandButton value="Buscar" action="#{batchManagedBean.searchByCriteria}">
+							</h:commandButton>                  		                    
+                        </h:panelGrid>
+                        <br />
+                        <div style="width: 200px;">
+                        	<rich:messages />
+                        </div>
+   				</rich:panel>	   					
+	    </h:panelGroup>
+	    	   
+		</h:form>	    
+    </div>    
+	</ui:define>
 	
 </ui:composition>

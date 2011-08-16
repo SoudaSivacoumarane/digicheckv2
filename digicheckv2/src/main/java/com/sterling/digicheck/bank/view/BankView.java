@@ -16,6 +16,18 @@ public class BankView implements Serializable {
 	private String bankId;
 	private String aba;
 	private String description;
+	
+	public BankView() {
+
+	}
+	
+	public BankView(String id, String abba, String desc) {
+		this.bankId = id;
+		this.aba = abba;
+		this.description = desc;
+	}
+	
+	
 
 	public String getBankId() {
 		return bankId;

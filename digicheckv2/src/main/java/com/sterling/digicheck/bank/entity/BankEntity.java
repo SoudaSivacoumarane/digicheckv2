@@ -25,6 +25,15 @@ public class BankEntity implements Serializable {
 	private String aba;
 	@Column(name = "DESCRIPCION")
 	private String description;
+	
+	public BankEntity() {
+	}
+	
+	public BankEntity(Integer argBankId, String argABA, String argDescription) {
+		this.bankId = argBankId;
+		this.aba = argABA;
+		this.description = argDescription;
+	}
 
 	public Integer getBankId() {
 		return bankId;

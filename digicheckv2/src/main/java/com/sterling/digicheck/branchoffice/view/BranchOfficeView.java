@@ -18,13 +18,14 @@ public class BranchOfficeView implements Serializable {
 		
 	}	
 	
-	public BranchOfficeView(String nName, String nAddress, String nCommunity, String nZip, StateView nState, String nCity) {
-		name = nName;
-		address = nAddress;
-		community = nCommunity;
-		zip = nZip;
-		state = nState;
-		city = nCity;
+	public BranchOfficeView(String argSucId, String nName, String nAddress, String nCommunity, String nZip, StateView nState, String nCity) {
+		this.sucId = argSucId;
+		this.name = nName;
+		this.address = nAddress;
+		this.community = nCommunity;
+		this.zip = nZip;
+		this.state = nState;
+		this.city = nCity;
 	}
 	
 	

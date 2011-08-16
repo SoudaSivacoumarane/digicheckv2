@@ -28,6 +28,16 @@ public class CurrencyEntity implements Serializable {
 	@Lob
 	@Column(name = "DIV_IMAGEN")
 	private byte[] image;
+	
+	public CurrencyEntity() {
+
+	}
+	
+	public CurrencyEntity(Integer argCurrencyId, String argCode, String argName) {
+		this.currencyId = argCurrencyId;
+		this.code = argCode;
+		this.name = argName;
+	}
 
 	public Integer getCurrencyId() {
 		return currencyId;

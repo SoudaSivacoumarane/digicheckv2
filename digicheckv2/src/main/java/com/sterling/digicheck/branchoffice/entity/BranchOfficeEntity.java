@@ -38,6 +38,20 @@ public class BranchOfficeEntity implements Serializable{
 	
 	@Column(name="SUC_CIUDAD")
 	private String city;
+	
+	public BranchOfficeEntity() {
+
+	}
+	
+	public BranchOfficeEntity(Integer argSucId, String argName, String argAddress, String argCommunity, String argZip, String argCity, StateEntity argStateEntity) {
+		this.sucId = argSucId;
+		this.name = argName;
+		this.address = argAddress;
+		this.community = argCommunity;
+		this.zip = argZip;
+		this.city = argCity;
+		this.stateEntity = argStateEntity;
+	}
 		
 	public Integer getSucId() {
 		return sucId;
