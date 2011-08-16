@@ -20,6 +20,15 @@ public class StateEntity implements Serializable{
 	@Column(name = "EST_NOMBRE")
 	private String name;
 	
+	public StateEntity() {
+	
+	}
+	
+	public StateEntity(String argCode, String argName) {
+		this.code = argCode;
+		this.name = argName;
+	}
+		
 	public String getCode() {
 		return code;
 	}
