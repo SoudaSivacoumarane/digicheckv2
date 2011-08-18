@@ -10,6 +10,7 @@ import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
 
 import com.sterling.common.util.JSFUtil;
+import com.sterling.digicheck.batch.managedbean.BatchManagedBean;
 import com.sterling.digicheck.security.service.SecurityAuthorizationService;
 import com.sterling.digicheck.user.exception.UserException;
 import com.sterling.digicheck.user.service.UserService;
@@ -37,11 +38,10 @@ public class LoginManagedBean implements Serializable{
 	
 	public void doLoginAction(){		
 		try {
-			HttpSession session = null;
-			
+			HttpSession session = null;			
 			if(userService.loginUser(view) != null){
 				session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-				session.setAttribute("user", view);
+				session.setAttribute("user", userService.getUserByLogin(view.getLogin()));
 				goHomeAction(null);							
 			}
 		} catch (UserException e) {
@@ -116,6 +116,8 @@ public class LoginManagedBean implements Serializable{
 	}
 	
 	public void goChecksAction(ActionEvent actionEvent){
+		BatchManagedBean batchManagedBean = (BatchManagedBean) JSFUtil.getManagedBean("batchManagedBean", BatchManagedBean.class);
+		batchManagedBean.cleanValues();
 		JSFUtil.redirect(VIEW_CHECKS);
 	}
 	

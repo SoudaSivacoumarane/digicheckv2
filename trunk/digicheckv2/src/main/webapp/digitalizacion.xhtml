@@ -19,29 +19,49 @@
     <div align="center"> 		
     	<h:form id="formDigitalization">
 	    <h:panelGroup>	    		   			
-   				<rich:panel header="Digitalizacion de Documentos" style="width: 600px;">
+   				<rich:panel header="Digitalizaci&oacute;n de Documentos" style="width: 500px;">
    					<fieldset>
 						<legend>Datos de Sucursal</legend>
-						<h:panelGrid columns="2" cellpadding="1" cellspacing="2">
-                            <h:outputLabel value="Usuario" style="font-weight: bold"/>
-                            <h:outputLabel value="Jose Delgado (jdelgado)"/>
+						<h:panelGrid columns="2" cellpadding="1" cellspacing="2" border="1">
+                            <h:outputLabel value="Usuario" style="font-weight: bold;"/>
+                            <h:outputLabel value="#{batchManagedBean.userView.login}" style="text-align: left;"/>
                             <h:outputLabel value="Nombre" style="font-weight: bold"/>
-                            <h:outputLabel value="Remesero"/>
+                            <h:outputLabel value="#{batchManagedBean.userView.name}" style="text-align: left;"/>
                             <h:outputLabel value="Direcci&oacute;n" style="font-weight: bold"/>
                             <h:panelGroup>
-                                <h:outputLabel value="Rio Verde #123"/>
-                                <h:outputLabel value=" Col." style="font-weight: bold"/>
-                                <h:outputLabel value="16 de Septiembre"/>
+                                <h:outputLabel value="#{batchManagedBean.branchOfficeView.address}" style="text-align: left;"/>
+                                <h:outputLabel value=" Colonia" style="font-weight: bold"/>
+                                <h:outputLabel value="#{batchManagedBean.branchOfficeView.community}" style="text-align: left;"/>
                                 <h:outputLabel value=" C.P." style="font-weight: bold"/>
-                                <h:outputLabel value="12345"/>
+                                <h:outputLabel value="#{batchManagedBean.branchOfficeView.zip}" style="text-align: left;"/>
                             </h:panelGroup>
                             <h:outputLabel value="Ciudad" style="font-weight: bold"/>
-                            <h:outputLabel value="Aguascalientes"/>
+                            <h:outputLabel value="#{batchManagedBean.branchOfficeView.city}" style="text-align: left;"/>
                             <h:outputLabel value="Estado" style="font-weight: bold"/>
-                            <h:outputLabel value="Aguascalientes"/>
+                            <h:outputLabel value="#{batchManagedBean.branchOfficeView.state.name}" style="text-align: left;"/>
                         </h:panelGrid>							
+					</fieldset>					
+					<fieldset>
+						<legend>LOTE</legend>						
+						<h:panelGrid columns="2">
+							<h:outputLabel value="Fecha" style="font-weight: bold"/>
+							<rich:calendar id="calendar" cellWidth="24px" datePattern="dd/MM/yyyy" value="#{batchManagedBean.batchView.batchDate}"
+                    				       cellHeight="22px" style="width:100px">
+                    		</rich:calendar>
+                    		
+                    		<h:outputLabel value="Referencia" style="font-weight: bold"/>
+                    		<h:inputText value="#{batchManagedBean.batchView.reference}" />
+                    		
+                    		<h:outputLabel value="# Documentos" style="font-weight: bold"/>
+                    		<h:inputText value="#{batchManagedBean.batchView.batchDocuments}" />
+                    		
+                    		<h:outputLabel value="Importe $" style="font-weight: bold"/>
+                    		<h:inputText value="#{batchManagedBean.batchView.batchAmount}" />		       
+                    				       
+						</h:panelGrid>
+						<h:commandButton value="Guardar" action="#{batchManagedBean.insertBatch}" ></h:commandButton>
 					</fieldset>
-   					
+   					<rich:messages globalOnly="true" />
    				</rich:panel>
    		</h:panelGroup>
    		</h:form>
