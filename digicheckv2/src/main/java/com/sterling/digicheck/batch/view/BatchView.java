@@ -19,15 +19,15 @@ public class BatchView implements Serializable {
 
 	private Integer batchId; 		
     private String reference;		    
-    private BigDecimal batchAmount;           	    
-    private Integer batchDocuments;        	    
+    private BigDecimal batchAmount = new BigDecimal(0);           	    
+    private Integer batchDocuments = new Integer(0);        	    
     private Date batchDate;        	    
     private Date batchDateAdded;
-	private BankView bankView;
-	private CurrencyView currencyView;
-	private BranchOfficeView branchOfficeView;
+	private BankView bankView = new BankView();
+	private CurrencyView currencyView = new CurrencyView();
+	private BranchOfficeView branchOfficeView = new BranchOfficeView();
 	private List<DocumentView> documentViewList;
-	private UserView userView;
+	private UserView userView = new UserView();
 	
 	public Integer getBatchId() {
 		return batchId;

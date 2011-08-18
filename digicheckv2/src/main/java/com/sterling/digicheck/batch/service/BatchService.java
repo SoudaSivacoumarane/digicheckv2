@@ -44,5 +44,23 @@ public class BatchService {
 		}			
 		return batchViewsList; 
 	}
+	
+	public void insertBatch(BatchView batchView) throws BatchException{
+		BatchEntity batchEntity = null;
+		BatchConverter batchConverter = null;
+		try{
+			batchConverter = new BatchConverter();
+			batchEntity = batchConverter.convertEntityToView(batchView);
+			this.batchDAO.insertBatchEntity(batchEntity);			
+		}catch (BatchException bankException){
+			throw bankException;
+		}catch (Exception exception){
+			BatchException batchException = null;
+			batchException = new BatchException(exception, BatchException.LAYER_SERVICE, BatchException.ACTION_INSERT);
+    		logger.error(batchException);
+    		exception.printStackTrace(System.out);
+    		throw batchException;
+		}
+	}
 
 }

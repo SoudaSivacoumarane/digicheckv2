@@ -72,8 +72,8 @@ public class BatchConverter {
 			batchEntity.setBatchDate(batchView.getBatchDate());
 			batchEntity.setBatchDateAdded(batchView.getBatchDateAdded());
 			batchEntity.setBatchDocuments(batchView.getBatchDocuments());
-			batchEntity.setLotReference(batchView.getReference());
-			batchEntity.setBankId(new BankEntity(Integer.parseInt(batchView.getBankView().getBankId()), batchView.getBankView().getAba(), batchView.getBankView().getDescription()));
+			batchEntity.setLotReference(batchView.getReference());			
+			batchEntity.setBankId(new BankEntity(Integer.parseInt(batchView.getBankView().getBankId()), batchView.getBankView().getAba(), batchView.getBankView().getDescription()));			
 			batchEntity.setCurrencyId(new CurrencyEntity(Integer.parseInt(batchView.getCurrencyView().getCurrencyId()), batchView.getCurrencyView().getCode(), batchView.getCurrencyView().getName()));
 			batchEntity.setUserLogin(new UserEntity(batchView.getUserView().getLogin(), batchView.getUserView().getPassword(), batchView.getUserView().getName(), Integer.parseInt(batchView.getUserView().getSucursalId())));			
 			batchEntity.setBranchOfficeId(new BranchOfficeEntity(Integer.parseInt(batchView.getBranchOfficeView().getSucId()), batchView.getBranchOfficeView().getName(), batchView.getBranchOfficeView().getAddress(), batchView.getBranchOfficeView().getCommunity(), batchView.getBranchOfficeView().getZip(), batchView.getBranchOfficeView().getCity(),
