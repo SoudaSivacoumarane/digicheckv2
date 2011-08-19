@@ -57,22 +57,21 @@ public class BatchManagedBean implements Serializable {
 	public String searchByCriteria(){
 		if(this.getReference().equals("")){
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Ingrese una referencia", "Ingrese una referencia");
-		}
-		if(this.getDate().equals("")){
+		}else if(this.getDate().equals("")){
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Ingrese una fecha", "Ingrese una fecha");
-		}
-		if(this.branchOfficeId.equals("-1")){
+		}else if(this.branchOfficeId.equals("-1")){
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Seleccione al menos una Sucursal", "Seleccione al menos una Sucursal");
-		}
-		try {
-			batchViewList = batchService.searchBatchEntity(reference, date, Integer.parseInt(branchOfficeId));
-			if(batchViewList != null){
-				this.renderTable = Boolean.TRUE;
-			}else{
-				JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "No se encontraron resultados.", "No se encontraron resultados.");
+		}else{
+			try {
+				batchViewList = batchService.searchBatchEntity(reference, date, Integer.parseInt(branchOfficeId));
+				if(batchViewList != null){
+					this.renderTable = Boolean.TRUE;
+				}else{
+					JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "No se encontraron resultados.", "No se encontraron resultados.");
+				}
+			} catch (BatchException e) {			
+				logger.error(e.getMessage());			
 			}
-		} catch (BatchException e) {			
-			logger.error(e.getMessage());			
 		}					
 		return null;
 	}
@@ -94,7 +93,7 @@ public class BatchManagedBean implements Serializable {
 			this.batchView.setBankView(this.bankService.getBankEntityById(3));
 			this.batchView.setCurrencyView(this.currencyService.getCurrencyById(10));
 			this.batchService.insertBatch(batchView);
-			JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "El lote se ha guardado exitosamente.", "El lote se ha guardado exitosamente.");
+			JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "El Lote se ha guardado exitosamente.", "El lote se ha guardado exitosamente.");
 		} catch (BatchException e) {		
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());
 		} catch (CurrencyException e) {
@@ -102,6 +101,10 @@ public class BatchManagedBean implements Serializable {
 		} catch (BankException e) {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());
 		}		
+	}
+	
+	public void back(){
+		JSFUtil.redirect("cheques.xhtml");
 	}
 	
 	public void cleanValues(){
