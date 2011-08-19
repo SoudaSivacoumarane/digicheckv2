@@ -9,7 +9,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 
 import org.apache.log4j.Logger;
 
@@ -24,7 +23,6 @@ import com.sterling.digicheck.branchoffice.service.BranchOfficeService;
 import com.sterling.digicheck.branchoffice.view.BranchOfficeView;
 import com.sterling.digicheck.currency.exception.CurrencyException;
 import com.sterling.digicheck.currency.service.CurrencyService;
-import com.sterling.digicheck.currency.view.CurrencyView;
 import com.sterling.digicheck.user.view.UserView;
 
 @ManagedBean(name="batchManagedBean")
