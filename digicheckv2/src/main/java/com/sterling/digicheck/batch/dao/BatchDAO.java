@@ -24,15 +24,14 @@ public class BatchDAO extends GenericDAO {
 	public List<BatchEntity> searchBatchEntity(String reference, Date date, Integer branchOfficeId) throws BatchException{
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
         SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
-        formatter.setTimeZone(TimeZone.getDefault());
+        //formatter.setTimeZone(TimeZone.getDefault());
         List<BatchEntity> batchEntityList = null;
         Date afterTime = new Date();
         Date beforeTime = new Date();
         String before = formatter1.format(date);
         String after = formatter1.format(date);
         Query query = null;   
-        try{   
-            //SELECT l FROM BatchEntity l WHERE UPPER(l.reference) LIKE :reference AND l.branchOfficeId.sucId = :sucId AND l.batchDate BETWEEN :beforeDate AND :afterDate
+        try{            
             afterTime = formatter.parse(after + " 23:59:59");
             beforeTime = formatter.parse(before + " 0:00:00");                       
             query = em.createNamedQuery("BatchEntity.findBySearchCriteria");
