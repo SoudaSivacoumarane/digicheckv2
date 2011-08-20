@@ -59,8 +59,16 @@
                     		<h:outputLabel value="Importe $" style="font-weight: bold"/>
                     		<h:inputText value="#{batchManagedBean.batchView.batchAmount}" required="true" requiredMessage="Ingrese un Importe." styleClass="columnanumero" onfocus="this.select();" onkeydown="return (numeric(event, 1) &amp;&amp; noPaste(event, this));" onkeyup="extractNumber(this,2,false);">
                     			<f:convertNumber currencySymbol="$" pattern="#,###,##0.00"/>
-                    		</h:inputText>		       
-                    				       
+                    		</h:inputText>
+                    		<f:facet name="footer">
+                    			<div style="text-align: left;">
+		                    		<h:outputLabel value="Divisa" style="font-weight: bold" required="true" requiredMessage="Seleccione una divisa." />
+		                    		<h:selectOneMenu id="divisas" value="#{batchManagedBean.currencySelected}" style="width:100px;" >
+										<f:selectItem itemValue="-1" itemLabel="Seleccione una Divisa"/>
+										<f:selectItems value="#{batchManagedBean.currencyItems}" />
+									</h:selectOneMenu>
+								</div>		
+							</f:facet>                           				       
 						</h:panelGrid>
 						<br />
 						<div style="text-align: right;">
