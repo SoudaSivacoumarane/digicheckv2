@@ -25,7 +25,7 @@
 		onstop="#{rich:component('statPane')}.hide()" />
 	
 	<h:form id="form">
-		<rich:dataTable value="#{branchOfficeManagedbean.branchOfficeList}" var="row" id="table" rows="10">		
+		<rich:dataTable value="#{branchOfficeManagedbean.branchOfficeList}" rowClasses="odd, even" var="row" id="table" rows="10">		
 			<rich:column>
 				<f:facet name="header">
 					<a4j:commandLink styleClass="no-decor" execute="@this" render="@none" oncomplete="#{rich:component('newPane')}.show()">

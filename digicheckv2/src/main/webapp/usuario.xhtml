@@ -29,7 +29,7 @@
 		onstop="#{rich:component('statPane')}.hide()" />
 			
 	<h:form id="form">
-		<rich:dataTable value="#{userManagedBean.userViewList}" var="row" id="table" rows="10" style="width: 30%">		
+		<rich:dataTable value="#{userManagedBean.userViewList}" var="row" id="table" rows="10" rowClasses="odd, even" style="width: 30%">		
 			<rich:column>
 				<f:facet name="header">
 					<a4j:commandLink rendered="#{userManagedBean.addUser}" styleClass="no-decor" execute="@this" render="addGrid,addPermissionGrid" oncomplete="#{rich:component('addPane')}.show()">
