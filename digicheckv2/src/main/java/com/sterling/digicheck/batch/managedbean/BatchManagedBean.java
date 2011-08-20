@@ -9,6 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.model.SelectItem;
 
 import org.apache.log4j.Logger;
 
@@ -23,6 +24,7 @@ import com.sterling.digicheck.branchoffice.service.BranchOfficeService;
 import com.sterling.digicheck.branchoffice.view.BranchOfficeView;
 import com.sterling.digicheck.currency.exception.CurrencyException;
 import com.sterling.digicheck.currency.service.CurrencyService;
+import com.sterling.digicheck.currency.view.CurrencyView;
 import com.sterling.digicheck.user.view.UserView;
 
 @ManagedBean(name="batchManagedBean")
@@ -51,6 +53,7 @@ public class BatchManagedBean implements Serializable {
 	private BranchOfficeView branchOfficeView = new BranchOfficeView();
 	private BatchView batchView = new BatchView();
 	private UserView userView = new UserView();
+	private String currencySelected;
 	
 	public String searchByCriteria(){
 		if(this.getReference().equals("")){
@@ -65,6 +68,7 @@ public class BatchManagedBean implements Serializable {
 				if(batchViewList != null){
 					this.renderTable = Boolean.TRUE;
 				}else{
+					this.renderTable = Boolean.FALSE;
 					JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "No se encontraron resultados.", "No se encontraron resultados.");
 				}
 			} catch (BatchException e) {			
@@ -117,6 +121,22 @@ public class BatchManagedBean implements Serializable {
 		this.batchView = new BatchView();
 	}
 		
+	public List<SelectItem> getCurrencyItems(){
+		List<SelectItem> currencyList = null;
+		SelectItem selectItem = null;		
+		try {
+			currencyList = new ArrayList<SelectItem>(0);
+			for(CurrencyView cv : this.currencyService.getAllCurrencys()){
+				selectItem = new SelectItem();
+				selectItem.setLabel(cv.getName());
+				selectItem.setValue(cv.getCurrencyId());
+				currencyList.add(selectItem);
+			}
+		} catch (CurrencyException e) {
+			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());
+		}
+		return currencyList;
+	}
 	
 	public String getReference() {
 		return reference;
@@ -184,5 +204,10 @@ public class BatchManagedBean implements Serializable {
 	public void setBankService(BankService bankService) {
 		this.bankService = bankService;
 	}
-
+	public String getCurrencySelected() {
+		return currencySelected;
+	}
+	public void setCurrencySelected(String currencySelected) {
+		this.currencySelected = currencySelected;
+	}	
 }
