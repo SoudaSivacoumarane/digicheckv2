@@ -70,15 +70,7 @@
 				<h:outputText value="#{row.batchDateAdded}">
 					<f:convertDateTime pattern="dd/MM/yyyy"/>
 				</h:outputText>
-			</rich:column>													
-			<rich:column>
-				<f:facet name="header">ABBA</f:facet>
-				<h:outputText value="#{row.bankView.aba}" />
-			</rich:column>	
-			<rich:column>
-				<f:facet name="header">Descripcion</f:facet>
-				<h:outputText value="#{row.bankView.description}" />
-			</rich:column>	
+			</rich:column>			
 			<rich:column>
 				<f:facet name="header">Divisa</f:facet>
 				<h:outputText value="#{row.currencyView.name}" />
