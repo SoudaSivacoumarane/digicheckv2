@@ -19,7 +19,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.sterling.digicheck.bank.dao.BankDAO;
-import com.sterling.digicheck.bank.exception.BankException;
 import com.sterling.digicheck.batch.dao.BatchDAO;
 import com.sterling.digicheck.batch.entity.BatchEntity;
 import com.sterling.digicheck.batch.exception.BatchException;
@@ -65,10 +64,7 @@ public class BatchTest extends AbstractTestNGSpringContextTests {
 		batchEntity.setBatchDate(new Date());
 		batchEntity.setBatchDateAdded(new Date());
 		batchEntity.setBatchDocuments(10);
-		batchEntity.setLotReference("Ref1");
-		try {
-			batchEntity.setBankId(bankDAO.getBankEntityById(3));
-		} catch (BankException e) {	e.printStackTrace();}
+		batchEntity.setLotReference("Ref1");		
 		try {
 			batchEntity.setBranchOfficeId(branchOfficeDAO.getBranchOfficeById(1));
 		} catch (BranchOfficeException e1) {e1.printStackTrace();}				
@@ -103,8 +99,7 @@ public class BatchTest extends AbstractTestNGSpringContextTests {
 		try {
 			batList = batchDAO.searchBatchEntity("12345", currentTime, 1);
 			for(BatchEntity b : batList){
-				System.out.println(b.getReference());
-				System.out.println(b.getBankId().getDescription());
+				System.out.println(b.getReference());				
 				System.out.println(b.getBatchDateAdded());
 				System.out.println(b.getBatchDocuments());
 			}

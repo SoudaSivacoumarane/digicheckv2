@@ -62,9 +62,7 @@ public class CurrencyConverter {
 				entity.setCurrencyId(Integer.parseInt(view.getCurrencyId()));
 			}
 			entity.setCode(view.getCode());			
-			entity.setName(view.getName());
-			byte[] b = new byte [0];
-			entity.setImage(b);
+			entity.setName(view.getName());			
 		}catch (Exception exception){
 			CurrencyException currencyException = null;
 			currencyException = new CurrencyException(exception, CurrencyException.LAYER_CONVERTER, CurrencyException.ACTION_SELECT);

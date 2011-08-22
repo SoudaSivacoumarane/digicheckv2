@@ -3,7 +3,6 @@ package com.sterling.digicheck.branchoffice.managedbean;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -11,7 +10,6 @@ import javax.faces.model.SelectItem;
 
 import org.apache.log4j.Logger;
 
-import com.sterling.common.util.JSFUtil;
 import com.sterling.digicheck.branchoffice.exception.BranchOfficeException;
 import com.sterling.digicheck.branchoffice.service.BranchOfficeService;
 import com.sterling.digicheck.branchoffice.view.BranchOfficeView;

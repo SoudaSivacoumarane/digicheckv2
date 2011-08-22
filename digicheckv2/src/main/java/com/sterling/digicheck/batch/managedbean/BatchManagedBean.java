@@ -14,8 +14,6 @@ import javax.faces.model.SelectItem;
 import org.apache.log4j.Logger;
 
 import com.sterling.common.util.JSFUtil;
-import com.sterling.digicheck.bank.exception.BankException;
-import com.sterling.digicheck.bank.service.BankService;
 import com.sterling.digicheck.batch.exception.BatchException;
 import com.sterling.digicheck.batch.service.BatchService;
 import com.sterling.digicheck.batch.view.BatchView;
@@ -41,9 +39,7 @@ public class BatchManagedBean implements Serializable {
 	@ManagedProperty("#{branchOfficeService}")
 	private BranchOfficeService branchOfficeService;
 	@ManagedProperty("#{currencyService}")
-	private CurrencyService currencyService;
-	@ManagedProperty("#{bankService}")
-	private BankService bankService;
+	private CurrencyService currencyService;	
 	private String reference;
 	private Date date = new Date();
 	private String branchOfficeId;
@@ -91,17 +87,14 @@ public class BatchManagedBean implements Serializable {
 	}
 	
 	public void insertBatch(){
-		try {
-			this.batchView.setBankView(this.bankService.getBankEntityById(3));
-			this.batchView.setCurrencyView(this.currencyService.getCurrencyById(10));
+		try {			
+			this.batchView.setCurrencyView(this.currencyService.getCurrencyById(Integer.parseInt(currencySelected)));
 			this.batchService.insertBatch(batchView);
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "El Lote se ha guardado exitosamente.", "El lote se ha guardado exitosamente.");
 		} catch (BatchException e) {		
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());
 		} catch (CurrencyException e) {
-			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());
-		} catch (BankException e) {
-			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());
+			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());		
 		}		
 	}
 	
@@ -200,10 +193,7 @@ public class BatchManagedBean implements Serializable {
 	}
 	public void setCurrencyService(CurrencyService currencyService) {
 		this.currencyService = currencyService;
-	}
-	public void setBankService(BankService bankService) {
-		this.bankService = bankService;
-	}
+	}	
 	public String getCurrencySelected() {
 		return currencySelected;
 	}

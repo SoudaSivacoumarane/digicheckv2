@@ -13,13 +13,14 @@
       <class>com.sterling.digicheck.user.permission.pk.UserPermissionPK</class>
       <class>com.sterling.digicheck.batch.entity.BatchEntity</class>
       <class>com.sterling.digicheck.document.entity.DocumentEntity</class>
-      <class>com.sterling.digicheck.documenttype.entity.DocumentTypeEntity</class>             
+      <class>com.sterling.digicheck.documenttype.entity.DocumentTypeEntity</class>
+      <class>com.sterling.digicheck.check.entity.CheckEntity</class>             
       <properties>        
       	<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
       	<property name="hibernate.connection.url" value="${jdbc.url}"/>
       	<property name="hibernate.connection.username" value="${jdbc.username}"/>
       	<property name="hibernate.connection.password" value="${jdbc.password}"/> 
-      	<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>      	
+      	<property name="hibernate.dialect" value="com.sterling.common.mysql.MSSqlDialect"/>     	
       	<property name="hibernate.show_sql" value="true" />
       	<property name="use_sql_comments" value="false"/>      	
       </properties>

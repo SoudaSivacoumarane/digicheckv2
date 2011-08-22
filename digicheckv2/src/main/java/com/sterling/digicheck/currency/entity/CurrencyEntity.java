@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -24,10 +23,7 @@ public class CurrencyEntity implements Serializable {
 	@Column(name = "DIV_CODIGO")
 	private String code;
 	@Column(name = "DIV_NOMBRE")
-	private String name;
-	@Lob
-	@Column(name = "DIV_IMAGEN")
-	private byte[] image;
+	private String name;	
 	
 	public CurrencyEntity() {
 
@@ -61,14 +57,6 @@ public class CurrencyEntity implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public byte[] getImage() {
-		return image;
-	}
-
-	public void setImage(byte[] image) {
-		this.image = image;
 	}
 
 }

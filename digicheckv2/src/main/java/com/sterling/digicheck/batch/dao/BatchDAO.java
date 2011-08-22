@@ -3,7 +3,6 @@ package com.sterling.digicheck.batch.dao;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 import javax.persistence.Query;
 import javax.persistence.TemporalType;

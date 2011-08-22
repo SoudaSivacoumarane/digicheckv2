@@ -2,8 +2,8 @@ package com.sterling.digicheck.batch.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -22,10 +22,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.sterling.digicheck.bank.entity.BankEntity;
 import com.sterling.digicheck.branchoffice.entity.BranchOfficeEntity;
+import com.sterling.digicheck.check.entity.CheckEntity;
 import com.sterling.digicheck.currency.entity.CurrencyEntity;
-import com.sterling.digicheck.document.entity.DocumentEntity;
 import com.sterling.digicheck.user.entity.UserEntity;
 
 @Entity
@@ -64,12 +63,9 @@ public class BatchEntity implements Serializable {
     @Basic(optional = false)
     @Column(name = "LOT_FECHA_ALTA")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date batchDateAdded;        
+    private Date batchDateAdded;                
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "batch")
-    private Collection<DocumentEntity> documentEntityCollection;        
-    @JoinColumn(name = "BAN_ID", referencedColumnName = "BAN_ID")
-    @ManyToOne(optional = false)    
-    private BankEntity bankId;        
+    private List<CheckEntity> checkEntityCollection;    
     @JoinColumn(name = "DIV_ID", referencedColumnName = "DIV_ID")
     @ManyToOne(optional = false)
     private CurrencyEntity currencyId;    
@@ -121,19 +117,15 @@ public class BatchEntity implements Serializable {
 	}
 	public void setBatchDateAdded(Date batchDateAdded) {
 		this.batchDateAdded = batchDateAdded;
+	}	
+	public List<CheckEntity> getCheckEntityCollection() {
+		return checkEntityCollection;
 	}
-	public Collection<DocumentEntity> getDocumentEntityCollection() {
-		return documentEntityCollection;
+	public void setCheckEntityCollection(List<CheckEntity> checkEntityCollection) {
+		this.checkEntityCollection = checkEntityCollection;
 	}
-	public void setDocumentEntityCollection(
-			Collection<DocumentEntity> documentEntityCollection) {
-		this.documentEntityCollection = documentEntityCollection;
-	}
-	public BankEntity getBankId() {
-		return bankId;
-	}
-	public void setBankId(BankEntity bankId) {
-		this.bankId = bankId;
+	public void setReference(String reference) {
+		this.reference = reference;
 	}
 	public CurrencyEntity getCurrencyId() {
 		return currencyId;
@@ -152,17 +144,15 @@ public class BatchEntity implements Serializable {
 	}
 	public void setUserLogin(UserEntity userLogin) {
 		this.userLogin = userLogin;
-	}
-    
+	}    
 	@Override
     public int hashCode() {
         int hash = 0;
         hash += (batchId != null ? batchId.hashCode() : 0);
         return hash;
     }
-
     @Override
-    public boolean equals(Object object) {        // 
+    public boolean equals(Object object) {
         if (!(object instanceof BatchEntity)) {
             return false;
         }
