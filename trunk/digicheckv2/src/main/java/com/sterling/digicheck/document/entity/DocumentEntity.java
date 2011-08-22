@@ -13,7 +13,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import com.sterling.digicheck.batch.entity.BatchEntity;
+import com.sterling.digicheck.check.entity.CheckEntity;
 import com.sterling.digicheck.documenttype.entity.DocumentTypeEntity;
 
 @Entity
@@ -37,9 +37,9 @@ public class DocumentEntity implements Serializable{
     @Lob
     @Column(name = "DOC_ARCHIVO")
     private byte[] docFile;
-    @JoinColumn(name = "LOT_ID", referencedColumnName = "LOT_ID")
+    @JoinColumn(name = "CHQ_ID", referencedColumnName = "CHQ_ID")
     @ManyToOne(optional = false)
-    private BatchEntity batch;
+    private CheckEntity checkEntity;
     @JoinColumn(name = "DOT_ID", referencedColumnName = "DOT_ID")
     @ManyToOne
     private DocumentTypeEntity documentType;       
@@ -61,12 +61,12 @@ public class DocumentEntity implements Serializable{
 	}
 	public void setDocFile(byte[] docFile) {
 		this.docFile = docFile;
+	}	
+	public CheckEntity getCheckEntity() {
+		return checkEntity;
 	}
-	public BatchEntity getBatch() {
-		return batch;
-	}
-	public void setBatch(BatchEntity batch) {
-		this.batch = batch;
+	public void setCheckEntity(CheckEntity checkEntity) {
+		this.checkEntity = checkEntity;
 	}
 	public DocumentTypeEntity getDocumentType() {
 		return documentType;

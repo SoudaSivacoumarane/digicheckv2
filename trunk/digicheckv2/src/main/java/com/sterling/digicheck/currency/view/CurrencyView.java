@@ -8,17 +8,15 @@ public class CurrencyView implements Serializable {
 	private String currencyId;
 	private String code;
 	private String name;
-	private String image;
 
 	public CurrencyView() {
 		
 	}	
 	
-	public CurrencyView(String nBankId, String nCode, String nName, String nImage) {
+	public CurrencyView(String nBankId, String nCode, String nName) {
 		currencyId = nBankId;
 		code = nCode;
-		name= nName;
-		image = nImage;
+		name= nName;		
 	}
 	
 
@@ -43,14 +41,6 @@ public class CurrencyView implements Serializable {
 
 	public void setCode(String code) {
 		this.code = code;
-	}
-
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
 	}
 
 	@Override

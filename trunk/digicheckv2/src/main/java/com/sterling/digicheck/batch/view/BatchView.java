@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import com.sterling.digicheck.bank.view.BankView;
 import com.sterling.digicheck.branchoffice.view.BranchOfficeView;
 import com.sterling.digicheck.currency.view.CurrencyView;
 import com.sterling.digicheck.document.view.DocumentView;
@@ -22,8 +21,7 @@ public class BatchView implements Serializable {
     private BigDecimal batchAmount = new BigDecimal(0);           	    
     private Integer batchDocuments = new Integer(0);        	    
     private Date batchDate;        	    
-    private Date batchDateAdded;
-	private BankView bankView = new BankView();
+    private Date batchDateAdded;	
 	private CurrencyView currencyView = new CurrencyView();
 	private BranchOfficeView branchOfficeView = new BranchOfficeView();
 	private List<DocumentView> documentViewList;
@@ -64,13 +62,7 @@ public class BatchView implements Serializable {
 	}
 	public void setBatchDateAdded(Date batchDateAdded) {
 		this.batchDateAdded = batchDateAdded;
-	}
-	public BankView getBankView() {
-		return bankView;
-	}
-	public void setBankView(BankView bankView) {
-		this.bankView = bankView;
-	}
+	}	
 	public CurrencyView getCurrencyView() {
 		return currencyView;
 	}

@@ -21,9 +21,9 @@ public class BankEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "BAN_ID")
 	private Integer bankId;
-	@Column(name = "ABA")
+	@Column(name = "BAN_ABBA")
 	private String aba;
-	@Column(name = "DESCRIPCION")
+	@Column(name = "BAN_DESCRIPCION")
 	private String description;
 	
 	public BankEntity() {

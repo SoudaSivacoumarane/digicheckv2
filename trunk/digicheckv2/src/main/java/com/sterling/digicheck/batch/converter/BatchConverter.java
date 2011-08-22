@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.sterling.digicheck.bank.entity.BankEntity;
-import com.sterling.digicheck.bank.view.BankView;
 import com.sterling.digicheck.batch.entity.BatchEntity;
 import com.sterling.digicheck.batch.exception.BatchException;
 import com.sterling.digicheck.batch.view.BatchView;
@@ -42,9 +40,8 @@ public class BatchConverter {
 			batchView.setBatchDate(batchEntity.getBatchDate());
 			batchView.setBatchDateAdded(batchEntity.getBatchDateAdded());
 			batchView.setBatchDocuments(batchEntity.getBatchDocuments());
-			batchView.setReference(batchEntity.getReference());			
-			batchView.setBankView(new BankView(batchEntity.getBankId().getBankId().toString(), batchEntity.getBankId().getAba(), batchEntity.getBankId().getDescription()));
-			batchView.setCurrencyView(new CurrencyView(batchEntity.getCurrencyId().getCurrencyId().toString(), batchEntity.getCurrencyId().getCode(), batchEntity.getCurrencyId().getName(), ""));						
+			batchView.setReference(batchEntity.getReference());						
+			batchView.setCurrencyView(new CurrencyView(batchEntity.getCurrencyId().getCurrencyId().toString(), batchEntity.getCurrencyId().getCode(), batchEntity.getCurrencyId().getName()));						
 			batchView.setUserView(new UserView(String.valueOf(batchEntity.getUserLogin().getSucursalId()), batchEntity.getUserLogin().getLogin(), batchEntity.getUserLogin().getNombre(), batchEntity.getUserLogin().getPassword()));			
 			batchView.setBranchOfficeView(new BranchOfficeView(batchEntity.getBranchOfficeId().getSucId().toString(), batchEntity.getBranchOfficeId().getName(), batchEntity.getBranchOfficeId().getAddress(), batchEntity.getBranchOfficeId().getCommunity(), batchEntity.getBranchOfficeId().getZip(), 
 							new StateView(batchEntity.getBranchOfficeId().getStateEntity().getCode(), batchEntity.getBranchOfficeId().getStateEntity().getName()), batchEntity.getBranchOfficeId().getCity()));								
@@ -73,7 +70,6 @@ public class BatchConverter {
 			batchEntity.setBatchDateAdded(batchView.getBatchDateAdded());
 			batchEntity.setBatchDocuments(batchView.getBatchDocuments());
 			batchEntity.setLotReference(batchView.getReference());			
-			batchEntity.setBankId(new BankEntity(Integer.parseInt(batchView.getBankView().getBankId()), batchView.getBankView().getAba(), batchView.getBankView().getDescription()));			
 			batchEntity.setCurrencyId(new CurrencyEntity(Integer.parseInt(batchView.getCurrencyView().getCurrencyId()), batchView.getCurrencyView().getCode(), batchView.getCurrencyView().getName()));
 			batchEntity.setUserLogin(new UserEntity(batchView.getUserView().getLogin(), batchView.getUserView().getPassword(), batchView.getUserView().getName(), Integer.parseInt(batchView.getUserView().getSucursalId())));			
 			batchEntity.setBranchOfficeId(new BranchOfficeEntity(Integer.parseInt(batchView.getBranchOfficeView().getSucId()), batchView.getBranchOfficeView().getName(), batchView.getBranchOfficeView().getAddress(), batchView.getBranchOfficeView().getCommunity(), batchView.getBranchOfficeView().getZip(), batchView.getBranchOfficeView().getCity(),
