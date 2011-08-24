@@ -27,22 +27,45 @@
     <div align="center"> 
     	<h:form id="formBatch">
 	    <h:panelGroup id="panel_tabla_lote_busqueda">	    		   			
-   				<rich:panel header="Buscar Cheques" style="width: 750px;">
-   					 <h:panelGrid columns="7">
-   					 		<h:outputLabel style="font-weight: bold" value="Referencia: " />
-   					 		<h:inputText value="#{batchManagedBean.reference}" required="true" requiredMessage="Ingrese una Referencia" />
-                        	<h:outputLabel value="Fecha : " style="font-weight: bold"/>
-                            <rich:calendar id="calendar" cellWidth="24px" datePattern="dd/MM/yyyy" value="#{batchManagedBean.date}"
-                    				       cellHeight="22px" style="width:100px">
-							</rich:calendar>
-                            <h:outputLabel value="Sucursal : "  style="font-weight: bold"/>
-		                    <h:selectOneMenu id="sucursales" style="width: 200px" value="#{batchManagedBean.branchOfficeId}">
-		                    	<f:selectItem itemValue="-1" itemLabel="Seleccione una Sucursal"/>			                    	
-								<f:selectItems value="#{dailyReportManagedBean.branchOfficeItems}" />
-							</h:selectOneMenu>			  
-							<h:commandButton value="Buscar" action="#{batchManagedBean.searchByCriteria}">
-							</h:commandButton>                  		                    
+   				<rich:panel header="Buscar Cheques" style="width: 600px;">
+   					<h:panelGrid columns="2">
+   						<h:panelGroup>
+   							<h:commandLink styleClass="no-decor" action="#{batchManagedBean.goDigitalization}" immediate="true">
+								<h:graphicImage value="resources/images/scanner.png" alt="Digitalizaci&oacute;n de Documentos" />						
+							</h:commandLink>
+							<h:outputLabel value="Digitalizar" style="font-weight: bold"/>
+   						</h:panelGroup>
+   						
+   						<h:panelGrid columns="4">   					 									
+   					 		<h:panelGroup>
+   					 			<h:outputLabel style="font-weight: bold" value="Referencia: " />
+   					 			<h:inputText value="#{batchManagedBean.reference}" required="true" requiredMessage="Ingrese una Referencia" />
+                        	</h:panelGroup>
+                        	
+                        	<h:panelGroup>
+	                        	<h:outputLabel value="Fecha : " style="font-weight: bold"/>
+	                            <rich:calendar id="calendar" cellWidth="24px" datePattern="dd/MM/yyyy" value="#{batchManagedBean.date}"
+	                    				       cellHeight="22px" style="width:100px">
+								</rich:calendar>
+							</h:panelGroup>
+							
+							<h:panelGroup>
+	                            <h:outputLabel value="Sucursal : "  style="font-weight: bold"/>
+			                    <h:selectOneMenu id="sucursales" style="width: 200px" value="#{batchManagedBean.branchOfficeId}">
+			                    	<f:selectItem itemValue="-1" itemLabel="Seleccione una Sucursal"/>			                    	
+									<f:selectItems value="#{dailyReportManagedBean.branchOfficeItems}" />
+								</h:selectOneMenu>			  															
+							</h:panelGroup>
+							
+							<f:facet name="footer">
+								<div style="text-align: right;">
+									<h:commandButton value="Buscar" action="#{batchManagedBean.searchByCriteria}" />
+								</div>
+							</f:facet>                  		                    
                         </h:panelGrid>
+   						
+   					
+   					</h:panelGrid>   					 
                         <br />
                         <div style="width: 200px;">
                         	<rich:messages />
