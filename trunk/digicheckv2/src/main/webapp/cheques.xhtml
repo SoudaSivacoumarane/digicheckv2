@@ -37,21 +37,21 @@
    						</h:panelGroup>
    						
    						<h:panelGrid columns="4">   					 									
-   					 		<h:panelGroup>
-   					 			<h:outputLabel style="font-weight: bold" value="Referencia: " />
+   					 		<h:panelGroup style="text-align: left;">
+   					 			<h:outputLabel style="font-weight: bold" value="Referencia: " /><br />
    					 			<h:inputText value="#{batchManagedBean.reference}" required="true" requiredMessage="Ingrese una Referencia" />
                         	</h:panelGroup>
                         	
-                        	<h:panelGroup>
-	                        	<h:outputLabel value="Fecha : " style="font-weight: bold"/>
+                        	<h:panelGroup style="text-align: left;">
+	                        	<h:outputLabel value="Fecha : " style="font-weight: bold"/><br />
 	                            <rich:calendar id="calendar" cellWidth="24px" datePattern="dd/MM/yyyy" value="#{batchManagedBean.date}"
 	                    				       cellHeight="22px" style="width:100px">
 								</rich:calendar>
 							</h:panelGroup>
 							
-							<h:panelGroup>
-	                            <h:outputLabel value="Sucursal : "  style="font-weight: bold"/>
-			                    <h:selectOneMenu id="sucursales" style="width: 200px" value="#{batchManagedBean.branchOfficeId}">
+							<h:panelGroup style="text-align: left;">
+	                            <h:outputLabel value="Sucursal : "  style="font-weight: bold"/><br />
+			                    <h:selectOneMenu id="sucursales" style="width: 200px" value="#{batchManagedBean.branchOfficeId}" disabled="#{batchManagedBean.branchOfficeAllowed}">
 			                    	<f:selectItem itemValue="-1" itemLabel="Seleccione una Sucursal"/>			                    	
 									<f:selectItems value="#{dailyReportManagedBean.branchOfficeItems}" />
 								</h:selectOneMenu>			  															

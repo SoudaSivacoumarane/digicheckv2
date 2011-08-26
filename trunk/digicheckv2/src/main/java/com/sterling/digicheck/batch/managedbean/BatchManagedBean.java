@@ -23,6 +23,8 @@ import com.sterling.digicheck.branchoffice.view.BranchOfficeView;
 import com.sterling.digicheck.currency.exception.CurrencyException;
 import com.sterling.digicheck.currency.service.CurrencyService;
 import com.sterling.digicheck.currency.view.CurrencyView;
+import com.sterling.digicheck.security.service.SecurityAuthorizationService;
+import com.sterling.digicheck.user.exception.UserException;
 import com.sterling.digicheck.user.view.UserView;
 
 @ManagedBean(name="batchManagedBean")
@@ -40,6 +42,8 @@ public class BatchManagedBean implements Serializable {
 	private BranchOfficeService branchOfficeService;
 	@ManagedProperty("#{currencyService}")
 	private CurrencyService currencyService;	
+	@ManagedProperty("#{securityAuthorizationService}")
+	SecurityAuthorizationService securityAuthorizationService;
 	private String reference;
 	private Date date = new Date();
 	private String branchOfficeId;
@@ -49,7 +53,7 @@ public class BatchManagedBean implements Serializable {
 	private BranchOfficeView branchOfficeView = new BranchOfficeView();
 	private BatchView batchView = new BatchView();
 	private UserView userView = new UserView();
-	private String currencySelected;
+	private String currencySelected;	
 	
 	public String searchByCriteria(){
 		if(this.getReference().equals("")){
@@ -57,7 +61,7 @@ public class BatchManagedBean implements Serializable {
 		}else if(this.getDate().equals("")){
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Ingrese una fecha", "Ingrese una fecha");
 		}else if(this.branchOfficeId.equals("-1")){
-			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Seleccione al menos una Sucursal", "Seleccione al menos una Sucursal");
+			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Seleccione al menos una Sucursal", "Seleccione una Sucursal");
 		}else{
 			try {
 				batchViewList = batchService.searchBatchEntity(reference, date, Integer.parseInt(branchOfficeId));
@@ -110,7 +114,7 @@ public class BatchManagedBean implements Serializable {
 		this.reference = "";
 		this.date = new Date();
 		this.renderTable = Boolean.FALSE;
-		this.branchOfficeId = "-1";
+		this.branchOfficeId = JSFUtil.getSessionAttribute(UserView.class, "user").getSucursalId();
 		this.batchView = new BatchView();
 	}
 		
@@ -129,6 +133,24 @@ public class BatchManagedBean implements Serializable {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());
 		}
 		return currencyList;
+	}
+	
+	public void validateForm(){
+		if(this.batchView.getReference() != null){
+			if(!this.batchView.getReference().equals("")){
+				JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Ingrese una referencia.", "Ingrese una Referencia.");
+			}
+		}
+	}
+	
+	public boolean isBranchOfficeAllowed(){
+		boolean branchofficeallowed = Boolean.FALSE;		
+		try {
+			branchofficeallowed = securityAuthorizationService.hasPermission("7", JSFUtil.getSessionAttribute(UserView.class, "user").getLogin());
+		} catch (UserException userException) {
+			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, userException.getMessage(), userException.getMessage());
+		}
+		return !branchofficeallowed;
 	}
 	
 	public String getReference() {
@@ -199,5 +221,9 @@ public class BatchManagedBean implements Serializable {
 	}
 	public void setCurrencySelected(String currencySelected) {
 		this.currencySelected = currencySelected;
-	}	
+	}
+	public void setSecurityAuthorizationService(
+			SecurityAuthorizationService securityAuthorizationService) {
+		this.securityAuthorizationService = securityAuthorizationService;
+	}		
 }

@@ -13,6 +13,39 @@
     </ui:define>
     
     <ui:define name="content">
+    <h:outputScript>
+    	function validate(){    		
+    	 	var errors = "";
+    	 	var calendar = document.getElementById("formDigitalization:calendarInputDate").value;
+    	 	var referenciaId = document.getElementById("formDigitalization:referenciaId").value;    	 	
+    	 	var numDocumentosId = document.getElementById("formDigitalization:numDocumentosId").value;
+    	 	var importeId = document.getElementById("formDigitalization:importeId").value;
+    	 	var divisaId = document.getElementById("formDigitalization:divisaId").value;
+    	 	
+    	 	if(calendar == ""){
+    	 		errors = "Ingrese una fecha.\n";
+    	 	} 
+    	 	if(referenciaId == ""){
+    	 		errors += "Ingrese una referencia.\n";
+    	 	}  
+    	 	if(numDocumentosId == "" || parseInt( numDocumentosId ) == 0){
+    	 		errors += "Ingrese un n&uacute;mero de documentos.\n"
+    	 	}
+    	 	if(importeId == "" || parseInt( importeId ) ==0){
+    	 		errors += "Ingrese un importe.\n";
+    	 	} 
+    	 	if(divisaId == "-1"){
+    	 		errors += "Seleccione una divisa.\n"
+    	 	}
+    	 	if( errors == "" ){
+	            var dummy = window.open("agregar_cheque.xhtml","AddBatch","width=1200,height=700");
+	            return true;
+	        }else{
+	            alert( errors );
+				return false;
+	        }	    	 	    	    		
+    	}
+    </h:outputScript>
     <br />
     <br />
     <br />
@@ -51,18 +84,18 @@
                     		</rich:calendar>
                     		
                     		<h:outputLabel value="Referencia" style="font-weight: bold;"/>
-                    		<h:inputText value="#{batchManagedBean.batchView.reference}" required="true" requiredMessage="Ingrese una Referencia." onfocus="this.select();" maxlength="100" />
+                    		<h:inputText id="referenciaId" value="#{batchManagedBean.batchView.reference}" required="true" requiredMessage="Ingrese una Referencia." onfocus="this.select();" maxlength="100" />
                     		
                     		<h:outputLabel value="# Documentos" style="font-weight: bold;"/>
-                    		<h:inputText value="#{batchManagedBean.batchView.batchDocuments}" required="true" requiredMessage="Ingrese un numero de Documentos." styleClass="columnanumero" onfocus="this.select();" onkeydown="return (numeric(event, 0) &amp;&amp; noPaste(event, this));" onkeyup="extractNumber(this,0,false);" />
+                    		<h:inputText id="numDocumentosId" value="#{batchManagedBean.batchView.batchDocuments}" required="true" requiredMessage="Ingrese un numero de Documentos." styleClass="columnanumero" onfocus="this.select();" onkeydown="return (numeric(event, 0) &amp;&amp; noPaste(event, this));" onkeyup="extractNumber(this,0,false);" />
                     		
                     		<h:outputLabel value="Importe $" style="font-weight: bold"/>
-                    		<h:inputText value="#{batchManagedBean.batchView.batchAmount}" required="true" requiredMessage="Ingrese un Importe." styleClass="columnanumero" onfocus="this.select();" onkeydown="return (numeric(event, 1) &amp;&amp; noPaste(event, this));" onkeyup="extractNumber(this,2,false);">
+                    		<h:inputText id="importeId" value="#{batchManagedBean.batchView.batchAmount}" required="true" requiredMessage="Ingrese un Importe." styleClass="columnanumero" onfocus="this.select();" onkeydown="return (numeric(event, 1) &amp;&amp; noPaste(event, this));" onkeyup="extractNumber(this,2,false);">
                     			<f:convertNumber currencySymbol="$" pattern="#,###,##0.00"/>
                     		</h:inputText>
                     		
                   			<h:outputLabel value="Divisa" style="font-weight: bold" required="true" requiredMessage="Seleccione una divisa." />
-                    		<h:selectOneMenu id="divisas" value="#{batchManagedBean.currencySelected}" style="width:150px;" >
+                    		<h:selectOneMenu id="divisaId" value="#{batchManagedBean.currencySelected}" style="width:150px;" >
 								<f:selectItem itemValue="-1" itemLabel="Seleccione una Divisa"/>
 								<f:selectItems value="#{batchManagedBean.currencyItems}" />
 							</h:selectOneMenu>
@@ -71,7 +104,7 @@
 							<h:panelGroup>&nbsp;</h:panelGroup>                           				       
 						</h:panelGrid>						
 						<div style="text-align: left;">
-							<h:graphicImage alt="Digitalizar" value="resources/images/scanner.png" onclick="var dummy = window.open('agregar_cheque.xhtml','AddBatch','width=1200,height=700');"  />
+							<h:graphicImage alt="Digitalizar" value="resources/images/scanner.png" onclick="return validate();"  />
 							<h:outputLabel value="Digitalizar" style="font-weight: bold"/>
 						</div>						
 						<div style="text-align: right;">
