@@ -1,6 +1,10 @@
 package com.cpi.sterling.check.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.cpi.sterling.document.dto.DocumentDTO;
 
 public class CheckDTO implements Serializable {
 	/**
@@ -12,6 +16,7 @@ public class CheckDTO implements Serializable {
 	private String abba;
 	private String account;
 	private double amount;
+	private List<DocumentDTO> documentDTOList = new ArrayList<DocumentDTO>(0);
 	
 	public int getChqId() {
 		return chqId;
@@ -42,5 +47,11 @@ public class CheckDTO implements Serializable {
 	}
 	public void setAmount(double amount) {
 		this.amount = amount;
-	}		
+	}
+	public List<DocumentDTO> getDocumentDTOList() {
+		return documentDTOList;
+	}
+	public void setDocumentDTOList(List<DocumentDTO> documentDTOList) {
+		this.documentDTOList = documentDTOList;
+	}	
 }
