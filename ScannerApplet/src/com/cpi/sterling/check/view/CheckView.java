@@ -1,6 +1,9 @@
 package com.cpi.sterling.check.view;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.cpi.sterling.document.view.DocumentView;
 
 public class CheckView implements Serializable{
 	/**
@@ -12,6 +15,7 @@ public class CheckView implements Serializable{
 	private String abba;
 	private String account;
 	private double amount;
+	private List<DocumentView> documentList;
 	
 	public int getChqId() {
 		return chqId;
@@ -42,5 +46,12 @@ public class CheckView implements Serializable{
 	}
 	public void setAmount(double amount) {
 		this.amount = amount;
-	}	
+	}
+	public List<DocumentView> getDocumentList() {
+		return documentList;
+	}
+	public void setDocumentList(List<DocumentView> documentList) {
+		this.documentList = documentList;
+	}
+		
 }

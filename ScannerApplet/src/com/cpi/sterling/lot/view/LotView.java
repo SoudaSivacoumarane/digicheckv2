@@ -2,6 +2,9 @@ package com.cpi.sterling.lot.view;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
+
+import com.cpi.sterling.check.view.CheckView;
 
 public class LotView implements Serializable {
 	/**
@@ -17,7 +20,8 @@ public class LotView implements Serializable {
 	private int noDocs;
 	private String user;
 	private Date date;
-	
+	private List<CheckView> chekViewList;
+		
 	public int getId() {
 		return id;
 	}
@@ -65,5 +69,11 @@ public class LotView implements Serializable {
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	public List<CheckView> getChekViewList() {
+		return chekViewList;
+	}
+	public void setChekViewList(List<CheckView> chekViewList) {
+		this.chekViewList = chekViewList;
 	}		
 }
