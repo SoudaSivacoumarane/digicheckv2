@@ -107,8 +107,7 @@ public class BatchManagedBean implements Serializable {
 		this.branchOfficeView = new BranchOfficeView();
 		this.userView = new UserView();
 		this.page = 0;
-		this.reference = "";
-		this.date = new Date();
+		this.reference = "";		
 		this.renderTable = Boolean.FALSE;
 		this.branchOfficeId = JSFUtil.getSessionAttribute(UserView.class, "user").getSucursalId();
 		this.batchView = new BatchView();
