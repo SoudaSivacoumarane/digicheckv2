@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Data for connection pools
+-->
+<datasources>
+	<datasource name="digicheck">
+	    <driver>com.inet.tds.TdsDriver</driver>
+	    <url>jdbc:inetdae7:172.20.236.230:1999</url>
+	    <catalog>digicheck</catalog>
+	    <username>digicheck</username>
+	    <pass>digicheck</pass>
+	   	<maxIdle>10</maxIdle>
+	   	<maxActive>2</maxActive>
+	   	<maxWait>120</maxWait>
+	   	<defaultAutoCommit>true</defaultAutoCommit>
+	   	<poolPreparedStatements>true</poolPreparedStatements>
+	   	<maxOpenPreparedStatements>5</maxOpenPreparedStatements>
+	</datasource>
+</datasources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<digester-rules>
+	<pattern value="datasources/datasource">
+		<object-create-rule classname="com.cs.common.pool.beans.DataSourceBean" />
+		<set-next-rule methodname="add" paramtype="com.cs.common.pool.beans.DataSourceBean" />
+		<set-properties-rule />
+		<bean-property-setter-rule pattern="driver" />
+		<bean-property-setter-rule pattern="url" />
+		<bean-property-setter-rule pattern="username" />
+		<bean-property-setter-rule pattern="pass" />
+		<bean-property-setter-rule pattern="maxIdle" />
+		<bean-property-setter-rule pattern="maxActive" />
+		<bean-property-setter-rule pattern="maxWait" />
+		<bean-property-setter-rule pattern="defaultAutoCommit" />
+		<bean-property-setter-rule pattern="poolPreparedStatements" />
+		<bean-property-setter-rule pattern="maxOpenPreparedStatements" />
+		<bean-property-setter-rule pattern="catalog"/>
+	</pattern>
+</digester-rules>
