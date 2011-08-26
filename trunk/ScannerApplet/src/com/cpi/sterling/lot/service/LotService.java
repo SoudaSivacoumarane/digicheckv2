@@ -42,10 +42,10 @@ public class LotService {
 				checkDTOList = new ArrayList<CheckDTO>(0);
 				for(CheckView v : lotView.getChekViewList()){
 					v.setLotId(loteId);
-					for(DocumentView dv : v.getDocumentList()){
-						
-					}	
 					checkDTO = checkConverter.convertViewToDTO(v);
+					for(DocumentView dv : v.getDocumentList()){						
+					   checkDTO.getDocumentDTOList().add(documentConverter.convertViewToDTO(dv));	
+					}						
 					checkDTOList.add(checkDTO);
 				}
 				
