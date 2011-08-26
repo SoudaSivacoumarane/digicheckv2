@@ -23,21 +23,39 @@ public class BatchDAO extends GenericDAO {
 	public List<BatchEntity> searchBatchEntity(String reference, Date date, Integer branchOfficeId) throws BatchException{
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
         SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
-        //formatter.setTimeZone(TimeZone.getDefault());
+        StringBuilder sql = null;
         List<BatchEntity> batchEntityList = null;
         Date afterTime = new Date();
         Date beforeTime = new Date();
-        String before = formatter1.format(date);
-        String after = formatter1.format(date);
+        String before = null;
+        String after = null;
+        if(date != null){
+        	before = formatter1.format(date);
+        	after = formatter1.format(date);
+        }
         Query query = null;   
         try{            
-            afterTime = formatter.parse(after + " 23:59:59");
-            beforeTime = formatter.parse(before + " 0:00:00");                       
-            query = em.createNamedQuery("BatchEntity.findBySearchCriteria");
-            query.setParameter("reference", "%"+reference+"%".toUpperCase());           
+        	sql = new StringBuilder(0);
+        	if(date != null){
+        		afterTime = formatter.parse(after + " 23:59:59");
+            	beforeTime = formatter.parse(before + " 0:00:00");
+        	}
+            sql.append("SELECT l FROM BatchEntity l WHERE l.branchOfficeId.sucId = :sucId ");
+            if(!reference.equals("")){
+            	sql.append(" AND UPPER(l.reference) LIKE :reference ");
+            }
+            if(date != null){
+            	sql.append(" AND l.batchDate BETWEEN :beforeDate AND :afterDate ");
+            }
+            query = em.createQuery(sql.toString());
+            if(!reference.trim().equals("")){
+            	query.setParameter("reference", "%"+reference+"%".toUpperCase());
+            }
             query.setParameter("sucId", branchOfficeId);
-            query.setParameter("beforeDate", beforeTime, TemporalType.TIMESTAMP);
-            query.setParameter("afterDate", afterTime, TemporalType.TIMESTAMP);
+            if(date != null){
+            	query.setParameter("beforeDate", beforeTime, TemporalType.TIMESTAMP);
+            	query.setParameter("afterDate", afterTime, TemporalType.TIMESTAMP);
+            }
             batchEntityList = query.getResultList();           
         }catch (Exception exception){
             BatchException bankException = null;

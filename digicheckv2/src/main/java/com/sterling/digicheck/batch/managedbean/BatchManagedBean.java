@@ -45,7 +45,7 @@ public class BatchManagedBean implements Serializable {
 	@ManagedProperty("#{securityAuthorizationService}")
 	SecurityAuthorizationService securityAuthorizationService;
 	private String reference;
-	private Date date = new Date();
+	private Date date;
 	private String branchOfficeId;
 	private boolean renderTable = Boolean.FALSE;
 	private List<BatchView> batchViewList = null;
@@ -56,11 +56,7 @@ public class BatchManagedBean implements Serializable {
 	private String currencySelected;	
 	
 	public String searchByCriteria(){
-		if(this.getReference().equals("")){
-			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Ingrese una referencia", "Ingrese una referencia");
-		}else if(this.getDate().equals("")){
-			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Ingrese una fecha", "Ingrese una fecha");
-		}else if(this.branchOfficeId.equals("-1")){
+		if(this.branchOfficeId.equals("-1")){
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Seleccione al menos una Sucursal", "Seleccione una Sucursal");
 		}else{
 			try {
