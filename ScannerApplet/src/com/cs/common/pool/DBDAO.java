@@ -29,7 +29,7 @@ public class DBDAO {
 	/**
 	 * Nombre del <code>data source</code> dónde se van a realizar las conexiónes
 	 */
-	protected static final String dsName 	= "cornpp";//$NON-NLS-1$
+	protected static final String dsName = "digicheck";//$NON-NLS-1$
 	/**
 	 * Instrucción <code>SQL</code> de inicio para extraer sólo aquellos registros que cumplan con cierta condición
 	 */
