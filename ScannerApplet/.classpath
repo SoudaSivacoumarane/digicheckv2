@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/ScannerScreen/web/libs/morena_license.jar"/>
+	<classpathentry kind="lib" path="/ScannerScreen/web/libs/morena_osx.jar"/>
+	<classpathentry kind="lib" path="/ScannerScreen/web/libs/morena_windows.jar"/>
+	<classpathentry kind="lib" path="/ScannerScreen/web/libs/morena.jar"/>
+	<classpathentry kind="lib" path="/ScannerScreen/web/libs/datasource/commons-dbcp.jar"/>
+	<classpathentry kind="lib" path="/ScannerScreen/web/libs/datasource/commons-pool.jar"/>
+	<classpathentry kind="lib" path="/ScannerScreen/web/libs/datasource/Opta2000.jar"/>
+	<classpathentry kind="lib" path="/ScannerScreen/web/libs/datasource/commons-digester.jar" sourcepath="C:/Users/813504/.m2/repository/commons-digester/commons-digester/1.8/commons-digester-1.8-sources.jar"/>
+	<classpathentry kind="lib" path="/ScannerScreen/web/libs/datasource/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="/ScannerScreen/web/libs/datasource/commons-beanutils.jar"/>
+	<classpathentry kind="lib" path="/ScannerScreen/web/libs/datasource/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
