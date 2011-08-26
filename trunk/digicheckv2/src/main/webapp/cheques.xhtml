@@ -24,7 +24,7 @@
 	<a4j:status onstart="#{rich:component('statPane')}.show()"
 		onstop="#{rich:component('statPane')}.hide()" />
 		
-    <div align="center"> 
+    <div align="center">     
     	<h:form id="formBatch">
 	    <h:panelGroup id="panel_tabla_lote_busqueda">	    		   			
    				<rich:panel header="Buscar Cheques" style="width: 600px;">
@@ -39,18 +39,18 @@
    						<h:panelGrid columns="4">   					 									
    					 		<h:panelGroup style="text-align: left;">
    					 			<h:outputLabel style="font-weight: bold" value="Referencia: " /><br />
-   					 			<h:inputText value="#{batchManagedBean.reference}" required="true" requiredMessage="Ingrese una Referencia" />
+   					 			<h:inputText value="#{batchManagedBean.reference}" />
                         	</h:panelGroup>
                         	
                         	<h:panelGroup style="text-align: left;">
-	                        	<h:outputLabel value="Fecha : " style="font-weight: bold"/><br />
+	                        	<h:outputLabel value="Fecha: " style="font-weight: bold"/><br />
 	                            <rich:calendar id="calendar" cellWidth="24px" datePattern="dd/MM/yyyy" value="#{batchManagedBean.date}"
 	                    				       cellHeight="22px" style="width:100px">
 								</rich:calendar>
 							</h:panelGroup>
 							
 							<h:panelGroup style="text-align: left;">
-	                            <h:outputLabel value="Sucursal : "  style="font-weight: bold"/><br />
+	                            <h:outputLabel value="Sucursal: "  style="font-weight: bold"/><br />
 			                    <h:selectOneMenu id="sucursales" style="width: 200px" value="#{batchManagedBean.branchOfficeId}" disabled="#{batchManagedBean.branchOfficeAllowed}">
 			                    	<f:selectItem itemValue="-1" itemLabel="Seleccione una Sucursal"/>			                    	
 									<f:selectItems value="#{dailyReportManagedBean.branchOfficeItems}" />
@@ -99,7 +99,7 @@
 				<h:outputText value="#{row.currencyView.name}" />
 			</rich:column>	
 			<rich:column>
-				<f:facet name="header">#Documentos</f:facet>
+				<f:facet name="header"># Documentos</f:facet>
 				<h:outputText value="#{row.batchDocuments}" />
 			</rich:column>	
 			<rich:column>
