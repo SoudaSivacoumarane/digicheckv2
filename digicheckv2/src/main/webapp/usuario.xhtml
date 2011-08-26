@@ -80,11 +80,8 @@
 		<h:form>
 			<h:panelGrid columns="2" id="editGrid">																							
 				<h:outputText value="Login" />
-				<h:panelGroup>
-					<h:inputText id="elogin" value="#{userManagedBean.currentUser.login}" required="true"
-						requiredMessage="Login es requerido">
-						<rich:validator />				
-					</h:inputText>
+				<h:panelGroup>					
+					<h:outputLabel value="#{userManagedBean.currentUser.login}" />					
 					<rich:message id="eloginMsg" for="elogin" />
 				</h:panelGroup>
 				
