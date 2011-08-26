@@ -5,6 +5,14 @@
 	<title>Digitalizar</title>
 </head>
 <body>
-	<APPLET CODE="com.sterling.web.batch.BatchScreen.class" ARCHIVE="../libs/examples.jar,libs/batch.jar,libs/morena.jar,libs/morena_windows.jar,libs/morena_osx.jar,libs/morena_license.jar" WIDTH="100%" HEIGHT="80%"></APPLET>
+	<APPLET CODE="com.sterling.web.batch.BatchScreen.class" ARCHIVE="../libs/examples.jar,libs/batch.jar,libs/morena.jar,libs/morena_windows.jar,libs/morena_osx.jar,libs/morena_license.jar" WIDTH="100%" HEIGHT="80%">
+		<param name="usuario" value="#{batchManagedBean.batchView.userView.login}" />
+		<param name="sucursal" value="#{batchManagedBean.branchOfficeId}" />
+		<param name="divisa" value="#{batchManagedBean.currencySelected}" />
+		<param name="importe" value="#{batchManagedBean.batchView.batchAmount}" />
+		<param name="documentos" value="#{batchManagedBean.batchView.batchDocuments}" />
+		<param name="referencia" value="#{batchManagedBean.batchView.reference}" />
+		<param name="fecha" value="#{batchManagedBean.batchView.batchDate}" />
+	</APPLET>
 </body>		
 </html>
