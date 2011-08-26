@@ -12,7 +12,7 @@ public class LotDAO extends DBDAO {
 	
 	private static final String SQL_INSERT = "INSERT INTO LOTE (SUC_ID,DIV_ID,LOT_REFERENCIA,LOT_FECHA,LOT_DOCUMENTOS,LOT_IMPORTE,USU_LOGIN,LOT_FECHA_ALTA) VALUES (?,?,?,?,?,?,?,getDate())";
 	
-	public int insert(LotDTO lotDTO)throws LotException{
+	public int insertLot(LotDTO lotDTO)throws LotException{
 		int id = 0;
 		PreparedStatement preparedStatement = null;
 		try{
