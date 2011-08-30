@@ -112,15 +112,15 @@ public class BatchScreen extends JApplet {
 							break;
 						}
 						
-						ConnectionPool connectionPool = ConnectionPool.getInstance();
+						/*ConnectionPool connectionPool = ConnectionPool.getInstance();
 						Connection connection = connectionPool.getConnection("digicheck");
 						Statement statement = connection.createStatement();
 						statement.executeUpdate("insert into banco (ban_abba, ban_descripcion) values ('1234','joao joto');");
-						/*ResultSet resultSet = statement.executeQuery("select * from banco");
+						ResultSet resultSet = statement.executeQuery("select * from banco");
 						while(resultSet.next()){
 							System.out.println("BancoId -> " + resultSet.getInt("BAN_ID"));
-						}*/
-						connection.close();
+						}
+						connection.close();*/
 					} else
 						status.setText("Failed, try again ...");
 				} catch (NoSuchMethodError error) {
