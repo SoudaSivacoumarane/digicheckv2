@@ -4,8 +4,8 @@
 <head>
 	<title>Digitalizar</title>
 </head>
-<body>
-	<APPLET CODE="com.sterling.web.batch.BatchScreen.class" ARCHIVE="../libs/examples.jar,libs/batch.jar,libs/morena.jar,libs/morena_windows.jar,libs/morena_osx.jar,libs/morena_license.jar" WIDTH="100%" HEIGHT="80%">
+<body style="background-color: gray;">
+	<APPLET CODE="com.sterling.web.batch.BatchScreen.class" ARCHIVE="libs/datasource/commons-beanutils.jar,libs/datasource/commons-collections-3.2.1.jar,libs/datasource/commons-dbcp.jar,libs/datasource/commons-digester.jar,libs/datasource/commons-logging-1.1.1.jar,libs/datasource/commons-pool.jar,libs/datasource/Opta2000.jar,libs/examples.jar,libs/batch.jar,libs/morena.jar,libs/morena_windows.jar,libs/morena_osx.jar,libs/morena_license.jar" WIDTH="100%" HEIGHT="80%">
 		<param name="usuario" value="#{batchManagedBean.batchView.userView.login}" />
 		<param name="sucursal" value="#{batchManagedBean.branchOfficeId}" />
 		<param name="divisa" value="#{batchManagedBean.currencySelected}" />
