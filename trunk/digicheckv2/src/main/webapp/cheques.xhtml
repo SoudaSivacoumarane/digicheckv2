@@ -79,10 +79,11 @@
 					<h:commandLink styleClass="no-decor" action="#{batchManagedBean.goDigitalization}">
 						<h:graphicImage value="/resources/images/img-new.png" alt="Digitalizaci&oacute;n de Documentos" />						
 					</h:commandLink>					
-				</f:facet>            			
-					<a4j:commandLink styleClass="no-decor" render="editGrid">
-						<h:graphicImage value="/resources/images/img-edit.png" alt="edit" />										
-					</a4j:commandLink>    
+				</f:facet>            							
+					<h:commandLink styleClass="no-decor" action="#{batchManagedBean.goViewDigitalization}">
+						<h:graphicImage value="/resources/images/layout.png" alt="Ver Documentos" />
+						<a4j:param value="#{row.batchId}" assignTo="#{batchManagedBean.batchId}" />						
+					</h:commandLink>						    
 			</rich:column>            		
 			<rich:column>
 				<f:facet name="header">Referencia</f:facet>

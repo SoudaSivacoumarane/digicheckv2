@@ -33,6 +33,15 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+	    <servlet-name>imageServlet</servlet-name>
+	    <servlet-class>com.sterling.digicheck.servlets.ImageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>imageServlet</servlet-name>
+	    <url-pattern>/image/*</url-pattern>
+	</servlet-mapping>
 
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

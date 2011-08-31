@@ -52,8 +52,10 @@ public class BatchManagedBean implements Serializable {
 	private int page = 1;
 	private BranchOfficeView branchOfficeView = new BranchOfficeView();
 	private BatchView batchView = new BatchView();
+	private BatchView batchDocumentView = new BatchView();
 	private UserView userView = new UserView();
-	private String currencySelected;	
+	private String currencySelected;
+	private String batchId;
 	
 	public String searchByCriteria(){
 		if(this.branchOfficeId.equals("-1")){
@@ -84,6 +86,15 @@ public class BatchManagedBean implements Serializable {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());
 		}
 		JSFUtil.redirect("digitalizacion.xhtml");
+	}
+	
+	public void goViewDigitalization(){
+		try {
+			this.batchDocumentView = batchService.getBatchViewById(batchId);
+		} catch (BatchException e) {
+			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());
+		}
+		JSFUtil.redirect("ver_digitalizacion.xhtml");
 	}
 	
 	public void insertBatch(){
@@ -220,5 +231,17 @@ public class BatchManagedBean implements Serializable {
 	public void setSecurityAuthorizationService(
 			SecurityAuthorizationService securityAuthorizationService) {
 		this.securityAuthorizationService = securityAuthorizationService;
+	}
+	public BatchView getBatchDocumentView() {
+		return batchDocumentView;
+	}
+	public void setBatchDocumentView(BatchView batchDocumentView) {
+		this.batchDocumentView = batchDocumentView;
+	}
+	public String getBatchId() {
+		return batchId;
+	}
+	public void setBatchId(String batchId) {
+		this.batchId = batchId;
 	}		
 }

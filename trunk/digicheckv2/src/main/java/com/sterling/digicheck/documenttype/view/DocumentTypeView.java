@@ -11,6 +11,15 @@ public class DocumentTypeView implements Serializable {
 	private Character docTypeId;    
     private String docTypeDescription;
     
+    public DocumentTypeView() {
+
+	}
+    
+    public DocumentTypeView(Character id, String description) {
+    	this.docTypeId = id;
+    	this.docTypeDescription = description;
+	}
+    
 	public Character getDocTypeId() {
 		return docTypeId;
 	}
