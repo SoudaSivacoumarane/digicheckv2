@@ -86,7 +86,7 @@ public class BatchScreen extends JApplet {
 					status.setText("Working ...");
 					MorenaSource source = TwainManager.selectSource(null);
 					if (source != null) {
-						source.setVisible(false);
+						source.setVisible(true);
 						source.setColorMode();
 						source.setResolution(100);
 						while (true) {
@@ -133,8 +133,7 @@ public class BatchScreen extends JApplet {
 									"Error", JOptionPane.ERROR_MESSAGE);
 					System.exit(0);
 				} catch (Throwable exception) {
-					JOptionPane.showMessageDialog(MainPanel.this, exception
-							.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(MainPanel.this, exception.toString(), "Error", JOptionPane.ERROR_MESSAGE);
 					exception.printStackTrace();
 					status.setText("Failed, try again ...");
 				} finally {
