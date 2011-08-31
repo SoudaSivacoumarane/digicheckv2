@@ -2,7 +2,6 @@ package com.sterling.digicheck.document.view;
 
 import java.io.Serializable;
 
-import com.sterling.digicheck.batch.view.BatchView;
 import com.sterling.digicheck.documenttype.view.DocumentTypeView;
 
 public class DocumentView implements Serializable {
@@ -13,8 +12,7 @@ public class DocumentView implements Serializable {
 	 
     private Integer docId;	    
     private Integer docNumber;	    
-    private byte[] docFile;	    
-    private BatchView batchView;	        
+    private byte[] docFile;	        	       
     private DocumentTypeView documentTypeView;
     
 	public Integer getDocId() {
@@ -34,12 +32,6 @@ public class DocumentView implements Serializable {
 	}
 	public void setDocFile(byte[] docFile) {
 		this.docFile = docFile;
-	}
-	public BatchView getBatchView() {
-		return batchView;
-	}
-	public void setBatchView(BatchView batchView) {
-		this.batchView = batchView;
 	}
 	public DocumentTypeView getDocumentTypeView() {
 		return documentTypeView;

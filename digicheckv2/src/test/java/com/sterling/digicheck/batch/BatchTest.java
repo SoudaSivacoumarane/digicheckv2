@@ -85,7 +85,7 @@ public class BatchTest extends AbstractTestNGSpringContextTests {
 		em.getTransaction().commit();						
 	}
 	
-	@Test
+	//@Test
 	public void searchCriteriaTest(){
 		List<BatchEntity> batList = null;
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");

@@ -47,6 +47,8 @@ public class BatchDAO extends GenericDAO {
             if(date != null){
             	sql.append(" AND l.batchDate BETWEEN :beforeDate AND :afterDate ");
             }
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
             query = em.createQuery(sql.toString());
             if(!reference.trim().equals("")){
             	query.setParameter("reference", "%"+reference+"%".toUpperCase());
@@ -56,6 +58,7 @@ public class BatchDAO extends GenericDAO {
             	query.setParameter("beforeDate", beforeTime, TemporalType.TIMESTAMP);
             	query.setParameter("afterDate", afterTime, TemporalType.TIMESTAMP);
             }
+            em.getTransaction().commit();
             batchEntityList = query.getResultList();           
         }catch (Exception exception){
             BatchException bankException = null;
@@ -80,6 +83,20 @@ public class BatchDAO extends GenericDAO {
     		exception.printStackTrace(System.out);
     		throw bankException;
 		}		
+	}
+	
+	public BatchEntity getBatchEntityById(String batchId) throws BatchException{
+		BatchEntity batchEntity = null;
+		try{
+			batchEntity = em.find(BatchEntity.class, Integer.parseInt(batchId));			
+		}catch (Exception exception){
+			BatchException bankException = null;
+			bankException = new BatchException(exception, BatchException.LAYER_DAO, BatchException.ACTION_SELECT);
+    		logger.error(bankException);
+    		exception.printStackTrace(System.out);
+    		throw bankException;
+		}
+		return batchEntity;
 	}
 	
 }

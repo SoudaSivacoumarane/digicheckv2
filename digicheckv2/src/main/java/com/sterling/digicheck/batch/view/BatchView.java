@@ -2,12 +2,13 @@ package com.sterling.digicheck.batch.view;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.sterling.digicheck.branchoffice.view.BranchOfficeView;
+import com.sterling.digicheck.check.view.CheckView;
 import com.sterling.digicheck.currency.view.CurrencyView;
-import com.sterling.digicheck.document.view.DocumentView;
 import com.sterling.digicheck.user.view.UserView;
 
 public class BatchView implements Serializable {
@@ -23,9 +24,9 @@ public class BatchView implements Serializable {
     private Date batchDate;        	    
     private Date batchDateAdded;	
 	private CurrencyView currencyView = new CurrencyView();
-	private BranchOfficeView branchOfficeView = new BranchOfficeView();
-	private List<DocumentView> documentViewList;
+	private BranchOfficeView branchOfficeView = new BranchOfficeView();	
 	private UserView userView = new UserView();
+	private List<CheckView> checkViewList = new ArrayList<CheckView>(0);
 	
 	public Integer getBatchId() {
 		return batchId;
@@ -75,17 +76,16 @@ public class BatchView implements Serializable {
 	public void setBranchOfficeView(BranchOfficeView branchOfficeView) {
 		this.branchOfficeView = branchOfficeView;
 	}
-	public List<DocumentView> getDocumentViewList() {
-		return documentViewList;
-	}
-	public void setDocumentViewList(List<DocumentView> documentViewList) {
-		this.documentViewList = documentViewList;
-	}
 	public UserView getUserView() {
 		return userView;
 	}
 	public void setUserView(UserView userView) {
 		this.userView = userView;
-	}		
-		
+	}
+	public List<CheckView> getCheckViewList() {
+		return checkViewList;
+	}
+	public void setCheckViewList(List<CheckView> checkViewList) {
+		this.checkViewList = checkViewList;
+	}				
 }

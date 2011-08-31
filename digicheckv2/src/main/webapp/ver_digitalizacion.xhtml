@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core_rt"
+	xmlns:rich="http://richfaces.org/rich"      
+	xmlns:a4j="http://richfaces.org/a4j"
+	template="./template/template_login.xhtml">
+	
+	<ui:define name="title">
+        Ver Digitalizacion
+    </ui:define>
+    
+    <ui:define name="content">
+    <script src="resources/js/utils.js"></script>        
+    <script src="resources/js/prototype.js"></script>
+    <script src="resources/js/scriptaculous.js?load=effects,builder"></script>
+    <script src="resources/js/lightbox.js"></script>   
+    <link href="resources/css/lightbox.css" rel="stylesheet" type="text/css" />
+    <br />
+    <br />
+    <div align="center">
+    	<h:form id="formVerDigitalization">
+	    <h:panelGroup>	    		   			
+   				<rich:panel header="Digitalizaci&oacute;n de Documentos" style="width: 600px;">
+   					<fieldset>
+						<legend>Datos de Sucursal</legend>
+						<h:panelGrid columns="4" cellpadding="1" cellspacing="2" width="500px;" style="text-align: left;">
+                            <h:outputLabel value="Usuario" style="font-weight: bold;"/>
+                            <h:outputLabel value="#{batchManagedBean.batchDocumentView.userView.login}" style="text-align: left;"/>
+                            <h:outputLabel value="Nombre" style="font-weight: bold"/>
+                            <h:outputLabel value="#{batchManagedBean.batchDocumentView.userView.name}" style="text-align: left;"/>
+                            <h:outputLabel value="Direcci&oacute;n" style="font-weight: bold"/>                         
+                            <h:outputLabel value="#{batchManagedBean.batchDocumentView.branchOfficeView.address}" style="text-align: left;"/>
+                            <h:outputLabel value=" Colonia" style="font-weight: bold"/>
+                            <h:outputLabel value="#{batchManagedBean.batchDocumentView.branchOfficeView.community}" style="text-align: left;"/>
+                            <h:outputLabel value=" C.P." style="font-weight: bold"/>
+                            <h:outputLabel value="#{batchManagedBean.batchDocumentView.branchOfficeView.zip}" style="text-align: left;"/>                            
+                            <h:outputLabel value="Ciudad" style="font-weight: bold"/>
+                            <h:outputLabel value="#{batchManagedBean.batchDocumentView.branchOfficeView.city}" style="text-align: left;"/>
+                            <h:outputLabel value="Estado" style="font-weight: bold"/>
+                            <h:outputLabel value="#{batchManagedBean.batchDocumentView.branchOfficeView.state.name}" style="text-align: left;"/>
+                            <h:panelGroup>
+                            	&nbsp;
+                            </h:panelGroup>
+                        </h:panelGrid>							
+					</fieldset>					
+					<fieldset>
+						<legend>LOTE</legend>						
+						<h:panelGrid columns="4" width="500px;" style="text-align: left;">
+							<h:outputLabel value="Fecha" style="font-weight: bold"/>
+							<h:outputText value="#{batchManagedBean.batchDocumentView.batchDate}">
+								<f:convertDateTime pattern="dd/MM/yyyy"/>
+							</h:outputText>							
+                    		
+                    		<h:outputLabel value="Referencia" style="font-weight: bold;"/>
+                    		<h:outputText value="#{batchManagedBean.batchDocumentView.reference}"/>
+                    		                    		
+                    		<h:outputLabel value="# Documentos" style="font-weight: bold;"/>
+                    		<h:outputText value="#{batchManagedBean.batchDocumentView.batchDocuments}"  />
+                    		
+                    		<h:outputLabel value="Importe $" style="font-weight: bold"/>
+                    		<h:outputText value="#{batchManagedBean.batchDocumentView.batchAmount}">
+                    			<f:convertNumber currencySymbol="$" pattern="#,###,##0.00"/>
+                    		</h:outputText>
+                    		
+                  			<h:outputLabel value="Divisa" style="font-weight: bold" />
+                    		<h:outputText value="#{batchManagedBean.batchDocumentView.currencyView.name}" />
+                    		
+							<h:panelGroup>&nbsp;</h:panelGroup>
+							<h:panelGroup>&nbsp;</h:panelGroup>
+							<h:panelGroup>&nbsp;</h:panelGroup>                           				       
+						</h:panelGrid>																						
+					</fieldset>
+					<fieldset>
+						<legend>Cheques Digitalizados</legend>
+						<div style="text-align: center;">										
+							<a href="image?id=1" rel="lightbox[roadtrip]" title="Vista Frontal.">Cheque #1 Vista Frontal.</a><br />
+							<a href="image?id=2" rel="lightbox[roadtrip]" title="Vista Trasera.">Cheque #1 Vista Trasera.</a><br />
+							<a href="image?id=3" rel="lightbox[roadtrip]" title="Vista Frontal.">Cheque #2 Vista Frontal.</a><br />
+							<a href="image?id=4" rel="lightbox[roadtrip]" title="Vista Trasera.">Cheque #2 Vista Trasera.</a><br />
+							<a href="image?id=5" rel="lightbox[roadtrip]" title="Vista Frontal.">Cheque #3 Vista Frontal.</a><br />
+							<a href="image?id=6" rel="lightbox[roadtrip]" title="Vista Trasera.">Cheque #3 Vista Trasera.</a><br />								
+						</div>						
+						<div style="text-align: right;">
+							<h:commandButton value="Cancelar" action="#{batchManagedBean.back}" immediate="true" />														
+						</div>								
+					</fieldset>						
+					<div style="width: 220px;">
+   						<rich:messages />
+   					</div>
+   				</rich:panel>
+   		</h:panelGroup>   			
+   		</h:form>        
+    </div>
+    </ui:define>        
+</ui:composition>    

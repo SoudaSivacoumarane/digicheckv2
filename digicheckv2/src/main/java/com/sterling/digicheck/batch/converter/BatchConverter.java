@@ -11,6 +11,7 @@ import com.sterling.digicheck.batch.exception.BatchException;
 import com.sterling.digicheck.batch.view.BatchView;
 import com.sterling.digicheck.branchoffice.entity.BranchOfficeEntity;
 import com.sterling.digicheck.branchoffice.view.BranchOfficeView;
+import com.sterling.digicheck.check.converter.CheckConverter;
 import com.sterling.digicheck.currency.entity.CurrencyEntity;
 import com.sterling.digicheck.currency.view.CurrencyView;
 import com.sterling.digicheck.state.entity.StateEntity;
@@ -32,9 +33,11 @@ public class BatchConverter {
 	 * @throws BatchException
 	 */
 	public BatchView convertViewToEntity(BatchEntity batchEntity) throws BatchException{
-		BatchView batchView = null;				
+		BatchView batchView = null;
+		CheckConverter checkConverter = null;
 		try{						
 			batchView = new BatchView();
+			checkConverter = new CheckConverter();
 			batchView.setBatchId(batchEntity.getBatchId());
 			batchView.setBatchAmount(batchEntity.getBatchAmount());
 			batchView.setBatchDate(batchEntity.getBatchDate());
@@ -44,7 +47,8 @@ public class BatchConverter {
 			batchView.setCurrencyView(new CurrencyView(batchEntity.getCurrencyId().getCurrencyId().toString(), batchEntity.getCurrencyId().getCode(), batchEntity.getCurrencyId().getName()));						
 			batchView.setUserView(new UserView(String.valueOf(batchEntity.getUserLogin().getSucursalId()), batchEntity.getUserLogin().getLogin(), batchEntity.getUserLogin().getNombre(), batchEntity.getUserLogin().getPassword()));			
 			batchView.setBranchOfficeView(new BranchOfficeView(batchEntity.getBranchOfficeId().getSucId().toString(), batchEntity.getBranchOfficeId().getName(), batchEntity.getBranchOfficeId().getAddress(), batchEntity.getBranchOfficeId().getCommunity(), batchEntity.getBranchOfficeId().getZip(), 
-							new StateView(batchEntity.getBranchOfficeId().getStateEntity().getCode(), batchEntity.getBranchOfficeId().getStateEntity().getName()), batchEntity.getBranchOfficeId().getCity()));								
+							new StateView(batchEntity.getBranchOfficeId().getStateEntity().getCode(), batchEntity.getBranchOfficeId().getStateEntity().getName()), batchEntity.getBranchOfficeId().getCity()));		
+			batchView.setCheckViewList(checkConverter.convertEntitiesToViews(batchEntity.getCheckEntityCollection()));			
 		}catch (Exception exception){
 			BatchException batchException = null;
 			batchException = new BatchException(exception, BatchException.LAYER_CONVERTER, BatchException.ACTION_SELECT);
