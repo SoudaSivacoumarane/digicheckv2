@@ -7,9 +7,9 @@
   		<param name="importe" value="10500"/>
   		<param name="referncia" value="1341234"/>
   		<param name="usuario" value="edgar"/>
-  		<param name="sucursal" 	value="3"/>
-  		<param name="divisa" value="USD"/>
-  		<param name="docs" value="5"/>
+  		<param name="sucursal" 	value="18"/>
+  		<param name="divisa" value="10"/>
+  		<param name="docs" value="4"/>
   		<param name="fecha" value="2011-08-25"/>
   	</APPLET>
   </BODY>
