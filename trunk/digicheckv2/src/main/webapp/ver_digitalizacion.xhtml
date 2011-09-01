@@ -3,31 +3,25 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:c="http://java.sun.com/jstl/core_rt"
+	xmlns:f="http://java.sun.com/jsf/core"	
 	xmlns:rich="http://richfaces.org/rich"      
 	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:util="http://java.sun.com/jsf/composite/components/jcarousel"
 	template="./template/template_login.xhtml">
 	
 	<ui:define name="title">
         Ver Digitalizacion
     </ui:define>
     
-    <ui:define name="content">
-    <script src="resources/js/utils.js"></script>        
-    <script src="resources/js/prototype.js"></script>
-    <script src="resources/js/scriptaculous.js?load=effects,builder"></script>
-    <script src="resources/js/lightbox.js"></script>   
-    <link href="resources/css/lightbox.css" rel="stylesheet" type="text/css" />
-    <br />
+    <ui:define name="content">    
     <br />
     <div align="center">
     	<h:form id="formVerDigitalization">
 	    <h:panelGroup>	    		   			
-   				<rich:panel header="Digitalizaci&oacute;n de Documentos" style="width: 600px;">
+   				<rich:panel header="Digitalizaci&oacute;n de Documentos" style="width: 750px;">
    					<fieldset>
 						<legend>Datos de Sucursal</legend>
-						<h:panelGrid columns="4" cellpadding="1" cellspacing="2" width="500px;" style="text-align: left;">
+						<h:panelGrid columns="4" cellpadding="1" cellspacing="2" width="600px;" style="text-align: left;">
                             <h:outputLabel value="Usuario" style="font-weight: bold;"/>
                             <h:outputLabel value="#{batchManagedBean.batchDocumentView.userView.login}" style="text-align: left;"/>
                             <h:outputLabel value="Nombre" style="font-weight: bold"/>
@@ -77,12 +71,7 @@
 					<fieldset>
 						<legend>Cheques Digitalizados</legend>
 						<div style="text-align: center;">										
-							<a href="image?id=1" rel="lightbox[roadtrip]" title="Vista Frontal.">Cheque #1 Vista Frontal.</a><br />
-							<a href="image?id=2" rel="lightbox[roadtrip]" title="Vista Trasera.">Cheque #1 Vista Trasera.</a><br />
-							<a href="image?id=3" rel="lightbox[roadtrip]" title="Vista Frontal.">Cheque #2 Vista Frontal.</a><br />
-							<a href="image?id=4" rel="lightbox[roadtrip]" title="Vista Trasera.">Cheque #2 Vista Trasera.</a><br />
-							<a href="image?id=5" rel="lightbox[roadtrip]" title="Vista Frontal.">Cheque #3 Vista Frontal.</a><br />
-							<a href="image?id=6" rel="lightbox[roadtrip]" title="Vista Trasera.">Cheque #3 Vista Trasera.</a><br />								
+							<util:jcarousel /> <br />						
 						</div>						
 						<div style="text-align: right;">
 							<h:commandButton value="Cancelar" action="#{batchManagedBean.back}" immediate="true" />														

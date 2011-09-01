@@ -12,8 +12,12 @@ import com.sterling.digicheck.batch.view.BatchView;
 import com.sterling.digicheck.branchoffice.entity.BranchOfficeEntity;
 import com.sterling.digicheck.branchoffice.view.BranchOfficeView;
 import com.sterling.digicheck.check.converter.CheckConverter;
+import com.sterling.digicheck.check.entity.CheckEntity;
 import com.sterling.digicheck.currency.entity.CurrencyEntity;
 import com.sterling.digicheck.currency.view.CurrencyView;
+import com.sterling.digicheck.document.entity.DocumentEntity;
+import com.sterling.digicheck.document.view.DocumentView;
+import com.sterling.digicheck.documenttype.view.DocumentTypeView;
 import com.sterling.digicheck.state.entity.StateEntity;
 import com.sterling.digicheck.state.view.StateView;
 import com.sterling.digicheck.user.entity.UserEntity;
@@ -49,6 +53,17 @@ public class BatchConverter {
 			batchView.setBranchOfficeView(new BranchOfficeView(batchEntity.getBranchOfficeId().getSucId().toString(), batchEntity.getBranchOfficeId().getName(), batchEntity.getBranchOfficeId().getAddress(), batchEntity.getBranchOfficeId().getCommunity(), batchEntity.getBranchOfficeId().getZip(), 
 							new StateView(batchEntity.getBranchOfficeId().getStateEntity().getCode(), batchEntity.getBranchOfficeId().getStateEntity().getName()), batchEntity.getBranchOfficeId().getCity()));		
 			batchView.setCheckViewList(checkConverter.convertEntitiesToViews(batchEntity.getCheckEntityCollection()));			
+			
+			DocumentTypeView documentTypeView = null;
+			for(CheckEntity c : batchEntity.getCheckEntityCollection()){
+				for(DocumentEntity d: c.getDocumentEntityCollection()){
+					documentTypeView = new DocumentTypeView();
+					documentTypeView.setDocTypeId(d.getDocumentType().getDocTypeId());
+					documentTypeView.setDocTypeDescription(d.getDocumentType().getDocTypeDescription());										
+					batchView.getDocumentList().add(new DocumentView(d.getDocId(), documentTypeView));
+				}
+			}
+			
 		}catch (Exception exception){
 			BatchException batchException = null;
 			batchException = new BatchException(exception, BatchException.LAYER_CONVERTER, BatchException.ACTION_SELECT);
