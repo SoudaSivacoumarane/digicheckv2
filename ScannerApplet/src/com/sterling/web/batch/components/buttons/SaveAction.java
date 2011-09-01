@@ -23,6 +23,7 @@ public class SaveAction implements ActionRunneable {
 		LotService lotService = null;
 		LotHelper lotHelper = null;
 		LotView lotView = null;
+		int loteId = 0;
 		try{
 			lotService = new LotService();
 			lotHelper = new LotHelper();
@@ -37,6 +38,7 @@ public class SaveAction implements ActionRunneable {
 			((ToolBar)mainPanel.getParent().getComponent(0)).isScan(false);
 			((ToolBar)mainPanel.getParent().getComponent(0)).arrowEnable(false);
 			
+			mainPanel.setStatusBar("Lote <"+loteId+"> Guardado.");
 		}catch(LotException lotException){
 			JOptionPane.showMessageDialog(mainPanel, lotException.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
 		}catch(Exception exception){

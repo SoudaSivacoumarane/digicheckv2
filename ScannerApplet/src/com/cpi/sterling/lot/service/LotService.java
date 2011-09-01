@@ -15,7 +15,7 @@ import com.cpi.sterling.lot.view.LotView;
 
 public class LotService {
 
-	public void saveLote(LotView lotView) throws LotException{
+	public int saveLote(LotView lotView) throws LotException{
 		LotDAO lotDAO = null;
 		DocumentDAO documentDAO = null;
 		DocumentConverter documentConverter = null;
@@ -51,7 +51,8 @@ public class LotService {
 			lotException = new LotException(exception, LotException.LAYER_SERVICE, LotException.ACTION_INSERT);			
 			exception.printStackTrace(System.out);
 			throw lotException;
-		}		
+		}
+		return loteId;
 	}
 	
 }
