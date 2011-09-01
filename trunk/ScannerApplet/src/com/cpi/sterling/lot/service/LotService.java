@@ -1,16 +1,12 @@
 package com.cpi.sterling.lot.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.w3c.dom.stylesheets.DocumentStyle;
-
 import com.cpi.sterling.check.converter.CheckConverter;
 import com.cpi.sterling.check.dao.CheckDAO;
 import com.cpi.sterling.check.dto.CheckDTO;
 import com.cpi.sterling.check.view.CheckView;
 import com.cpi.sterling.document.converter.DocumentConverter;
 import com.cpi.sterling.document.dao.DocumentDAO;
+import com.cpi.sterling.document.dto.DocumentDTO;
 import com.cpi.sterling.document.view.DocumentView;
 import com.cpi.sterling.lot.converter.LotConverter;
 import com.cpi.sterling.lot.dao.LotDAO;
@@ -23,38 +19,33 @@ public class LotService {
 		LotDAO lotDAO = null;
 		DocumentDAO documentDAO = null;
 		DocumentConverter documentConverter = null;
-		List<CheckDTO> checkDTOList = null;
 		CheckDAO checkDAO = null;
 		CheckDTO checkDTO = null;
+		DocumentDTO documentDTO = null;
 		CheckConverter checkConverter = null;
 		LotConverter lotConverter = null;
 		int loteId = 0;
 		int checkId = 0;
 		try{
-			if(lotView != null){
-				lotDAO = new LotDAO();
-				lotConverter = new LotConverter();			
-				loteId = lotDAO.insertLot(lotConverter.convertViewToDTO(lotView));
-								
-				checkDAO = new CheckDAO();
-				checkConverter = new CheckConverter();
-				documentConverter = new DocumentConverter();
-				checkDTOList = new ArrayList<CheckDTO>(0);
-				for(CheckView v : lotView.getChekViewList()){
-					v.setLotId(loteId);
-					checkDTO = checkConverter.convertViewToDTO(v);
-					for(DocumentView dv : v.getDocumentList()){						
-					   checkDTO.getDocumentDTOList().add(documentConverter.convertViewToDTO(dv));	
-					}						
-					checkDTOList.add(checkDTO);
+			lotDAO = new LotDAO();
+			checkDAO = new CheckDAO();
+			documentDAO = new DocumentDAO();
+			
+			lotConverter = new LotConverter();
+			checkConverter = new CheckConverter();
+			documentConverter = new DocumentConverter();
+			
+			loteId = lotDAO.insertLot(lotConverter.convertViewToDTO(lotView));
+			for(CheckView checkView : lotView.getChekViewList()){
+				checkView.setLotId(loteId);
+				checkDTO = checkConverter.convertViewToDTO(checkView);
+				checkId = checkDAO.insertCheck(checkDTO);
+				for(DocumentView documentView : checkView.getDocumentList()){
+					documentView.setCheckId(checkId);
+					documentDTO = documentConverter.convertViewToDTO(documentView);
+					documentDAO.insertDocument(documentDTO);
 				}
-				
-				
-				for(CheckDTO dto : checkDTOList){				
-					checkId = checkDAO.insertCheck(dto);
-				}								
-								
-			}			
+			}
 		} catch (Exception exception){
 			LotException lotException = null;
 			lotException = new LotException(exception, LotException.LAYER_SERVICE, LotException.ACTION_INSERT);			

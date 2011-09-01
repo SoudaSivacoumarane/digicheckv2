@@ -20,7 +20,7 @@ public class CheckDAO extends DBDAO {
 			preparedStatement.setInt(1, dto.getLotId());
 			preparedStatement.setString(2, dto.getAbba());
 			preparedStatement.setString(3, dto.getAccount());
-			preparedStatement.setDouble(4, dto.getAmount());								
+			preparedStatement.setDouble(4, dto.getAmount());
 			id = executeInsert(preparedStatement);
 		}catch(PoolException poolException){
 			CheckException checkException = null;

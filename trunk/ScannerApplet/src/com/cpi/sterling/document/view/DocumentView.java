@@ -3,13 +3,13 @@ package com.cpi.sterling.document.view;
 import java.io.Serializable;
 
 public class DocumentView implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3383191080112904408L;
+	private static final long serialVersionUID = -8710097868582814732L;
+
+	public static final int TYPE_FRONT = 1;
+
+	public static final int TYPE_BACK = 2;
 	
 	private int docId;
-	private int number;
 	private byte[] file;
 	private int docTypeId;
 	private int checkId;
@@ -19,12 +19,6 @@ public class DocumentView implements Serializable {
 	}
 	public void setDocId(int docId) {
 		this.docId = docId;
-	}
-	public int getNumber() {
-		return number;
-	}
-	public void setNumber(int number) {
-		this.number = number;
 	}
 	public byte[] getFile() {
 		return file;

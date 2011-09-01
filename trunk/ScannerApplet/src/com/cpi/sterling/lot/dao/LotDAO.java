@@ -1,5 +1,6 @@
 package com.cpi.sterling.lot.dao;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -20,7 +21,7 @@ public class LotDAO extends DBDAO {
 			preparedStatement.setInt(1, lotDTO.getSucId());
 			preparedStatement.setInt(2, lotDTO.getDivId());
 			preparedStatement.setString(3, lotDTO.getReference());
-			preparedStatement.setDate(4, lotDTO.getDate());
+			preparedStatement.setDate(4, new Date(lotDTO.getDate().getTimeInMillis()));
 			preparedStatement.setInt(5, lotDTO.getNoDocs());
 			preparedStatement.setDouble(6, lotDTO.getAmount());
 			preparedStatement.setString(7, lotDTO.getUser());

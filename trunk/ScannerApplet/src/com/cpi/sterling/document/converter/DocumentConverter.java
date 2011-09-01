@@ -14,7 +14,6 @@ public class DocumentConverter {
 				dto.setDocId(view.getDocId());
 				dto.setCheckId(view.getCheckId());
 				dto.setDocTypeId(view.getDocTypeId());
-				dto.setNumber(view.getNumber());
 				dto.setFile(view.getFile());
 			}			
 		} catch (Exception exception){

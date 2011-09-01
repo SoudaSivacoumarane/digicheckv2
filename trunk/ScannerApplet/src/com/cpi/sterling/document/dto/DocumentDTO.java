@@ -3,13 +3,8 @@ package com.cpi.sterling.document.dto;
 import java.io.Serializable;
 
 public class DocumentDTO implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8216416679474431686L;
-	
+	private static final long serialVersionUID = 113988406665907423L;
 	private int docId;
-	private int number;
 	private byte[] file;
 	private int docTypeId;
 	private int checkId;
@@ -19,12 +14,6 @@ public class DocumentDTO implements Serializable {
 	}
 	public void setDocId(int docId) {
 		this.docId = docId;
-	}
-	public int getNumber() {
-		return number;
-	}
-	public void setNumber(int number) {
-		this.number = number;
 	}
 	public byte[] getFile() {
 		return file;
@@ -44,5 +33,4 @@ public class DocumentDTO implements Serializable {
 	public void setCheckId(int checkId) {
 		this.checkId = checkId;
 	}
-		
 }

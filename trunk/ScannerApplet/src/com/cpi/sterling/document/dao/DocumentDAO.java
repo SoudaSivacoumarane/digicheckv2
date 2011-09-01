@@ -10,16 +10,14 @@ import com.cs.common.pool.exception.PoolException;
 
 public class DocumentDAO extends DBDAO {
 
-	private static final String SQL_INSERT = "INSERT INTO DOCUMENTO (DOC_NUMERO, DOC_ARCHIVO, DOT_ID, CHQ_ID) values(?,?,?,?)";
-	
+	private static final String SQL_INSERT = "INSERT INTO DOCUMENTO (CHQ_ID,DOT_ID,DOC_ARCHIVO) values(?,?,?)";
 	public void insertDocument(DocumentDTO dto) throws DocumentException{
 		PreparedStatement preparedStatement = null;
 		try{
 			preparedStatement = prepareSQL(SQL_INSERT, dsName);
-			preparedStatement.setInt(1, dto.getNumber());
-			//preparedStatement.setb
-			preparedStatement.setInt(3, dto.getDocTypeId());
-			preparedStatement.setInt(4, dto.getCheckId());								
+			preparedStatement.setInt(1, dto.getCheckId());
+			preparedStatement.setInt(2, dto.getDocTypeId());
+			preparedStatement.setBytes(3, dto.getFile());
 			executeInsert(preparedStatement);
 		}catch(PoolException poolException){
 			DocumentException documentException = null;
@@ -32,6 +30,5 @@ public class DocumentDAO extends DBDAO {
 			documentException = new DocumentException(sqlException, DocumentException.LAYER_DAO, DocumentException.ACTION_INSERT);
 			throw documentException;
 		}
-	}
-	
+	}	
 }
