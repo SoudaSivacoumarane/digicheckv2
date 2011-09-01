@@ -31,7 +31,7 @@ public class SaveAction implements ActionRunneable {
 			
 			lotHelper.setChecks(lotView, mainPanel.getChecks(), mainPanel.getImages());
 			
-			lotService.saveLote(lotView);
+			loteId = lotService.saveLote(lotView);
 			mainPanel.removeAll();
 			mainPanel.repaint();
 			

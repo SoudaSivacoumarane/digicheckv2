@@ -1,5 +1,6 @@
 package com.cpi.sterling.check.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -7,6 +8,7 @@ import com.cpi.sterling.check.dto.CheckDTO;
 import com.cpi.sterling.check.exception.CheckException;
 import com.cs.common.pool.DBDAO;
 import com.cs.common.pool.exception.PoolException;
+import com.cs.common.utils.NumberUtil;
 
 public class CheckDAO extends DBDAO {
 	
@@ -14,6 +16,7 @@ public class CheckDAO extends DBDAO {
 	
 	public int insertCheck(CheckDTO dto) throws CheckException{
 		int id = 0;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try{
 			preparedStatement = prepareSQL(SQL_INSERT, dsName);
@@ -21,7 +24,10 @@ public class CheckDAO extends DBDAO {
 			preparedStatement.setString(2, dto.getAbba());
 			preparedStatement.setString(3, dto.getAccount());
 			preparedStatement.setDouble(4, dto.getAmount());
-			id = executeInsert(preparedStatement);
+			executeInsert(preparedStatement);
+			connection = preparedStatement.getConnection();
+			id = NumberUtil.parseInt(getInsertedId(connection));
+			connection.close();
 		}catch(PoolException poolException){
 			CheckException checkException = null;
 			poolException.printStackTrace(System.out);

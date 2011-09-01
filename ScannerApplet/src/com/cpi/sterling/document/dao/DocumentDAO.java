@@ -1,5 +1,6 @@
 package com.cpi.sterling.document.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -12,6 +13,7 @@ public class DocumentDAO extends DBDAO {
 
 	private static final String SQL_INSERT = "INSERT INTO DOCUMENTO (CHQ_ID,DOT_ID,DOC_ARCHIVO) values(?,?,?)";
 	public void insertDocument(DocumentDTO dto) throws DocumentException{
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try{
 			preparedStatement = prepareSQL(SQL_INSERT, dsName);
@@ -19,6 +21,8 @@ public class DocumentDAO extends DBDAO {
 			preparedStatement.setInt(2, dto.getDocTypeId());
 			preparedStatement.setBytes(3, dto.getFile());
 			executeInsert(preparedStatement);
+			connection = preparedStatement.getConnection();
+			connection.close();
 		}catch(PoolException poolException){
 			DocumentException documentException = null;
 			poolException.printStackTrace(System.out);
