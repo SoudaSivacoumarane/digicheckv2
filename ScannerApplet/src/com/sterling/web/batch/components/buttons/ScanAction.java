@@ -15,6 +15,7 @@ import SK.gnome.twain.TwainException;
 import SK.gnome.twain.TwainManager;
 import SK.gnome.twain.TwainSource;
 
+import com.cpi.sterling.check.view.CheckView;
 import com.sterling.web.batch.components.ImagePanel;
 import com.sterling.web.batch.components.MainPanel;
 import com.sterling.web.batch.components.ToolBar;
@@ -35,6 +36,7 @@ public class ScanAction implements ActionRunneable {
 		int indexImage = 0;
 		Image image = null;
 		List<Image> arrayImages = new ArrayList<Image>();
+		List<CheckView> arrayCheckInfo = new ArrayList<CheckView>();
 		try {
 			source = TwainManager.selectSource(null);
 			if (source != null) {
@@ -47,6 +49,9 @@ public class ScanAction implements ActionRunneable {
 					if (imageStatus == ImageConsumer.STATICIMAGEDONE) {
 						image = Toolkit.getDefaultToolkit().createImage(morenaImage);
 						imagePanel = new ImagePanel(image);
+						if( indexImage%2 == 0 ){
+							arrayCheckInfo.add(new CheckView());//Aqui falta agregar los datos del abba
+						}
 						if( indexImage++ < 2 ){
 							mainPanel.add(imagePanel);
 						}
@@ -72,6 +77,7 @@ public class ScanAction implements ActionRunneable {
 				mainPanel.setStatusBar("# Cheques : " + arrayImages.size()/2);
 				
 				mainPanel.setImages(arrayImages);
+				mainPanel.setChecks(arrayCheckInfo);
 				
 			}else{
 				mainPanel.setStatusBar("Failed, try again ...");

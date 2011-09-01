@@ -1,14 +1,19 @@
 package com.cpi.sterling.lot.converter;
 
+import java.util.Calendar;
+
 import com.cpi.sterling.lot.dto.LotDTO;
 import com.cpi.sterling.lot.exception.LotException;
 import com.cpi.sterling.lot.view.LotView;
+import com.cs.common.utils.TimeUtils;
 
 public class LotConverter {
 
 	public LotDTO convertViewToDTO(LotView view) throws LotException{
 		LotDTO dto = null;
+		Calendar date = null;
 		try{
+			date = Calendar.getInstance();
 			if(view != null){
 				dto = new LotDTO();
 				dto.setUser(view.getUser());
@@ -17,7 +22,8 @@ public class LotConverter {
 				dto.setNoDocs(view.getNoDocs());
 				dto.setReference(view.getReference());
 				dto.setAmount(view.getAmount());
-				dto.setDate(view.getDate());
+				date.setTime(TimeUtils.convertStringToDate(view.getDate(), TimeUtils.DATE_PATTERN_YYYYMMDD));
+				dto.setDate(date);
 			}			
 		} catch (Exception exception){
 			LotException lotException = null;

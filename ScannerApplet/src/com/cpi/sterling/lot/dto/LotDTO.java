@@ -1,10 +1,10 @@
 package com.cpi.sterling.lot.dto;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Calendar;
 
 public class LotDTO implements Serializable {
-	private static final long serialVersionUID = -5606007881700788460L;
+	private static final long serialVersionUID = -7611262709048089785L;
 	private int id;
 	private int sucId;
 	private int divId;
@@ -12,8 +12,8 @@ public class LotDTO implements Serializable {
 	private double amount;
 	private int noDocs;
 	private String user;
-	private Date date;
-	private Date addDate;
+	private Calendar date;
+	private Calendar addDate;
 	public int getId() {
 		return id;
 	}
@@ -56,16 +56,16 @@ public class LotDTO implements Serializable {
 	public void setUser(String user) {
 		this.user = user;
 	}
-	public Date getDate() {
+	public Calendar getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(Calendar date) {
 		this.date = date;
 	}
-	public Date getAddDate() {
+	public Calendar getAddDate() {
 		return addDate;
 	}
-	public void setAddDate(Date addDate) {
+	public void setAddDate(Calendar addDate) {
 		this.addDate = addDate;
 	}
 }
