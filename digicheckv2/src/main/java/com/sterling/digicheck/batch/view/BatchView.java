@@ -9,6 +9,7 @@ import java.util.List;
 import com.sterling.digicheck.branchoffice.view.BranchOfficeView;
 import com.sterling.digicheck.check.view.CheckView;
 import com.sterling.digicheck.currency.view.CurrencyView;
+import com.sterling.digicheck.document.view.DocumentView;
 import com.sterling.digicheck.user.view.UserView;
 
 public class BatchView implements Serializable {
@@ -27,6 +28,7 @@ public class BatchView implements Serializable {
 	private BranchOfficeView branchOfficeView = new BranchOfficeView();	
 	private UserView userView = new UserView();
 	private List<CheckView> checkViewList = new ArrayList<CheckView>(0);
+	private List<DocumentView> documentList = new ArrayList<DocumentView>(0);
 	
 	public Integer getBatchId() {
 		return batchId;
@@ -87,5 +89,11 @@ public class BatchView implements Serializable {
 	}
 	public void setCheckViewList(List<CheckView> checkViewList) {
 		this.checkViewList = checkViewList;
-	}				
+	}
+	public List<DocumentView> getDocumentList() {
+		return documentList;
+	}
+	public void setDocumentList(List<DocumentView> documentList) {
+		this.documentList = documentList;
+	}	
 }

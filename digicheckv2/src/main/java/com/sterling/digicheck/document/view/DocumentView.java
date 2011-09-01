@@ -15,6 +15,14 @@ public class DocumentView implements Serializable {
     private byte[] docFile;	        	       
     private DocumentTypeView documentTypeView;
     
+    public DocumentView() {
+	}
+    
+    public DocumentView(Integer id, DocumentTypeView docTypeView) {
+    	this.docId = id;
+    	this.documentTypeView = docTypeView;
+	}
+    
 	public Integer getDocId() {
 		return docId;
 	}
