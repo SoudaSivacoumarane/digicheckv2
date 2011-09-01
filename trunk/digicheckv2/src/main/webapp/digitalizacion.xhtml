@@ -79,23 +79,29 @@
 						<legend>LOTE</legend>						
 						<h:panelGrid columns="4" width="500px;" style="text-align: left;">
 							<h:outputLabel value="Fecha" style="font-weight: bold"/>
-							<rich:calendar id="calendar" cellWidth="24px" datePattern="dd/MM/yyyy" value="#{batchManagedBean.batchView.batchDate}"
+							<rich:calendar id="calendar" cellWidth="24px" datePattern="yyyy-MM-dd" value="#{batchManagedBean.batchView.batchDate}"
                     				       cellHeight="22px" style="width:100px" required="true" requiredMessage="Ingrese una fecha.">
+                    				       <f:ajax render="@none" execute="@this" />
                     		</rich:calendar>
                     		
                     		<h:outputLabel value="Referencia" style="font-weight: bold;"/>
-                    		<h:inputText id="referenciaId" value="#{batchManagedBean.batchView.reference}" required="true" requiredMessage="Ingrese una Referencia." onfocus="this.select();" maxlength="100" />
+                    		<h:inputText id="referenciaId" value="#{batchManagedBean.batchView.reference}" required="true" requiredMessage="Ingrese una Referencia." onfocus="this.select();" maxlength="100">
+                    			<f:ajax render="@none" execute="@this" />
+                    		</h:inputText>
                     		
                     		<h:outputLabel value="# Documentos" style="font-weight: bold;"/>
-                    		<h:inputText id="numDocumentosId" value="#{batchManagedBean.batchView.batchDocuments}" required="true" requiredMessage="Ingrese un numero de Documentos." styleClass="columnanumero" onfocus="this.select();" onkeydown="return (numeric(event, 0) &amp;&amp; noPaste(event, this));" onkeyup="extractNumber(this,0,false);" />
+                    		<h:inputText id="numDocumentosId" value="#{batchManagedBean.batchView.batchDocuments}" required="true" requiredMessage="Ingrese un numero de Documentos." styleClass="columnanumero" onfocus="this.select();" onkeydown="return (numeric(event, 0) &amp;&amp; noPaste(event, this));" onkeyup="extractNumber(this,0,false);">
+                    			<f:ajax render="@none" execute="@this" />
+                    		</h:inputText>
                     		
                     		<h:outputLabel value="Importe $" style="font-weight: bold"/>
                     		<h:inputText id="importeId" value="#{batchManagedBean.batchView.batchAmount}" required="true" requiredMessage="Ingrese un Importe." styleClass="columnanumero" onfocus="this.select();" onkeydown="return (numeric(event, 1) &amp;&amp; noPaste(event, this));" onkeyup="extractNumber(this,2,false);">
-                    			<f:convertNumber currencySymbol="$" pattern="#,###,##0.00"/>
+                    			<f:ajax render="@none" execute="@this" />
                     		</h:inputText>
                     		
                   			<h:outputLabel value="Divisa" style="font-weight: bold" required="true" requiredMessage="Seleccione una divisa." />
                     		<h:selectOneMenu id="divisaId" value="#{batchManagedBean.currencySelected}" style="width:150px;" >
+                    			<f:ajax render="@none" execute="@this" />
 								<f:selectItem itemValue="-1" itemLabel="Seleccione una Divisa"/>
 								<f:selectItems value="#{batchManagedBean.currencyItems}" />
 							</h:selectOneMenu>
