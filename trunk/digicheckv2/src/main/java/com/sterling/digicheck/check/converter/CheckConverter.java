@@ -45,8 +45,7 @@ public class CheckConverter {
 			list = new ArrayList<DocumentView>(0);
 			for(DocumentEntity d : documentEntities){
 				documentView = new DocumentView();
-				documentView.setDocId(d.getDocId());
-				documentView.setDocNumber(d.getDocNumber());
+				documentView.setDocId(d.getDocId());				
 				documentView.setDocumentTypeView(new DocumentTypeView(d.getDocumentType().getDocTypeId(), d.getDocumentType().getDocTypeDescription()));
 				list.add(documentView);
 			}			
