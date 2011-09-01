@@ -21,7 +21,7 @@ public class LotHelper {
 	private static final String PARAM_DATE = "fecha";
 	private static final String PARAM_DIVID = "divisa";
 	private static final String PARAM_NODOCS = "docs";
-	private static final String PARAM_REFERENCE = "referncia";
+	private static final String PARAM_REFERENCE = "referencia";
 	private static final String PARAM_SUCID = "sucursal";
 	private static final String PARAM_USER = "usuario";
 
