@@ -19,8 +19,8 @@ import com.sterling.digicheck.documenttype.entity.DocumentTypeEntity;
 @Entity
 @Table(name = "DOCUMENTO")
 @NamedQueries({@NamedQuery(name = "DocumentEntity.findAll", query = "SELECT d FROM DocumentEntity d"), 
-			   @NamedQuery(name = "DocumentEntity.findByDocId", query = "SELECT d FROM DocumentEntity d WHERE d.docId = :docId"), 
-			   @NamedQuery(name = "DocumentEntity.findByDocNumero", query = "SELECT d FROM DocumentEntity d WHERE d.docNumber = :docNumber")})
+			   @NamedQuery(name = "DocumentEntity.findByDocId", query = "SELECT d FROM DocumentEntity d WHERE d.docId = :docId")
+			   })
 public class DocumentEntity implements Serializable{
 	/**
 	 * Serial Version UID
@@ -29,10 +29,7 @@ public class DocumentEntity implements Serializable{
 	@Id
     @Basic(optional = false)
     @Column(name = "DOC_ID")
-    private Integer docId;
-    @Basic(optional = false)
-    @Column(name = "DOC_NUMERO")
-    private int docNumber;
+    private Integer docId;       
     @Basic(optional = false)
     @Lob
     @Column(name = "DOC_ARCHIVO")
@@ -49,12 +46,6 @@ public class DocumentEntity implements Serializable{
 	}
 	public void setDocId(Integer docId) {
 		this.docId = docId;
-	}
-	public int getDocNumber() {
-		return docNumber;
-	}
-	public void setDocNumber(int docNumber) {
-		this.docNumber = docNumber;
 	}
 	public byte[] getDocFile() {
 		return docFile;

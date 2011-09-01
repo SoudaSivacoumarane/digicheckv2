@@ -10,8 +10,7 @@ public class DocumentView implements Serializable {
 	 */
 	private static final long serialVersionUID = -6093243672520498445L;
 	 
-    private Integer docId;	    
-    private Integer docNumber;	    
+    private Integer docId;	          
     private byte[] docFile;	        	       
     private DocumentTypeView documentTypeView;
     
@@ -28,12 +27,6 @@ public class DocumentView implements Serializable {
 	}
 	public void setDocId(Integer docId) {
 		this.docId = docId;
-	}
-	public Integer getDocNumber() {
-		return docNumber;
-	}
-	public void setDocNumber(Integer docNumber) {
-		this.docNumber = docNumber;
 	}
 	public byte[] getDocFile() {
 		return docFile;
