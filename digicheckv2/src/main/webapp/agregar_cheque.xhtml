@@ -1,18 +1,25 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-<head>
-	<title>Digitalizar</title>
-</head>
-<body style="background-color: gray;">
-	<APPLET CODE="com.sterling.web.batch.BatchScreenNew.class" ARCHIVE="libs/datasource/commons-beanutils.jar,libs/datasource/commons-collections-3.2.1.jar,libs/datasource/commons-dbcp.jar,libs/datasource/commons-digester.jar,libs/datasource/commons-logging-1.1.1.jar,libs/datasource/commons-pool.jar,libs/datasource/Opta2000.jar,libs/examples.jar,libs/batch.jar,libs/morena.jar,libs/morena_windows.jar,libs/morena_osx.jar,libs/morena_license.jar" WIDTH="1024" HEIGHT="300">
-		<param name="usuario" value="#{batchManagedBean.batchView.userView.login}" />
-		<param name="sucursal" value="#{batchManagedBean.branchOfficeId}" />
-		<param name="divisa" value="#{batchManagedBean.currencySelected}" />
-		<param name="importe" value="#{batchManagedBean.batchView.batchAmount}" />
-		<param name="documentos" value="#{batchManagedBean.batchView.batchDocuments}" />
-		<param name="referencia" value="#{batchManagedBean.batchView.reference}" />
-		<param name="fecha" value="#{batchManagedBean.batchView.batchDate}" />
-	</APPLET>
-</body>		
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:rich="http://richfaces.org/rich"      
+	  xmlns:a4j="http://richfaces.org/a4j">
+<h:head>
+	<title>Cheques</title>
+</h:head>	  	 
+    <h:body style="background-color: gray;">        		
+      	<f:view>      		
+				<APPLET CODE="com.sterling.web.batch.BatchScreenNew.class" ARCHIVE="libs/datasource/commons-beanutils.jar,libs/datasource/commons-collections-3.2.1.jar,libs/datasource/commons-dbcp.jar,libs/datasource/commons-digester.jar,libs/datasource/commons-logging-1.1.1.jar,libs/datasource/commons-pool.jar,libs/datasource/Opta2000.jar,libs/examples.jar,libs/batch.jar,libs/morena.jar,libs/morena_windows.jar,libs/morena_osx.jar,libs/morena_license.jar" WIDTH="1024" HEIGHT="300">
+					<param name="usuario" value="#{batchManagedBean.batchView.userView.login}" />
+					<param name="sucursal" value="#{batchManagedBean.branchOfficeId}" />
+					<param name="divisa" value="#{batchManagedBean.currencySelected}" />
+					<param name="importe" value="10500" />
+					<param name="documentos" value="#{batchManagedBean.batchView.batchDocuments}" />
+					<param name="referencia" value="#{batchManagedBean.batchView.reference}" />
+					<param name="fecha" value="2011-09-01" />
+				</APPLET>			
+		</f:view>
+	</h:body>		
 </html>
