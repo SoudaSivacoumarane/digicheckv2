@@ -1,5 +1,6 @@
 package com.cpi.sterling.lot.dao;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -8,6 +9,7 @@ import com.cpi.sterling.lot.dto.LotDTO;
 import com.cpi.sterling.lot.exception.LotException;
 import com.cs.common.pool.DBDAO;
 import com.cs.common.pool.exception.PoolException;
+import com.cs.common.utils.NumberUtil;
 
 public class LotDAO extends DBDAO {
 	
@@ -15,6 +17,7 @@ public class LotDAO extends DBDAO {
 	
 	public int insertLot(LotDTO lotDTO)throws LotException{
 		int id = 0;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try{
 			preparedStatement = prepareSQL(SQL_INSERT, dsName);
@@ -25,7 +28,10 @@ public class LotDAO extends DBDAO {
 			preparedStatement.setInt(5, lotDTO.getNoDocs());
 			preparedStatement.setDouble(6, lotDTO.getAmount());
 			preparedStatement.setString(7, lotDTO.getUser());
-			id = executeInsert(preparedStatement);
+			executeInsert(preparedStatement);
+			connection = preparedStatement.getConnection();
+			id = NumberUtil.parseInt(getInsertedId(connection));
+			connection.close();
 		}catch(PoolException poolException){
 			LotException lotException = null;
 			poolException.printStackTrace(System.out);
