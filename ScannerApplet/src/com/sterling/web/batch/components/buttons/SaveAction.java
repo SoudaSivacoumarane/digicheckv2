@@ -48,7 +48,7 @@ public class SaveAction implements ActionRunneable {
 				((ToolBar)mainPanel.getParent().getComponent(0)).arrowEnable(false);
 				
 				mainPanel.setStatusBar("Lote <"+loteId+"> Guardado.");
-				JOptionPane.showMessageDialog(mainPanel, "Loste <"+loteId+"> Guardado con Exito.");
+				JOptionPane.showMessageDialog(mainPanel, "Lote <"+loteId+"> Guardado con Exito.");
 			}else{
 				mainPanel.setStatusBar("No. Docs <"+lotView.getNoDocs()+"> != Cheques Scanneados <"+checks.size()+">");
 			}

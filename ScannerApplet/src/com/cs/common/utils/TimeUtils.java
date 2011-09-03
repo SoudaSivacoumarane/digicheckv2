@@ -17,7 +17,8 @@ import java.util.TimeZone;
  */
 public class TimeUtils {
 	
-	public static final String DATE_PATTERN_YYYYMMDD = "yyyy-MM-dd";	
+	public static final String DATE_PATTERN_YYYYMMDD = "yyyy-MM-dd";
+	public static final String DATE_PATTERN_COMPLETE = "EEE MMM dd HH:mm:ss zzz yyyy";
 	
 	/**
 	 * Returns the current date in de format dd-MM-yyyy

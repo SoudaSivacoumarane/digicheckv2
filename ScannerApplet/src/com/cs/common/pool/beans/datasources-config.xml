@@ -5,7 +5,7 @@ Data for connection pools
 <datasources>
 	<datasource name="digicheck">
 	    <driver>com.inet.tds.TdsDriver</driver>
-	    <url>jdbc:inetdae7:180.180.1.138:1433</url>
+	    <url>jdbc:inetdae7:localhost:1999</url>
 	    <catalog>digicheck</catalog>
 	    <username>digicheck</username>
 	    <pass>digicheck</pass>
