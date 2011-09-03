@@ -40,9 +40,12 @@ public class ScanAction implements ActionRunneable {
 		try {
 			source = TwainManager.selectSource(null);
 			if (source != null) {
-				source.setVisible(true);
-				source.setColorMode();
+				source.setVisible(false);
+				source.setGrayScaleMode();
 				source.setResolution(100);
+				source.setDuplexEnabled(true);
+				source.setPrinterEnabled(false);
+				source.setSupportedSizes(0);
 				do{
 					morenaImage = new MorenaImage(source);
 					imageStatus = morenaImage.getStatus();
@@ -66,18 +69,20 @@ public class ScanAction implements ActionRunneable {
 					}
 				}while(source.hasMoreImages());
 				
-				((ToolBar)mainPanel.getParent().getComponent(0)).isScan(true);
-				if(  arrayImages.size()/2 > 1 ){
-					((ToolBar)mainPanel.getParent().getComponent(0)).onlyRightEnable();
-				}else{
-					((ToolBar)mainPanel.getParent().getComponent(0)).arrowEnable(false);
+				if( arrayCheckInfo.size() > 0 ){
+					((ToolBar)mainPanel.getParent().getComponent(0)).isScan(true);
+					if(  arrayImages.size()/2 > 1 ){
+						((ToolBar)mainPanel.getParent().getComponent(0)).onlyRightEnable();
+					}else{
+						((ToolBar)mainPanel.getParent().getComponent(0)).arrowEnable(false);
+					}
+					
+					mainPanel.resetPosition();
+					mainPanel.setStatusBar("# Cheques : " + arrayImages.size()/2);
+					
+					mainPanel.setImages(arrayImages);
+					mainPanel.setChecks(arrayCheckInfo);
 				}
-				
-				mainPanel.resetPosition();
-				mainPanel.setStatusBar("# Cheques : " + arrayImages.size()/2);
-				
-				mainPanel.setImages(arrayImages);
-				mainPanel.setChecks(arrayCheckInfo);
 				
 			}else{
 				mainPanel.setStatusBar("Failed, try again ...");

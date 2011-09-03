@@ -22,7 +22,7 @@ public class LotConverter {
 				dto.setNoDocs(view.getNoDocs());
 				dto.setReference(view.getReference());
 				dto.setAmount(view.getAmount());
-				date.setTime(TimeUtils.convertStringToDate(view.getDate(), TimeUtils.DATE_PATTERN_YYYYMMDD));
+				date.setTime(TimeUtils.convertStringToDate(view.getDate(), TimeUtils.DATE_PATTERN_COMPLETE));
 				dto.setDate(date);
 			}			
 		} catch (Exception exception){
