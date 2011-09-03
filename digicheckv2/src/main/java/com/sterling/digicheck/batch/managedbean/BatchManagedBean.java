@@ -123,7 +123,15 @@ public class BatchManagedBean implements Serializable {
 	}
 	
 	public void back(){
-		JSFUtil.redirect("cheques.xhtml");
+		try {
+			this.userView = JSFUtil.getSessionAttribute(UserView.class, "user");
+			this.branchOfficeView = branchOfficeService.validateBranchOffice(Integer.parseInt(userView.getSucursalId()));
+			this.batchView.setUserView(userView);
+			this.batchView.setBranchOfficeView(branchOfficeView);
+		} catch (BranchOfficeException e) {
+			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());
+		}
+		JSFUtil.redirect("home.xhtml");
 	}
 	
 	public void cleanValues(){
