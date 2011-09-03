@@ -13,6 +13,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+
 import com.sterling.digicheck.permission.entity.PermissionEntity;
 @Entity
 @Table(name = "TIPO_PERMISO")
@@ -31,6 +33,7 @@ public class PermissionTypeEntity implements Serializable {
     @Column(name = "PET_DESCRIPCION")
     private String petDescripcion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "petCode")
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Collection<PermissionEntity> permisoCollection;
 
     public PermissionTypeEntity() {
