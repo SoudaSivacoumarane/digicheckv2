@@ -79,7 +79,7 @@
 						<legend>LOTE</legend>						
 						<h:panelGrid columns="4" width="500px;" style="text-align: left;">
 							<h:outputLabel value="Fecha" style="font-weight: bold"/>
-							<rich:calendar id="calendar" cellWidth="24px" datePattern="yyyy-MM-dd" value="#{batchManagedBean.batchView.batchDate}"
+							<rich:calendar id="calendar" cellWidth="24px" datePattern="dd/MM/yyyy" value="#{batchManagedBean.batchView.batchDate}"
                     				       cellHeight="22px" style="width:100px" required="true" requiredMessage="Ingrese una fecha.">
                     				       <f:ajax render="@none" execute="@this" />
                     		</rich:calendar>
@@ -108,14 +108,10 @@
 							<h:panelGroup>&nbsp;</h:panelGroup>
 							<h:panelGroup>&nbsp;</h:panelGroup>
 							<h:panelGroup>&nbsp;</h:panelGroup>                           				       
-						</h:panelGrid>						
-						<div style="text-align: left;">
-							<h:graphicImage alt="Digitalizar" value="resources/images/scanner.png" onclick="return validate();"  />
-							<h:outputLabel value="Digitalizar" style="font-weight: bold"/>
-						</div>						
+						</h:panelGrid>																
 						<div style="text-align: right;">
-							<h:commandButton value="Cancelar" action="#{batchManagedBean.back}" immediate="true" /> &nbsp;
-							<h:commandButton value="Digitalizar Lotes" action="#{batchManagedBean.insertBatch}" />							
+							<h:commandButton value="Cancelar" action="#{batchManagedBean.back}" immediate="true" /> &nbsp;							
+							<h:commandButton value="Digitalizar Lotes" onclick="return validate();" />							
 						</div>
 					</fieldset>
 					<div style="width: 220px;">

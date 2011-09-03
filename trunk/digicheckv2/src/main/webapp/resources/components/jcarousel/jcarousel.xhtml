@@ -24,11 +24,11 @@
 					visible: 2 
 				});
 			});
-		</script>
+		</script>		  
 		
 		<ul id="digicheckcarousel" class="jcarousel-skin-tango">
 			<c:forEach var="row" items="${sessionScope.batchManagedBean.batchDocumentView.documentList}">							
-				<li><a href="image?id=#{row.docId}" rel="lightbox[roadtrip]"><img src="image?id=#{row.docId}" width="290" height="180" alt="" /></a></li>
+				<li><a href="image?id=#{row.docId}" rel="lightbox[roadtrip]"><img src="image?id=#{row.docId}" style="border: none;" width="290" height="180" alt="" /></a></li>
 			</c:forEach>
 		</ul>			
 	</composite:implementation>

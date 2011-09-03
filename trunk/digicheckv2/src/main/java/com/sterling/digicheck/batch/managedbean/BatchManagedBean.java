@@ -9,6 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
 import org.apache.log4j.Logger;
@@ -77,6 +78,18 @@ public class BatchManagedBean implements Serializable {
 	}
 	
 	public void goDigitalization(){
+		try {
+			this.userView = JSFUtil.getSessionAttribute(UserView.class, "user");
+			this.branchOfficeView = branchOfficeService.validateBranchOffice(Integer.parseInt(userView.getSucursalId()));
+			this.batchView.setUserView(userView);
+			this.batchView.setBranchOfficeView(branchOfficeView);
+		} catch (BranchOfficeException e) {
+			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());
+		}
+		JSFUtil.redirect("digitalizacion.xhtml");
+	}
+	
+	public void goViewDigitalizationAction(ActionEvent actionEvent){
 		try {
 			this.userView = JSFUtil.getSessionAttribute(UserView.class, "user");
 			this.branchOfficeView = branchOfficeService.validateBranchOffice(Integer.parseInt(userView.getSucursalId()));
@@ -157,6 +170,16 @@ public class BatchManagedBean implements Serializable {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, userException.getMessage(), userException.getMessage());
 		}
 		return !branchofficeallowed;
+	}	
+	
+	public boolean isDigitize(){
+		boolean digitize = Boolean.FALSE;		
+		try {
+			digitize = securityAuthorizationService.hasPermission("2", JSFUtil.getSessionAttribute(UserView.class, "user").getLogin());
+		} catch (UserException userException) {
+			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, userException.getMessage(), userException.getMessage());
+		}
+		return digitize;
 	}
 	
 	public String getReference() {
