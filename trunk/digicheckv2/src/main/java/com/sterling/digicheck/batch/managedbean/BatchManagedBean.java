@@ -81,7 +81,9 @@ public class BatchManagedBean implements Serializable {
 		try {
 			this.userView = JSFUtil.getSessionAttribute(UserView.class, "user");
 			this.branchOfficeView = branchOfficeService.validateBranchOffice(Integer.parseInt(userView.getSucursalId()));
-			this.batchView.setUserView(userView);
+			this.batchView.setBatchDocuments(null);
+			this.batchView.setBatchAmount(null);
+			this.batchView.setUserView(userView);			
 			this.batchView.setBranchOfficeView(branchOfficeView);
 		} catch (BranchOfficeException e) {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());
@@ -93,6 +95,8 @@ public class BatchManagedBean implements Serializable {
 		try {
 			this.userView = JSFUtil.getSessionAttribute(UserView.class, "user");
 			this.branchOfficeView = branchOfficeService.validateBranchOffice(Integer.parseInt(userView.getSucursalId()));
+			this.batchView.setBatchDocuments(null);
+			this.batchView.setBatchAmount(null);
 			this.batchView.setUserView(userView);
 			this.batchView.setBranchOfficeView(branchOfficeView);
 		} catch (BranchOfficeException e) {
