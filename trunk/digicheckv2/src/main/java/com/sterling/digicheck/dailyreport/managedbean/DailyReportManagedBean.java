@@ -15,6 +15,7 @@ import com.sterling.common.util.JSFUtil;
 import com.sterling.digicheck.branchoffice.exception.BranchOfficeException;
 import com.sterling.digicheck.branchoffice.service.BranchOfficeService;
 import com.sterling.digicheck.monthlyreport.view.MonthlyReportView;
+import com.sterling.digicheck.user.view.UserView;
 
 @ManagedBean(name="dailyReportManagedBean")
 @RequestScoped
@@ -29,6 +30,9 @@ public class DailyReportManagedBean implements Serializable {
 	private List<MonthlyReportView> reportList = null;
 	private String branchOfficeCode;
 	
+	public DailyReportManagedBean() {
+		this.branchOfficeCode = JSFUtil.getSessionAttribute(UserView.class, "user").getSucursalId();
+	}
 	
 	public List<SelectItem> getBranchOfficeItems(){
 		List<SelectItem> bItems = null;
