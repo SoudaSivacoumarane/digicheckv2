@@ -12,9 +12,12 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.model.SelectItem;
 
 import com.sterling.common.util.JSFUtil;
+import com.sterling.digicheck.batch.exception.BatchException;
+import com.sterling.digicheck.batch.service.BatchService;
 import com.sterling.digicheck.branchoffice.exception.BranchOfficeException;
 import com.sterling.digicheck.branchoffice.service.BranchOfficeService;
 import com.sterling.digicheck.monthlyreport.view.MonthlyReportView;
+import com.sterling.digicheck.user.view.UserView;
 
 @ManagedBean(name="monthlyReportManagedBean")
 @RequestScoped
@@ -27,7 +30,15 @@ public class MonthlyReportManagedBean implements Serializable{
 	@ManagedProperty("#{branchOfficeService}")
 	BranchOfficeService branchOfficeService;	
 	private String branchOfficeCode;
+	@ManagedProperty("#{batchService}")
+	private BatchService batchService;
 	private List<MonthlyReportView> reportList = null;		
+	private String month;
+	private String year;
+	
+	public MonthlyReportManagedBean() {
+		this.branchOfficeCode = JSFUtil.getSessionAttribute(UserView.class, "user").getSucursalId();
+	}
 	
 	public List<SelectItem> getBranchOfficeItems(){
 		List<SelectItem> bItems = null;
@@ -44,6 +55,13 @@ public class MonthlyReportManagedBean implements Serializable{
 		if(branchOfficeCode.equals("-1")){
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Seleccione al menos una Sucursal", "Seleccione al menos una Sucursal");
 		}else{
+			
+			try {
+				batchService.searchMonthlyReport(month, year, branchOfficeCode);
+			} catch (BatchException e) {
+				JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Hubo un error al generar el Reporte Mensual.", "Hubo un error al generar el Reporte Mensual.");
+			}
+			
 			NumberFormat numberFormat = NumberFormat.getInstance();
 			NumberFormat numberFormat2 = NumberFormat.getInstance();
 			numberFormat.setMaximumFractionDigits(0);
@@ -89,5 +107,25 @@ public class MonthlyReportManagedBean implements Serializable{
 	public void setBranchOfficeService(BranchOfficeService branchOfficeService) {
 		this.branchOfficeService = branchOfficeService;
 	}
+		
+	public String getMonth() {
+		return month;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	public void setBatchService(BatchService batchService) {
+		this.batchService = batchService;
+	}		
 
 }
