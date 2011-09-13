@@ -83,6 +83,7 @@ public class BatchManagedBean implements Serializable {
 			this.branchOfficeView = branchOfficeService.validateBranchOffice(Integer.parseInt(userView.getSucursalId()));
 			this.batchView.setBatchDocuments(null);
 			this.batchView.setBatchAmount(null);
+			this.batchView.setBatchDate(new Date());
 			this.batchView.setUserView(userView);			
 			this.batchView.setBranchOfficeView(branchOfficeView);
 		} catch (BranchOfficeException e) {
@@ -97,6 +98,7 @@ public class BatchManagedBean implements Serializable {
 			this.branchOfficeView = branchOfficeService.validateBranchOffice(Integer.parseInt(userView.getSucursalId()));
 			this.batchView.setBatchDocuments(null);
 			this.batchView.setBatchAmount(null);
+			this.batchView.setBatchDate(new Date());
 			this.batchView.setUserView(userView);
 			this.batchView.setBranchOfficeView(branchOfficeView);
 		} catch (BranchOfficeException e) {
