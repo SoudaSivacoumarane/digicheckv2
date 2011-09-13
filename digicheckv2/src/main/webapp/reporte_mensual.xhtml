@@ -22,22 +22,22 @@
   				<rich:panel header="Reporte Mensual por Sucursal" style="width: 700px;">
   					<h:panelGrid columns="7" cellpadding="1" cellspacing="2">
                         	<h:outputLabel value="Mes : " style="font-weight: bold"/>
-                            <h:selectOneMenu id="Mes" label="Mes">
-		                        <f:selectItem itemValue="Enero" itemLabel="Enero" />
-		                        <f:selectItem itemValue="Febrero" itemLabel="Febrero" />
-		                        <f:selectItem itemValue="Marzo" itemLabel="Marzo" />
-		                        <f:selectItem itemValue="Abril" itemLabel="Abril" />
-		                        <f:selectItem itemValue="Mayo" itemLabel="Mayo" />
-		                        <f:selectItem itemValue="Junio" itemLabel="Junio" />
-		                        <f:selectItem itemValue="Julio" itemLabel="Julio" />
-		                        <f:selectItem itemValue="Agosto" itemLabel="Agosto" />
-		                        <f:selectItem itemValue="Septiembre" itemLabel="Septiembre" />
-		                        <f:selectItem itemValue="Octubre" itemLabel="Octubre" />
-		                        <f:selectItem itemValue="Noviembre" itemLabel="Noviembre" />
-		                        <f:selectItem itemValue="Diciembre" itemLabel="Diciembre" />
+                            <h:selectOneMenu id="Mes" label="Mes" value="#{monthlyReportManagedBean.month}">
+		                        <f:selectItem itemValue="1" itemLabel="Enero" />
+		                        <f:selectItem itemValue="2" itemLabel="Febrero" />
+		                        <f:selectItem itemValue="3" itemLabel="Marzo" />
+		                        <f:selectItem itemValue="4" itemLabel="Abril" />
+		                        <f:selectItem itemValue="5" itemLabel="Mayo" />
+		                        <f:selectItem itemValue="6" itemLabel="Junio" />
+		                        <f:selectItem itemValue="7" itemLabel="Julio" />
+		                        <f:selectItem itemValue="8" itemLabel="Agosto" />
+		                        <f:selectItem itemValue="9" itemLabel="Septiembre" />
+		                        <f:selectItem itemValue="10" itemLabel="Octubre" />
+		                        <f:selectItem itemValue="11" itemLabel="Noviembre" />
+		                        <f:selectItem itemValue="12" itemLabel="Diciembre" />
 		                    </h:selectOneMenu>
 		                    <h:outputLabel value="A&ntilde;o : " style="font-weight: bold"/>
-                            <h:selectOneMenu id="a&ntilde;o" label="A&ntilde;o">
+                            <h:selectOneMenu id="a&ntilde;o" label="A&ntilde;o" value="#{monthlyReportManagedBean.year}">
 		                        <f:selectItem itemValue="2007" itemLabel="2007" />
 		                        <f:selectItem itemValue="2008" itemLabel="2008" />
 		                        <f:selectItem itemValue="2009" itemLabel="2009" />
@@ -46,7 +46,7 @@
 		                        <f:selectItem itemValue="2012" itemLabel="2012" />
 		                    </h:selectOneMenu>
                             <h:outputLabel value="Sucursal : " style="font-weight: bold"/>
-		                    <h:selectOneMenu id="sucursales" style="width: 200px" value="#{monthlyReportManagedBean.branchOfficeCode}">
+		                    <h:selectOneMenu id="sucursales" style="width: 200px" value="#{monthlyReportManagedBean.branchOfficeCode}" disabled="#{batchManagedBean.branchOfficeAllowed}" >
 		                    	<f:selectItem itemValue="-1" itemLabel="Seleccione una Sucursal"/>			                    	
 								<f:selectItems value="#{monthlyReportManagedBean.branchOfficeItems}" />
 							</h:selectOneMenu>		                    		                    		                    		                    
