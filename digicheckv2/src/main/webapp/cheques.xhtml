@@ -69,10 +69,7 @@
 	    <br />
 	    <rich:dataTable value="#{batchManagedBean.batchViewList}" var="row" rowClasses="odd, even" id="table" rows="5" style="width: 70%" rendered="#{batchManagedBean.renderTable}">		
 			<rich:column>
-				<f:facet name="header">					
-					<h:commandLink styleClass="no-decor" action="#{batchManagedBean.goDigitalization}">
-						<h:graphicImage value="/resources/images/img-new.png" alt="Digitalizaci&oacute;n de Documentos" />						
-					</h:commandLink>					
+				<f:facet name="header">
 				</f:facet>            							
 					<h:commandLink styleClass="no-decor" action="#{batchManagedBean.goViewDigitalization}">
 						<h:graphicImage value="/resources/images/layout.png" alt="Ver Documentos" />
