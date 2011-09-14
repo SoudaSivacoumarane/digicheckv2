@@ -135,7 +135,7 @@ public class BatchDAO extends GenericDAO {
 			query = em.createQuery("SELECT l FROM BatchEntity l WHERE l.branchOfficeId.sucId = ?1 AND year(l.batchDate) = ?2 AND month(l.batchDate) = ?3 AND day(l.batchDate) = ?4");
 			query.setParameter(1, Integer.parseInt(branchOfficeId));
 			query.setParameter(2, calendar.get(Calendar.YEAR));
-        	query.setParameter(3, calendar.get(Calendar.MONTH));
+        	query.setParameter(3, calendar.get(Calendar.MONTH) + 1);
         	query.setParameter(4, calendar.get(Calendar.DATE));
 			batchEntityList = query.getResultList();			
 			em.getTransaction().commit();					
