@@ -1,17 +1,33 @@
 package com.sterling.digicheck.monthlyreport.managedbean;
 
+import java.io.IOException;
 import java.io.Serializable;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpServletResponse;
 
+import jxl.Workbook;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
 import com.sterling.common.util.JSFUtil;
+import com.sterling.common.util.NumberUtil;
+import com.sterling.common.util.StringUtils;
 import com.sterling.digicheck.batch.exception.BatchException;
 import com.sterling.digicheck.batch.service.BatchService;
 import com.sterling.digicheck.branchoffice.exception.BranchOfficeException;
@@ -20,7 +36,7 @@ import com.sterling.digicheck.monthlyreport.view.MonthlyReportView;
 import com.sterling.digicheck.user.view.UserView;
 
 @ManagedBean(name="monthlyReportManagedBean")
-@RequestScoped
+@ViewScoped
 public class MonthlyReportManagedBean implements Serializable{
 	/**
 	 * 
@@ -32,9 +48,12 @@ public class MonthlyReportManagedBean implements Serializable{
 	private String branchOfficeCode;
 	@ManagedProperty("#{batchService}")
 	private BatchService batchService;
-	private List<MonthlyReportView> reportList = null;		
+	private List<MonthlyReportView> reportList = new ArrayList<MonthlyReportView>(0);		
 	private String month;
 	private String year;
+	private String header;
+	private String totalAmount;
+	private String totalDocNum;
 	
 	public MonthlyReportManagedBean() {
 		this.branchOfficeCode = JSFUtil.getSessionAttribute(UserView.class, "user").getSucursalId();
@@ -54,39 +73,112 @@ public class MonthlyReportManagedBean implements Serializable{
 	public String performSearch(){
 		if(branchOfficeCode.equals("-1")){
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Seleccione al menos una Sucursal", "Seleccione al menos una Sucursal");
-		}else{
-			
+		}else{			
 			try {
 				batchService.searchMonthlyReport(month, year, branchOfficeCode);
 			} catch (BatchException e) {
 				JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Hubo un error al generar el Reporte Mensual.", "Hubo un error al generar el Reporte Mensual.");
+			}						
+			reportList = new ArrayList<MonthlyReportView>();			
+			try {
+				JSFUtil.getSessionAttribute(UserView.class, "user");
+				reportList = batchService.searchMonthlyReport(month, year, branchOfficeCode);
+				if(!reportList.isEmpty()){
+					String branchOfficeName = branchOfficeService.validateBranchOffice(Integer.parseInt(JSFUtil.getSessionAttribute(UserView.class, "user").getSucursalId())).getName();				
+					this.header = "Mes: " + StringUtils.getMonth(Integer.parseInt(month)) + "/" + year + " Sucursal " + branchOfficeName;
+					double totalA = 0;
+					int totalDoc = 0;
+					for (MonthlyReportView r : reportList) {
+						totalA += r.getTotalAmount();
+						totalDoc += r.getTotalDocNum();
+					}
+					this.totalAmount = NumberUtil.convertQuantity(totalA);
+					this.totalDocNum ="$ " + String.valueOf(totalDoc);
+				}else{
+					JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "No se encontraron Resultados.", "No se encontraron Resultados.");	
+				}
+				
+			} catch (BatchException e) {
+				JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Hubo un error al generar el Reporte Mensual.", e.getMessage());
+			} catch (BranchOfficeException branchOfficeException){
+				JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Hubo un error al generar el Reporte Mensual.", branchOfficeException.getMessage());
 			}
-			
-			NumberFormat numberFormat = NumberFormat.getInstance();
-			NumberFormat numberFormat2 = NumberFormat.getInstance();
-			numberFormat.setMaximumFractionDigits(0);
-			numberFormat.setMinimumFractionDigits(0);
-			MonthlyReportView monthlyReportView = null;
-			reportList = new ArrayList<MonthlyReportView>();
-			for (int i = 0; i < 25; i++) {
-				monthlyReportView = new MonthlyReportView();
-				String day = String.valueOf((int)(Math.random()*31));
-				day = day.length() == 1 ? "0" + day :day;
-				monthlyReportView.setDate(day+"/08/2010");
-				monthlyReportView.setReference(numberFormat.format(Math.random()*999999999).replaceAll(",", ""));			
-				monthlyReportView.setBank("BANORTE");
-				monthlyReportView.setCurrency("USD");
-				monthlyReportView.setAccount(numberFormat.format(Math.random()*999999).replaceAll(",", ""));
-			    monthlyReportView.setDocNum(numberFormat.format(Math.random()*9));
-			    numberFormat2.setMaximumFractionDigits(2);
-				numberFormat2.setMinimumFractionDigits(2);
-				monthlyReportView.setAmount(numberFormat2.format(Math.random()*99999));
-			    reportList.add(monthlyReportView);			    
-			 }			
 		}
 		return null;
 	}
+	
+	public void excelExportAction(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		WritableWorkbook workbook = null;
+		try {
+			//create workbook and sheet for output
+			HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-disposition", "inline;filename=\"ReporteMensual.xls\"");
+			response.setContentType("application/xls");
+			
+			workbook = Workbook.createWorkbook(response.getOutputStream());
+			WritableSheet s = workbook.createSheet("Reporte Mensual", 0);
+			s.addCell(new Label(0, 0, "Hello World"));
+			for (MonthlyReportView report : reportList) {
+				s.addCell(new Label(0, 0, report.getDate()));
+				s.addCell(new Label(0, 0, report.getReference()));
+				s.addCell(new Label(0, 0, report.getAmount()));
+			}			
+			s.addCell(new Label(0, 0, this.totalDocNum));
+			s.addCell(new Label(0, 0, this.totalAmount));
+
+			workbook.write();
+			workbook.close();
+			context.responseComplete();
+		} catch(IOException e) {
+			e.printStackTrace();
+		} catch (RowsExceededException e) {
+			e.printStackTrace();
+		} catch (WriteException e) {
+			e.printStackTrace();
+		} 
+	}
+	
+	public void pdfExportAction(){
+		FacesContext context = FacesContext.getCurrentInstance();
 		
+		HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
+		response.setContentType("application/pdf");
+		response.setHeader("Content-disposition", "attachment;filename=\"ReporteMensual.pdf\"");		
+		Document document = new Document();
+		try{
+			PdfWriter.getInstance(document, response.getOutputStream());
+			document.open();			
+			document.add(new Paragraph(header));
+			PdfPTable table = new PdfPTable(5);
+			table.addCell("Fecha");
+			table.addCell("Referencia");
+			table.addCell("Divisa");
+			table.addCell("No. Doc.");
+			table.addCell("Importe");						
+			for (MonthlyReportView report : reportList) {
+				table.addCell(report.getDate());
+				table.addCell(report.getReference());
+				table.addCell(report.getCurrency());
+				table.addCell(report.getDocNum());
+				table.addCell(report.getAmount());
+			}
+			table.addCell("");
+			table.addCell("");
+			table.addCell("");
+			table.addCell(totalDocNum);
+			table.addCell(totalAmount);
+			
+			document.add(table);		
+			document.close(); 
+			context.responseComplete();
+		}catch(DocumentException e){
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
+	}
 
 	public List<MonthlyReportView> getReportList() {
 		return reportList;
@@ -126,6 +218,30 @@ public class MonthlyReportManagedBean implements Serializable{
 
 	public void setBatchService(BatchService batchService) {
 		this.batchService = batchService;
-	}		
+	}
 
+	public String getHeader() {
+		return header;
+	}
+
+	public void setHeader(String header) {
+		this.header = header;
+	}
+
+	public String getTotalAmount() {
+		return totalAmount;
+	}
+
+	public void setTotalAmount(String totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+
+	public String getTotalDocNum() {
+		return totalDocNum;
+	}
+
+	public void setTotalDocNum(String totalDocNum) {
+		this.totalDocNum = totalDocNum;
+	}
+	
 }
