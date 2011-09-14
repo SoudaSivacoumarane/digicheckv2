@@ -1,6 +1,7 @@
 package com.sterling.digicheck.batch.dao;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -97,6 +98,55 @@ public class BatchDAO extends GenericDAO {
     		throw bankException;
 		}
 		return batchEntity;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<BatchEntity> searchMonthlyReport(String month, String year, String branchOfficeId) throws BatchException{
+		List<BatchEntity> batchEntityList = null;		
+		Query query = null;
+		try{
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
+			query = em.createQuery("SELECT l FROM BatchEntity l WHERE year(l.batchDate) = ?1 AND month(l.batchDate) = ?2 AND l.branchOfficeId.sucId = ?3");
+			query.setParameter(1, Integer.parseInt(year));
+			query.setParameter(2, Integer.parseInt(month));			
+			query.setParameter(3, Integer.parseInt(branchOfficeId));
+			batchEntityList = query.getResultList();			
+			em.getTransaction().commit();					
+		}catch (Exception exception){
+			BatchException bankException = null;
+			bankException = new BatchException(exception, BatchException.LAYER_DAO, BatchException.ACTION_SELECT);
+    		logger.error(bankException);
+    		exception.printStackTrace(System.out);
+    		throw bankException;
+		}		
+		return batchEntityList;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<BatchEntity> searchDailyReport(String branchOfficeId, Date day) throws BatchException{
+		List<BatchEntity> batchEntityList = null;				        	
+		Query query = null;
+		Calendar calendar = Calendar.getInstance();
+		try{										
+			calendar.setTime(day);			
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
+			query = em.createQuery("SELECT l FROM BatchEntity l WHERE l.branchOfficeId.sucId = ?1 AND year(l.batchDate) = ?2 AND month(l.batchDate) = ?3 AND day(l.batchDate) = ?4");
+			query.setParameter(1, Integer.parseInt(branchOfficeId));
+			query.setParameter(2, calendar.get(Calendar.YEAR));
+        	query.setParameter(3, calendar.get(Calendar.MONTH));
+        	query.setParameter(4, calendar.get(Calendar.DATE));
+			batchEntityList = query.getResultList();			
+			em.getTransaction().commit();					
+		}catch (Exception exception){
+			BatchException bankException = null;
+			bankException = new BatchException(exception, BatchException.LAYER_DAO, BatchException.ACTION_SELECT);
+    		logger.error(bankException);
+    		exception.printStackTrace(System.out);
+    		throw bankException;
+		}		
+		return batchEntityList;
 	}
 	
 }

@@ -9,6 +9,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityResult;
+import javax.persistence.FieldResult;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +20,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,6 +32,9 @@ import com.sterling.digicheck.user.entity.UserEntity;
 
 @Entity
 @Table(name = "LOTE")
+@SqlResultSetMapping(name="monthlyReportEntity", entities={@EntityResult(entityClass=BatchEntity.class, fields={@FieldResult(name="batchId", column="LOT_ID"), @FieldResult(name="currencyId", column="DIV_ID")}),										
+														   @EntityResult(entityClass=CurrencyEntity.class, fields={@FieldResult(name="name", column="DIV_NOMBRE") 
+															   													   })})
 @NamedQueries({@NamedQuery(name = "BatchEntity.findAll", query = "SELECT l FROM BatchEntity l"),
 			   @NamedQuery(name = "BatchEntity.findBySearchCriteria", query = "SELECT l FROM BatchEntity l WHERE UPPER(l.reference) LIKE :reference AND l.branchOfficeId.sucId = :sucId AND l.batchDate BETWEEN :beforeDate AND :afterDate"),
 			   @NamedQuery(name = "BatchEntity.findByLotReferencia", query = "SELECT l FROM BatchEntity l WHERE l.reference = :reference"), 

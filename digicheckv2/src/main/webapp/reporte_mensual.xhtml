@@ -23,6 +23,7 @@
   					<h:panelGrid columns="7" cellpadding="1" cellspacing="2">
                         	<h:outputLabel value="Mes : " style="font-weight: bold"/>
                             <h:selectOneMenu id="Mes" label="Mes" value="#{monthlyReportManagedBean.month}">
+                            	<f:ajax render="@none" execute="@this" />
 		                        <f:selectItem itemValue="1" itemLabel="Enero" />
 		                        <f:selectItem itemValue="2" itemLabel="Febrero" />
 		                        <f:selectItem itemValue="3" itemLabel="Marzo" />
@@ -38,6 +39,14 @@
 		                    </h:selectOneMenu>
 		                    <h:outputLabel value="A&ntilde;o : " style="font-weight: bold"/>
                             <h:selectOneMenu id="a&ntilde;o" label="A&ntilde;o" value="#{monthlyReportManagedBean.year}">
+                            	<f:ajax render="@none" execute="@this" />
+                            	<f:selectItem itemValue="2007" itemLabel="2000" />
+		                        <f:selectItem itemValue="2008" itemLabel="2001" />
+		                        <f:selectItem itemValue="2009" itemLabel="2002" />
+                            	<f:selectItem itemValue="2007" itemLabel="2003" />
+		                        <f:selectItem itemValue="2008" itemLabel="2004" />
+		                        <f:selectItem itemValue="2009" itemLabel="2005" />
+		                        <f:selectItem itemValue="2010" itemLabel="2006" />
 		                        <f:selectItem itemValue="2007" itemLabel="2007" />
 		                        <f:selectItem itemValue="2008" itemLabel="2008" />
 		                        <f:selectItem itemValue="2009" itemLabel="2009" />
@@ -47,11 +56,12 @@
 		                    </h:selectOneMenu>
                             <h:outputLabel value="Sucursal : " style="font-weight: bold"/>
 		                    <h:selectOneMenu id="sucursales" style="width: 200px" value="#{monthlyReportManagedBean.branchOfficeCode}" disabled="#{batchManagedBean.branchOfficeAllowed}" >
+		                    	<f:ajax render="@none" execute="@this" />
 		                    	<f:selectItem itemValue="-1" itemLabel="Seleccione una Sucursal"/>			                    	
 								<f:selectItems value="#{monthlyReportManagedBean.branchOfficeItems}" />
 							</h:selectOneMenu>		                    		                    		                    		                    
 		                    <a4j:commandButton value="Aceptar" action="#{monthlyReportManagedBean.performSearch}"
-								render="monthlyReportPane"  execute="@form"
+								render="monthlyReportPane" execute="@form"
 								oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('monthlyReportPane')}.show();}" />			                    		                    		                   
                         </h:panelGrid>                        
                         <br />
@@ -61,14 +71,20 @@
   				</rich:panel>
   			</h:panelGroup>  
   			
-  		<rich:popupPanel header="Reporte Mensual - MES:  Enero-2010 / SUCURSAL: San Agustin Remesas" id="monthlyReportPane" width="600" height="520">
+  		<rich:popupPanel header="#{monthlyReportManagedBean.header}" id="monthlyReportPane" width="350" height="520">
   			<f:facet name="controls">
 				<h:outputLink value="#" onclick="#{rich:component('monthlyReportPane')}.hide(); return false;">
 					cerrar
 				</h:outputLink>
 			</f:facet>					
 			<div align="center">
-			<h:dataTable id="tabla_reporte_mensual" var="row" value="#{monthlyReportManagedBean.reportList}" >                                                
+			<h:commandLink action="#{monthlyReportManagedBean.pdfExportAction}">
+				<h:graphicImage value="resources/images/pdf.png" style="border: none;" alt="Exportar a PDF." />
+			</h:commandLink> &nbsp;&nbsp;
+			<h:commandLink action="#{monthlyReportManagedBean.excelExportAction}">
+				<h:graphicImage value="resources/images/excel.png" style="border: none;" alt="Exportar a Excel." />
+			</h:commandLink>         
+			<h:dataTable id="tabla_reporte_mensual" var="row" rowClasses="odd, even" value="#{monthlyReportManagedBean.reportList}" >					                                       
                    <h:column style="text-align: center">
                        <f:facet name="header">
                        	<h:outputText value="FECHA" />
@@ -80,19 +96,7 @@
                            <h:outputText value="REFERENCIA" />
                        </f:facet>
                        <h:outputText value="#{row.reference}" />
-                   </h:column>
-                   <h:column style="text-align: center">
-                       <f:facet name="header">
-                           <h:outputText value="BANCO" />
-                       </f:facet>
-                       <h:outputText value="#{row.bank}" />
-                   </h:column>
-                   <h:column style="text-align: center">
-                       <f:facet name="header">
-                           <h:outputText value="CUENTA" />
-                       </f:facet>
-                       <h:outputText value="#{row.account}" />
-                   </h:column>
+                   </h:column>                                      
                    <h:column style="text-align: center">
                        <f:facet name="header">
                            <h:outputText value="DIVISA" />
@@ -112,8 +116,8 @@
                        <h:outputText value="#{row.amount}" />
                    </h:column>
                 </h:dataTable>                
-                <h:panelGroup style="width: 790; text-align: right;">
-           			<h:outputText value="32" /> <h:outputText value="$ 3,434.32" />
+                <h:panelGroup style="text-align: right;">
+           			<h:outputText value="#{monthlyReportManagedBean.totalDocNum}" /> &nbsp;&nbsp;&nbsp; <h:outputText value="#{monthlyReportManagedBean.totalAmount}" />
              	</h:panelGroup>  
              </div>                          	  		
 		</rich:popupPanel>  			

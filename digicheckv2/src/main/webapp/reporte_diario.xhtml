@@ -22,11 +22,13 @@
 	   				<rich:panel header="Reporte Diario por Sucursal" style="width: 600px;">
 	   					 <h:panelGrid columns="6">
 	                        	<h:outputLabel value="Fecha : " style="font-weight: bold"/>
-	                            <rich:calendar id="calendar" cellWidth="24px" datePattern="dd/MM/yyyy"
+	                            <rich:calendar id="calendar" cellWidth="24px" datePattern="dd/MM/yyyy" value="#{dailyReportManagedBean.day}"
 	                    				       cellHeight="22px" style="width:200px">
+	                    				       <f:ajax render="@none" execute="@this" />
 								</rich:calendar>
 	                            <h:outputLabel value="Sucursal : "  style="font-weight: bold"/>
 			                    <h:selectOneMenu id="sucursales" style="width: 200px" value="#{dailyReportManagedBean.branchOfficeCode}" disabled="#{batchManagedBean.branchOfficeAllowed}">
+			                    	<f:ajax render="@none" execute="@this" />
 			                    	<f:selectItem itemValue="-1" itemLabel="Seleccione una Sucursal"/>			                    	
 									<f:selectItems value="#{dailyReportManagedBean.branchOfficeItems}" />
 								</h:selectOneMenu>			                    
@@ -41,12 +43,19 @@
 	   				</rich:panel>	   					
 	    </h:panelGroup>
 	    
-	    <rich:popupPanel header="Reporte Diario - Dia: 24-Agosto-2010 / Sucursal: San Agustin Remesas" id="dailyReportPane" width="600" height="520">
+	    <rich:popupPanel header="#{dailyReportManagedBean.header}" id="dailyReportPane" width="350" height="520">
   			<f:facet name="controls">
 				<h:outputLink value="#" onclick="#{rich:component('dailyReportPane')}.hide(); return false;">
 					cerrar
 				</h:outputLink>
-			</f:facet>					
+			</f:facet>
+			
+			<h:commandLink action="#{dailyReportManagedBean.pdfExportAction}">
+				<h:graphicImage value="resources/images/pdf.png" style="border: none;" alt="Exportar a PDF." />
+			</h:commandLink> &nbsp;&nbsp;
+			<h:commandLink action="#{dailyReportManagedBean.excelExportAction}">
+				<h:graphicImage value="resources/images/excel.png" style="border: none;" alt="Exportar a Excel." />
+			</h:commandLink>         								
 			<div align="center">
 			<h:dataTable id="tabla_reporte_mensual" var="row" value="#{dailyReportManagedBean.reportList}" >                                                
                    <h:column style="text-align: center">
@@ -60,19 +69,7 @@
                            <h:outputText value="REFERENCIA" />
                        </f:facet>
                        <h:outputText value="#{row.reference}" />
-                   </h:column>
-                   <h:column style="text-align: center">
-                       <f:facet name="header">
-                           <h:outputText value="BANCO" />
-                       </f:facet>
-                       <h:outputText value="#{row.bank}" />
-                   </h:column>
-                   <h:column style="text-align: center">
-                       <f:facet name="header">
-                           <h:outputText value="CUENTA" />
-                       </f:facet>
-                       <h:outputText value="#{row.account}" />
-                   </h:column>
+                   </h:column>                   
                    <h:column style="text-align: center">
                        <f:facet name="header">
                            <h:outputText value="DIVISA" />
@@ -92,8 +89,8 @@
                        <h:outputText value="#{row.amount}" />
                    </h:column>
                 </h:dataTable>                
-                <h:panelGroup style="width: 790; text-align: right;">
-           			<h:outputText value="32" /> <h:outputText value="$ 3,434.32" />
+                <h:panelGroup style="text-align: right;">
+           			<h:outputText value="#dailyReportManagedBean.totalDocNum}" /> &nbsp;&nbsp;&nbsp; <h:outputText value="#{dailyReportManagedBean.totalAmount}" />
              	</h:panelGroup>  
              </div>                          	  		
 		</rich:popupPanel>
