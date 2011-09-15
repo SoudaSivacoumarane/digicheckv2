@@ -1,6 +1,8 @@
 package com.sterling.digicheck.batch.managedbean;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,11 +11,20 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Image;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfWriter;
 import com.sterling.common.util.JSFUtil;
 import com.sterling.digicheck.batch.exception.BatchException;
 import com.sterling.digicheck.batch.service.BatchService;
@@ -24,6 +35,7 @@ import com.sterling.digicheck.branchoffice.view.BranchOfficeView;
 import com.sterling.digicheck.currency.exception.CurrencyException;
 import com.sterling.digicheck.currency.service.CurrencyService;
 import com.sterling.digicheck.currency.view.CurrencyView;
+import com.sterling.digicheck.document.view.DocumentView;
 import com.sterling.digicheck.security.service.SecurityAuthorizationService;
 import com.sterling.digicheck.user.exception.UserException;
 import com.sterling.digicheck.user.view.UserView;
@@ -139,7 +151,7 @@ public class BatchManagedBean implements Serializable {
 		} catch (BranchOfficeException e) {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());
 		}
-		JSFUtil.redirect("home.xhtml");
+		JSFUtil.redirect("cheques.xhtml");
 	}
 	
 	public void cleanValues(){
@@ -196,6 +208,41 @@ public class BatchManagedBean implements Serializable {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, userException.getMessage(), userException.getMessage());
 		}
 		return digitize;
+	}
+		
+	public void sendToPrintAction(){
+		FacesContext context = FacesContext.getCurrentInstance();		
+		HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
+		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+		response.setContentType("application/pdf");
+		response.setHeader("Content-disposition", "attachment;filename=\"Cheques.pdf\"");		
+		Document document = new Document();
+		StringBuilder filePath = null; 
+		try{
+			PdfWriter.getInstance(document, response.getOutputStream());
+			document.open();			
+			Image check = null;
+			//document.add(new Paragraph("Sucursal / " + batchDocumentView.getBranchOfficeView().getName()));
+			int index = 0;
+			for(DocumentView view : batchDocumentView.getDocumentList()){				
+				filePath = new StringBuilder("http://localhost:8080/digicheck/image?id=" + view.getDocId());
+				check = Image.getInstance(new URL(filePath.toString()));
+				check.scaleToFit(400, 400);
+				document.add(new Paragraph(""));
+				document.add(new Paragraph(""));
+				if(index%2 == 0){				
+					document.newPage();
+				}
+				document.add(check);								
+				index++;
+			}											
+			document.close(); 
+			context.responseComplete();
+		}catch(DocumentException e){
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
 	}
 	
 	public String getReference() {

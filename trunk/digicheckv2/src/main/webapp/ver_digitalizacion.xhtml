@@ -18,7 +18,7 @@
     <div align="center">
     	<h:form id="formVerDigitalization">
 	    <h:panelGroup>	    		   			
-   				<rich:panel header="Digitalizaci&oacute;n de Documentos" style="width: 750px;">
+   				<rich:panel header="Digitalizaci&oacute;n de Documentos" style="width: 730px;">
    					<fieldset>
 						<legend>Datos de Sucursal</legend>
 						<h:panelGrid columns="4" cellpadding="1" cellspacing="2" width="600px;" style="text-align: left;">
@@ -70,10 +70,13 @@
 					</fieldset>
 					<fieldset>
 						<legend>Cheques Digitalizados</legend>
-						<div style="text-align: center;">										
+						<div style="text-align: left;">
+							<h:commandLink action="#{batchManagedBean.sendToPrintAction}">
+								<h:graphicImage value="resources/images/pdf_icon.gif" style="border: none;" alt="Imprimir Cheques." />
+							</h:commandLink> 										
 							<util:jcarousel /> <br />						
 						</div>						
-						<div style="text-align: right;">
+						<div style="text-align: right;">							
 							<h:commandButton value="Cancelar" action="#{batchManagedBean.back}" immediate="true" />														
 						</div>								
 					</fieldset>						
