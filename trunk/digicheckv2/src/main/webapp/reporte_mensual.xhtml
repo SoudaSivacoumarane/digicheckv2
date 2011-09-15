@@ -116,9 +116,9 @@
                        <h:outputText value="#{row.amount}" />
                    </h:column>
                 </h:dataTable>                
-                <h:panelGroup style="text-align: right;">
-           			<h:outputText value="#{monthlyReportManagedBean.totalDocNum}" /> &nbsp;&nbsp;&nbsp; <h:outputText value="#{monthlyReportManagedBean.totalAmount}" />
-             	</h:panelGroup>  
+                <div style="text-align: right; padding-right: 30px;">
+           			<h:outputText value="#{monthlyReportManagedBean.totalDocNum}" />&nbsp;&nbsp; <h:outputText value="#{monthlyReportManagedBean.totalAmount}" />&nbsp;
+             	</div>
              </div>                          	  		
 		</rich:popupPanel>  			
   	</h:form>		
