@@ -63,9 +63,13 @@ public class UserDAO extends GenericDAO {
 	}
 	
 	public void updateUser(UserEntity userEntity)throws UserException{		
+		Query query = null;
 		try{
 			em = emf.createEntityManager();
 			em.getTransaction().begin();
+			query = em.createNativeQuery("DELETE FROM USUARIO_PERMISO WHERE USU_LOGIN = ?1");
+			query.setParameter(1, userEntity.getLogin());
+			query.executeUpdate();
 			em.merge(userEntity);
 			em.getTransaction().commit();
 		}catch (Exception exception){
