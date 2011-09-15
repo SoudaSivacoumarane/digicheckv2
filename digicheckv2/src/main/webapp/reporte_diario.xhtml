@@ -49,15 +49,14 @@
 					cerrar
 				</h:outputLink>
 			</f:facet>
-			
+			<div align="center">
 			<h:commandLink action="#{dailyReportManagedBean.pdfExportAction}">
 				<h:graphicImage value="resources/images/pdf.png" style="border: none;" alt="Exportar a PDF." />
 			</h:commandLink> &nbsp;&nbsp;
 			<h:commandLink action="#{dailyReportManagedBean.excelExportAction}">
 				<h:graphicImage value="resources/images/excel.png" style="border: none;" alt="Exportar a Excel." />
-			</h:commandLink>         								
-			<div align="center">
-			<h:dataTable id="tabla_reporte_mensual" var="row" value="#{dailyReportManagedBean.reportList}" >                                                
+			</h:commandLink>         											
+			<h:dataTable id="tabla_reporte_mensual" var="row" rowClasses="odd, even" value="#{dailyReportManagedBean.reportList}" >                                                
                    <h:column style="text-align: center">
                        <f:facet name="header">
                        	<h:outputText value="FECHA" />
@@ -88,10 +87,10 @@
                        </f:facet>
                        <h:outputText value="#{row.amount}" />
                    </h:column>
-                </h:dataTable>                
-                <h:panelGroup style="text-align: right;">
-           			<h:outputText value="#dailyReportManagedBean.totalDocNum}" /> &nbsp;&nbsp;&nbsp; <h:outputText value="#{dailyReportManagedBean.totalAmount}" />
-             	</h:panelGroup>  
+                </h:dataTable>                                
+                <div style="text-align: right; padding-right: 30px;">
+           			<h:outputText value="#{dailyReportManagedBean.totalDocNum}" /> &nbsp;&nbsp; <h:outputText value="#{dailyReportManagedBean.totalAmount}" />&nbsp;
+           		</div>
              </div>                          	  		
 		</rich:popupPanel>
 		</h:form>	    

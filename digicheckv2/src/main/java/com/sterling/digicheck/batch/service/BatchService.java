@@ -126,7 +126,8 @@ public class BatchService {
 		try{
 			 batchEntities = batchDAO.searchDailyReport(branchOfficeId, day);
 			 if(batchEntities != null){
-				 DailyReportView view = null;
+				 dailyReportViewList = new ArrayList<DailyReportView>(0);
+				 DailyReportView view = null;				 
 				 for (BatchEntity b : batchEntities) {
 					view = new DailyReportView();	
 					view.setDate(TimeUtils.convertJavaDateToString(b.getBatchDate()));
@@ -136,6 +137,7 @@ public class BatchService {
 					view.setTotalAmount(b.getBatchAmount().doubleValue());
 					view.setCurrency(b.getCurrencyId().getName());
 					view.setAmount(NumberUtil.convertQuantity(b.getBatchAmount().doubleValue()));
+					dailyReportViewList.add(view);
 				}
 			 }
 		}catch (BatchException bankException){

@@ -1,5 +1,6 @@
 package com.sterling.digicheck.monthlyreport.managedbean;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,7 +15,13 @@ import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletResponse;
 
 import jxl.Workbook;
+import jxl.format.Alignment;
+import jxl.format.Border;
+import jxl.format.BorderLineStyle;
+import jxl.format.Colour;
 import jxl.write.Label;
+import jxl.write.WritableCellFormat;
+import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
@@ -22,7 +29,10 @@ import jxl.write.biff.RowsExceededException;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
-import com.lowagie.text.Paragraph;
+import com.lowagie.text.Element;
+import com.lowagie.text.Font;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import com.sterling.common.util.JSFUtil;
@@ -92,8 +102,8 @@ public class MonthlyReportManagedBean implements Serializable{
 						totalA += r.getTotalAmount();
 						totalDoc += r.getTotalDocNum();
 					}
-					this.totalAmount = NumberUtil.convertQuantity(totalA);
-					this.totalDocNum ="$ " + String.valueOf(totalDoc);
+					this.totalAmount = "$ " + NumberUtil.convertQuantity(totalA);
+					this.totalDocNum = String.valueOf(totalDoc);
 				}else{
 					JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "No se encontraron Resultados.", "No se encontraron Resultados.");	
 				}
@@ -119,15 +129,32 @@ public class MonthlyReportManagedBean implements Serializable{
 			
 			workbook = Workbook.createWorkbook(response.getOutputStream());
 			WritableSheet s = workbook.createSheet("Reporte Mensual", 0);
-			s.addCell(new Label(0, 0, "Hello World"));
-			for (MonthlyReportView report : reportList) {
-				s.addCell(new Label(0, 0, report.getDate()));
-				s.addCell(new Label(0, 0, report.getReference()));
-				s.addCell(new Label(0, 0, report.getAmount()));
-			}			
-			s.addCell(new Label(0, 0, this.totalDocNum));
-			s.addCell(new Label(0, 0, this.totalAmount));
-
+			WritableFont grayFont = new WritableFont(WritableFont.ARIAL, 9, WritableFont.BOLD);
+			WritableCellFormat headerCellFormat = new WritableCellFormat(grayFont);
+			WritableCellFormat numberCellFormat = new WritableCellFormat();			
+			headerCellFormat.setBackground(Colour.GRAY_25);
+			headerCellFormat.setAlignment(Alignment.CENTRE);
+			headerCellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);			
+			numberCellFormat.setAlignment(Alignment.RIGHT);
+			
+			s.addCell(new Label(0, 0, header));
+			s.mergeCells(0, 0, 4, 0);			
+			s.addCell(new Label(0, 1, "Fecha", headerCellFormat));
+			s.addCell(new Label(1, 1, "Referencia", headerCellFormat));
+			s.addCell(new Label(2, 1, "Divisa", headerCellFormat));
+			s.addCell(new Label(3, 1, "No. Doc.", headerCellFormat));
+			s.addCell(new Label(4, 1, "Importe", headerCellFormat));
+								
+			for (int i = 2; i <= reportList.size() + 1; i++) {	
+				MonthlyReportView view = reportList.get(i - 2);				
+				s.addCell(new Label(0, i, view.getDate()));
+				s.addCell(new Label(1, i, view.getReference()));
+				s.addCell(new Label(2, i, view.getCurrency()));
+				s.addCell(new Label(3, i, view.getDocNum(),numberCellFormat));
+				s.addCell(new Label(4, i, view.getAmount(),numberCellFormat));
+			}					
+			s.addCell(new Label(3, reportList.size() + 2, totalDocNum, numberCellFormat));
+			s.addCell(new Label(4, reportList.size() + 2, totalAmount, numberCellFormat));
 			workbook.write();
 			workbook.close();
 			context.responseComplete();
@@ -149,26 +176,75 @@ public class MonthlyReportManagedBean implements Serializable{
 		Document document = new Document();
 		try{
 			PdfWriter.getInstance(document, response.getOutputStream());
-			document.open();			
-			document.add(new Paragraph(header));
-			PdfPTable table = new PdfPTable(5);
-			table.addCell("Fecha");
-			table.addCell("Referencia");
-			table.addCell("Divisa");
-			table.addCell("No. Doc.");
-			table.addCell("Importe");						
-			for (MonthlyReportView report : reportList) {
-				table.addCell(report.getDate());
-				table.addCell(report.getReference());
-				table.addCell(report.getCurrency());
-				table.addCell(report.getDocNum());
-				table.addCell(report.getAmount());
+			document.open();						
+			PdfPTable table = new PdfPTable(5);			
+			PdfPCell cellHeader;					
+			cellHeader = new PdfPCell(new Phrase(header));			
+			cellHeader.setColspan(5);
+			table.addCell(cellHeader);
+								
+			PdfPCell date = null;
+			PdfPCell reference = null;
+			PdfPCell currency = null;
+			PdfPCell docNum = null;
+			PdfPCell amount = null;
+			
+			date = new PdfPCell(new Phrase("Fecha", new Font(Font.BOLD)));
+			date.setBackgroundColor(new Color(211, 211, 211));
+			date.setHorizontalAlignment(Element.ALIGN_CENTER);
+			
+			reference = new PdfPCell(new Phrase("Referencia", new Font(Font.BOLD)));
+			reference.setBackgroundColor(new Color(211, 211, 211));
+			reference.setHorizontalAlignment(Element.ALIGN_CENTER);
+			
+			currency = new PdfPCell(new Phrase("Divisa", new Font(Font.BOLD)));
+			currency.setBackgroundColor(new Color(211, 211, 211));
+			currency.setHorizontalAlignment(Element.ALIGN_CENTER);
+			
+			docNum = new PdfPCell(new Phrase("No. Doc.", new Font(Font.BOLD)));
+			docNum.setBackgroundColor(new Color(211, 211, 211));
+			docNum.setHorizontalAlignment(Element.ALIGN_CENTER);
+			
+			amount = new PdfPCell(new Phrase("Importe", new Font(Font.BOLD)));
+			amount.setBackgroundColor(new Color(211, 211, 211));
+			amount.setHorizontalAlignment(Element.ALIGN_CENTER);
+			
+			table.addCell(date);			
+			table.addCell(reference);
+			table.addCell(currency);
+			table.addCell(docNum);
+			table.addCell(amount);			
+			
+			PdfPCell docNumCellAling = null;
+			PdfPCell amountCellAling = null;			
+			for (MonthlyReportView report : reportList) {									
+				table.addCell(new Phrase(report.getDate()));
+				table.addCell(new Phrase(report.getReference()));
+				table.addCell(new Phrase(report.getCurrency()));
+				
+				docNumCellAling = new PdfPCell(new Phrase(report.getDocNum()));
+				docNumCellAling.setHorizontalAlignment(Element.ALIGN_RIGHT);				
+				table.addCell(docNumCellAling);
+				
+				amountCellAling = new PdfPCell(new Phrase("$ " + report.getAmount()));
+				amountCellAling.setHorizontalAlignment(Element.ALIGN_RIGHT);							
+				table.addCell(amountCellAling);
 			}
 			table.addCell("");
 			table.addCell("");
 			table.addCell("");
-			table.addCell(totalDocNum);
-			table.addCell(totalAmount);
+			
+			PdfPCell totalDocCellAling = null;
+			PdfPCell totalAmountCellAling = null;	
+			
+			totalDocCellAling = new PdfPCell(new Phrase(totalDocNum));
+			totalDocCellAling.setHorizontalAlignment(Element.ALIGN_RIGHT);	
+						
+			totalAmountCellAling = new PdfPCell(new Phrase(totalAmount));
+			totalAmountCellAling.setHorizontalAlignment(Element.ALIGN_RIGHT);
+						
+			table.addCell(totalDocCellAling);
+			table.addCell(totalAmountCellAling);
 			
 			document.add(table);		
 			document.close(); 
