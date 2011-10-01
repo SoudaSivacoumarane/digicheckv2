@@ -151,4 +151,18 @@ public class BatchService {
 		}			
 		return dailyReportViewList;
 	}
+	
+	public void deleteBatch(String batchId) throws BatchException{
+		try{
+			batchDAO.deleteBatch(batchId);
+		}catch (BatchException bankException){
+			throw bankException;
+		}catch (Exception exception){
+			BatchException batchException = null;
+			batchException = new BatchException(exception, BatchException.LAYER_SERVICE, BatchException.ACTION_LISTS);
+    		logger.error(batchException);
+    		exception.printStackTrace(System.out);
+    		throw batchException;
+		}
+	}
 }
