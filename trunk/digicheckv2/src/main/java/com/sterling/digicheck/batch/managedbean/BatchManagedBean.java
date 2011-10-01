@@ -14,7 +14,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
@@ -22,7 +21,6 @@ import org.apache.log4j.Logger;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Image;
-import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfWriter;
 import com.sterling.common.util.JSFUtil;
@@ -75,7 +73,7 @@ public class BatchManagedBean implements Serializable {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Seleccione al menos una Sucursal", "Seleccione una Sucursal");
 		}else{
 			try {
-				batchViewList = batchService.searchBatchEntity(reference, date, Integer.parseInt(branchOfficeId));
+				batchViewList = batchService.searchBatchEntity(reference.trim(), date, Integer.parseInt(branchOfficeId));
 				if(batchViewList != null){
 					this.renderTable = Boolean.TRUE;
 				}else{
@@ -128,6 +126,18 @@ public class BatchManagedBean implements Serializable {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());
 		}
 		JSFUtil.redirect("ver_digitalizacion.xhtml");
+	}
+	
+	public void deleteBatch(){
+		try{
+			batchService.deleteBatch(batchId);						
+			cleanValues();
+			JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "El Lote se ha eliminado exitosamente.", "El lote se ha eliminado exitosamente.");
+			
+		} catch (BatchException e) {
+			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Ha Ocurrido un error al tratar de eliminar el lote.", "Ha Ocurrido un error al tratar de eliminar el lote.");
+		}
+		JSFUtil.redirect("cheques.xhtml");
 	}
 	
 	public void insertBatch(){
@@ -212,8 +222,7 @@ public class BatchManagedBean implements Serializable {
 		
 	public void sendToPrintAction(){
 		FacesContext context = FacesContext.getCurrentInstance();		
-		HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
-		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+		HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();		
 		response.setContentType("application/pdf");
 		response.setHeader("Content-disposition", "attachment;filename=\"Cheques.pdf\"");		
 		Document document = new Document();
@@ -222,7 +231,6 @@ public class BatchManagedBean implements Serializable {
 			PdfWriter.getInstance(document, response.getOutputStream());
 			document.open();			
 			Image check = null;
-			//document.add(new Paragraph("Sucursal / " + batchDocumentView.getBranchOfficeView().getName()));
 			int index = 0;
 			for(DocumentView view : batchDocumentView.getDocumentList()){				
 				filePath = new StringBuilder("http://localhost:8080/digicheck/image?id=" + view.getDocId());

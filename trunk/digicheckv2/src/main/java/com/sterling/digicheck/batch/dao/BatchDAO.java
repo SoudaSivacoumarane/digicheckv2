@@ -157,4 +157,21 @@ public class BatchDAO extends GenericDAO {
 		return batchEntityList;
 	}
 	
+	public void deleteBatch(String batchId) throws BatchException{
+		BatchEntity batchEntity = null;
+		try{
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
+			batchEntity = em.find(BatchEntity.class, Integer.parseInt(batchId));
+			em.remove(batchEntity);
+			em.getTransaction().commit();
+		}catch (Exception exception){
+			BatchException bankException = null;
+			bankException = new BatchException(exception, BatchException.LAYER_DAO, BatchException.ACTION_SELECT);
+    		logger.error(bankException);
+    		exception.printStackTrace(System.out);
+    		throw bankException;
+		}		
+	}
+	
 }

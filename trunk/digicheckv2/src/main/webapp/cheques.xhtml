@@ -74,7 +74,13 @@
 					<h:commandLink styleClass="no-decor" action="#{batchManagedBean.goViewDigitalization}">
 						<h:graphicImage value="/resources/images/layout.png" alt="Ver Documentos" />
 						<a4j:param value="#{row.batchId}" assignTo="#{batchManagedBean.batchId}" />						
-					</h:commandLink>						    
+					</h:commandLink>
+					:
+					<a4j:commandLink styleClass="no-decor" execute="@this"
+						render="@none" oncomplete="#{rich:component('confirmPane')}.show();">
+						<h:graphicImage value="resources/images/img-delete.png" alt="delete" />
+						<a4j:param value="#{row.batchId}" assignTo="#{batchManagedBean.batchId}" />
+					</a4j:commandLink>						    
 			</rich:column>            		
 			<rich:column>
 				<f:facet name="header">Referencia</f:facet>
@@ -108,11 +114,17 @@
 				<rich:dataScroller page="#{bankManagedBean.page}" />
 			</f:facet>
 		</rich:dataTable>
+		<a4j:jsFunction name="remove" action="#{batchManagedBean.deleteBatch}" render="table" execute="@this"
+			oncomplete="#{rich:component('confirmPane')}.hide();" />		
+		<rich:popupPanel id="confirmPane" autosized="true">
+        	Desea borrar el Lote?
+        <a4j:commandButton value="Cancelar" onclick="#{rich:component('confirmPane')}.hide(); return false;" />&nbsp;&nbsp;
+			<a4j:commandButton value="Borrar" onclick="remove(); return false;" />
+		</rich:popupPanel>		
 		<rich:popupPanel id="statPane" autosized="true">
 			<h:graphicImage value="/resources/images/ai.gif" alt="ai" />
 	        Please wait...
-	    </rich:popupPanel>
-	        	   
+	    </rich:popupPanel>	        	   
 	</h:form>	    
     </div>    
 	</ui:define>
