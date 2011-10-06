@@ -20,5 +20,6 @@ public class RemoveAllAction implements ActionRunneable {
 		((ToolBar)mainPanel.getParent().getComponent(0)).arrowEnable(false);
 		
 		mainPanel.setImages(null);
+		mainPanel.setChecks(null);
 	}
 }

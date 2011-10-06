@@ -22,10 +22,20 @@ public class ToolBar extends JToolBar {
 	private ButtonAction leftAction;
 	private ButtonAction rightAction;
 	
+	public void saveBotton(boolean enable){
+		saveAction.setEnabled(enable);
+	}
+	
 	public void isScan(boolean scan){
 		saveAction.setEnabled(scan);
 		scanAction.setEnabled(!scan);
 		removeAction.setEnabled(scan);
+	}
+	
+	public void isScanNotFinish(){
+		saveAction.setEnabled(true);
+		scanAction.setEnabled(true);
+		removeAction.setEnabled(true);
 	}
 	
 	public void onlyRightEnable() {

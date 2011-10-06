@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -33,6 +34,9 @@ public class MainPanel extends JPanel {
 	}
 	
 	public List<Image> getImages(){
+		if(arrayImages==null){
+			arrayImages = new ArrayList<Image>();
+		}
 		return arrayImages;
 	}
 	
@@ -65,6 +69,9 @@ public class MainPanel extends JPanel {
 	}
 	
 	public List<CheckView> getChecks(){
+		if( arrayChecks == null ){
+			arrayChecks = new ArrayList<CheckView>();
+		}
 		return arrayChecks;
 	}
 }
