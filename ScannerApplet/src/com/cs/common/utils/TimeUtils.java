@@ -66,7 +66,7 @@ public class TimeUtils {
 		if (date == null)
 			return null;
 		
-		SimpleDateFormat sdf = new SimpleDateFormat(pattern, Locale.ENGLISH);
+		SimpleDateFormat sdf = new SimpleDateFormat(pattern, Locale.US);
 		java.util.Date parsedDate = null;
 		
 		try {
