@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 /**
@@ -65,7 +66,7 @@ public class TimeUtils {
 		if (date == null)
 			return null;
 		
-		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+		SimpleDateFormat sdf = new SimpleDateFormat(pattern, Locale.ENGLISH);
 		java.util.Date parsedDate = null;
 		
 		try {
