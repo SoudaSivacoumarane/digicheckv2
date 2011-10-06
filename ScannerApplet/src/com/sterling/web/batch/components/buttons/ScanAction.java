@@ -4,7 +4,6 @@ import java.awt.Container;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.ImageConsumer;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -33,10 +32,9 @@ public class ScanAction implements ActionRunneable {
 		MorenaImage morenaImage = null;
 		int imageStatus = 0;
 		ImagePanel imagePanel = null;
-		int indexImage = 0;
 		Image image = null;
-		List<Image> arrayImages = new ArrayList<Image>();
-		List<CheckView> arrayCheckInfo = new ArrayList<CheckView>();
+		List<Image> arrayImages = mainPanel.getImages();
+		List<CheckView> arrayCheckInfo = mainPanel.getChecks();
 		try {
 			source = TwainManager.selectSource(null);
 			if (source != null) {
@@ -52,10 +50,11 @@ public class ScanAction implements ActionRunneable {
 					if (imageStatus == ImageConsumer.STATICIMAGEDONE) {
 						image = Toolkit.getDefaultToolkit().createImage(morenaImage);
 						imagePanel = new ImagePanel(image);
-						if( indexImage%2 == 0 ){
+						if( arrayImages.size()%2 == 0 ){
 							arrayCheckInfo.add(new CheckView());//Aqui falta agregar los datos del abba
+							mainPanel.setStatusBar("# Cheques : " + arrayCheckInfo.size());
 						}
-						if( indexImage++ < 2 ){
+						if( arrayImages.size() < 2 ){
 							mainPanel.add(imagePanel);
 						}
 						arrayImages.add(image);
@@ -70,15 +69,19 @@ public class ScanAction implements ActionRunneable {
 				}while(source.hasMoreImages());
 				
 				if( arrayCheckInfo.size() > 0 ){
-					((ToolBar)mainPanel.getParent().getComponent(0)).isScan(true);
-					if(  arrayImages.size()/2 > 1 ){
+					if( (arrayImages.size()/2) < mainPanel.getLotView().getNoDocs()){
+						((ToolBar)mainPanel.getParent().getComponent(0)).isScanNotFinish();
+					}else{
+						((ToolBar)mainPanel.getParent().getComponent(0)).isScan(true);
+					}
+					if( arrayImages.size()/2 > 1 ){
 						((ToolBar)mainPanel.getParent().getComponent(0)).onlyRightEnable();
 					}else{
 						((ToolBar)mainPanel.getParent().getComponent(0)).arrowEnable(false);
 					}
 					
 					mainPanel.resetPosition();
-					mainPanel.setStatusBar("# Cheques : " + arrayImages.size()/2);
+					//mainPanel.setStatusBar("# Cheques : " + arrayCheckInfo.size());
 					
 					mainPanel.setImages(arrayImages);
 					mainPanel.setChecks(arrayCheckInfo);

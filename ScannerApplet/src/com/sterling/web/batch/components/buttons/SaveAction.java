@@ -22,6 +22,7 @@ public class SaveAction implements ActionRunneable {
 	@Override
 	public void run() {
 		mainPanel.setStatusBar("Saving ... ");
+		((ToolBar)mainPanel.getParent().getComponent(0)).saveBotton(false);
 		LotService lotService = null;
 		LotHelper lotHelper = null;
 		LotView lotView = null;
@@ -49,12 +50,19 @@ public class SaveAction implements ActionRunneable {
 				
 				mainPanel.setStatusBar("Lote <"+loteId+"> Guardado.");
 				JOptionPane.showMessageDialog(mainPanel, "Lote <"+loteId+"> Guardado con Exito.");
+				
+				mainPanel.setImages(null);
+				mainPanel.setChecks(null);
 			}else{
 				mainPanel.setStatusBar("No. Docs <"+lotView.getNoDocs()+"> != Cheques Scanneados <"+checks.size()+">");
+				((ToolBar)mainPanel.getParent().getComponent(0)).saveBotton(true);
 			}
+			
 		}catch(LotException lotException){
+			((ToolBar)mainPanel.getParent().getComponent(0)).saveBotton(true);
 			JOptionPane.showMessageDialog(mainPanel, lotException.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
 		}catch(Exception exception){
+			((ToolBar)mainPanel.getParent().getComponent(0)).saveBotton(true);
 			JOptionPane.showMessageDialog(mainPanel, exception.getMessage(), "General Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}

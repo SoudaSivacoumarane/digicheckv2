@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
-import java.net.URL;
 import java.util.ArrayList;
 
 import org.apache.commons.digester.Digester;
@@ -20,7 +19,7 @@ import org.xml.sax.SAXException;
  * @date 2008-06-05
  */
 
-public class DataSourceCollection  extends ArrayList{
+public class DataSourceCollection  extends ArrayList<DataSourceBean>{
 	/** Necessary field for serialization*/
 	private static final long serialVersionUID = -1886098823901152293L;
 	/** Rules file for data source */
@@ -39,7 +38,6 @@ public class DataSourceCollection  extends ArrayList{
 	 * Load data sources in array list
 	 */
 	private void loadDatasource(){
-		URL url = null;
 		StringBuffer buffer = null;
 		BufferedReader reader = null;
 		String line = null;

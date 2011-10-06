@@ -20,14 +20,14 @@ import com.cs.common.pool.exception.PoolException;
 
 public class ConnectionPool {
 	/** Store connection pool */
-	private Hashtable pool = null;
+	private Hashtable<String, BasicDataSource> pool = null;
 	/** Field for singleton class */
 	private static ConnectionPool connectionPool;
 	/**
 	 * Default constructor for singleton class
 	 */
 	private ConnectionPool(){
-		pool = new Hashtable(0);
+		pool = new Hashtable<String, BasicDataSource>();
 		createPool();
 	}
 	/**
@@ -35,13 +35,13 @@ public class ConnectionPool {
 	 */
 	private void createPool(){
 		DataSourceCollection dataSourceCollection = null;
-		Iterator iterator = null;
+		Iterator <DataSourceBean>iterator = null;
 		DataSourceBean dataSourceBean = null;
 		try{
 			dataSourceCollection = DataSourceCollection.getInstance();
 			iterator = dataSourceCollection.iterator();
 			while( iterator.hasNext()){
-				dataSourceBean = (DataSourceBean)iterator.next();
+				dataSourceBean = iterator.next();
 				pool.put(dataSourceBean.getName(), createDataSource(dataSourceBean) );
 			}
 		}catch( NumberFormatException numberFormatException ){
@@ -124,11 +124,11 @@ public class ConnectionPool {
 	 * Close data sources
 	 */
 	public void finalize() {
-		ArrayList datasource = null;
-		Iterator iterator = null;
+		ArrayList <BasicDataSource>datasource = null;
+		Iterator <BasicDataSource>iterator = null;
 		BasicDataSource basicDataSource = null;
 		
-		datasource = new ArrayList(pool.values());
+		datasource = new ArrayList<BasicDataSource>(pool.values());
 		iterator = datasource.iterator();
 		while(iterator.hasNext()){
 			basicDataSource = (BasicDataSource)iterator.next();
