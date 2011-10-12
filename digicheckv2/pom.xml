@@ -357,7 +357,22 @@
 				<finalName>digicheck</finalName>
 				<filters>
 					<filter>src/main/environments/prod.properties</filter>
-				</filters>				
+				</filters>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-war-plugin</artifactId>
+						<version>2.0.2</version>
+						<configuration>
+							<webResources>
+								<resource>
+									<directory>externalresources</directory>
+									<targetPath>WEB-INF/lib</targetPath>
+								</resource>
+							</webResources>
+						</configuration>
+					</plugin>
+				</plugins>				
 			</build>
 		</profile>
 		<profile>
