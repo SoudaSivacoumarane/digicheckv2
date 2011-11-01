@@ -374,7 +374,7 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<build>
-				<finalName>digicheck-${buildNumber}</finalName>
+				<finalName>digicheck</finalName>
 				<filters>
 					<filter>src/main/environments/prod.properties</filter>
 				</filters>
@@ -384,6 +384,14 @@
 						<artifactId>maven-war-plugin</artifactId>
 						<version>2.0.2</version>
 						<configuration>
+							<archive>
+					            <manifest>
+					              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+					            </manifest>
+					            <manifestEntries>
+					              <Implementation-Build>${buildNumber}</Implementation-Build>
+					            </manifestEntries>
+				          	</archive>										
 							<webResources>
 								<resource>
 									<directory>externalresources</directory>
