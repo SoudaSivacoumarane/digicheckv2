@@ -248,7 +248,27 @@
 					<source>1.6</source>
 					<target>1.6</target>
 				</configuration>
-			</plugin>			
+			</plugin>
+			<plugin>
+		      <groupId>org.codehaus.mojo</groupId>
+		      <artifactId>buildnumber-maven-plugin</artifactId>
+		      <version>1.0</version>
+		      <executions>
+		        <execution>
+		          <phase>validate</phase>
+		          <goals>
+		            <goal>create</goal>
+		          </goals>
+		        </execution>
+		      </executions>
+		      <configuration>
+		       <format>{0}.{1,date,yyyyMMddHHmm}</format>
+			   <items>
+			   <item>${project.version}</item>
+			   <item>timestamp</item>               
+			   </items>   
+		      </configuration>
+		    </plugin>			
 			<plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.5</version>
@@ -354,7 +374,7 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<build>
-				<finalName>digicheck</finalName>
+				<finalName>digicheck-${buildNumber}</finalName>
 				<filters>
 					<filter>src/main/environments/prod.properties</filter>
 				</filters>
