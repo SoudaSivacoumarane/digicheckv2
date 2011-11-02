@@ -157,13 +157,13 @@ public class BatchDAO extends GenericDAO {
 		return batchEntityList;
 	}
 	
-	public void deleteBatch(String batchId) throws BatchException{
-		BatchEntity batchEntity = null;
+	public void deleteBatch(String batchId) throws BatchException{				
 		try{
 			em = emf.createEntityManager();
 			em.getTransaction().begin();
-			batchEntity = em.find(BatchEntity.class, Integer.parseInt(batchId));
-			em.remove(batchEntity);
+			Query query = em.createNativeQuery("DELETE FROM LOTE WHERE LOT_ID = ?1");
+			query.setParameter(1, Integer.parseInt(batchId));
+			query.executeUpdate();
 			em.getTransaction().commit();
 		}catch (Exception exception){
 			BatchException bankException = null;
