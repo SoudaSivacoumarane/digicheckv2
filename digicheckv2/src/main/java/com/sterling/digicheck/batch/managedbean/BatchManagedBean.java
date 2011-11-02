@@ -97,6 +97,7 @@ public class BatchManagedBean implements Serializable {
 			this.batchView.setUserView(userView);			
 			this.batchView.setBranchOfficeView(branchOfficeView);
 		} catch (BranchOfficeException e) {
+			logger.error(e);
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());
 		}
 		JSFUtil.redirect("digitalizacion.xhtml");
@@ -114,6 +115,7 @@ public class BatchManagedBean implements Serializable {
 			this.batchView.setUserView(userView);
 			this.batchView.setBranchOfficeView(branchOfficeView);
 		} catch (BranchOfficeException e) {
+			logger.error(e);
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());
 		}
 		JSFUtil.redirect("digitalizacion.xhtml");
@@ -123,6 +125,7 @@ public class BatchManagedBean implements Serializable {
 		try {
 			this.batchDocumentView = batchService.getBatchViewById(batchId);
 		} catch (BatchException e) {
+			logger.error(e.getCustomError(), e);
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());
 		}
 		JSFUtil.redirect("ver_digitalizacion.xhtml");
@@ -130,11 +133,11 @@ public class BatchManagedBean implements Serializable {
 	
 	public void deleteBatch(){
 		try{
-			batchService.deleteBatch(batchId);						
+			batchService.deleteBatch(batchId);									
 			cleanValues();
-			JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "El Lote se ha eliminado exitosamente.", "El lote se ha eliminado exitosamente.");
-			
+			JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "El Lote se ha eliminado exitosamente.", "El lote se ha eliminado exitosamente.");						
 		} catch (BatchException e) {
+			logger.error(e.getCustomError(), e);
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Ha Ocurrido un error al tratar de eliminar el lote.", "Ha Ocurrido un error al tratar de eliminar el lote.");
 		}
 		JSFUtil.redirect("cheques.xhtml");
@@ -146,8 +149,10 @@ public class BatchManagedBean implements Serializable {
 			this.batchService.insertBatch(batchView);
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "El Lote se ha guardado exitosamente.", "El lote se ha guardado exitosamente.");
 		} catch (BatchException e) {		
+			logger.error(e.getCustomError(), e);
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());
 		} catch (CurrencyException e) {
+			logger.error(e.getCustomError(), e);
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());		
 		}		
 	}
@@ -159,6 +164,7 @@ public class BatchManagedBean implements Serializable {
 			this.batchView.setUserView(userView);
 			this.batchView.setBranchOfficeView(branchOfficeView);
 		} catch (BranchOfficeException e) {
+			logger.error(e);
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());
 		}
 		JSFUtil.redirect("cheques.xhtml");
@@ -187,6 +193,7 @@ public class BatchManagedBean implements Serializable {
 				currencyList.add(selectItem);
 			}
 		} catch (CurrencyException e) {
+			logger.error(e);
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getMessage());
 		}
 		return currencyList;
@@ -205,6 +212,7 @@ public class BatchManagedBean implements Serializable {
 		try {
 			branchofficeallowed = securityAuthorizationService.hasPermission("7", JSFUtil.getSessionAttribute(UserView.class, "user").getLogin());
 		} catch (UserException userException) {
+			logger.error(userException);
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, userException.getMessage(), userException.getMessage());
 		}
 		return !branchofficeallowed;
@@ -215,6 +223,7 @@ public class BatchManagedBean implements Serializable {
 		try {
 			digitize = securityAuthorizationService.hasPermission("2", JSFUtil.getSessionAttribute(UserView.class, "user").getLogin());
 		} catch (UserException userException) {
+			logger.info(userException.getCustomError(), userException);
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, userException.getMessage(), userException.getMessage());
 		}
 		return digitize;
@@ -247,9 +256,9 @@ public class BatchManagedBean implements Serializable {
 			document.close(); 
 			context.responseComplete();
 		}catch(DocumentException e){
-			e.printStackTrace();
+			logger.error(e);			
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}	
 	}
 	
