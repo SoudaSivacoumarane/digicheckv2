@@ -164,14 +164,15 @@ public class BatchDAO extends GenericDAO {
 			Query query = em.createNativeQuery("DELETE FROM LOTE WHERE LOT_ID = ?1");
 			query.setParameter(1, Integer.parseInt(batchId));
 			query.executeUpdate();
-			em.getTransaction().commit();
 		}catch (Exception exception){
 			BatchException bankException = null;
 			bankException = new BatchException(exception, BatchException.LAYER_DAO, BatchException.ACTION_SELECT);
     		logger.error(bankException);
     		exception.printStackTrace(System.out);
     		throw bankException;
-		}		
+		}finally{
+			em.getTransaction().commit();
+		}
 	}
 	
 }
