@@ -13,6 +13,7 @@ public class UserView implements Serializable {
 	private String password;
 	private boolean scannerPermission = false;
 	private boolean digitalizePermission = false;
+	private boolean digitalizeCashPermission = false;
 	private boolean branchOfficePermission = false;
 	private boolean itselfCheckPermission = false;
 	private boolean allCheckPermission = false;
@@ -153,6 +154,15 @@ public class UserView implements Serializable {
 
 	public void setDelUser(boolean delUser) {
 		this.delUser = delUser;
+	}
+	
+
+	public boolean isDigitalizeCashPermission() {
+		return digitalizeCashPermission;
+	}
+
+	public void setDigitalizeCashPermission(boolean digitalizeCashPermission) {
+		this.digitalizeCashPermission = digitalizeCashPermission;
 	}
 
 	@Override

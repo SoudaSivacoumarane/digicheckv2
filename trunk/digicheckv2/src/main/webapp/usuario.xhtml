@@ -135,7 +135,8 @@
 					<h:panelGroup>															
 						<fieldset>
 							<legend>Digitalizar</legend>
-							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.digitalizePermission}" />Digitalizar Cheques
+							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.digitalizePermission}" />Digitalizar Cheques <br />
+							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.digitalizeCashPermission}" />Digitalizar Efectivo
 						</fieldset>
 					</h:panelGroup>
 					
@@ -242,22 +243,23 @@
 					<h:panelGroup>															
 						<fieldset>
 							<legend>Digitalizar</legend>
-							<h:selectBooleanCheckbox tabindex="7" value="#{userManagedBean.userView.digitalizePermission}" />Digitalizar Cheques
+							<h:selectBooleanCheckbox tabindex="7" value="#{userManagedBean.userView.digitalizePermission}" />Digitalizar Cheques <br />
+							<h:selectBooleanCheckbox tabindex="8" value="#{userManagedBean.userView.digitalizeCashPermission}" />Digitalizar Efectivo
 						</fieldset>
 					</h:panelGroup>
 					
 					<h:panelGroup>															
 						<fieldset>
 							<legend>Sucursales</legend>
-							<h:selectBooleanCheckbox tabindex="8" value="#{userManagedBean.userView.branchOfficePermission}" />Datos de Sucursal
+							<h:selectBooleanCheckbox tabindex="9" value="#{userManagedBean.userView.branchOfficePermission}" />Datos de Sucursal
 						</fieldset>
 					</h:panelGroup>					
 										
 					<h:panelGroup>
 						<fieldset>
 							<legend>Cheques</legend>
-							<h:selectBooleanCheckbox tabindex="9" value="#{userManagedBean.userView.itselfCheckPermission}" />Solo de su Sucursal<br/>
-				            <h:selectBooleanCheckbox tabindex="10" value="#{userManagedBean.userView.allCheckPermission}" />Todas las Sucursales
+							<h:selectBooleanCheckbox tabindex="10" value="#{userManagedBean.userView.itselfCheckPermission}" />Solo de su Sucursal<br/>
+				            <h:selectBooleanCheckbox tabindex="11" value="#{userManagedBean.userView.allCheckPermission}" />Todas las Sucursales
 						</fieldset>
 					</h:panelGroup>
 					
