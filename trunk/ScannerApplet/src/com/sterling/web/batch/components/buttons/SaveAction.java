@@ -35,7 +35,7 @@ public class SaveAction implements ActionRunneable {
 			lotView = mainPanel.getLotView();
 			checks = mainPanel.getChecks();
 			
-			if( checks.size() == lotView.getNoDocs() || JOptionPane.showOptionDialog(mainPanel, "No. de documentos<"+lotView.getNoDocs()+"> es diferente a los cheques scanneados<"+checks.size()+">, desea continuar?", "Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]) == 0 ){
+			if( lotView.getType() == LotView.CATCH_TYPE || checks.size() == lotView.getNoDocs() || JOptionPane.showOptionDialog(mainPanel, "No. de documentos<"+lotView.getNoDocs()+"> es diferente a los cheques scanneados<"+checks.size()+">, desea continuar?", "Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]) == 0 ){
 				if( checks.size() != lotView.getNoDocs() ){
 					lotView.setNoDocs(checks.size());
 				}

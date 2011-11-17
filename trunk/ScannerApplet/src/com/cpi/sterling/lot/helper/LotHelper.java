@@ -24,9 +24,11 @@ public class LotHelper {
 	private static final String PARAM_REFERENCE = "referencia";
 	private static final String PARAM_SUCID = "sucursal";
 	private static final String PARAM_USER = "usuario";
+	private static final String PARAM_TYPE = "tipo";
 
 	public LotView createLotViewFromApplet(Applet applet)throws LotException{
 		LotView lotView = null;
+		String type;
 		try{
 			lotView = new LotView();
 			lotView.setAmount(NumberUtil.parseDouble(applet.getParameter(PARAM_AMOUNT)));
@@ -36,6 +38,12 @@ public class LotHelper {
 			lotView.setReference(applet.getParameter(PARAM_REFERENCE));
 			lotView.setSucId(NumberUtil.parseInt(applet.getParameter(PARAM_SUCID)));
 			lotView.setUser(applet.getParameter(PARAM_USER));
+			type = applet.getParameter(PARAM_TYPE);
+			if( type != null && !type.trim().equals("")){
+				lotView.setType(NumberUtil.parseInt(type));
+			}else{
+				lotView.setType(LotView.CHECK_TYPE);
+			}
 		}catch(Exception exception){
 			LotException lotException = new LotException(exception, LotException.LAYER_ACTION, LotException.ACTION_INSERT);
 			lotException.printStackTrace(System.out);

@@ -7,17 +7,20 @@ import java.io.InputStream;
 import javax.swing.ImageIcon;
 import javax.swing.JToolBar;
 
+import com.cpi.sterling.lot.view.LotView;
 import com.sterling.web.batch.components.buttons.ButtonAction;
 import com.sterling.web.batch.components.buttons.LeftAction;
 import com.sterling.web.batch.components.buttons.RemoveAllAction;
 import com.sterling.web.batch.components.buttons.RightAction;
 import com.sterling.web.batch.components.buttons.SaveAction;
 import com.sterling.web.batch.components.buttons.ScanAction;
+import com.sterling.web.batch.components.buttons.ScanCatchAction;
 
 public class ToolBar extends JToolBar {
 	private static final long serialVersionUID = -3737125446189470311L;
 	private ButtonAction removeAction;
 	private ButtonAction scanAction;
+	private ButtonAction scanCatchAction;
 	private ButtonAction saveAction;
 	private ButtonAction leftAction;
 	private ButtonAction rightAction;
@@ -29,12 +32,14 @@ public class ToolBar extends JToolBar {
 	public void isScan(boolean scan){
 		saveAction.setEnabled(scan);
 		scanAction.setEnabled(!scan);
+		scanCatchAction.setEnabled(!scan);
 		removeAction.setEnabled(scan);
 	}
 	
 	public void isScanNotFinish(){
 		saveAction.setEnabled(true);
 		scanAction.setEnabled(true);
+		scanCatchAction.setEnabled(true);
 		removeAction.setEnabled(true);
 	}
 	
@@ -63,7 +68,12 @@ public class ToolBar extends JToolBar {
 			inputSream = ToolBar.class.getResourceAsStream("buttons/images/scan.png");
 			image = new byte[inputSream.available()];
 			inputSream.read(image);
-			scanAction = new ButtonAction(new ScanAction(mainPanel), "Scan", new ImageIcon(image), "Scannear", 'S');
+			scanAction = new ButtonAction(new ScanAction(mainPanel), "ScanCheque", new ImageIcon(image), "Scannear Cheque", 'S');
+			
+			inputSream = ToolBar.class.getResourceAsStream("buttons/images/scan.png");
+			image = new byte[inputSream.available()];
+			inputSream.read(image);
+			scanCatchAction = new ButtonAction(new ScanCatchAction(mainPanel), "ScanEfectivo", new ImageIcon(image), "Scannear Efectivo", 'S');
 			
 			inputSream = ToolBar.class.getResourceAsStream("buttons/images/save.png");
 			image = new byte[inputSream.available()];
@@ -82,7 +92,11 @@ public class ToolBar extends JToolBar {
 			
 			add(leftAction);
 			add(removeAction);
-			add(scanAction);
+			if( ((MainPanel)mainPanel).getLotView().getType() == LotView.CATCH_TYPE ){
+				add(scanCatchAction);
+			}else{
+				add(scanAction);
+			}
 			add(saveAction);
 			add(rightAction);
 			

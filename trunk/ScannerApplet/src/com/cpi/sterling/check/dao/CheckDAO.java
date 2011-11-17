@@ -12,7 +12,7 @@ import com.cs.common.utils.NumberUtil;
 
 public class CheckDAO extends DBDAO {
 	
-	private static final String SQL_INSERT = "INSERT INTO CHEQUE (LOT_ID, CHQ_ABBA, CHQ_CUENTA,CHQ_IMPORTE) values (?,?,?,?)";
+	private static final String SQL_INSERT = "INSERT INTO CHEQUE (LOT_ID, CHQ_ABBA, CHQ_CUENTA,CHQ_IMPORTE,CHQ_TIPO) values (?,?,?,?,?)";
 	
 	public int insertCheck(CheckDTO dto) throws CheckException{
 		int id = 0;
@@ -24,6 +24,7 @@ public class CheckDAO extends DBDAO {
 			preparedStatement.setString(2, dto.getAbba());
 			preparedStatement.setString(3, dto.getAccount());
 			preparedStatement.setDouble(4, dto.getAmount());
+			preparedStatement.setInt(5, dto.getType());
 			executeInsert(preparedStatement);
 			connection = preparedStatement.getConnection();
 			id = NumberUtil.parseInt(getInsertedId(connection));

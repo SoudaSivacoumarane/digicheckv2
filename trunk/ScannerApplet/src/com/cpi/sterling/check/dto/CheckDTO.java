@@ -7,15 +7,13 @@ import java.util.List;
 import com.cpi.sterling.document.dto.DocumentDTO;
 
 public class CheckDTO implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -8122974379157831923L;
+	private static final long serialVersionUID = 1157870147147774691L;
 	private int chqId;
 	private int lotId;
 	private String abba;
 	private String account;
 	private double amount;
+	private int type;
 	private List<DocumentDTO> documentDTOList = new ArrayList<DocumentDTO>(0);
 	
 	public int getChqId() {
@@ -53,5 +51,11 @@ public class CheckDTO implements Serializable {
 	}
 	public void setDocumentDTOList(List<DocumentDTO> documentDTOList) {
 		this.documentDTOList = documentDTOList;
+	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
 	}	
 }

@@ -15,7 +15,8 @@ public class CheckConverter {
 				dto.setLotId(view.getLotId());
 				dto.setAbba(view.getAbba());
 				dto.setAccount(view.getAccount());
-				dto.setAmount(view.getAmount());				
+				dto.setAmount(view.getAmount());
+				dto.setType(view.getType());
 			}			
 		} catch (Exception exception){
 			CheckException checkException = null;
