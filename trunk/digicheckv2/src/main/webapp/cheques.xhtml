@@ -27,10 +27,10 @@
     <div align="center">     
     	<h:form id="formBatch">
 	    <h:panelGroup id="panel_tabla_lote_busqueda">	    		   			
-   				<rich:panel header="Buscar Cheques" style="width: 600px;">
+   				<rich:panel header="Buscar Cheques" style="width: 650px;">
    					<h:panelGrid columns="2">   						
    						
-   						<h:panelGrid columns="4">   					 									
+   						<h:panelGrid columns="5">   					 									
    					 		<h:panelGroup style="text-align: left;">
    					 			<h:outputLabel style="font-weight: bold" value="Referencia: " /><br />
    					 			<h:inputText value="#{batchManagedBean.reference}" />
@@ -44,12 +44,20 @@
 							</h:panelGroup>
 							
 							<h:panelGroup style="text-align: left;">
+	                            <h:outputLabel value="Tipo de Documento: "  style="font-weight: bold"/><br />
+			                    <h:selectOneMenu id="typoDoc" style="width: 120px" value="#{batchManagedBean.documentType}">			                    	
+			                    	<f:selectItem itemValue="1" itemLabel="Efectivo"/>			                    	
+									<f:selectItem itemValue="0" itemLabel="Cheque"/>									
+								</h:selectOneMenu>			  															
+							</h:panelGroup>
+							
+							<h:panelGroup style="text-align: left;">
 	                            <h:outputLabel value="Sucursal: "  style="font-weight: bold"/><br />
 			                    <h:selectOneMenu id="sucursales" style="width: 200px" value="#{batchManagedBean.branchOfficeId}" disabled="#{batchManagedBean.branchOfficeAllowed}">
 			                    	<f:selectItem itemValue="-1" itemLabel="Seleccione una Sucursal"/>			                    	
 									<f:selectItems value="#{dailyReportManagedBean.branchOfficeItems}" />
 								</h:selectOneMenu>			  															
-							</h:panelGroup>
+							</h:panelGroup>														
 							
 							<f:facet name="footer">
 								<div style="text-align: right;">

@@ -26,13 +26,13 @@ public class BatchService {
 	@Autowired
 	private BatchDAO batchDAO;
 	
-	public List<BatchView> searchBatchEntity(String reference, Date date, Integer branchOfficeId) throws BatchException{
+	public List<BatchView> searchBatchEntity(String reference, Date date, Integer branchOfficeId, Integer docType) throws BatchException{
 		List<BatchEntity> batchEntities = null;
 		List<BatchView> batchViewsList = null;
 		BatchConverter batchConverter = null;
 		try{
 			batchConverter = new BatchConverter();
-			batchEntities = batchDAO.searchBatchEntity(reference, date, branchOfficeId);
+			batchEntities = batchDAO.searchBatchEntity(reference, date, branchOfficeId, docType);
 			if(batchEntities != null){
 				if(!batchEntities.isEmpty()){
 					batchViewsList = batchConverter.convertViewsToEntities(batchEntities);
@@ -86,12 +86,12 @@ public class BatchService {
 		return batchView;
 	}
 	
-	public List<MonthlyReportView> searchMonthlyReport(String month, String year, String branchOfficeId) throws BatchException{
+	public List<MonthlyReportView> searchMonthlyReport(String month, String year, String branchOfficeId, Integer documentType) throws BatchException{
 		List<MonthlyReportView> monthlyReportViewList = null;
 		List<BatchEntity> batchEntities = null;
 		try{
 			monthlyReportViewList = new ArrayList<MonthlyReportView>(0);
-			batchEntities = batchDAO.searchMonthlyReport(month, year, branchOfficeId);
+			batchEntities = batchDAO.searchMonthlyReport(month, year, branchOfficeId, documentType);
 			System.out.println(batchEntities.size());			
 			if(batchEntities != null){
 				MonthlyReportView view = null;
@@ -120,11 +120,11 @@ public class BatchService {
 		return monthlyReportViewList;
 	}
 	
-	public List<DailyReportView> searchDailyReport(String branchOfficeId, Date day) throws BatchException{
+	public List<DailyReportView> searchDailyReport(String branchOfficeId, Date day, Integer documentType) throws BatchException{
 		List<DailyReportView> dailyReportViewList = null;
 		List<BatchEntity> batchEntities = null;
 		try{
-			 batchEntities = batchDAO.searchDailyReport(branchOfficeId, day);
+			 batchEntities = batchDAO.searchDailyReport(branchOfficeId, day, documentType);
 			 if(batchEntities != null){
 				 dailyReportViewList = new ArrayList<DailyReportView>(0);
 				 DailyReportView view = null;				 

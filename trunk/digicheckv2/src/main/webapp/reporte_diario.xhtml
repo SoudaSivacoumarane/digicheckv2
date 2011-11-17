@@ -19,13 +19,20 @@
     <div align="center"> 
     	<h:form id="panel_reporte_form">
 	    <h:panelGroup id="panel_tabla_reporte_diario">	    		   			
-	   				<rich:panel header="Reporte Diario por Sucursal" style="width: 600px;">
-	   					 <h:panelGrid columns="6">
+	   				<rich:panel header="Reporte Diario por Sucursal" style="width: 850px;">
+	   					 <h:panelGrid columns="8">
 	                        	<h:outputLabel value="Fecha : " style="font-weight: bold"/>
 	                            <rich:calendar id="calendar" cellWidth="24px" datePattern="dd/MM/yyyy" value="#{dailyReportManagedBean.day}"
 	                    				       cellHeight="22px" style="width:200px">
 	                    				       <f:ajax render="@none" execute="@this" />
 								</rich:calendar>
+	                            		
+	                            <h:outputLabel value="Tipo de Documento: "  style="font-weight: bold"/><br />
+			                    <h:selectOneMenu id="typoDoc" style="width: 100px" value="#{dailyReportManagedBean.documentType}">			                    	
+			                    	<f:selectItem itemValue="1" itemLabel="Efectivo"/>			                    	
+									<f:selectItem itemValue="0" itemLabel="Cheque"/>									
+								</h:selectOneMenu>			  															
+							
 	                            <h:outputLabel value="Sucursal : "  style="font-weight: bold"/>
 			                    <h:selectOneMenu id="sucursales" style="width: 200px" value="#{dailyReportManagedBean.branchOfficeCode}" disabled="#{batchManagedBean.branchOfficeAllowed}">
 			                    	<f:ajax render="@none" execute="@this" />

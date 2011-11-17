@@ -96,7 +96,7 @@ public class BatchTest extends AbstractTestNGSpringContextTests {
 			e1.printStackTrace();
 		}
 		try {
-			batList = batchDAO.searchBatchEntity("12345", currentTime, 1);
+			batList = batchDAO.searchBatchEntity("12345", currentTime, 1,2);
 			for(BatchEntity b : batList){
 				System.out.println(b.getReference());				
 				System.out.println(b.getBatchDateAdded());

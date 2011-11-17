@@ -64,6 +64,7 @@ public class MonthlyReportManagedBean implements Serializable{
 	private String header;
 	private String totalAmount;
 	private String totalDocNum;
+	private String documentType;
 	
 	public MonthlyReportManagedBean() {
 		this.branchOfficeCode = JSFUtil.getSessionAttribute(UserView.class, "user").getSucursalId();
@@ -85,14 +86,14 @@ public class MonthlyReportManagedBean implements Serializable{
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Seleccione al menos una Sucursal", "Seleccione al menos una Sucursal");
 		}else{			
 			try {
-				batchService.searchMonthlyReport(month, year, branchOfficeCode);
+				batchService.searchMonthlyReport(month, year, branchOfficeCode, Integer.parseInt(documentType));
 			} catch (BatchException e) {
 				JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Hubo un error al generar el Reporte Mensual.", "Hubo un error al generar el Reporte Mensual.");
 			}						
 			reportList = new ArrayList<MonthlyReportView>();			
 			try {
 				JSFUtil.getSessionAttribute(UserView.class, "user");
-				reportList = batchService.searchMonthlyReport(month, year, branchOfficeCode);
+				reportList = batchService.searchMonthlyReport(month, year, branchOfficeCode, Integer.parseInt(documentType));
 				if(!reportList.isEmpty()){
 					String branchOfficeName = branchOfficeService.validateBranchOffice(Integer.parseInt(JSFUtil.getSessionAttribute(UserView.class, "user").getSucursalId())).getName();				
 					this.header = "Mes: " + StringUtils.getMonth(Integer.parseInt(month)) + "/" + year + " Sucursal " + branchOfficeName;
@@ -319,5 +320,13 @@ public class MonthlyReportManagedBean implements Serializable{
 	public void setTotalDocNum(String totalDocNum) {
 		this.totalDocNum = totalDocNum;
 	}
+
+	public String getDocumentType() {
+		return documentType;
+	}
+
+	public void setDocumentType(String documentType) {
+		this.documentType = documentType;
+	}	
 	
 }

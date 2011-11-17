@@ -19,8 +19,8 @@
     <div align="center">     	
   		<h:form id="panel_reporte_form">
   			<h:panelGroup>
-  				<rich:panel header="Reporte Mensual por Sucursal" style="width: 700px;">
-  					<h:panelGrid columns="7" cellpadding="1" cellspacing="2">
+  				<rich:panel header="Reporte Mensual por Sucursal" style="width: 850px;">
+  					<h:panelGrid columns="9" cellpadding="1" cellspacing="2">
                         	<h:outputLabel value="Mes : " style="font-weight: bold"/>
                             <h:selectOneMenu id="Mes" label="Mes" value="#{monthlyReportManagedBean.month}">
                             	<f:ajax render="@none" execute="@this" />
@@ -53,7 +53,15 @@
 		                        <f:selectItem itemValue="2010" itemLabel="2010" />
 		                        <f:selectItem itemValue="2011" itemLabel="2011" />
 		                        <f:selectItem itemValue="2012" itemLabel="2012" />
+		                        <f:selectItem itemValue="2013" itemLabel="2013" />
+		                        <f:selectItem itemValue="2014" itemLabel="2014" />
+		                        <f:selectItem itemValue="2015" itemLabel="2015" />
 		                    </h:selectOneMenu>
+                            <h:outputLabel value="Tipo de Documento: "  style="font-weight: bold"/>
+		                    <h:selectOneMenu id="typoDoc" style="width: 100px" value="#{monthlyReportManagedBean.documentType}">			                    	
+		                    	<f:selectItem itemValue="1" itemLabel="Efectivo"/>			                    	
+								<f:selectItem itemValue="0" itemLabel="Cheque"/>									
+							</h:selectOneMenu>
                             <h:outputLabel value="Sucursal : " style="font-weight: bold"/>
 		                    <h:selectOneMenu id="sucursales" style="width: 200px" value="#{monthlyReportManagedBean.branchOfficeCode}" disabled="#{batchManagedBean.branchOfficeAllowed}" >
 		                    	<f:ajax render="@none" execute="@this" />

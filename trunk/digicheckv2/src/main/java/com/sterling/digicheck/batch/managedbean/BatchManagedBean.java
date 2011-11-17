@@ -67,13 +67,14 @@ public class BatchManagedBean implements Serializable {
 	private UserView userView = new UserView();
 	private String currencySelected;
 	private String batchId;
+	private String documentType;
 	
 	public String searchByCriteria(){
 		if(this.branchOfficeId.equals("-1")){
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Seleccione al menos una Sucursal", "Seleccione una Sucursal");
 		}else{
 			try {
-				batchViewList = batchService.searchBatchEntity(reference.trim(), date, Integer.parseInt(branchOfficeId));
+				batchViewList = batchService.searchBatchEntity(reference.trim(), date, Integer.parseInt(branchOfficeId), Integer.parseInt(documentType));
 				if(batchViewList != null){
 					this.renderTable = Boolean.TRUE;
 				}else{
@@ -260,8 +261,16 @@ public class BatchManagedBean implements Serializable {
 		} catch (IOException e) {
 			logger.error(e);
 		}	
-	}
+	}		
 	
+	public String getDocumentType() {
+		return documentType;
+	}
+
+	public void setDocumentType(String documentType) {
+		this.documentType = documentType;
+	}
+
 	public String getReference() {
 		return reference;
 	}

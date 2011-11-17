@@ -20,7 +20,7 @@ public class BatchDAO extends GenericDAO {
 	private static final Logger logger = Logger.getLogger(BatchDAO.class);
 	
 	@SuppressWarnings("unchecked")
-	public List<BatchEntity> searchBatchEntity(String reference, Date date, Integer branchOfficeId) throws BatchException{
+	public List<BatchEntity> searchBatchEntity(String reference, Date date, Integer branchOfficeId, Integer docType) throws BatchException{
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
         SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
         StringBuilder sql = null;
@@ -46,9 +46,9 @@ public class BatchDAO extends GenericDAO {
             }
             if(date != null){
             	sql.append(" AND l.batchDate BETWEEN :beforeDate AND :afterDate ");
-            }
+            }                      
             em = emf.createEntityManager();
-            em.getTransaction().begin();
+            em.getTransaction().begin();            
             query = em.createQuery(sql.toString());
             if(!reference.trim().equals("")){
             	query.setParameter("reference", "%"+reference+"%".toUpperCase());
@@ -58,8 +58,9 @@ public class BatchDAO extends GenericDAO {
             	query.setParameter("beforeDate", beforeTime, TemporalType.TIMESTAMP);
             	query.setParameter("afterDate", afterTime, TemporalType.TIMESTAMP);
             }
+                        
+            batchEntityList = query.getResultList();
             em.getTransaction().commit();
-            batchEntityList = query.getResultList();           
         }catch (Exception exception){
             BatchException bankException = null;
             bankException = new BatchException(exception, BatchException.LAYER_DAO, BatchException.ACTION_LISTS);
@@ -100,7 +101,7 @@ public class BatchDAO extends GenericDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<BatchEntity> searchMonthlyReport(String month, String year, String branchOfficeId) throws BatchException{
+	public List<BatchEntity> searchMonthlyReport(String month, String year, String branchOfficeId, Integer documentType) throws BatchException{
 		List<BatchEntity> batchEntityList = null;		
 		Query query = null;
 		try{
@@ -124,7 +125,7 @@ public class BatchDAO extends GenericDAO {
 	
 	
 	@SuppressWarnings("unchecked")
-	public List<BatchEntity> searchDailyReport(String branchOfficeId, Date day) throws BatchException{
+	public List<BatchEntity> searchDailyReport(String branchOfficeId, Date day, Integer documentType) throws BatchException{
 		List<BatchEntity> batchEntityList = null;				        	
 		Query query = null;		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
