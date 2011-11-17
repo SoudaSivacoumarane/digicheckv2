@@ -6,7 +6,9 @@ import java.util.List;
 import com.cpi.sterling.check.view.CheckView;
 
 public class LotView implements Serializable {
-	private static final long serialVersionUID = 5265119098186567587L;
+	private static final long serialVersionUID = -3481831521302863478L;
+	public static final int CATCH_TYPE = 1;
+	public static final int CHECK_TYPE = 0;
 	private int id;
 	private int sucId;
 	private int divId;
@@ -15,6 +17,7 @@ public class LotView implements Serializable {
 	private int noDocs;
 	private String user;
 	private String date;
+	private int type;
 	private List<CheckView> chekViewList;
 		
 	public int getId() {
@@ -70,5 +73,13 @@ public class LotView implements Serializable {
 	}
 	public void setChekViewList(List<CheckView> chekViewList) {
 		this.chekViewList = chekViewList;
+	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		if( type == CATCH_TYPE || type == CHECK_TYPE ){
+			this.type = type;
+		}
 	}		
 }

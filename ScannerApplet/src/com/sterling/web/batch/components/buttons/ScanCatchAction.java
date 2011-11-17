@@ -20,18 +20,18 @@ import com.sterling.web.batch.components.ImagePanel;
 import com.sterling.web.batch.components.MainPanel;
 import com.sterling.web.batch.components.ToolBar;
 
-public class ScanAction implements ActionRunneable {
+public class ScanCatchAction implements ActionRunneable {
 	private MainPanel mainPanel;
-	public ScanAction(Container container) {
+	public ScanCatchAction(Container container) {
 		mainPanel = (MainPanel)container;
 	}
-	
 	@Override
 	public void run() {
 		mainPanel.setStatusBar("Scanning ... ");
 		TwainSource source = null;
 		MorenaImage morenaImage = null;
 		int imageStatus = 0;
+		int i = 0;
 		ImagePanel imagePanel = null;
 		Image image = null;
 		List<Image> arrayImages = mainPanel.getImages();
@@ -45,6 +45,30 @@ public class ScanAction implements ActionRunneable {
 				source.setDuplexEnabled(true);
 				source.setPrinterEnabled(false);
 				source.setSupportedSizes(0);
+				JOptionPane.showMessageDialog(mainPanel, "Introdusca el IFE", "IFE", JOptionPane.INFORMATION_MESSAGE);
+				while(i++ < 2){
+					morenaImage = new MorenaImage(source);
+					imageStatus = morenaImage.getStatus();
+					if (imageStatus == ImageConsumer.STATICIMAGEDONE) {
+						image = Toolkit.getDefaultToolkit().createImage(morenaImage);
+						imagePanel = new ImagePanel(image);
+						if( arrayImages.size()%2 == 0 ){
+							arrayCheckInfo.add(new CheckView(LotView.CATCH_TYPE));//Aqui falta agregar los datos del abba
+							mainPanel.setStatusBar("# Cheques : " + arrayCheckInfo.size());
+						}
+						if( arrayImages.size() < 2 ){
+							mainPanel.add(imagePanel);
+						}
+						arrayImages.add(image);
+						mainPanel.validate();
+					}else if (imageStatus == ImageConsumer.IMAGEABORTED){
+						mainPanel.setStatusBar("Aborted, try again ...");
+					}else if (imageStatus == ImageConsumer.IMAGEERROR){
+						mainPanel.setStatusBar("Failed, try again ...");
+					}
+				}
+				
+				JOptionPane.showMessageDialog(mainPanel, "Introdusca el EFECTIVO", "EFECTIVO", JOptionPane.INFORMATION_MESSAGE);
 				do{
 					morenaImage = new MorenaImage(source);
 					imageStatus = morenaImage.getStatus();
@@ -52,8 +76,8 @@ public class ScanAction implements ActionRunneable {
 						image = Toolkit.getDefaultToolkit().createImage(morenaImage);
 						imagePanel = new ImagePanel(image);
 						if( arrayImages.size()%2 == 0 ){
-							arrayCheckInfo.add(new CheckView(LotView.CHECK_TYPE));//Aqui falta agregar los datos del abba
-							mainPanel.setStatusBar("# Cheques : " + arrayCheckInfo.size());
+							arrayCheckInfo.add(new CheckView(LotView.CATCH_TYPE));//Aqui falta agregar los datos del abba
+							mainPanel.setStatusBar("# IFE, Billetes : " + (arrayCheckInfo.size()-1));
 						}
 						if( arrayImages.size() < 2 ){
 							mainPanel.add(imagePanel);
@@ -69,7 +93,7 @@ public class ScanAction implements ActionRunneable {
 					}
 				}while(source.hasMoreImages());
 				
-				if( arrayCheckInfo.size() > 0 ){
+				if( arrayCheckInfo.size() > 1 ){
 					if( (arrayImages.size()/2) < mainPanel.getLotView().getNoDocs()){
 						((ToolBar)mainPanel.getParent().getComponent(0)).isScanNotFinish();
 					}else{
@@ -87,9 +111,6 @@ public class ScanAction implements ActionRunneable {
 					mainPanel.setImages(arrayImages);
 					mainPanel.setChecks(arrayCheckInfo);
 				}
-				
-			}else{
-				mainPanel.setStatusBar("Failed, try again ...");
 			}
 		} catch (TwainException twainException){
 			JOptionPane.showMessageDialog(mainPanel, twainException.toString(), "Twain Error", JOptionPane.ERROR_MESSAGE);

@@ -6,17 +6,19 @@ import java.util.List;
 import com.cpi.sterling.document.view.DocumentView;
 
 public class CheckView implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3925264526319810498L;
+	private static final long serialVersionUID = 3951310950458045033L;
 	private int chqId;
 	private int lotId;
 	private String abba;
 	private String account;
 	private double amount;
+	private int type;
 	private List<DocumentView> documentList;
-	
+	public CheckView() {
+	}
+	public CheckView(int type) {
+		this.type = type;
+	}
 	public int getChqId() {
 		return chqId;
 	}
@@ -53,5 +55,10 @@ public class CheckView implements Serializable{
 	public void setDocumentList(List<DocumentView> documentList) {
 		this.documentList = documentList;
 	}
-		
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
 }

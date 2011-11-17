@@ -5,8 +5,8 @@ Data for connection pools
 <datasources>
 	<datasource name="digicheck">
 	    <driver>com.inet.tds.TdsDriver</driver>
-	    <url>jdbc:inetdae7:sterlingdc5:1433</url>
-	    <catalog>digicheck</catalog>
+	    <url>jdbc:inetdae7:localhost:1999</url>
+	    <catalog>digicheck31</catalog>
 	    <username>digicheck</username>
 	    <pass>digicheck</pass>
 	   	<maxIdle>10</maxIdle>
