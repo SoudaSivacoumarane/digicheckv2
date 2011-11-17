@@ -64,6 +64,7 @@ public class DailyReportManagedBean implements Serializable {
 	private String header;
 	private String totalAmount;
 	private String totalDocNum;
+	private String documentType;
 	
 	public DailyReportManagedBean() {
 		this.branchOfficeCode = JSFUtil.getSessionAttribute(UserView.class, "user").getSucursalId();
@@ -85,7 +86,7 @@ public class DailyReportManagedBean implements Serializable {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, "Seleccione al menos una Sucursal", "Seleccione al menos una Sucursal");
 		}else{
 			try {
-				reportList = batchService.searchDailyReport(branchOfficeCode, day);
+				reportList = batchService.searchDailyReport(branchOfficeCode, day, Integer.parseInt(documentType));
 				if(reportList != null){
 					if(!reportList.isEmpty()){									
 						this.header = "Fecha: " + TimeUtils.convertJavaDateToString(day);
@@ -299,6 +300,14 @@ public class DailyReportManagedBean implements Serializable {
 
 	public void setTotalDocNum(String totalDocNum) {
 		this.totalDocNum = totalDocNum;
+	}
+	
+	public String getDocumentType() {
+		return documentType;
+	}
+
+	public void setDocumentType(String documentType) {
+		this.documentType = documentType;
 	}
 
 	public void setBatchService(BatchService batchService) {
