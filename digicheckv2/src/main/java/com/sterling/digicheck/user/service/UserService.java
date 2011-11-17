@@ -135,6 +135,10 @@ public class UserService {
 			if(view.isDelUser()){
 				uList.add(new UserPermissionEntity(view.getLogin(), 10, new Date(), pList.get(9), entity));
 			}
+			if(view.isDigitalizeCashPermission()){
+				uList.add(new UserPermissionEntity(view.getLogin(), 11, new Date(), pList.get(10), entity));
+			}
+				
 			entity.setUserPermissionEntity(uList);			
 			userDAO.insertUser(entity);
 		}catch (UserException userException){
@@ -188,6 +192,9 @@ public class UserService {
 			}
 			if(view.isDelUser()){
 				uList.add(new UserPermissionEntity(view.getLogin(), 10, new Date(), pList.get(9), entity));
+			}
+			if(view.isDigitalizeCashPermission()){
+				uList.add(new UserPermissionEntity(view.getLogin(), 11, new Date(), pList.get(10), entity));
 			}
 			entity.setUserPermissionEntity(uList);
 			userDAO.updateUser(entity);

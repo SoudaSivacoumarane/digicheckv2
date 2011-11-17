@@ -44,11 +44,13 @@ public class CheckEntity implements Serializable {
     @Basic(optional = false)
     @Column(name = "CHQ_IMPORTE")
     private BigDecimal chqAmount;
+    @Column(name = "CHQ_TIPO")
+    private Integer chqType;    
     @OneToMany(mappedBy = "checkEntity")
     private List<DocumentEntity> documentEntityCollection;
     @JoinColumn(name = "LOT_ID", referencedColumnName = "LOT_ID")
     @ManyToOne(optional = false)
-    private BatchEntity batch;
+    private BatchEntity batch;    
     
     public CheckEntity() {
     }
@@ -111,6 +113,14 @@ public class CheckEntity implements Serializable {
 
 	public void setBatch(BatchEntity batch) {
 		this.batch = batch;
+	}		
+
+	public Integer getChqType() {
+		return chqType;
+	}
+
+	public void setChqType(Integer chqType) {
+		this.chqType = chqType;
 	}
 
 	@Override
