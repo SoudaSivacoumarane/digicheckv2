@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"      
+	xmlns:a4j="http://richfaces.org/a4j"
+	template="./template/template_login.xhtml">
+	
+	<ui:define name="title">
+        Efectivo
+    </ui:define>
+    
+    <ui:define name="content">
+    <h:outputScript>
+    	function validate(){    		
+    	 	var errors = "";
+    	 	var calendar = document.getElementById("formDigitalizationEfectivo:calendarInputDate").value;
+    	 	var referenciaId = document.getElementById("formDigitalizationEfectivo:referenciaId").value;    	 	
+    	 	var numDocumentosId = document.getElementById("formDigitalizationEfectivo:numDocumentosId").value;
+    	 	var importeId = document.getElementById("formDigitalizationEfectivo:importeId").value;
+    	 	var divisaId = document.getElementById("formDigitalizationEfectivo:divisaId").value;
+    	 	
+    	 	if(calendar == ""){
+    	 		errors = "Ingrese una fecha.\n";
+    	 	} 
+    	 	if(referenciaId == ""){
+    	 		errors += "Ingrese una referencia.\n";
+    	 	}  
+    	 	if(numDocumentosId == "" || parseInt( numDocumentosId ) == 0){
+    	 		errors += "Ingrese un n&uacute;mero de documentos.\n"
+    	 	}
+    	 	if(importeId == "" || parseInt( importeId ) ==0){
+    	 		errors += "Ingrese un importe.\n";
+    	 	} 
+    	 	if(divisaId == "-1"){
+    	 		errors += "Seleccione una divisa.\n"
+    	 	}
+    	 	if( errors == "" ){
+	            var dummy = window.open("agregar_efectivo.xhtml","AddCashBatch","width=1050,height=330");
+	            return true;
+	        }else{
+	            alert( errors );
+				return false;
+	        }	    	 	    	    		
+    	}
+    </h:outputScript>
+    <br />
+    <br />
+    <br />
+    <div align="center"> 		
+    	<h:form id="formDigitalizationEfectivo">
+	    <h:panelGroup>	    		   			
+   				<rich:panel header="Digitalizaci&oacute;n de Documentos Efectivo" style="width: 600px;">
+   					<fieldset>
+						<legend>Datos de Sucursal</legend>
+						<h:panelGrid columns="4" cellpadding="1" cellspacing="2" width="500px;" style="text-align: left;">
+                            <h:outputLabel value="Usuario" style="font-weight: bold;"/>
+                            <h:outputLabel value="#{cashManagedBean.userView.login}" style="text-align: left;"/>
+                            <h:outputLabel value="Nombre" style="font-weight: bold"/>
+                            <h:outputLabel value="#{cashManagedBean.userView.name}" style="text-align: left;"/>
+                            <h:outputLabel value="Direcci&oacute;n" style="font-weight: bold"/>                         
+                            <h:outputLabel value="#{cashManagedBean.branchOfficeView.address}" style="text-align: left;"/>
+                            <h:outputLabel value=" Colonia" style="font-weight: bold"/>
+                            <h:outputLabel value="#{cashManagedBean.branchOfficeView.community}" style="text-align: left;"/>
+                            <h:outputLabel value=" C.P." style="font-weight: bold"/>
+                            <h:outputLabel value="#{cashManagedBean.branchOfficeView.zip}" style="text-align: left;"/>                            
+                            <h:outputLabel value="Ciudad" style="font-weight: bold"/>
+                            <h:outputLabel value="#{cashManagedBean.branchOfficeView.city}" style="text-align: left;"/>
+                            <h:outputLabel value="Estado" style="font-weight: bold"/>
+                            <h:outputLabel value="#{cashManagedBean.branchOfficeView.state.name}" style="text-align: left;"/>
+                            <h:panelGroup>
+                            	&nbsp;
+                            </h:panelGroup>
+                        </h:panelGrid>							
+					</fieldset>					
+					
+					<fieldset>
+						<legend>LOTE</legend>						
+						<h:panelGrid columns="4" width="500px;" style="text-align: left;">
+							<h:outputLabel value="Fecha" style="font-weight: bold"/>
+							<rich:calendar id="calendar" cellWidth="24px" datePattern="dd/MM/yyyy" value="#{cashManagedBean.batchView.batchDate}"
+										   cellHeight="22px" style="width:100px" required="true" requiredMessage="Ingrese una fecha.">
+										   <f:ajax render="@none" execute="@this" />
+							</rich:calendar>
+							
+							<h:outputLabel value="Referencia" style="font-weight: bold;"/>
+							<h:inputText id="referenciaId" value="#{cashManagedBean.batchView.reference}" required="true" requiredMessage="Ingrese una Referencia." onfocus="this.select();" maxlength="100">
+								<f:ajax render="@none" execute="@this" />
+							</h:inputText>
+							
+							<h:outputLabel value="# Documentos" style="font-weight: bold;"/>
+							<h:inputText id="numDocumentosId" value="#{cashManagedBean.batchView.batchDocuments}" required="true" requiredMessage="Ingrese un numero de Documentos." styleClass="columnanumero" onfocus="this.select();" onkeydown="return (numeric(event, 0) &amp;&amp; noPaste(event, this));" onkeyup="extractNumber(this,0,false);">
+								<f:ajax render="@none" execute="@this" />
+							</h:inputText>
+							
+							<h:outputLabel value="Importe $" style="font-weight: bold"/>
+							<h:inputText id="importeId" value="#{cashManagedBean.batchView.batchAmount}" required="true" requiredMessage="Ingrese un Importe." styleClass="columnanumero" onfocus="this.select();" onkeydown="return (numeric(event, 1) &amp;&amp; noPaste(event, this));" onkeyup="extractNumber(this,2,false);">
+								<f:ajax render="@none" execute="@this" />
+							</h:inputText>
+							
+							<h:outputLabel value="Divisa" style="font-weight: bold" required="true" requiredMessage="Seleccione una divisa." />
+							<h:selectOneMenu id="divisaId" value="#{cashManagedBean.currencySelected}" style="width:150px;" >
+								<f:ajax render="@none" execute="@this" />
+								<f:selectItem itemValue="-1" itemLabel="Seleccione una Divisa"/>
+								<f:selectItems value="#{cashManagedBean.currencyItems}" />
+							</h:selectOneMenu>
+							<h:panelGroup>&nbsp;</h:panelGroup>
+							<h:panelGroup>&nbsp;</h:panelGroup>
+							<h:panelGroup>&nbsp;</h:panelGroup>                           				       
+						</h:panelGrid>																
+						<div style="text-align: right;">
+							<h:commandButton value="Digitalizar Efectivo" onclick="return validate();" />							
+						</div>
+					</fieldset>					
+					
+					<div style="width: 220px;">
+   						<rich:messages />
+   					</div>
+   				</rich:panel>
+   		</h:panelGroup>
+   		</h:form>
+   	</div>    
+    </ui:define>
+</ui:composition>

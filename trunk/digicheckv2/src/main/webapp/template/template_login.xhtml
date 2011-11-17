@@ -57,10 +57,14 @@
                                     <img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_10_L.jpg" width="101" height="41" alt="Cheques" border="0" />
                                </h:commandLink>
 	                       </td>
+	                        <td><h:commandLink actionListener="#{cashManagedBean.goCashDigitalization}" rendered="#{cashManagedBean.cashDigitize}" >
+                                   	<img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_26.jpg" width="100" height="41" alt="Digitalizar Efectivo" border="0" />
+                              	</h:commandLink>
+                       		</td>
 	                       <td><h:commandLink actionListener="#{batchManagedBean.goViewDigitalizationAction}" rendered="#{batchManagedBean.digitize}" >
                                     <img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_25.jpg" width="100" height="41" alt="Digitalizar" border="0" />
                                </h:commandLink>
-	                       </td>
+	                       </td>	                          
 	                       <td> 
 	                       		<h:commandLink action="#" onmouseover="popup('reportes', 'img_reportes');" onmouseout="popdown();">
 	                       			<img name="img_reportes" id="img_reportes" src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_11_L.jpg" width="101" height="41" alt="Reportes"  border="0" />
