@@ -38,7 +38,7 @@
     	 		errors += "Seleccione una divisa.\n"
     	 	}
     	 	if( errors == "" ){
-	            var dummy = window.open("agregar_cheque.xhtml","AddBatch","width=1050,height=330");
+	            var dummy = window.open("agregar_cheque.xhtml","AddBatch","width=1025,height=305");
 	            return true;
 	        }else{
 	            alert( errors );
@@ -52,7 +52,7 @@
     <div align="center"> 		
     	<h:form id="formDigitalization">
 	    <h:panelGroup>	    		   			
-   				<rich:panel header="Digitalizaci&oacute;n de Documentos" style="width: 600px;">
+   				<rich:panel header="Digitalizaci&oacute;n de CHEQUES" style="width: 600px;">
    					<fieldset>
 						<legend>Datos de Sucursal</legend>
 						<h:panelGrid columns="4" cellpadding="1" cellspacing="2" width="500px;" style="text-align: left;">
@@ -90,7 +90,7 @@
                     		</h:inputText>
                     		
                     		<h:outputLabel value="# Documentos" style="font-weight: bold;"/>
-                    		<h:inputText id="numDocumentosId" value="#{batchManagedBean.batchView.batchDocuments}" required="true" requiredMessage="Ingrese un numero de Documentos." styleClass="columnanumero" onfocus="this.select();" onkeydown="return (numeric(event, 0) &amp;&amp; noPaste(event, this));" onkeyup="extractNumber(this,0,false);">
+                    		<h:inputText id="numDocumentosId" value="#{batchManagedBean.batchView.batchDocuments}" required="true" requiredMessage="Ingrese un numero de Cheques." styleClass="columnanumero" onfocus="this.select();" onkeydown="return (numeric(event, 0) &amp;&amp; noPaste(event, this));" onkeyup="extractNumber(this,0,false);">
                     			<f:ajax render="@none" execute="@this" />
                     		</h:inputText>
                     		
@@ -110,8 +110,7 @@
 							<h:panelGroup>&nbsp;</h:panelGroup>                           				       
 						</h:panelGrid>																
 						<div style="text-align: right;">
-							<h:commandButton value="Cancelar" action="#{batchManagedBean.back}" immediate="true" /> &nbsp;							
-							<h:commandButton value="Digitalizar Lotes" onclick="return validate();" />							
+							<h:commandButton value="Digitalizar" onclick="return validate();" />							
 						</div>
 					</fieldset>
 					<div style="width: 220px;">

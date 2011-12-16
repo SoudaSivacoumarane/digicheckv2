@@ -14,7 +14,6 @@ import javax.faces.model.SelectItem;
 import org.apache.log4j.Logger;
 
 import com.sterling.common.util.JSFUtil;
-import com.sterling.digicheck.batch.service.BatchService;
 import com.sterling.digicheck.batch.view.BatchView;
 import com.sterling.digicheck.branchoffice.exception.BranchOfficeException;
 import com.sterling.digicheck.branchoffice.service.BranchOfficeService;
@@ -65,7 +64,9 @@ public class CashManagedBean implements Serializable{
 			this.batchView.setBatchDocuments(null);
 			this.batchView.setBatchAmount(null);
 			this.batchView.setBatchDate(new Date());
-			this.batchView.setUserView(userView);			
+			this.batchView.setReference("");
+			this.currencySelected = "-1";
+			this.batchView.setUserView(userView);
 			this.batchView.setBranchOfficeView(branchOfficeView);
 		} catch (BranchOfficeException e) {
 			logger.error(e);

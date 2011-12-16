@@ -58,9 +58,9 @@
 		                        <f:selectItem itemValue="2015" itemLabel="2015" />
 		                    </h:selectOneMenu>
                             <h:outputLabel value="Tipo de Documento: "  style="font-weight: bold"/>
-		                    <h:selectOneMenu id="typoDoc" style="width: 100px" value="#{monthlyReportManagedBean.documentType}">			                    	
+		                    <h:selectOneMenu id="typoDoc" style="width: 100px" value="#{monthlyReportManagedBean.documentType}">
+		                    	<f:selectItem itemValue="0" itemLabel="Cheque"/>			                    	
 		                    	<f:selectItem itemValue="1" itemLabel="Efectivo"/>			                    	
-								<f:selectItem itemValue="0" itemLabel="Cheque"/>									
 							</h:selectOneMenu>
                             <h:outputLabel value="Sucursal : " style="font-weight: bold"/>
 		                    <h:selectOneMenu id="sucursales" style="width: 200px" value="#{monthlyReportManagedBean.branchOfficeCode}" disabled="#{batchManagedBean.branchOfficeAllowed}" >

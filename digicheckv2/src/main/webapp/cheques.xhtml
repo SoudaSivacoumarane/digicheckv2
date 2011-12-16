@@ -9,7 +9,7 @@
 	template="./template/template_login.xhtml">
 	
 	<ui:define name="title">
-        Cheques
+        Busqueda de Documentos
     </ui:define>
     
     <ui:define name="content">
@@ -27,7 +27,7 @@
     <div align="center">     
     	<h:form id="formBatch">
 	    <h:panelGroup id="panel_tabla_lote_busqueda">	    		   			
-   				<rich:panel header="Buscar Cheques" style="width: 650px;">
+   				<rich:panel header="Buscar Documentos" style="width: 650px;">
    					<h:panelGrid columns="2">   						
    						
    						<h:panelGrid columns="5">   					 									
@@ -45,9 +45,9 @@
 							
 							<h:panelGroup style="text-align: left;">
 	                            <h:outputLabel value="Tipo de Documento: "  style="font-weight: bold"/><br />
-			                    <h:selectOneMenu id="typoDoc" style="width: 120px" value="#{batchManagedBean.documentType}">			                    	
-			                    	<f:selectItem itemValue="1" itemLabel="Efectivo"/>			                    	
-									<f:selectItem itemValue="0" itemLabel="Cheque"/>									
+			                    <h:selectOneMenu id="typoDoc" style="width: 120px" value="#{batchManagedBean.documentType}">
+			                    	<f:selectItem itemValue="0" itemLabel="Cheque"/>			                    	
+			                    	<f:selectItem itemValue="1" itemLabel="Efectivo"/>
 								</h:selectOneMenu>			  															
 							</h:panelGroup>
 							
@@ -75,7 +75,7 @@
    				</rich:panel>	   					
 	    </h:panelGroup>
 	    <br />
-	    <rich:dataTable value="#{batchManagedBean.batchViewList}" var="row" rowClasses="odd, even" id="table" rows="5" style="width: 70%" rendered="#{batchManagedBean.renderTable}">		
+	    <rich:dataTable value="#{batchManagedBean.batchViewList}" var="row" rowClasses="odd, even" id="table" rows="10" style="width: 70%" rendered="#{batchManagedBean.renderTable}">		
 			<rich:column>
 				<f:facet name="header">
 				</f:facet>            							
