@@ -1,9 +1,12 @@
 package com.sterling.web.batch.components;
 
+import java.applet.AppletContext;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,10 +22,18 @@ public class MainPanel extends JPanel {
 	private List<CheckView> arrayChecks;
 	private int position;
 	private LotView lotView = null;
+	private AppletContext appletContext;
+	
+	public void closeWindow(){
+		try {
+			appletContext.showDocument(new URL("javascript:window.close();"));
+		} catch (MalformedURLException malformedURLException) {}
+	}
 
-	public MainPanel(Container container, LotView nLotView) {
+	public MainPanel(Container container, LotView nLotView, AppletContext nAppletContext) {
 		statusBar = new StatusBar();
 		lotView = nLotView;
+		appletContext = nAppletContext;
 		container.add(new ToolBar(this), BorderLayout.NORTH);
 		container.add(this, BorderLayout.CENTER);
 		container.add(statusBar, BorderLayout.SOUTH);

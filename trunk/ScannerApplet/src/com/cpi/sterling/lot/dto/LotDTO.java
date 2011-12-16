@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 public class LotDTO implements Serializable {
-	private static final long serialVersionUID = -7611262709048089785L;
+	private static final long serialVersionUID = 2682755892782670207L;
 	private int id;
 	private int sucId;
 	private int divId;
@@ -14,6 +14,7 @@ public class LotDTO implements Serializable {
 	private String user;
 	private Calendar date;
 	private Calendar addDate;
+	private int type;
 	public int getId() {
 		return id;
 	}
@@ -67,5 +68,11 @@ public class LotDTO implements Serializable {
 	}
 	public void setAddDate(Calendar addDate) {
 		this.addDate = addDate;
+	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
 	}
 }

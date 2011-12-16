@@ -20,7 +20,7 @@ public class BatchScreenNew extends JApplet {
 		try {
 			lotHelper = new LotHelper();
 			lotView = lotHelper.createLotViewFromApplet(this);
-			new MainPanel(getContentPane(), lotView);
+			new MainPanel(getContentPane(), lotView, getAppletContext());
 		} catch (LotException lotException) {
 			JOptionPane.showMessageDialog(this, lotException.getMessage(), "Init Error", JOptionPane.ERROR_MESSAGE);
 		}

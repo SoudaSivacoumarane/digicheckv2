@@ -15,7 +15,6 @@ import SK.gnome.twain.TwainManager;
 import SK.gnome.twain.TwainSource;
 
 import com.cpi.sterling.check.view.CheckView;
-import com.cpi.sterling.lot.view.LotView;
 import com.sterling.web.batch.components.ImagePanel;
 import com.sterling.web.batch.components.MainPanel;
 import com.sterling.web.batch.components.ToolBar;
@@ -45,6 +44,7 @@ public class ScanAction implements ActionRunneable {
 				source.setDuplexEnabled(true);
 				source.setPrinterEnabled(false);
 				source.setSupportedSizes(0);
+				source.setAutoScan(true);
 				do{
 					morenaImage = new MorenaImage(source);
 					imageStatus = morenaImage.getStatus();
@@ -52,7 +52,7 @@ public class ScanAction implements ActionRunneable {
 						image = Toolkit.getDefaultToolkit().createImage(morenaImage);
 						imagePanel = new ImagePanel(image);
 						if( arrayImages.size()%2 == 0 ){
-							arrayCheckInfo.add(new CheckView(LotView.CHECK_TYPE));//Aqui falta agregar los datos del abba
+							arrayCheckInfo.add(new CheckView());//Aqui falta agregar los datos del abba
 							mainPanel.setStatusBar("# Cheques : " + arrayCheckInfo.size());
 						}
 						if( arrayImages.size() < 2 ){
@@ -62,10 +62,8 @@ public class ScanAction implements ActionRunneable {
 						mainPanel.validate();
 					}else if (imageStatus == ImageConsumer.IMAGEABORTED){
 						mainPanel.setStatusBar("Aborted, try again ...");
-						break;
 					}else if (imageStatus == ImageConsumer.IMAGEERROR){
 						mainPanel.setStatusBar("Failed, try again ...");
-						break;
 					}
 				}while(source.hasMoreImages());
 				
