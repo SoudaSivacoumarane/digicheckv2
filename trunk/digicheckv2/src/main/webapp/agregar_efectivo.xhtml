@@ -1,27 +1,27 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:rich="http://richfaces.org/rich"      
-	  xmlns:a4j="http://richfaces.org/a4j"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
-<h:head>
-	<title>Cheques</title>	
-</h:head>	  	 
-    <h:body style="background-color: gray;">        		
-      	<f:view>      		      	
-			<APPLET name="BatchScreen" CODE="com.sterling.web.batch.BatchScreenNew.class" ARCHIVE="libs/datasource/commons-beanutils.jar,libs/datasource/commons-collections-3.2.1.jar,libs/datasource/commons-dbcp.jar,libs/datasource/commons-digester.jar,libs/datasource/commons-logging-1.1.1.jar,libs/datasource/commons-pool.jar,libs/datasource/Opta2000.jar,libs/examples.jar,libs/batch.jar,libs/morena.jar,libs/morena_windows.jar,libs/morena_osx.jar,libs/morena_license.jar" WIDTH="1024" HEIGHT="300">
-				<param name="usuario" value="#{cashManagedBean.batchView.userView.login}" />
-				<param name="sucursal" value="#{cashManagedBean.branchOfficeView.sucId}" />
-				<param name="divisa" value="#{cashManagedBean.currencySelected}" />
-				<param name="importe" value="#{cashManagedBean.batchView.batchAmount}" />			
-				<param name="docs" value="0" />
-				<param name="referencia" value="#{cashManagedBean.batchView.reference}" />
-				<param name="fecha" value="#{cashManagedBean.batchView.batchDate}" />
-				<param name="tipo" value="1" />															
-			</APPLET>			
-		</f:view>
-	</h:body>		
-</html>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"      
+	xmlns:a4j="http://richfaces.org/a4j"
+	template="./template/template_empty.xhtml">
+	<ui:define name="title">
+        Digitalizar Efectivo
+    </ui:define>
+    
+    <ui:define name="content">
+		<APPLET name="BatchScreen" CODE="com.sterling.web.batch.BatchScreenNew.class" ARCHIVE="libs/datasource/commons-beanutils.jar,libs/datasource/commons-collections-3.2.1.jar,libs/datasource/commons-dbcp.jar,libs/datasource/commons-digester.jar,libs/datasource/commons-logging-1.1.1.jar,libs/datasource/commons-pool.jar,libs/datasource/Opta2000.jar,libs/examples.jar,libs/batch.jar,libs/morena.jar,libs/morena_windows.jar,libs/morena_osx.jar,libs/morena_license.jar" WIDTH="1024" HEIGHT="300">
+			<param name="usuario" value="#{cashManagedBean.batchView.userView.login}" />
+			<param name="sucursal" value="#{cashManagedBean.branchOfficeView.sucId}" />
+			<param name="divisa" value="#{cashManagedBean.currencySelected}" />
+			<param name="importe" value="#{cashManagedBean.batchView.batchAmount}" />			
+			<param name="docs" value="0" />
+			<param name="referencia" value="#{cashManagedBean.batchView.reference}" />
+			<param name="fecha" value="#{cashManagedBean.batchView.batchDate}" />
+			<param name="tipo" value="1" />
+			<param name="java_arguments" value="-Xmx512m"/>
+		</APPLET>
+	</ui:define>
+</ui:composition>

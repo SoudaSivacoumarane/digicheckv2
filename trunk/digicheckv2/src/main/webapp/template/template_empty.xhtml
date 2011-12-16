@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:rich="http://richfaces.org/rich"      
+	  xmlns:a4j="http://richfaces.org/a4j">
+    <h:head>
+        <title>
+            DigiCheck :: <ui:insert name="title"/>
+        </title>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/themes/theme2/skin.css"  rel="stylesheet" type="text/css" />
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/prototype.css"  rel="stylesheet" type="text/css" />            
+		<meta http-equiv="Expires" content="Sat, 6 May 1995 12:00:00 GMT"/>
+		<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+		<meta http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+		<meta http-equiv="Pragma" content="no-cache"/>
+        <ui:insert name="head"/>
+    </h:head>
+    <h:body>        		
+        <f:view>
+        	<f:loadBundle basename="messages" var="msgs" />
+			<div style="background-color: gray;">			     
+				<ui:insert name="content">Contenido ...</ui:insert>
+			</div>
+        </f:view>
+    </h:body>
+</html>

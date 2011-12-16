@@ -34,7 +34,7 @@
     	 		errors += "Seleccione una divisa.\n"
     	 	}
     	 	if( errors == "" ){
-	            var dummy = window.open("agregar_efectivo.xhtml","AddCashBatch","width=1050,height=330");
+	            var dummy = window.open("agregar_efectivo.xhtml","AddCashBatch","width=1025,height=305");
 	            return true;
 	        }else{
 	            alert( errors );
@@ -48,7 +48,7 @@
     <div align="center"> 		
     	<h:form id="formDigitalizationEfectivo">
 	    <h:panelGroup>	    		   			
-   				<rich:panel header="Digitalizaci&oacute;n de Documentos Efectivo" style="width: 600px;">
+   				<rich:panel header="Digitalizaci&oacute;n de EFECTIVO" style="width: 600px;">
    					<fieldset>
 						<legend>Datos de Sucursal</legend>
 						<h:panelGrid columns="4" cellpadding="1" cellspacing="2" width="500px;" style="text-align: left;">
@@ -103,7 +103,7 @@
 							                           				       
 						</h:panelGrid>																
 						<div style="text-align: right;">
-							<h:commandButton value="Digitalizar Efectivo" onclick="return validate();" />							
+							<h:commandButton value="Digitalizar" onclick="return validate();" />							
 						</div>
 					</fieldset>					
 					

@@ -29,7 +29,7 @@ public class CheckEntity implements Serializable {
 	/**
 	 * Serial Version UID
 	 */
-	private static final long serialVersionUID = -5908099809660543175L;
+	private static final long serialVersionUID = 7383666588568383798L;
 	
 	@Id
     @Basic(optional = false)
@@ -44,8 +44,6 @@ public class CheckEntity implements Serializable {
     @Basic(optional = false)
     @Column(name = "CHQ_IMPORTE")
     private BigDecimal chqAmount;
-    @Column(name = "CHQ_TIPO")
-    private Integer chqType;    
     @OneToMany(mappedBy = "checkEntity")
     private List<DocumentEntity> documentEntityCollection;
     @JoinColumn(name = "LOT_ID", referencedColumnName = "LOT_ID")
@@ -114,14 +112,6 @@ public class CheckEntity implements Serializable {
 	public void setBatch(BatchEntity batch) {
 		this.batch = batch;
 	}		
-
-	public Integer getChqType() {
-		return chqType;
-	}
-
-	public void setChqType(Integer chqType) {
-		this.chqType = chqType;
-	}
 
 	@Override
     public int hashCode() {

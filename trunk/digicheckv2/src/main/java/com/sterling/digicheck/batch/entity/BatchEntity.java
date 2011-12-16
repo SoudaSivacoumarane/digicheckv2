@@ -47,7 +47,7 @@ public class BatchEntity implements Serializable {
 	/**
 	 * Serial Version UID
 	 */
-	private static final long serialVersionUID = 1120492214943348512L;
+	private static final long serialVersionUID = -4472330594862813027L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -81,6 +81,8 @@ public class BatchEntity implements Serializable {
     @JoinColumn(name = "USU_LOGIN", referencedColumnName = "USU_LOGIN")
     @ManyToOne(optional = false)
     private UserEntity userLogin;
+    @Column(name = "LOT_TIPO")
+    private Integer type;  
     
     @PrePersist
     public void onPrePersist() {
@@ -151,6 +153,16 @@ public class BatchEntity implements Serializable {
 	public void setUserLogin(UserEntity userLogin) {
 		this.userLogin = userLogin;
 	}    
+	public Integer getType() {
+		return type;
+	}
+
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+
 	@Override
     public int hashCode() {
         int hash = 0;

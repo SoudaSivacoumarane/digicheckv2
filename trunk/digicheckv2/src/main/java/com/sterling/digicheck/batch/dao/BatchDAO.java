@@ -40,7 +40,7 @@ public class BatchDAO extends GenericDAO {
         		afterTime = formatter.parse(after + " 23:59:59");
             	beforeTime = formatter.parse(before + " 0:00:00");
         	}
-            sql.append("SELECT l FROM BatchEntity l WHERE l.branchOfficeId.sucId = :sucId ");
+            sql.append("SELECT l FROM BatchEntity l WHERE l.branchOfficeId.sucId = :sucId and l.type = :type");
             if(!reference.equals("")){
             	sql.append(" AND UPPER(l.reference) LIKE :reference ");
             }
@@ -54,6 +54,7 @@ public class BatchDAO extends GenericDAO {
             	query.setParameter("reference", "%"+reference+"%".toUpperCase());
             }
             query.setParameter("sucId", branchOfficeId);
+            query.setParameter("type", docType);
             if(date != null){
             	query.setParameter("beforeDate", beforeTime, TemporalType.TIMESTAMP);
             	query.setParameter("afterDate", afterTime, TemporalType.TIMESTAMP);
@@ -107,10 +108,11 @@ public class BatchDAO extends GenericDAO {
 		try{
 			em = emf.createEntityManager();
 			em.getTransaction().begin();
-			query = em.createQuery("SELECT l FROM BatchEntity l WHERE year(l.batchDate) = ?1 AND month(l.batchDate) = ?2 AND l.branchOfficeId.sucId = ?3");
+			query = em.createQuery("SELECT l FROM BatchEntity l WHERE year(l.batchDate) = ?1 AND month(l.batchDate) = ?2 AND l.branchOfficeId.sucId = ?3 and l.type = ?4");
 			query.setParameter(1, Integer.parseInt(year));
 			query.setParameter(2, Integer.parseInt(month));			
 			query.setParameter(3, Integer.parseInt(branchOfficeId));
+			query.setParameter(4, documentType.intValue());
 			batchEntityList = query.getResultList();			
 			em.getTransaction().commit();					
 		}catch (Exception exception){
@@ -142,10 +144,11 @@ public class BatchDAO extends GenericDAO {
 	        beforeTime = formatter.parse(before + " 0:00:00");
 			em = emf.createEntityManager();
 			em.getTransaction().begin();
-			query = em.createQuery("SELECT l FROM BatchEntity l WHERE l.branchOfficeId.sucId = ?1 AND l.batchDate BETWEEN ?2 AND ?3");
+			query = em.createQuery("SELECT l FROM BatchEntity l WHERE l.branchOfficeId.sucId = ?1 AND l.batchDate BETWEEN ?2 AND ?3 and l.type = ?4");
 			query.setParameter(1, Integer.parseInt(branchOfficeId));			
 			query.setParameter(2, beforeTime, TemporalType.TIMESTAMP);
         	query.setParameter(3, afterTime, TemporalType.TIMESTAMP);
+        	query.setParameter(4, documentType.intValue());
 			batchEntityList = query.getResultList();			
 			em.getTransaction().commit();					
 		}catch (Exception exception){
