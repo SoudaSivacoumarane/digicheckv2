@@ -13,7 +13,7 @@ import com.cs.common.utils.NumberUtil;
 
 public class LotDAO extends DBDAO {
 	
-	private static final String SQL_INSERT = "INSERT INTO LOTE (SUC_ID,DIV_ID,LOT_REFERENCIA,LOT_FECHA,LOT_DOCUMENTOS,LOT_IMPORTE,USU_LOGIN,LOT_FECHA_ALTA) VALUES (?,?,?,?,?,?,?,getDate())";
+	private static final String SQL_INSERT = "INSERT INTO LOTE (SUC_ID,DIV_ID,LOT_REFERENCIA,LOT_FECHA,LOT_DOCUMENTOS,LOT_IMPORTE,USU_LOGIN,LOT_FECHA_ALTA,LOT_TIPO) VALUES (?,?,?,?,?,?,?,getDate(),?)";
 	
 	public int insertLot(LotDTO lotDTO)throws LotException{
 		int id = 0;
@@ -28,6 +28,7 @@ public class LotDAO extends DBDAO {
 			preparedStatement.setInt(5, lotDTO.getNoDocs());
 			preparedStatement.setDouble(6, lotDTO.getAmount());
 			preparedStatement.setString(7, lotDTO.getUser());
+			preparedStatement.setInt(8, lotDTO.getType());
 			executeInsert(preparedStatement);
 			connection = preparedStatement.getConnection();
 			id = NumberUtil.parseInt(getInsertedId(connection));

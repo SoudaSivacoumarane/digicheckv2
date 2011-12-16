@@ -24,6 +24,7 @@ public class LotConverter {
 				dto.setAmount(view.getAmount());
 				date.setTime(TimeUtils.convertStringToDate(view.getDate(), TimeUtils.DATE_PATTERN_COMPLETE));
 				dto.setDate(date);
+				dto.setType(view.getType());
 			}			
 		} catch (Exception exception){
 			LotException lotException = null;

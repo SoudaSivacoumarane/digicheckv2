@@ -15,7 +15,6 @@ import SK.gnome.twain.TwainManager;
 import SK.gnome.twain.TwainSource;
 
 import com.cpi.sterling.check.view.CheckView;
-import com.cpi.sterling.lot.view.LotView;
 import com.sterling.web.batch.components.ImagePanel;
 import com.sterling.web.batch.components.MainPanel;
 import com.sterling.web.batch.components.ToolBar;
@@ -45,7 +44,8 @@ public class ScanCatchAction implements ActionRunneable {
 				source.setDuplexEnabled(true);
 				source.setPrinterEnabled(false);
 				source.setSupportedSizes(0);
-				JOptionPane.showMessageDialog(mainPanel, "Introdusca el IFE", "IFE", JOptionPane.INFORMATION_MESSAGE);
+				source.setAutoScan(true);
+				JOptionPane.showMessageDialog(mainPanel, "Introdusca el IFE y Billetes", "IFE/Efectivo", JOptionPane.INFORMATION_MESSAGE);
 				while(i++ < 2){
 					morenaImage = new MorenaImage(source);
 					imageStatus = morenaImage.getStatus();
@@ -53,7 +53,7 @@ public class ScanCatchAction implements ActionRunneable {
 						image = Toolkit.getDefaultToolkit().createImage(morenaImage);
 						imagePanel = new ImagePanel(image);
 						if( arrayImages.size()%2 == 0 ){
-							arrayCheckInfo.add(new CheckView(LotView.CATCH_TYPE));//Aqui falta agregar los datos del abba
+							arrayCheckInfo.add(new CheckView());//Aqui falta agregar los datos del abba
 							mainPanel.setStatusBar("# Cheques : " + arrayCheckInfo.size());
 						}
 						if( arrayImages.size() < 2 ){
@@ -68,7 +68,6 @@ public class ScanCatchAction implements ActionRunneable {
 					}
 				}
 				
-				JOptionPane.showMessageDialog(mainPanel, "Introdusca el EFECTIVO", "EFECTIVO", JOptionPane.INFORMATION_MESSAGE);
 				do{
 					morenaImage = new MorenaImage(source);
 					imageStatus = morenaImage.getStatus();
@@ -76,7 +75,7 @@ public class ScanCatchAction implements ActionRunneable {
 						image = Toolkit.getDefaultToolkit().createImage(morenaImage);
 						imagePanel = new ImagePanel(image);
 						if( arrayImages.size()%2 == 0 ){
-							arrayCheckInfo.add(new CheckView(LotView.CATCH_TYPE));//Aqui falta agregar los datos del abba
+							arrayCheckInfo.add(new CheckView());//Aqui falta agregar los datos del abba
 							mainPanel.setStatusBar("# IFE, Billetes : " + (arrayCheckInfo.size()-1));
 						}
 						if( arrayImages.size() < 2 ){
