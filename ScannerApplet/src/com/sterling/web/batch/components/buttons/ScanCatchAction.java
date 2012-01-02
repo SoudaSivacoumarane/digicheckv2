@@ -45,7 +45,7 @@ public class ScanCatchAction implements ActionRunneable {
 				source.setPrinterEnabled(false);
 				source.setSupportedSizes(0);
 				source.setAutoScan(true);
-				JOptionPane.showMessageDialog(mainPanel, "Introdusca el IFE y Billetes", "IFE/Efectivo", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(mainPanel, "Introduzca el IFE y Billetes", "IFE/Efectivo", JOptionPane.INFORMATION_MESSAGE);
 				while(i++ < 2){
 					morenaImage = new MorenaImage(source);
 					imageStatus = morenaImage.getStatus();

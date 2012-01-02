@@ -1,2 +1,4 @@
 keytool -genkey -alias sterling -keypass sterling 
 jarsigner batch.jar sterling
+
+mvn package clean -P dev jetty:run-war
