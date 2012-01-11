@@ -30,7 +30,7 @@ public class ScanCatchAction implements ActionRunneable {
 		TwainSource source = null;
 		MorenaImage morenaImage = null;
 		int imageStatus = 0;
-		int i = 0;
+		//int i = 0;
 		ImagePanel imagePanel = null;
 		Image image = null;
 		List<Image> arrayImages = mainPanel.getImages();
@@ -45,8 +45,8 @@ public class ScanCatchAction implements ActionRunneable {
 				source.setPrinterEnabled(false);
 				source.setSupportedSizes(0);
 				source.setAutoScan(true);
-				JOptionPane.showMessageDialog(mainPanel, "Introduzca el IFE y Billetes", "IFE/Efectivo", JOptionPane.INFORMATION_MESSAGE);
-				while(i++ < 2){
+				JOptionPane.showMessageDialog(mainPanel, "Introduzca el IFE y/o Billetes", "IFE/Efectivo", JOptionPane.INFORMATION_MESSAGE);
+				/*while(i++ < 2){
 					morenaImage = new MorenaImage(source);
 					imageStatus = morenaImage.getStatus();
 					if (imageStatus == ImageConsumer.STATICIMAGEDONE) {
@@ -66,7 +66,7 @@ public class ScanCatchAction implements ActionRunneable {
 					}else if (imageStatus == ImageConsumer.IMAGEERROR){
 						mainPanel.setStatusBar("Failed, try again ...");
 					}
-				}
+				}*/
 				
 				do{
 					morenaImage = new MorenaImage(source);
@@ -92,7 +92,7 @@ public class ScanCatchAction implements ActionRunneable {
 					}
 				}while(source.hasMoreImages());
 				
-				if( arrayCheckInfo.size() > 1 ){
+				if( arrayCheckInfo.size() > 0 ){
 					if( (arrayImages.size()/2) < mainPanel.getLotView().getNoDocs()){
 						((ToolBar)mainPanel.getParent().getComponent(0)).isScanNotFinish();
 					}else{
