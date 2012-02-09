@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"      
+	xmlns:a4j="http://richfaces.org/a4j"
+	template="./template/template_login.xhtml">
+	
+	<ui:define name="title">
+        Reporte Ife
+    </ui:define>
+        
+    <ui:define name="content">
+    <br />
+    <br />
+    <br />
+    <div align="center"> 
+    	<h:form id="ifeform">
+	    <h:panelGroup>	    		   			
+   				<rich:panel header="Reporte IFE's por sucursal" style="width: 650px;">
+   					  <f:event listener="#{ifeBean.preRender}" type="preRenderView" />
+   					  <h:panelGrid columns="5">                       	   
+                       	  <h:outputLabel value="Sucursal : "  style="font-weight: bold"/>
+	                      <h:selectOneMenu id="sucursales" style="width: 200px" value="#{ifeBean.branchOfficeCode}">
+	                    	 <f:ajax render="@none" execute="@this" />
+							 <f:selectItems value="#{ifeBean.branchOfficeItems}" />
+						  </h:selectOneMenu>
+                       	   
+                       	   <h:outputLabel value="Fecha : " style="font-weight: bold"/>
+                           <rich:calendar id="calendar" cellWidth="24px" datePattern="dd/MM/yyyy" value="#{ifeBean.date}"
+                   				       cellHeight="22px" style="width:200px">
+                   				       <f:ajax render="@none" execute="@this" />
+						   </rich:calendar>		  															
+					       					       
+					       <a4j:commandButton value="Buscar" action="#{ifeBean.sendToPDFAction}" execute="@form" />	 
+					                        			                    		                 		                    			                    		                
+                       </h:panelGrid> 
+                       <div style="width: 200px;">
+	                      <rich:messages />
+	                   </div>                                              
+   				</rich:panel>	   					
+	    </h:panelGroup>
+	    
+		</h:form>	    
+    </div>    
+	</ui:define>
+</ui:composition>

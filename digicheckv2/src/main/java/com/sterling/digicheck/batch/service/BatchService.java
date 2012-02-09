@@ -163,4 +163,20 @@ public class BatchService {
     		throw batchException;
 		}
 	}
+	
+	public List<Integer> getIFEsList(String sucId, String date) throws BatchException{
+		List<Integer> list = new ArrayList<Integer>(0);
+		try{
+			list = batchDAO.getIFEsList(sucId, date);
+		}catch (BatchException bankException){
+			throw bankException;
+		}catch (Exception exception){
+			BatchException batchException = null;
+			batchException = new BatchException(exception, BatchException.LAYER_SERVICE, BatchException.ACTION_LISTS);
+    		logger.error(batchException);
+    		exception.printStackTrace(System.out);
+    		throw batchException;
+		}
+		return list;
+	}
 }
