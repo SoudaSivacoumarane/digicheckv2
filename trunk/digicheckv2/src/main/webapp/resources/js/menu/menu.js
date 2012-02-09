@@ -46,6 +46,7 @@ with(milonic=new menuname('reportes')){
 	style=menuStyle;
 	aI('text=Mensual;url=reporte_mensual.xhtml;');
 	aI('text=Diario;url=reporte_diario.xhtml;');
+	aI('text=IFE;url=reporte_ife.xhtml;');
 }
 
 drawMenus();
