@@ -65,7 +65,7 @@ public class CashManagedBean implements Serializable{
 			this.batchView.setBatchAmount(null);
 			this.batchView.setBatchDate(new Date());
 			this.batchView.setReference("");
-			this.currencySelected = "-1";
+			this.currencySelected = "1";
 			this.batchView.setUserView(userView);
 			this.batchView.setBranchOfficeView(branchOfficeView);
 		} catch (BranchOfficeException e) {
