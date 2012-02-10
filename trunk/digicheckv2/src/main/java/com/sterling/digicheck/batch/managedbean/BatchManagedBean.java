@@ -111,7 +111,7 @@ public class BatchManagedBean implements Serializable {
 			this.batchView.setBatchDocuments(null);
 			this.batchView.setBatchAmount(null);
 			this.batchView.setReference("");
-			this.currencySelected ="-1";
+			this.currencySelected ="1";
 			this.batchView.setBatchDate(new Date());
 			this.batchView.setUserView(userView);
 			this.batchView.setBranchOfficeView(branchOfficeView);
