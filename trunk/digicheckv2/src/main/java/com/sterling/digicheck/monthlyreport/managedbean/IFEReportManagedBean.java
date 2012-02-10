@@ -81,7 +81,7 @@ public class IFEReportManagedBean implements Serializable {
 					check.scaleToFit(400, 400);
 					document.add(new Paragraph(""));
 					document.add(new Paragraph(""));
-					if(index%2 == 0){				
+					if(index > 0  && index%2 == 0){				
 						document.newPage();
 					}
 					document.add(check);								
