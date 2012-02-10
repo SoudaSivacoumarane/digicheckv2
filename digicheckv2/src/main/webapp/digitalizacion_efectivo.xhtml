@@ -94,6 +94,7 @@
 							<h:outputLabel value="Divisa" style="font-weight: bold" required="true" requiredMessage="Seleccione una divisa." />
 							<h:selectOneMenu id="divisaId" value="#{cashManagedBean.currencySelected}" style="width:150px;" >
 								<f:ajax render="@none" execute="@this" />
+								<f:selectItem itemValue="-1" itemLabel="Seleccione una Divisa"/>
 								<f:selectItems value="#{cashManagedBean.currencyItems}" />
 							</h:selectOneMenu>
 							

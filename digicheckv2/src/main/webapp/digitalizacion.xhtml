@@ -100,8 +100,9 @@
                     		</h:inputText>
                     		
                   			<h:outputLabel value="Divisa" style="font-weight: bold" required="true" requiredMessage="Seleccione una divisa." />
-                    		<h:selectOneMenu id="divisaId" value="#{batchManagedBean.currencySelected}" style="width:150px;" >
+                    		<h:selectOneMenu id="divisaId" value="#{batchManagedBean.currencySelected}" style="width:150px;">
                     			<f:ajax render="@none" execute="@this" />
+                    			<f:selectItem itemValue="-1" itemLabel="Seleccione una Divisa"/>
 								<f:selectItems value="#{batchManagedBean.currencyItems}" />
 							</h:selectOneMenu>
 							<h:panelGroup>&nbsp;</h:panelGroup>
