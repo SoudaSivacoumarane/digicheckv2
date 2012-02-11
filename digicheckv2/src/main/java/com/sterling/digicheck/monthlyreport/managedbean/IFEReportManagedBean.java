@@ -10,7 +10,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletResponse;
@@ -37,7 +37,7 @@ import com.sterling.digicheck.branchoffice.service.BranchOfficeService;
  *
  */
 @ManagedBean(name="ifeBean")
-@ViewScoped
+@RequestScoped
 public class IFEReportManagedBean implements Serializable {
 
 	
@@ -58,16 +58,17 @@ public class IFEReportManagedBean implements Serializable {
 	private Date date = new Date();
 	
 	public void sendToPDFAction(){
-		FacesContext context = FacesContext.getCurrentInstance();		
-		HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();		
-		response.setContentType("application/pdf");
-		response.setHeader("Content-disposition", "attachment;filename=\"IFEs-" + System.currentTimeMillis() + ".pdf\"");		
-		Document document = new Document();
-		StringBuilder filePath = null; 
-		List<Integer> list = new ArrayList<Integer>(0);
 		try{			
+			List<Integer> list = new ArrayList<Integer>(0);
 			list = batchService.getIFEsList(branchOfficeCode, TimeUtils.convertJavaDateToString(date));
 			if(!list.isEmpty()){
+				FacesContext context = FacesContext.getCurrentInstance();		
+				HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();		
+				response.setContentType("application/pdf");
+				response.setHeader("Content-disposition", "attachment;filename=\"IFEs-" + System.currentTimeMillis() + ".pdf\"");		
+				Document document = new Document();
+				StringBuilder filePath = null; 
+				
 				PdfWriter.getInstance(document, response.getOutputStream());
 				document.open();
 				Paragraph header = new Paragraph("IFE ",new Font(Font.BOLD));
