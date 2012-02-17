@@ -4,6 +4,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:rich="http://richfaces.org/rich"      
 	  xmlns:a4j="http://richfaces.org/a4j">
     <h:head>
@@ -52,7 +53,11 @@
 	                           		<img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_08_L.jpg" width="101" height="41" alt="Sucursales" border="0" />
 	                           </h:commandLink>
                            </td>
-	                       <td><a href="#" onmouseover="popup('catalogos', 'img_catalogos');" onmouseout="popdown();"><img name="img_catalogos" id="img_catalogos" src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_09_L.jpg" width="100" height="41" alt="Catalogos"  border="0" /></a></td>
+	                       <td>
+	                       		<c:if test="${loginManagedBean.catalogosAllowed}" >
+	                       			<a href	="#" onmouseover="popup('catalogos', 'img_catalogos');" onmouseout="popdown();"><img name="img_catalogos" id="img_catalogos" src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_09_L.jpg" width="100" height="41" alt="Catalogos"  border="0" /></a>
+	                       		</c:if>
+	                       	</td>
 	                       <td><h:commandLink actionListener="#{loginManagedBean.goChecksAction}" rendered="#{loginManagedBean.allCheckPermission}" >
                                     <img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_10_L.jpg" width="101" height="41" alt="Cheques" border="0" />
                                </h:commandLink>
