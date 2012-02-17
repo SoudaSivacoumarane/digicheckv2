@@ -58,7 +58,7 @@
 	                       			<a href	="#" onmouseover="popup('catalogos', 'img_catalogos');" onmouseout="popdown();"><img name="img_catalogos" id="img_catalogos" src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_09_L.jpg" width="100" height="41" alt="Catalogos"  border="0" /></a>
 	                       		</c:if>
 	                       	</td>
-	                       <td><h:commandLink actionListener="#{loginManagedBean.goChecksAction}" rendered="#{loginManagedBean.allCheckPermission}" >
+	                       <td><h:commandLink actionListener="#{loginManagedBean.goChecksAction}" rendered="#{loginManagedBean.documentModuleAllowed}" >
                                     <img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_10_L.jpg" width="101" height="41" alt="Cheques" border="0" />
                                </h:commandLink>
 	                       </td>

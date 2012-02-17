@@ -69,14 +69,19 @@ public class LoginManagedBean implements Serializable{
 		return allReportsPermission;
 	}
 	
-	public boolean isAllCheckPermission(){
-		boolean allCheckPermission = Boolean.FALSE; 
-		try {
-			allCheckPermission = this.securityAuthorizationService.hasPermission("5", JSFUtil.getSessionAttribute(UserView.class, "user").getLogin());
+	
+	public boolean isDocumentModuleAllowed(){
+		boolean documentPermission = Boolean.FALSE; 
+		try {			
+			boolean onlySelftBranchOffice = this.securityAuthorizationService.hasPermission("4", JSFUtil.getSessionAttribute(UserView.class, "user").getLogin());
+			boolean allBranchOffices = this.securityAuthorizationService.hasPermission("5", JSFUtil.getSessionAttribute(UserView.class, "user").getLogin());
+			if(onlySelftBranchOffice || allBranchOffices){
+				documentPermission = Boolean.TRUE;
+			}			
 		} catch (UserException e) {
 			System.out.println(e.getMessage());
 		}
-		return allCheckPermission;
+		return documentPermission;
 	}
 	
 	/**
