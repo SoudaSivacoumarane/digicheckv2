@@ -74,7 +74,14 @@ public class UserConverter {
 						userView.setDelUser(true);
 					}else if(upe.getPermiso().getPerId().intValue() == 11){
 						userView.setDigitalizeCashPermission(true);
+					}else if(upe.getPermiso().getPerId().intValue() == 12){
+						userView.setUserDataPermission(true);
+					}else if(upe.getPermiso().getPerId().intValue() == 13){
+						userView.setCatalogsDataPermission(true);
+					}else if(upe.getPermiso().getPerId().intValue() == 14){
+						userView.setDelDocumentsPermission(true);
 					}
+					
 				}
 			}
 			

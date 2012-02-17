@@ -6,7 +6,11 @@ import java.util.List;
 import com.sterling.digicheck.user.permission.view.UserPermissionView;
 
 public class UserView implements Serializable {
-	private static final long serialVersionUID = 1091505038339380532L;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1197299016292404309L;
 	private String sucursalId;
 	private String login;
 	private String name;
@@ -21,7 +25,10 @@ public class UserView implements Serializable {
 	private boolean allReportsPermission = false;
 	private boolean addUser = false;
 	private boolean editUser = false;
-	private boolean delUser = false;		
+	private boolean delUser = false;
+	private boolean userDataPermission = false;
+	private boolean catalogsDataPermission = false;
+	private boolean delDocumentsPermission = false;
 	private List<UserPermissionView> userPermissionViews;
 
 	public UserView() {
@@ -163,6 +170,30 @@ public class UserView implements Serializable {
 
 	public void setDigitalizeCashPermission(boolean digitalizeCashPermission) {
 		this.digitalizeCashPermission = digitalizeCashPermission;
+	}
+
+	public boolean isUserDataPermission() {
+		return userDataPermission;
+	}
+
+	public void setUserDataPermission(boolean userDataPermission) {
+		this.userDataPermission = userDataPermission;
+	}
+
+	public boolean isCatalogsDataPermission() {
+		return catalogsDataPermission;
+	}
+
+	public void setCatalogsDataPermission(boolean catalogsDataPermission) {
+		this.catalogsDataPermission = catalogsDataPermission;
+	}
+
+	public boolean isDelDocumentsPermission() {
+		return delDocumentsPermission;
+	}
+
+	public void setDelDocumentsPermission(boolean delDocumentsPermission) {
+		this.delDocumentsPermission = delDocumentsPermission;
 	}
 
 	@Override
