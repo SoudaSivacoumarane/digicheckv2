@@ -94,6 +94,16 @@ public class LoginManagedBean implements Serializable{
 		return userData;
 	}
 	
+	public boolean isCatalogosAllowed(){
+		boolean catalogs = Boolean.FALSE;
+		try{
+			catalogs = this.securityAuthorizationService.hasPermission("13", JSFUtil.getSessionAttribute(UserView.class, "user").getLogin());
+		} catch (UserException e) {
+			System.out.println(e.getMessage());
+		}
+		return catalogs;
+	}
+	
 	public void setSecurityAuthorizationService(
 			SecurityAuthorizationService securityAuthorizationService) {
 		this.securityAuthorizationService = securityAuthorizationService;
