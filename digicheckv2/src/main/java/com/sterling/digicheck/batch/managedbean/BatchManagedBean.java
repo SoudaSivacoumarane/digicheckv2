@@ -209,9 +209,9 @@ public class BatchManagedBean implements Serializable {
 	}
 	
 	public boolean isBranchOfficeAllowed(){
-		boolean branchofficeallowed = Boolean.FALSE;		
+		boolean branchofficeallowed = Boolean.FALSE;
 		try {
-			branchofficeallowed = securityAuthorizationService.hasPermission("4", JSFUtil.getSessionAttribute(UserView.class, "user").getLogin());
+			branchofficeallowed = !securityAuthorizationService.hasPermission("5", JSFUtil.getSessionAttribute(UserView.class, "user").getLogin());
 		} catch (UserException userException) {
 			logger.error(userException);
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, userException.getMessage(), userException.getMessage());
