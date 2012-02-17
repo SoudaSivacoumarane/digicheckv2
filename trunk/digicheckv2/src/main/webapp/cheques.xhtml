@@ -84,7 +84,7 @@
 						<a4j:param value="#{row.batchId}" assignTo="#{batchManagedBean.batchId}" />						
 					</h:commandLink>
 					:
-					<a4j:commandLink styleClass="no-decor" execute="@this"
+					<a4j:commandLink styleClass="no-decor" execute="@this" rendered="#{userManagedBean.deleteDocumentAllowed}"
 						render="@none" oncomplete="#{rich:component('confirmPane')}.show();">
 						<h:graphicImage value="resources/images/img-delete.png" alt="delete" />
 						<a4j:param value="#{row.batchId}" assignTo="#{batchManagedBean.batchId}" />
