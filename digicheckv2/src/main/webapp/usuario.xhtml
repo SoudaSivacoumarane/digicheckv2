@@ -76,7 +76,7 @@
 		</rich:popupPanel>
 	</h:form>
 		
-	<rich:popupPanel header="Editar Usuario" id="editPane" width="500" height="400">
+	<rich:popupPanel header="Editar Usuario" id="editPane" width="500" height="450">
 		<h:form>
 			<h:panelGrid columns="2" id="editGrid">																							
 				<h:outputText value="Login" />
@@ -136,14 +136,16 @@
 						<fieldset>
 							<legend>Digitalizar</legend>
 							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.digitalizePermission}" />Digitalizar Cheques <br />
-							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.digitalizeCashPermission}" />Digitalizar Efectivo
+							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.digitalizeCashPermission}" />Digitalizar Efectivo<br />
+							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.delDocumentsPermission}" />Borrar Documentos
 						</fieldset>
 					</h:panelGroup>
 					
 					<h:panelGroup>															
 						<fieldset>
 							<legend>Sucursales</legend>
-							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.branchOfficePermission}" />Datos de Sucursal
+							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.branchOfficePermission}" />Datos de Sucursal<br />
+							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.catalogsDataPermission}" />Datos Bancos/Divisas
 						</fieldset>
 					</h:panelGroup>					
 										
@@ -151,7 +153,7 @@
 						<fieldset>
 							<legend>Cheques</legend>
 							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.itselfCheckPermission}" />Solo de su Sucursal<br/>
-				            <h:selectBooleanCheckbox value="#{userManagedBean.currentUser.allCheckPermission}" />Todas las Sucursales
+				            <h:selectBooleanCheckbox value="#{userManagedBean.currentUser.allCheckPermission}" />Todas las Sucursales				            
 						</fieldset>
 					</h:panelGroup>
 					
@@ -168,7 +170,8 @@
 							<legend>Usuarios</legend>
 							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.addUser}" />Agregar<br/>
 				            <h:selectBooleanCheckbox value="#{userManagedBean.currentUser.editUser}" />Modificar<br/>
-				            <h:selectBooleanCheckbox value="#{userManagedBean.currentUser.delUser}" />Eliminar
+				            <h:selectBooleanCheckbox value="#{userManagedBean.currentUser.delUser}" />Eliminar<br />
+				            <h:selectBooleanCheckbox value="#{userManagedBean.currentUser.userDataPermission}" />Datos Usuario
 						</fieldset>
 					</h:panelGroup>																			
 				</h:panelGrid>				 			
@@ -181,7 +184,7 @@
 		</h:form>
 	</rich:popupPanel>
 	
-	<rich:popupPanel header="Agregar Usuario" id="addPane" width="500" height="400">
+	<rich:popupPanel header="Agregar Usuario" id="addPane" width="500" height="450">
 		<h:form id="addForm">
 			<h:panelGrid columns="2" id="addGrid">																							
 				<h:outputText value="Login" />
@@ -236,7 +239,7 @@
 					<h:panelGroup>
 						<fieldset>
 							<legend>Scanner</legend>
-							<h:selectBooleanCheckbox value="#{userManagedBean.userView.scannerPermission}" tabindex="6" />Configurar Scanner
+							<h:selectBooleanCheckbox tabindex="6" value="#{userManagedBean.userView.scannerPermission}"  />Configurar Scanner
 						</fieldset>
 					</h:panelGroup>
 					
@@ -244,45 +247,48 @@
 						<fieldset>
 							<legend>Digitalizar</legend>
 							<h:selectBooleanCheckbox tabindex="7" value="#{userManagedBean.userView.digitalizePermission}" />Digitalizar Cheques <br />
-							<h:selectBooleanCheckbox tabindex="8" value="#{userManagedBean.userView.digitalizeCashPermission}" />Digitalizar Efectivo
+							<h:selectBooleanCheckbox tabindex="8" value="#{userManagedBean.userView.digitalizeCashPermission}" />Digitalizar Efectivo<br />
+							<h:selectBooleanCheckbox tabindex="9" value="#{userManagedBean.userView.delDocumentsPermission}" />Borrar Documentos
 						</fieldset>
 					</h:panelGroup>
 					
 					<h:panelGroup>															
 						<fieldset>
 							<legend>Sucursales</legend>
-							<h:selectBooleanCheckbox tabindex="9" value="#{userManagedBean.userView.branchOfficePermission}" />Datos de Sucursal
+							<h:selectBooleanCheckbox tabindex="10" value="#{userManagedBean.userView.branchOfficePermission}" />Datos de Sucursal <br />
+							<h:selectBooleanCheckbox tabindex="11" value="#{userManagedBean.userView.catalogsDataPermission}" />Datos Bancos/Divisas
 						</fieldset>
 					</h:panelGroup>					
 										
 					<h:panelGroup>
 						<fieldset>
 							<legend>Cheques</legend>
-							<h:selectBooleanCheckbox tabindex="10" value="#{userManagedBean.userView.itselfCheckPermission}" />Solo de su Sucursal<br/>
-				            <h:selectBooleanCheckbox tabindex="11" value="#{userManagedBean.userView.allCheckPermission}" />Todas las Sucursales
+							<h:selectBooleanCheckbox tabindex="12" value="#{userManagedBean.userView.itselfCheckPermission}" />Solo de su Sucursal<br/>
+				            <h:selectBooleanCheckbox tabindex="13" value="#{userManagedBean.userView.allCheckPermission}" />Todas las Sucursales<br />
 						</fieldset>
 					</h:panelGroup>
 					
 					<h:panelGroup>	
 						<fieldset>
 							<legend>Reportes</legend>
-							<h:selectBooleanCheckbox tabindex="11" value="#{userManagedBean.userView.itselftReportPermission}" />Solo de su Sucursal<br/>
-				            <h:selectBooleanCheckbox tabindex="12" value="#{userManagedBean.userView.allReportsPermission}" />Todas las Sucursales
+							<h:selectBooleanCheckbox tabindex="14" value="#{userManagedBean.userView.itselftReportPermission}" />Solo de su Sucursal<br/>
+				            <h:selectBooleanCheckbox tabindex="15" value="#{userManagedBean.userView.allReportsPermission}" />Todas las Sucursales
 						</fieldset>
 					</h:panelGroup>
 					
 					<h:panelGroup>	
 						<fieldset>
 							<legend>Usuarios</legend>
-							<h:selectBooleanCheckbox tabindex="13" value="#{userManagedBean.userView.addUser}" />Agregar<br/>
-				            <h:selectBooleanCheckbox tabindex="14" value="#{userManagedBean.userView.editUser}" />Modificar<br/>
-				            <h:selectBooleanCheckbox tabindex="15" value="#{userManagedBean.userView.delUser}" />Eliminar
+							<h:selectBooleanCheckbox tabindex="16" value="#{userManagedBean.userView.addUser}" />Agregar<br/>
+				            <h:selectBooleanCheckbox tabindex="17" value="#{userManagedBean.userView.editUser}" />Modificar<br/>
+				            <h:selectBooleanCheckbox tabindex="18" value="#{userManagedBean.userView.delUser}" />Eliminar<br />
+				            <h:selectBooleanCheckbox tabindex="19" value="#{userManagedBean.userView.userDataPermission}" />Datos Usuario
 						</fieldset>
 					</h:panelGroup>																			
 				</h:panelGrid>				 			
 			</fieldset>
 			<br />					
-			<a4j:commandButton tabindex="16" value="Agregar Usuario" action="#{userManagedBean.addUser}"
+			<a4j:commandButton tabindex="20" value="Agregar Usuario" action="#{userManagedBean.addUser}"
 				render="table" execute="addPane"
 				oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('addPane')}.hide();}" /> &nbsp;&nbsp;
 			<a4j:commandButton tabindex="17" value="Cancelar" action="#{userManagedBean.cleanUser}" onclick="#{rich:component('addPane')}.hide(); return false;" />			

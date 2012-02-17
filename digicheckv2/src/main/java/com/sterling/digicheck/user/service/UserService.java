@@ -138,6 +138,15 @@ public class UserService {
 			if(view.isDigitalizeCashPermission()){
 				uList.add(new UserPermissionEntity(view.getLogin(), 11, new Date(), pList.get(10), entity));
 			}
+			if(view.isUserDataPermission()){
+				uList.add(new UserPermissionEntity(view.getLogin(), 12, new Date(), pList.get(11), entity));
+			}
+			if(view.isCatalogsDataPermission()){
+				uList.add(new UserPermissionEntity(view.getLogin(), 13, new Date(), pList.get(12), entity));
+			}
+			if(view.isDelDocumentsPermission()){
+				uList.add(new UserPermissionEntity(view.getLogin(), 14, new Date(), pList.get(13), entity));
+			}
 				
 			entity.setUserPermissionEntity(uList);			
 			userDAO.insertUser(entity);
@@ -195,6 +204,15 @@ public class UserService {
 			}
 			if(view.isDigitalizeCashPermission()){
 				uList.add(new UserPermissionEntity(view.getLogin(), 11, new Date(), pList.get(10), entity));
+			}
+			if(view.isUserDataPermission()){
+				uList.add(new UserPermissionEntity(view.getLogin(), 12, new Date(), pList.get(11), entity));
+			}
+			if(view.isCatalogsDataPermission()){
+				uList.add(new UserPermissionEntity(view.getLogin(), 13, new Date(), pList.get(12), entity));
+			}
+			if(view.isDelDocumentsPermission()){
+				uList.add(new UserPermissionEntity(view.getLogin(), 14, new Date(), pList.get(13), entity));
 			}
 			entity.setUserPermissionEntity(uList);
 			userDAO.updateUser(entity);
