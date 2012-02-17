@@ -79,6 +79,21 @@ public class LoginManagedBean implements Serializable{
 		return allCheckPermission;
 	}
 	
+	/**
+	 * Este permiso sirve para ver o no el 
+	 * catalogo de usuarios
+	 * @return
+	 */
+	public boolean isUserDataPermissions(){
+		boolean userData = Boolean.FALSE;
+		try{
+			userData = this.securityAuthorizationService.hasPermission("12", JSFUtil.getSessionAttribute(UserView.class, "user").getLogin());
+		} catch (UserException e) {
+			System.out.println(e.getMessage());
+		}
+		return userData;
+	}
+	
 	public void setSecurityAuthorizationService(
 			SecurityAuthorizationService securityAuthorizationService) {
 		this.securityAuthorizationService = securityAuthorizationService;

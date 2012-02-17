@@ -44,7 +44,7 @@
 	                       <td width="100%"><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_04.jpg" width="100%" height="41" alt="" /></td>
 	                       <td><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_05.jpg" width="131" height="41" alt="" /></td>
 	                       <td><img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_06.jpg" width="43" height="41" alt="" /></td>
-	                       <td><h:commandLink  actionListener="#{loginManagedBean.goUserAction}">
+	                       <td><h:commandLink  actionListener="#{loginManagedBean.goUserAction}" rendered="#{loginManagedBean.userDataPermissions}" >
 	                           		<img src="#{facesContext.externalContext.requestContextPath}/resources/images/DigiCheck_07_L.jpg" width="97" height="41" alt="Usuarios" border="0"/>
 	                           </h:commandLink>
                            </td>
