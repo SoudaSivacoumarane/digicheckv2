@@ -246,6 +246,20 @@ public class UserManagedBean implements Serializable{
 		}
 		return updateUser;
 	}
+	/**
+	 * Metodo que verifica si un usuario tiene permiso
+	 * para borrar documentos.
+	 * @return
+	 */
+	public boolean isDeleteDocumentAllowed(){
+		boolean deleteDocuments = Boolean.FALSE;
+		try{
+			deleteDocuments = this.securityAuthorizationService.hasPermission("14", JSFUtil.getSessionAttribute(UserView.class, "user").getLogin());
+		} catch (UserException e) {
+			System.out.println(e.getMessage());
+		}
+		return deleteDocuments;
+	}
 
 	public void setSecurityAuthorizationService(
 			SecurityAuthorizationService securityAuthorizationService) {
