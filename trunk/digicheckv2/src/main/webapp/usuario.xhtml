@@ -136,14 +136,13 @@
 						<fieldset>
 							<legend>Digitalizar</legend>
 							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.digitalizePermission}" />Digitalizar Cheques <br />
-							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.digitalizeCashPermission}" />Digitalizar Efectivo<br />
-							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.delDocumentsPermission}" />Borrar Documentos
+							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.digitalizeCashPermission}" />Digitalizar Efectivo
 						</fieldset>
 					</h:panelGroup>
 					
 					<h:panelGroup>															
 						<fieldset>
-							<legend>Sucursales</legend>
+							<legend>Cat&aacute;logos</legend>
 							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.branchOfficePermission}" />Datos de Sucursal<br />
 							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.catalogsDataPermission}" />Datos Bancos/Divisas
 						</fieldset>
@@ -151,9 +150,10 @@
 										
 					<h:panelGroup>
 						<fieldset>
-							<legend>Cheques</legend>
+							<legend>Documentos</legend>
 							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.itselfCheckPermission}" />Solo de su Sucursal<br/>
-				            <h:selectBooleanCheckbox value="#{userManagedBean.currentUser.allCheckPermission}" />Todas las Sucursales				            
+				            <h:selectBooleanCheckbox value="#{userManagedBean.currentUser.allCheckPermission}" />Todas las Sucursales	<br />
+				            <h:selectBooleanCheckbox value="#{userManagedBean.currentUser.delDocumentsPermission}" />Borrar Documentos			            
 						</fieldset>
 					</h:panelGroup>
 					
@@ -247,24 +247,24 @@
 						<fieldset>
 							<legend>Digitalizar</legend>
 							<h:selectBooleanCheckbox tabindex="7" value="#{userManagedBean.userView.digitalizePermission}" />Digitalizar Cheques <br />
-							<h:selectBooleanCheckbox tabindex="8" value="#{userManagedBean.userView.digitalizeCashPermission}" />Digitalizar Efectivo<br />
-							<h:selectBooleanCheckbox tabindex="9" value="#{userManagedBean.userView.delDocumentsPermission}" />Borrar Documentos
+							<h:selectBooleanCheckbox tabindex="8" value="#{userManagedBean.userView.digitalizeCashPermission}" />Digitalizar Efectivo
 						</fieldset>
 					</h:panelGroup>
 					
 					<h:panelGroup>															
 						<fieldset>
-							<legend>Sucursales</legend>
-							<h:selectBooleanCheckbox tabindex="10" value="#{userManagedBean.userView.branchOfficePermission}" />Datos de Sucursal <br />
-							<h:selectBooleanCheckbox tabindex="11" value="#{userManagedBean.userView.catalogsDataPermission}" />Datos Bancos/Divisas
+							<legend>Cat&aacute;logos</legend>
+							<h:selectBooleanCheckbox tabindex="9" value="#{userManagedBean.userView.branchOfficePermission}" />Datos de Sucursal <br />
+							<h:selectBooleanCheckbox tabindex="10" value="#{userManagedBean.userView.catalogsDataPermission}" />Datos Bancos/Divisas
 						</fieldset>
 					</h:panelGroup>					
 										
 					<h:panelGroup>
 						<fieldset>
-							<legend>Cheques</legend>
-							<h:selectBooleanCheckbox tabindex="12" value="#{userManagedBean.userView.itselfCheckPermission}" />Solo de su Sucursal<br/>
-				            <h:selectBooleanCheckbox tabindex="13" value="#{userManagedBean.userView.allCheckPermission}" />Todas las Sucursales<br />
+							<legend>Documentos</legend>
+							<h:selectBooleanCheckbox tabindex="11" value="#{userManagedBean.userView.itselfCheckPermission}" />Solo de su Sucursal<br/>
+				            <h:selectBooleanCheckbox tabindex="12" value="#{userManagedBean.userView.allCheckPermission}" />Todas las Sucursales<br />
+				            <h:selectBooleanCheckbox tabindex="13" value="#{userManagedBean.userView.delDocumentsPermission}" />Borrar Documentos
 						</fieldset>
 					</h:panelGroup>
 					
