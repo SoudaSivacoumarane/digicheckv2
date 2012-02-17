@@ -144,7 +144,8 @@
 						<fieldset>
 							<legend>Cat&aacute;logos</legend>
 							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.branchOfficePermission}" />Datos de Sucursal<br />
-							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.catalogsDataPermission}" />Datos Bancos/Divisas
+							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.catalogsDataPermission}" />Datos Bancos/Divisas<br />
+							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.userDataPermission}" />Datos Usuario
 						</fieldset>
 					</h:panelGroup>					
 										
@@ -170,8 +171,7 @@
 							<legend>Usuarios</legend>
 							<h:selectBooleanCheckbox value="#{userManagedBean.currentUser.addUser}" />Agregar<br/>
 				            <h:selectBooleanCheckbox value="#{userManagedBean.currentUser.editUser}" />Modificar<br/>
-				            <h:selectBooleanCheckbox value="#{userManagedBean.currentUser.delUser}" />Eliminar<br />
-				            <h:selectBooleanCheckbox value="#{userManagedBean.currentUser.userDataPermission}" />Datos Usuario
+				            <h:selectBooleanCheckbox value="#{userManagedBean.currentUser.delUser}" />Eliminar
 						</fieldset>
 					</h:panelGroup>																			
 				</h:panelGrid>				 			
@@ -255,34 +255,34 @@
 						<fieldset>
 							<legend>Cat&aacute;logos</legend>
 							<h:selectBooleanCheckbox tabindex="9" value="#{userManagedBean.userView.branchOfficePermission}" />Datos de Sucursal <br />
-							<h:selectBooleanCheckbox tabindex="10" value="#{userManagedBean.userView.catalogsDataPermission}" />Datos Bancos/Divisas
+							<h:selectBooleanCheckbox tabindex="10" value="#{userManagedBean.userView.catalogsDataPermission}" />Datos Bancos/Divisas<br />
+							<h:selectBooleanCheckbox tabindex="11" value="#{userManagedBean.userView.userDataPermission}" />Datos Usuario
 						</fieldset>
 					</h:panelGroup>					
 										
 					<h:panelGroup>
 						<fieldset>
 							<legend>Documentos</legend>
-							<h:selectBooleanCheckbox tabindex="11" value="#{userManagedBean.userView.itselfCheckPermission}" />Solo de su Sucursal<br/>
-				            <h:selectBooleanCheckbox tabindex="12" value="#{userManagedBean.userView.allCheckPermission}" />Todas las Sucursales<br />
-				            <h:selectBooleanCheckbox tabindex="13" value="#{userManagedBean.userView.delDocumentsPermission}" />Borrar Documentos
+							<h:selectBooleanCheckbox tabindex="12" value="#{userManagedBean.userView.itselfCheckPermission}" />Solo de su Sucursal<br/>
+				            <h:selectBooleanCheckbox tabindex="13" value="#{userManagedBean.userView.allCheckPermission}" />Todas las Sucursales<br />
+				            <h:selectBooleanCheckbox tabindex="14" value="#{userManagedBean.userView.delDocumentsPermission}" />Borrar Documentos
 						</fieldset>
 					</h:panelGroup>
 					
 					<h:panelGroup>	
 						<fieldset>
 							<legend>Reportes</legend>
-							<h:selectBooleanCheckbox tabindex="14" value="#{userManagedBean.userView.itselftReportPermission}" />Solo de su Sucursal<br/>
-				            <h:selectBooleanCheckbox tabindex="15" value="#{userManagedBean.userView.allReportsPermission}" />Todas las Sucursales
+							<h:selectBooleanCheckbox tabindex="15" value="#{userManagedBean.userView.itselftReportPermission}" />Solo de su Sucursal<br/>
+				            <h:selectBooleanCheckbox tabindex="16" value="#{userManagedBean.userView.allReportsPermission}" />Todas las Sucursales
 						</fieldset>
 					</h:panelGroup>
 					
 					<h:panelGroup>	
 						<fieldset>
 							<legend>Usuarios</legend>
-							<h:selectBooleanCheckbox tabindex="16" value="#{userManagedBean.userView.addUser}" />Agregar<br/>
-				            <h:selectBooleanCheckbox tabindex="17" value="#{userManagedBean.userView.editUser}" />Modificar<br/>
-				            <h:selectBooleanCheckbox tabindex="18" value="#{userManagedBean.userView.delUser}" />Eliminar<br />
-				            <h:selectBooleanCheckbox tabindex="19" value="#{userManagedBean.userView.userDataPermission}" />Datos Usuario
+							<h:selectBooleanCheckbox tabindex="17" value="#{userManagedBean.userView.addUser}" />Agregar<br/>
+				            <h:selectBooleanCheckbox tabindex="18" value="#{userManagedBean.userView.editUser}" />Modificar<br/>
+				            <h:selectBooleanCheckbox tabindex="19" value="#{userManagedBean.userView.delUser}" />Eliminar
 						</fieldset>
 					</h:panelGroup>																			
 				</h:panelGrid>				 			
