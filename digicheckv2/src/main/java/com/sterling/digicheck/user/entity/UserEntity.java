@@ -8,11 +8,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.sterling.digicheck.profiles.entity.ProfileEntity;
 import com.sterling.digicheck.user.permission.entity.UserPermissionEntity;
 
 @Entity
@@ -34,6 +37,9 @@ public class UserEntity implements Serializable {
 	private int sucursalId;
 	@OneToMany(cascade = CascadeType.ALL, fetch= FetchType.EAGER, mappedBy = "usuario")
     private Collection<UserPermissionEntity> userPermissionEntity;
+	@JoinColumn(name = "PRF_ID", referencedColumnName = "PRF_ID")
+    @ManyToOne
+    private ProfileEntity profileEntity;
 	
 	public UserEntity() {
 
@@ -85,6 +91,15 @@ public class UserEntity implements Serializable {
 	public void setUserPermissionEntity(
 			Collection<UserPermissionEntity> userPermissionEntity) {
 		this.userPermissionEntity = userPermissionEntity;
-	}		
+	}
+
+	public ProfileEntity getProfileEntity() {
+		return profileEntity;
+	}
+
+	public void setProfileEntity(ProfileEntity profileEntity) {
+		this.profileEntity = profileEntity;
+	}
+	
 
 }
