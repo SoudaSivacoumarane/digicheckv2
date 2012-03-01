@@ -14,9 +14,12 @@
       <class>com.sterling.digicheck.batch.entity.BatchEntity</class>
       <class>com.sterling.digicheck.document.entity.DocumentEntity</class>
       <class>com.sterling.digicheck.documenttype.entity.DocumentTypeEntity</class>
-      <class>com.sterling.digicheck.check.entity.CheckEntity</class>             
+      <class>com.sterling.digicheck.check.entity.CheckEntity</class>
+      <class>com.sterling.digicheck.profiles.entity.ProfileEntity</class>      
+      <class>com.sterling.digicheck.profiles.entity.ProfilePermissionEntity</class>
+      <class>com.sterling.digicheck.profiles.entity.ProfilePermissionPK</class>                
       <properties>        
-      	<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+      	<property name="hibernate.connection.driver_class" value="com.inet.tds.TdsDriver"/>
       	<property name="hibernate.connection.url" value="${jdbc.url}"/>
       	<property name="hibernate.connection.username" value="${jdbc.username}"/>
       	<property name="hibernate.connection.password" value="${jdbc.password}"/> 
