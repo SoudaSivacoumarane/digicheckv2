@@ -16,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import com.sterling.digicheck.bank.dao.BankDAO;
 import com.sterling.digicheck.batch.dao.BatchDAO;
@@ -26,6 +27,10 @@ import com.sterling.digicheck.branchoffice.exception.BranchOfficeException;
 import com.sterling.digicheck.currency.dao.CurrencyDAO;
 import com.sterling.digicheck.currency.exception.CurrencyException;
 import com.sterling.digicheck.documenttype.entity.DocumentTypeEntity;
+import com.sterling.digicheck.profiles.dao.ProfileDAO;
+import com.sterling.digicheck.profiles.entity.ProfileEntity;
+import com.sterling.digicheck.profiles.entity.ProfilePermissionEntity;
+import com.sterling.digicheck.profiles.exception.ProfileException;
 import com.sterling.digicheck.user.dao.UserDAO;
 import com.sterling.digicheck.user.exception.UserException;
 
@@ -47,6 +52,8 @@ public class BatchTest extends AbstractTestNGSpringContextTests {
 	UserDAO userDAO;	
 	EntityManagerFactory emf;
 	EntityManager em;
+	@Autowired
+	ProfileDAO profileDAO;
 	
 	
 	//@Test
@@ -82,6 +89,25 @@ public class BatchTest extends AbstractTestNGSpringContextTests {
 			BatchEntity be = em.find(BatchEntity.class, 1);
 			Assert.assertNotNull(be);
 		em.getTransaction().commit();						
+	}
+	
+	@Test
+	public void profileTest(){
+		try {
+			List<ProfileEntity> entities = profileDAO.getProfileEntity();
+			for(ProfileEntity profile : entities){
+				System.out.println(profile.getProfileDescription());
+				System.out.println(profile.getPrfId());
+				for(ProfilePermissionEntity p : profile.getProfilePermissionEntityCollection()){
+					System.out.println(p.getPermissionEntity().getPerId());
+					System.out.println(p.getPermissionEntity().getPetCode());
+					System.out.println(p.getPepDate());
+					System.out.println(p.getProfilePermissionPK().getPrfId());
+				}
+			}
+		} catch (ProfileException e) {		
+			e.printStackTrace();
+		}
 	}
 	
 	//@Test
