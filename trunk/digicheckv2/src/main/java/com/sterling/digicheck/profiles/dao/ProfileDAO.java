@@ -41,9 +41,12 @@ public class ProfileDAO extends GenericDAO {
 		List<ProfileEntity> profileList = null;
 		Query query = null;
 		try{
-			query = em.createNativeQuery("SELECT * FROM PERFIL p INNER JOIN USUARIO u ON  p.PRF_ID = u.PRF_ID AND u.USU_LOGIN = ?");
-			query.setParameter(1, userId);			
-			profileList = query.getResultList();				
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
+			query = em.createQuery("select p1, p2 from ProfileEntity p1 JOIN FETCH p1.userEntities p2 where p2.login = :usuario ");
+			query.setParameter("usuario", userId);			
+			profileList = query.getResultList();
+			em.getTransaction().commit();
 		}catch (Exception exception){
 			ProfileException profileException = null;
 			profileException = new ProfileException(exception, ProfileException.LAYER_DAO, ProfileException.ACTION_LISTS);
@@ -52,6 +55,18 @@ public class ProfileDAO extends GenericDAO {
     		throw profileException;
 		}
 		return profileList;
+	}
+	
+	public void deleteProfile(String login) throws ProfileException{
+		try{
+			
+		}catch (Exception exception){
+			ProfileException profileException = null;
+			profileException = new ProfileException(exception, ProfileException.LAYER_DAO, ProfileException.ACTION_DELETE);
+    		logger.error(profileException);
+    		exception.printStackTrace(System.out);
+    		throw profileException;
+		}
 	}
 	
 }

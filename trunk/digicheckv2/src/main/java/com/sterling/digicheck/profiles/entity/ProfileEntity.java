@@ -28,6 +28,10 @@ import com.sterling.digicheck.user.entity.UserEntity;
 )})
 public class ProfileEntity implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2579457409143051411L;
 	@Id
 	@Basic(optional = false)
 	@Column(name = "PRF_ID")

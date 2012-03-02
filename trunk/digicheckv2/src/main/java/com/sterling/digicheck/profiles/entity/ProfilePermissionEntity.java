@@ -32,6 +32,10 @@ import com.sterling.digicheck.permission.entity.PermissionEntity;
 )})
 public class ProfilePermissionEntity implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2215996205808440368L;
 	@EmbeddedId
 	protected ProfilePermissionPK profilePermissionPK;
 	@Basic(optional = false)
