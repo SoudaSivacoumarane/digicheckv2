@@ -31,6 +31,9 @@ import com.sterling.digicheck.profiles.dao.ProfileDAO;
 import com.sterling.digicheck.profiles.entity.ProfileEntity;
 import com.sterling.digicheck.profiles.entity.ProfilePermissionEntity;
 import com.sterling.digicheck.profiles.exception.ProfileException;
+import com.sterling.digicheck.profiles.service.ProfileService;
+import com.sterling.digicheck.profiles.view.ProfilePermissionsView;
+import com.sterling.digicheck.profiles.view.ProfileView;
 import com.sterling.digicheck.user.dao.UserDAO;
 import com.sterling.digicheck.user.exception.UserException;
 
@@ -54,6 +57,8 @@ public class BatchTest extends AbstractTestNGSpringContextTests {
 	EntityManager em;
 	@Autowired
 	ProfileDAO profileDAO;
+	@Autowired
+	ProfileService profileService;
 	
 	
 	//@Test
@@ -94,17 +99,32 @@ public class BatchTest extends AbstractTestNGSpringContextTests {
 	@Test
 	public void profileTest(){
 		try {
-			List<ProfileEntity> entities = profileDAO.getProfileEntity();
+			System.out.println("-------- Obtenemos todos los permisos -----");
+			List<ProfileView> profileViews = profileService.permissionList("admin");
+			System.out.println("-------- Size ------- " + profileViews.size());
+			for(ProfileView view : profileViews){
+				System.out.println(view.getShortName());
+				for(ProfilePermissionsView p : view.getPermissionsViews()){
+					System.out.println(p.getPerDescription());
+					System.out.println(p.getPerId());
+					System.out.println(p.getPrfId());
+				}
+			}
+			
+			//List<ProfileEntity> entities = profileDAO.getProfileEntity();
+			/*List<ProfileEntity> entities = profileDAO.getProfileByUser("admin");
 			for(ProfileEntity profile : entities){
 				System.out.println(profile.getProfileDescription());
 				System.out.println(profile.getPrfId());
 				for(ProfilePermissionEntity p : profile.getProfilePermissionEntityCollection()){
 					System.out.println(p.getPermissionEntity().getPerId());
 					System.out.println(p.getPermissionEntity().getPetCode());
+					System.out.println(p.getPermissionEntity().getPerDescripcion());
 					System.out.println(p.getPepDate());
 					System.out.println(p.getProfilePermissionPK().getPrfId());
+					
 				}
-			}
+			}*/
 		} catch (ProfileException e) {		
 			e.printStackTrace();
 		}

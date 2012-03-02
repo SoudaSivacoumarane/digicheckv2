@@ -1,6 +1,7 @@
 package com.sterling.digicheck.profiles.view;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,8 +11,12 @@ import java.util.List;
  */
 public class ProfileView implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6734523063195272120L;
 	private String shortName;
-	private List<ProfilePermissionsView> permissionsViews;
+	private List<ProfilePermissionsView> permissionsViews = new ArrayList<ProfilePermissionsView>(0);
 	
 	public String getShortName() {
 		return shortName;
