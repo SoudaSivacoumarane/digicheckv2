@@ -29,17 +29,17 @@
 		<rich:dataTable value="#{currencyMagedbean.currencyList}" rowClasses="odd, even" var="row" id="table" rows="10">		
 			<rich:column>
 				<f:facet name="header">
-					<a4j:commandLink styleClass="no-decor" execute="@this" render="@none" oncomplete="#{rich:component('newPane')}.show()">
+					<a4j:commandLink rendered="#{userManagedBean.addUser}" styleClass="no-decor" execute="@this" render="@none" oncomplete="#{rich:component('newPane')}.show()">
 						<h:graphicImage value="/resources/images/img-new.png" alt="Nueva Divisa" />
 					</a4j:commandLink>
 				</f:facet>            
-					<a4j:commandLink styleClass="no-decor" execute="@this"
+					<a4j:commandLink rendered="#{userManagedBean.deleteUser}" styleClass="no-decor" execute="@this"
 						render="@none" oncomplete="#{rich:component('confirmPane')}.show()">
 						<h:graphicImage value="/resources/images/img-delete.png" alt="delete" />
 						<a4j:param value="#{row.currencyId}" assignTo="#{currencyMagedbean.currencyId}" />
 					</a4j:commandLink>
 					::
-					<a4j:commandLink styleClass="no-decor" render="editGrid" action="#{currencyMagedbean.goEditCurrency}"
+					<a4j:commandLink rendered="#{userManagedBean.updateUser}" styleClass="no-decor" render="editGrid" action="#{currencyMagedbean.goEditCurrency}"
 						execute="@this" oncomplete="#{rich:component('editPane')}.show()">
 						<h:graphicImage value="/resources/images/img-edit.png" alt="edit" />
 						<a4j:param value="#{row.currencyId}" assignTo="#{currencyMagedbean.currencyId}" />					
