@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=C:\projects\DigiCheck\workspacewebapp\maven.1320386581562\digicheckv2\externalresources\Opta2000.jar -DgroupId=Opta -DartifactId=Opta -Dversion=2000 -Dpackaging=jar
