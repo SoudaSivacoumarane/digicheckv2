@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.sterling.digicheck.profiles.entity.ProfileEntity;
 import com.sterling.digicheck.user.entity.UserEntity;
 import com.sterling.digicheck.user.exception.UserException;
 import com.sterling.digicheck.user.permission.entity.UserPermissionEntity;
@@ -38,6 +39,8 @@ public class UserConverter {
 		}
 		return userViews;
 	}
+	
+	
 	public UserView converterEntityToAuthView(UserEntity userEntity)throws UserException{
 		UserView userView = null;
 
@@ -46,6 +49,10 @@ public class UserConverter {
 			userView.setLogin(userEntity.getLogin());
 			userView.setPassword(userEntity.getPassword());
 			userView.setName(userEntity.getNombre());
+			
+			if(userEntity.getProfileEntity() != null){
+				userView.setProfile(userEntity.getProfileEntity().getPrfId().toString());
+			}
 			userView.setSucursalId(String.valueOf(userEntity.getSucursalId()));
 			if(userView.getPassword()!=null){
 				userView.setPassword(userView.getPassword().trim());
@@ -104,6 +111,11 @@ public class UserConverter {
 			if(view.getSucursalId() != null){
 				entity.setSucursalId(Integer.parseInt(view.getSucursalId()));
 			}
+			ProfileEntity profileEntity = new ProfileEntity();
+			if(view.getProfile() != null){
+				profileEntity.setPrfId(new Integer(view.getProfile()));
+			}
+			entity.setProfileEntity(profileEntity);
 		}catch (Exception exception){
 			UserException userException = null;
 			userException = new UserException(exception, UserException.LAYER_CONVERTER, UserException.ACTION_SELECT);

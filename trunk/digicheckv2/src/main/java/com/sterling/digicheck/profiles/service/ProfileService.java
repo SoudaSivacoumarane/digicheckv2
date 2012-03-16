@@ -3,6 +3,8 @@ package com.sterling.digicheck.profiles.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.model.SelectItem;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,4 +54,39 @@ public class ProfileService {
 	public void saveOrUpdate(List<ProfilePermissionsView> views) throws ProfileException{
 		
 	}
+	/**
+	 * Obtiene la lista de Perfiles
+	 * @return
+	 */
+	public List<SelectItem> getProfileList() throws ProfileException{
+		List<SelectItem> list = new ArrayList<SelectItem>(0);
+		try {
+			List<ProfileEntity> profiles = this.profileDAO.getProfileEntity();
+			for(ProfileEntity p : profiles){
+				SelectItem item = new SelectItem(p.getPrfId().toString(), p.getProfileDescription());
+				list.add(item);
+			}
+		} catch (ProfileException e) {
+			logger.error(e);
+		}
+		return list;	
+	}
+	/**
+	 * Obtenemos la lista de permisos para un perfil
+	 * @param profileId
+	 * @return
+	 * @throws ProfileException
+	 */
+	public List<ProfilePermissionsView> getProfilePermissionsById(String profileId) throws ProfileException{
+		List<ProfilePermissionsView> list = new ArrayList<ProfilePermissionsView>(0);
+		List<ProfilePermissionEntity> permissionEntities = this.profileDAO.getProfilePermissionsById(profileId);
+		for (ProfilePermissionEntity pp : permissionEntities) {
+			ProfilePermissionsView pView = new ProfilePermissionsView();
+			pView.setPerId(pp.getPermissionEntity().getPerId());
+			pView.setPrfId(pp.getProfile().getPrfId());
+			list.add(pView);
+		}		
+		return list;
+	}
+	
 }
