@@ -15,6 +15,7 @@ public class UserView implements Serializable {
 	private String login;
 	private String name;
 	private String password;
+	private String profile;
 	private boolean scannerPermission = false;
 	private boolean digitalizePermission = false;
 	private boolean digitalizeCashPermission = false;
@@ -194,6 +195,14 @@ public class UserView implements Serializable {
 
 	public void setDelDocumentsPermission(boolean delDocumentsPermission) {
 		this.delDocumentsPermission = delDocumentsPermission;
+	}
+
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 
 	@Override

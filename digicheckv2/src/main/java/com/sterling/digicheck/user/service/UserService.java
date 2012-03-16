@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sterling.digicheck.permission.entity.PermissionEntity;
+import com.sterling.digicheck.profiles.dao.ProfileDAO;
+import com.sterling.digicheck.profiles.entity.ProfileEntity;
 import com.sterling.digicheck.user.converter.UserConverter;
 import com.sterling.digicheck.user.dao.UserDAO;
 import com.sterling.digicheck.user.entity.UserEntity;
@@ -26,6 +28,8 @@ public class UserService {
 	private UserDAO userDAO;	
 	@Autowired
 	private UserPermissionDAO userPermissionDAO;
+	@Autowired
+	private ProfileDAO profileDAO;
 	
 	public UserView loginUser(UserView userView) throws UserException{		
 		UserEntity userEntity = null;
@@ -36,7 +40,7 @@ public class UserService {
 			userEntity = userDAO.loginUser(userConverter.convertViewToEntity(userView));
 			if(userEntity != null){
 				view = userConverter.converterEntityToAuthView(userEntity);
-			}
+			}			
 		} catch (UserException userException){
 			throw userException;
 		} catch (Exception exception){
@@ -172,6 +176,10 @@ public class UserService {
 			entity.setUserPermissionEntity(null);
 			pList = userPermissionDAO.getAllPermissionEntitiesList();			
 			uList = new ArrayList<UserPermissionEntity>(0);
+			if(view.getProfile() != null){
+				ProfileEntity profileEntity = this.profileDAO.getProfileById(view.getProfile());
+				entity.setProfileEntity(profileEntity);
+			}
 			if(view.isScannerPermission()){
 				uList.add(new UserPermissionEntity(view.getLogin(), 1, new Date(), pList.get(0), entity));				
 			}

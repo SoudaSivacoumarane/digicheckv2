@@ -1,6 +1,7 @@
 package com.sterling.digicheck.user.managedbean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -11,11 +12,15 @@ import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
 import com.sterling.common.util.JSFUtil;
 import com.sterling.digicheck.branchoffice.exception.BranchOfficeException;
 import com.sterling.digicheck.branchoffice.service.BranchOfficeService;
+import com.sterling.digicheck.profiles.exception.ProfileException;
+import com.sterling.digicheck.profiles.service.ProfileService;
+import com.sterling.digicheck.profiles.view.ProfilePermissionsView;
 import com.sterling.digicheck.security.service.SecurityAuthorizationService;
 import com.sterling.digicheck.user.exception.UserException;
 import com.sterling.digicheck.user.service.UserService;
@@ -41,7 +46,9 @@ public class UserManagedBean implements Serializable{
 	@ManagedProperty("#{branchOfficeService}")
 	BranchOfficeService branchOfficeService;	
 	@ManagedProperty("#{securityAuthorizationService}")
-	SecurityAuthorizationService securityAuthorizationService;	
+	SecurityAuthorizationService securityAuthorizationService;
+	@ManagedProperty("#{profileService}")
+	private ProfileService profileService;
 	private List<UserView> userViewList = null;
 	private String login;
 	private int page = 1;
@@ -49,6 +56,136 @@ public class UserManagedBean implements Serializable{
 	private UserView currentUser = new UserView();
 	private String sucId;
 	private String password;
+	private String profileSelected;
+	
+	public List<SelectItem> getProfilesList(){
+		List<SelectItem> list = new ArrayList<SelectItem>(0);
+		try {
+		  list = profileService.getProfileList();
+		} catch (ProfileException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public void profileEditChanged(ValueChangeEvent e){
+		profileSelected = e.getNewValue().toString();
+		List<ProfilePermissionsView> list = new ArrayList<ProfilePermissionsView>(0);
+		try {
+			list = profileService.getProfilePermissionsById(profileSelected);
+			currentUser.setScannerPermission(false);
+			currentUser.setDigitalizePermission(false);
+			currentUser.setBranchOfficePermission(false);
+			currentUser.setItselfCheckPermission(false);		
+			currentUser.setAllCheckPermission(false);	
+			currentUser.setItselftReportPermission(false);
+			currentUser.setAllReportsPermission(false);
+			currentUser.setAddUser(false);
+			currentUser.setEditUser(false);
+			currentUser.setDelUser(false);
+			currentUser.setDigitalizeCashPermission(false);
+			currentUser.setUserDataPermission(false);
+			currentUser.setCatalogsDataPermission(false);
+			currentUser.setDelDocumentsPermission(false);
+		
+			for (ProfilePermissionsView pp : list) {
+				if(pp.getPerId().intValue() == 1){
+					currentUser.setScannerPermission(true);						
+				}else if(pp.getPerId().intValue() == 2){
+					currentUser.setDigitalizePermission(true);
+				}else if(pp.getPerId().intValue() == 3){
+					currentUser.setBranchOfficePermission(true);
+				}else if(pp.getPerId().intValue() == 4){
+					currentUser.setItselfCheckPermission(true);
+				}else if(pp.getPerId().intValue() == 5){
+					currentUser.setAllCheckPermission(true);
+				}else if(pp.getPerId().intValue() == 6){
+					currentUser.setItselftReportPermission(true);
+				}else if(pp.getPerId().intValue() == 7){
+					currentUser.setAllReportsPermission(true);
+				}else if(pp.getPerId().intValue() == 8){
+					currentUser.setAddUser(true);
+				}else if(pp.getPerId().intValue() == 9){
+					currentUser.setEditUser(true);
+				}else if(pp.getPerId().intValue() == 10){
+					currentUser.setDelUser(true);
+				}else if(pp.getPerId().intValue() == 11){
+					currentUser.setDigitalizeCashPermission(true);
+				}else if(pp.getPerId().intValue() == 12){
+					currentUser.setUserDataPermission(true);
+				}else if(pp.getPerId().intValue() == 13){
+					currentUser.setCatalogsDataPermission(true);
+				}else if(pp.getPerId().intValue() == 14){
+					currentUser.setDelDocumentsPermission(true);
+				}
+			}
+		} catch (ProfileException e1) {
+			e1.printStackTrace();
+		}
+		
+		FacesContext.getCurrentInstance().renderResponse();
+	}
+	/**
+	 * Agregar permiso
+	 * @param e
+	 */
+	public void profileAddChanged(ValueChangeEvent e){
+		profileSelected = e.getNewValue().toString();
+		List<ProfilePermissionsView> list = new ArrayList<ProfilePermissionsView>(0);
+		try {
+			list = profileService.getProfilePermissionsById(profileSelected);
+			userView.setScannerPermission(false);
+			userView.setDigitalizePermission(false);
+			userView.setBranchOfficePermission(false);
+			userView.setItselfCheckPermission(false);		
+			userView.setAllCheckPermission(false);	
+			userView.setItselftReportPermission(false);
+			userView.setAllReportsPermission(false);
+			userView.setAddUser(false);
+			userView.setEditUser(false);
+			userView.setDelUser(false);
+			userView.setDigitalizeCashPermission(false);
+			userView.setUserDataPermission(false);
+			userView.setCatalogsDataPermission(false);
+			userView.setDelDocumentsPermission(false);
+		
+			for (ProfilePermissionsView pp : list) {
+				if(pp.getPerId().intValue() == 1){
+					userView.setScannerPermission(true);						
+				}else if(pp.getPerId().intValue() == 2){
+					userView.setDigitalizePermission(true);
+				}else if(pp.getPerId().intValue() == 3){
+					userView.setBranchOfficePermission(true);
+				}else if(pp.getPerId().intValue() == 4){
+					userView.setItselfCheckPermission(true);
+				}else if(pp.getPerId().intValue() == 5){
+					userView.setAllCheckPermission(true);
+				}else if(pp.getPerId().intValue() == 6){
+					userView.setItselftReportPermission(true);
+				}else if(pp.getPerId().intValue() == 7){
+					userView.setAllReportsPermission(true);
+				}else if(pp.getPerId().intValue() == 8){
+					userView.setAddUser(true);
+				}else if(pp.getPerId().intValue() == 9){
+					userView.setEditUser(true);
+				}else if(pp.getPerId().intValue() == 10){
+					userView.setDelUser(true);
+				}else if(pp.getPerId().intValue() == 11){
+					userView.setDigitalizeCashPermission(true);
+				}else if(pp.getPerId().intValue() == 12){
+					userView.setUserDataPermission(true);
+				}else if(pp.getPerId().intValue() == 13){
+					userView.setCatalogsDataPermission(true);
+				}else if(pp.getPerId().intValue() == 14){
+					userView.setDelDocumentsPermission(true);
+				}
+			}
+		} catch (ProfileException e1) {
+			e1.printStackTrace();
+		}
+		FacesContext.getCurrentInstance().renderResponse();
+	}
+	
 	
 	public List<UserView> getUserViewList() {
 		try{
@@ -62,6 +199,7 @@ public class UserManagedBean implements Serializable{
 	public void goEditUser(){
 		try {
 			currentUser = userService.getUserByLogin(login);
+			this.profileSelected = currentUser.getProfile();
 			this.password = currentUser.getPassword();
 		} catch (UserException userException) {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, userException.getMessage(), userException.getMessage());
@@ -121,6 +259,7 @@ public class UserManagedBean implements Serializable{
 		this.setUserView(null);
 		this.userView = new UserView();
 		this.password = "";
+		this.profileSelected = "";
 	}
 	
 	public String getSucId() {
@@ -235,7 +374,13 @@ public class UserManagedBean implements Serializable{
 		}
 		return deleteUser;
 	}
+	
+	
 
+
+	public void setProfileService(ProfileService profileService) {
+		this.profileService = profileService;
+	}
 
 	public boolean isUpdateUser() {
 		boolean updateUser = Boolean.FALSE; 
@@ -264,6 +409,14 @@ public class UserManagedBean implements Serializable{
 	public void setSecurityAuthorizationService(
 			SecurityAuthorizationService securityAuthorizationService) {
 		this.securityAuthorizationService = securityAuthorizationService;
-	}			
+	}
+
+	public String getProfileSelected() {
+		return profileSelected;
+	}
+
+	public void setProfileSelected(String profileSelected) {
+		this.profileSelected = profileSelected;
+	}		
 	
 }
