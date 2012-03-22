@@ -21,18 +21,17 @@
 	    <h:panelGroup>	    		   			
    				<rich:panel header="Reporte IFE's por sucursal" style="width: 650px;">
    					  <f:event listener="#{ifeBean.preRender}" type="preRenderView" />
-   					  <h:panelGrid columns="5">                       	   
+   					  <h:panelGrid columns="5">
+   					  	  <h:outputLabel value="Fecha : " style="font-weight: bold"/>
+                          <rich:calendar id="calendar" cellWidth="24px" datePattern="dd/MM/yyyy" value="#{ifeBean.date}" cellHeight="22px" style="width:200px">
+							<f:ajax render="@none" execute="@this" />
+						  </rich:calendar>
+						                          	   
                        	  <h:outputLabel value="Sucursal : "  style="font-weight: bold"/>
-	                      <h:selectOneMenu id="sucursales" style="width: 200px" value="#{ifeBean.branchOfficeCode}">
+	                      <h:selectOneMenu id="sucursales" style="width: 200px" value="#{ifeBean.branchOfficeCode}" disabled="#{batchManagedBean.branchOfficeAllowed}">
 	                    	 <f:ajax render="@none" execute="@this" />
 							 <f:selectItems value="#{ifeBean.branchOfficeItems}" />
 						  </h:selectOneMenu>
-                       	   
-                       	   <h:outputLabel value="Fecha : " style="font-weight: bold"/>
-                           <rich:calendar id="calendar" cellWidth="24px" datePattern="dd/MM/yyyy" value="#{ifeBean.date}"
-                   				       cellHeight="22px" style="width:200px">
-                   				       <f:ajax render="@none" execute="@this" />
-						   </rich:calendar>		  															
 					       					       
 					       <h:commandButton value="Buscar" action="#{ifeBean.sendToPDFAction}" />	 
 					                        			                    		                 		                    			                    		                
