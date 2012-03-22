@@ -15,6 +15,8 @@ import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
+import org.apache.log4j.Logger;
+
 import com.sterling.common.util.JSFUtil;
 import com.sterling.digicheck.branchoffice.exception.BranchOfficeException;
 import com.sterling.digicheck.branchoffice.service.BranchOfficeService;
@@ -30,8 +32,13 @@ import com.sterling.digicheck.user.view.UserView;
 @ViewScoped
 public class UserManagedBean implements Serializable{
 
-	/** Serial Version UID */
-	private static final long serialVersionUID = 5909347434256740767L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3711210057227357830L;
+
+	private static final Logger logger = Logger.getLogger(UserManagedBean.class);
+
 	private static final String VIEW_HOME = "home.xhtml";
 	private static final String VIEW_BRANCH_OFFICES = "sucursal.xhtml";
 	private static final String VIEW_OUT = "index.xhtml";
@@ -63,13 +70,55 @@ public class UserManagedBean implements Serializable{
 		try {
 		  list = profileService.getProfileList();
 		} catch (ProfileException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 		return list;
 	}
 	
+	public void fillPermissions(){		
+		this.profileSelected = "4";
+		List<ProfilePermissionsView> list = new ArrayList<ProfilePermissionsView>(0);		
+		try {
+			list = profileService.getProfilePermissionsById(profileSelected);
+			for (ProfilePermissionsView pp : list) {
+				if(pp.getPerId().intValue() == 1){
+					userView.setScannerPermission(true);						
+				}else if(pp.getPerId().intValue() == 2){
+					userView.setDigitalizePermission(true);
+				}else if(pp.getPerId().intValue() == 3){
+					userView.setBranchOfficePermission(true);
+				}else if(pp.getPerId().intValue() == 4){
+					userView.setItselfCheckPermission(true);
+				}else if(pp.getPerId().intValue() == 5){
+					userView.setAllCheckPermission(true);
+				}else if(pp.getPerId().intValue() == 6){
+					userView.setItselftReportPermission(true);
+				}else if(pp.getPerId().intValue() == 7){
+					userView.setAllReportsPermission(true);
+				}else if(pp.getPerId().intValue() == 8){
+					userView.setAddUser(true);
+				}else if(pp.getPerId().intValue() == 9){
+					userView.setEditUser(true);
+				}else if(pp.getPerId().intValue() == 10){
+					userView.setDelUser(true);
+				}else if(pp.getPerId().intValue() == 11){
+					userView.setDigitalizeCashPermission(true);
+				}else if(pp.getPerId().intValue() == 12){
+					userView.setUserDataPermission(true);
+				}else if(pp.getPerId().intValue() == 13){
+					userView.setCatalogsDataPermission(true);
+				}else if(pp.getPerId().intValue() == 14){
+					userView.setDelDocumentsPermission(true);
+				}
+			}			
+		} catch (ProfileException e) {
+			logger.error(e);
+		}
+	}
+	
 	public void profileEditChanged(ValueChangeEvent e){
 		profileSelected = e.getNewValue().toString();
+		currentUser.setProfile(profileSelected);
 		List<ProfilePermissionsView> list = new ArrayList<ProfilePermissionsView>(0);
 		try {
 			list = profileService.getProfilePermissionsById(profileSelected);
@@ -120,7 +169,7 @@ public class UserManagedBean implements Serializable{
 				}
 			}
 		} catch (ProfileException e1) {
-			e1.printStackTrace();
+			logger.error(e);
 		}
 		
 		FacesContext.getCurrentInstance().renderResponse();
@@ -131,6 +180,7 @@ public class UserManagedBean implements Serializable{
 	 */
 	public void profileAddChanged(ValueChangeEvent e){
 		profileSelected = e.getNewValue().toString();
+		userView.setProfile(profileSelected);
 		List<ProfilePermissionsView> list = new ArrayList<ProfilePermissionsView>(0);
 		try {
 			list = profileService.getProfilePermissionsById(profileSelected);
@@ -182,6 +232,7 @@ public class UserManagedBean implements Serializable{
 			}
 		} catch (ProfileException e1) {
 			e1.printStackTrace();
+			logger.error(e);
 		}
 		FacesContext.getCurrentInstance().renderResponse();
 	}
@@ -203,6 +254,7 @@ public class UserManagedBean implements Serializable{
 			this.password = currentUser.getPassword();
 		} catch (UserException userException) {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, userException.getMessage(), userException.getMessage());
+			logger.error(userException);
 		}
 	}
 	
@@ -215,15 +267,17 @@ public class UserManagedBean implements Serializable{
 			//JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "El usuario se elimino correctamente");
 		} catch (UserException userException) {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, userException.getMessage(), userException.getMessage());
+			logger.error(userException);
 		}
 	}
 	
 	public void editUser(){
-		try{						
+		try{
 			userService.updateUser(currentUser);
 			//JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "El usuario se modifico correctamente");
 		} catch (UserException userException) {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, userException.getMessage(), userException.getMessage());
+			logger.error(userException);
 		}
 	}
 	
@@ -233,6 +287,7 @@ public class UserManagedBean implements Serializable{
 			//JSFUtil.writeMessage(FacesMessage.SEVERITY_INFO, "Operacion exitosa", "El usuario se agrego correctamente");
 		} catch (UserException userException) {
 			JSFUtil.writeMessage(FacesMessage.SEVERITY_ERROR, userException.getMessage(), userException.getMessage());
+			logger.error(userException);
 		}
 	}
 	
@@ -360,6 +415,7 @@ public class UserManagedBean implements Serializable{
 			addUser = this.securityAuthorizationService.hasPermission("8", JSFUtil.getSessionAttribute(UserView.class, "user").getLogin());
 		} catch (UserException e) {
 			System.out.println(e.getMessage());
+			logger.info(e);
 		}
 		return addUser;
 	}
@@ -371,6 +427,7 @@ public class UserManagedBean implements Serializable{
 			deleteUser = this.securityAuthorizationService.hasPermission("10", JSFUtil.getSessionAttribute(UserView.class, "user").getLogin());
 		} catch (UserException e) {
 			System.out.println(e.getMessage());
+			logger.info(e);
 		}
 		return deleteUser;
 	}
@@ -388,6 +445,7 @@ public class UserManagedBean implements Serializable{
 			updateUser = this.securityAuthorizationService.hasPermission("9", JSFUtil.getSessionAttribute(UserView.class, "user").getLogin());
 		} catch (UserException e) {
 			System.out.println(e.getMessage());
+			logger.info(e);
 		}
 		return updateUser;
 	}
@@ -402,6 +460,7 @@ public class UserManagedBean implements Serializable{
 			deleteDocuments = this.securityAuthorizationService.hasPermission("14", JSFUtil.getSessionAttribute(UserView.class, "user").getLogin());
 		} catch (UserException e) {
 			System.out.println(e.getMessage());
+			logger.info(e);
 		}
 		return deleteDocuments;
 	}

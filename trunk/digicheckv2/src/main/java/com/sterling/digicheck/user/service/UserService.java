@@ -106,6 +106,8 @@ public class UserService {
 		try{
 			userConverter = new UserConverter();
 			entity = userConverter.convertViewToEntity(view);
+			ProfileEntity profileEntity = this.profileDAO.getProfileById(view.getProfile());
+			entity.setProfileEntity(profileEntity);
 			pList = userPermissionDAO.getAllPermissionEntitiesList();
 			
 			uList = new ArrayList<UserPermissionEntity>(0);

@@ -53,7 +53,6 @@ public class UserDAO extends GenericDAO {
 			em.getTransaction().begin();
 			em.persist(userEntity);		
 			em.getTransaction().commit();
-			em.flush();
 		}catch (Exception exception){
 			UserException userException = null;
 			userException = new UserException(exception, UserException.LAYER_DAO, UserException.ACTION_INSERT);

@@ -32,7 +32,7 @@
 		<rich:dataTable value="#{userManagedBean.userViewList}" var="row" id="table" rows="10" rowClasses="odd, even" style="width: 30%">		
 			<rich:column>
 				<f:facet name="header">
-					<a4j:commandLink rendered="#{userManagedBean.addUser}" styleClass="no-decor" execute="@this" render="addGrid,addPermissionGrid" oncomplete="#{rich:component('addPane')}.show()">
+					<a4j:commandLink rendered="#{userManagedBean.addUser}" action="#{userManagedBean.fillPermissions}" styleClass="no-decor" execute="@this" render="addGrid,addPermissionGrid,profileId" oncomplete="#{rich:component('addPane')}.show()">
 						<h:graphicImage value="resources/images/img-new.png" alt="Nuevo Usuario" />
 					</a4j:commandLink>
 				</f:facet>            
@@ -42,7 +42,7 @@
 						<a4j:param value="#{row.login}" assignTo="#{userManagedBean.login}" />
 					</a4j:commandLink>
 					::
-					<a4j:commandLink rendered="#{userManagedBean.updateUser}" styleClass="no-decor" render="editGrid,editPermissionsGrid,esucursales" action="#{userManagedBean.goEditUser}"
+					<a4j:commandLink rendered="#{userManagedBean.updateUser}" styleClass="no-decor" render="editGrid,editPermissionsGrid,esucursales,eprofileId" action="#{userManagedBean.goEditUser}"
 						execute="@this" oncomplete="#{rich:component('editPane')}.show();">
 						<h:graphicImage value="resources/images/img-edit.png" alt="edit" />
 						<a4j:param value="#{row.login}" assignTo="#{userManagedBean.login}" />					
@@ -76,7 +76,7 @@
 		</rich:popupPanel>
 	</h:form>
 		
-	<rich:popupPanel header="Editar Usuario" id="editPane" width="500" height="450">
+	<rich:popupPanel header="Editar Usuario" id="editPane" width="500" height="540">
 		<h:form>
 			<h:panelGrid columns="2" id="editGrid">																							
 				<h:outputText value="Login" />
@@ -121,10 +121,10 @@
 			</h:selectOneMenu>
 			<br />
 			<h:outputText value="Perfil" />&nbsp;
-			<h:selectOneMenu valueChangeListener="#{userManagedBean.profileEditChanged}"
-					style="width: 180px" value="#{userManagedBean.profileSelected}" immediate="true">
+			<h:selectOneMenu valueChangeListener="#{userManagedBean.profileEditChanged}" id="eprofileId" required="true"
+					style="width: 180px" value="#{userManagedBean.profileSelected}">
 				<f:ajax render="editPermissionsGrid" execute="@this" />
-				<f:selectItem itemValue="-1" itemLabel="Seleccione un Perfil"/>	
+				<f:selectItem itemValue="#{null}" itemLabel="Seleccione un Perfil"/>
 				<f:selectItems value="#{userManagedBean.profilesList}" />
 			</h:selectOneMenu>
 			<br />
@@ -191,7 +191,7 @@
 		</h:form>
 	</rich:popupPanel>
 	
-	<rich:popupPanel header="Agregar Usuario" id="addPane" width="500" height="450">
+	<rich:popupPanel header="Agregar Usuario" id="addPane" width="500" height="500">
 		<h:form id="addForm">
 			<h:panelGrid columns="2" id="addGrid">																							
 				<h:outputText value="Login" />
@@ -240,10 +240,9 @@
 			</h:selectOneMenu>
 			<br />
 			<h:outputText value="Perfil" />&nbsp;
-			<h:selectOneMenu valueChangeListener="#{userManagedBean.profileAddChanged}"
+			<h:selectOneMenu valueChangeListener="#{userManagedBean.profileAddChanged}" id="profileId"
 					style="width: 180px" value="#{userManagedBean.profileSelected}" immediate="true">
 				<f:ajax render="addPermissionGrid" execute="@this" />
-				<f:selectItem itemValue="-1" itemLabel="Seleccione un Perfil"/>
 				<f:selectItems value="#{userManagedBean.profilesList}" />
 			</h:selectOneMenu>
 			<br />
